@@ -1,14 +1,14 @@
 import Head from 'next/head'
 import Image from 'next/future/image'
 
-import Line from '../components/Line'
+import data from '../data.json'
+
 import LogoSVG from '../components/LogoSVG'
 import LogoSVGsmall from '../components/LogoSVGsmall'
 
 import { IoLogoJavascript, IoLogoNodejs, IoLogoGithub, IoLogoInstagram, IoLogoLinkedin, IoLogoReact, IoLogoDiscord, IoLogoHtml5, IoLogoCss3 } from 'react-icons/io5';
-import { TbBrandNextjs } from 'react-icons/tb';
-import { SiMysql, SiMongodb, SiJavascript } from 'react-icons/si';
-
+import { SiMongodb, SiNextdotjs } from 'react-icons/si';
+import { GrMysql } from 'react-icons/gr';
 
 export default function Home() {
   return (
@@ -70,56 +70,145 @@ export default function Home() {
         </nav>
 
         <div class=" bg-white dark:bg-gray-900">
-          <div class="flex flex-row items-center justify-center px-5 py-16 mx-auto lg:px-20 md:flex-row">
+          <div class="flex flex-col items-center justify-center px-5 py-16 mx-auto lg:px-20 md:flex-row">
             
             <div class="basis-full md:basis-4/12 flex flex-col items-center justify-center text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:flex md:flex-col md:justify-center">
-              <h1 class="mb-4 text-2xl font-normal text-gray-900 lg:text-5xl md:text-3xl dark:text-white">Hi, I{"'"}m <span class="text-palette-400">John Doe</span></h1>
+              <h1 class="mb-4 text-2xl font-normal text-gray-900 lg:text-5xl md:text-3xl dark:text-white">Hi, I{"'"}m <span class="text-palette-400">Juan Manuel Vila</span></h1>
               {/* add a line svg */}
-              <div class="w-16 h-1 mb-8 bg-palette-400 rounded-full md:mb-12"></div>
+              <div class="transition w-64 h-1 mb-8 bg-palette-400 rounded-full md:mb-12"></div>
               <p class="mb-8 text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-              <div class="flex flex-row justify-center">
-                <button class="px-8 py-2 text-base font-medium text-white transition-colors duration-200 transform bg-palette-400 rounded-md hover:bg-palette-500 focus:outline-none focus:bg-palette-500">Get Started</button>
-                <button class="px-8 py-2 ml-4 text-base font-medium text-gray-700 transition-colors duration-200 transform bg-gray-100 rounded-md hover:bg-gray-200 focus:outline-none focus:bg-gray-200 dark:text-white dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:bg-gray-600">Learn More</button>
+            </div>
+
+            {/* IMAGE */}
+            <div class="basis-4/12 relative p-4 w-64 md:w-full">
+              <Image width="500" height="500" class="relative mx-auto z-10 object-cover object-center" alt="hero" src="/heroIMG.jpg"
+                style={
+                  {
+                    'border-top-left-radius': "12rem 12rem",
+                    'border-top-right-radius': "12rem 12rem",
+                    'border-bottom-right-radius': "12rem 12rem",
+                    'border-bottom-left-radius': "12rem 12rem",
+                    border: "10px solid #fefefe",
+                    boxShadow: "0.1px 0.1px 1px 0.5px rgba(18, 164, 42, 0.9), -0.1px -0.1px 1px 0.5px rgba(18, 164, 42, 0.9)",
+                  }
+                }
+                // style={{
+                //   maskImage: "url(/about-me-main-image-mask.png)",
+                //   WebkitMaskImage: "url(/about-me-main-image-mask.png)",
+                //   maskRepeat: "no-repeat",
+                //   maskSize: "cover", 
+                //   WebkitMaskRepeat: "no-repeat",
+                //   WebkitMaskSize: "cover",
+                //   maskPosition: "center",
+                //   WebkitMaskPosition: "center",
+                // }}
+              />
+            </div>
+
+            {/* LANGUAGES */}
+            <div class="basis-4/12 relative flex flex-col items-center justify-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left md:flex md:flex-col md:justify-center">
+              <h1 class="mb-2 text-xl font-normal text-gray-900 lg:text-3xl md:text-2xl dark:text-white">My Skills</h1>
+              {/* add a line svg */}
+              <div class="w-24 h-0.5 mb-8 bg-palette-400 rounded-full md:mb-12"></div>
+              {/* list of languajes */}
+              <div class="flex flex-row justify-start gap-2 flex-wrap py-2">
+
+                <div class="flex flex-row items-center justify-center gap-0">
+                  <IoLogoHtml5 size={40} color="#3178C6" />
+                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">HTML</p>
+                </div>
+                <div class="flex flex-row items-center justify-center gap-0">
+                  <IoLogoCss3 size={40} color="#264DE4" />
+                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">CSS</p>
+                </div>
+              </div>
+              <div class="flex flex-row justify-start gap-2 flex-wrap py-2">
+                <div class="flex flex-row items-center justify-center gap-0">
+                  <IoLogoJavascript size={40} color="#F7DF1E" />
+                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">Javascript</p>
+                </div>
+                <div class="flex flex-row items-center justify-center gap-0">
+                  <IoLogoReact size={40} color="#61DAFB" />
+                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">React</p>
+                </div>
+                <div class="flex flex-row items-center justify-center gap-0">
+                  <IoLogoNodejs size={40} color="#339933" />
+                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">NodeJS</p>
+                </div>
+                <div class="flex flex-row items-center justify-center gap-0">
+                  <SiNextdotjs size={40} color="#3776AB" />
+                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">NextJS</p>
+                </div>
+              </div>
+              <div class="flex flex-row justify-start gap-2 flex-wrap py-2">
+                <div class="flex flex-row items-center justify-center gap-0">
+                  <GrMysql size={40} color="#4479A1" />
+                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">MySQL</p>
+                </div>
+                <div class="flex flex-row items-center justify-center gap-0">
+                  <SiMongodb size={40} color="#47A248" />
+                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">MongoDB</p>
+                </div>
               </div>
 
             </div>
-            <div class="basis-4/12 relative">
-              <Image width="450" height="500" class="relative z-10 object-cover object-center" alt="hero" src="/heroIMG.jpg" 
-                style={{
-                  maskImage: "url(/about-me-main-image-mask.png)",
-                  WebkitMaskImage: "url(/about-me-main-image-mask.png)",
-                  maskRepeat: "no-repeat",
-                  maskSize: "cover", 
-                  WebkitMaskRepeat: "no-repeat",
-                  WebkitMaskSize: "cover",
-                  maskPosition: "center",
-                  WebkitMaskPosition: "center",
-                }}
-              />
-            </div>
-            <div class="basis-4/12 relative flex flex-col items-center justify-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:flex md:flex-col md:justify-center">
-                <div className='absolute -top-[2rem] left-0'>
-                  <div className='relative'>
-                  <SiJavascript className='relative text-yellow-400' />
-                  {/* <h1 class=" mb-0 pl-8 text-right text-2xl font-normal text-gray-900 lg:text-5xl md:text-3xl dark:text-white">Hi, I{"'"}m <span class="text-palette-400">John</span></h1> */}
-                  <Line className="absolute -translate-y-[70px] -translate-x-[20%]" />
+
+          </div>
+
+        </div>
+
+
+        <div class="flex flex-col w-full py-20 bg-gray-50 dark:bg-gray-800">
+          <div class="flex flex-col items-center justify-center w-full py-20 bg-gray-50 dark:bg-gray-800">
+            <h1 class="mb-2 text-xl font-normal text-gray-900 lg:text-3xl md:text-2xl dark:text-white">My Projects</h1>
+            {/* add a line svg */}
+            <div class="w-24 h-0.5 mb-8 bg-palette-400 rounded-full md:mb-12"></div>
+            <div class="flex flex-col md:flex-row justify-start gap-8 flex-wrap py-2">
+              {/* create cards for each proyect */}
+              {
+                data.proyects.map( (proyect, index) => (
+                  <div key={index} class="basis-1/3 m-12 md:m-0 group block overflow-hidden rounded-2xl hover:shadow-md hover:scale-110 border border-gray-900 transition-all duration-500 ease-out">
+                    <Image
+                      width={500}
+                      height={500}
+                      alt="Office"
+                      src="/donateloImg.png"
+                      class="object-cover w-full h-56 md:h-64 lg:h-80"
+                    />
+
+                    <div class="p-4 bg-gray-200 shadow-2xl ">
+                      <a href='#' class="text-xs text-gray-500 hover:underline m-0">website.com</a>
+
+                      <h5 class="text-sm text-white">
+                        How to position your furniture for positivity
+                      </h5>
+
+                      <p class="mt-1 text-xs text-gray-500">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum nobis
+                        aliquid accusamus? Sint, sequi voluptas.
+                      </p>
+
+                      <div class="flex flex-row items-center justify-center gap-0 flex-wrap py-2 group-hover:gap-4 transition-all transition-400">
+                        <div class="flex flex-col items-center justify-center gap-0">
+                          <IoLogoHtml5 size={40} color="#3178C6" />
+                          <p class="text-base font-normal text-gray-500 lg:text-xs md:text-base dark:text-gray-400">HTML</p>
+                        </div>
+                        <div class="flex flex-col items-center justify-center gap-0">
+                          <IoLogoCss3 size={40} color="#264DE4" />
+                          <p class="text-base font-normal text-gray-500 lg:text-xs md:text-base dark:text-gray-400">CSS</p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className='absolute -top-[8rem] left-0'>
-                  <div className='relative'>
-                  <h1 class=" mb-0 pl-8 text-right text-2xl font-normal text-gray-900 lg:text-5xl md:text-3xl dark:text-white">Hi, I{"'"}m <span class="text-palette-400">John</span></h1>
-                  <Line className="absolute -translate-y-[70px] -translate-x-[20%]" />
-                  </div>
-                </div>
-                <div className='absolute top-[4rem] left-0'>
-                  <div className='relative'>
-                  <h1 class=" mb-0 pl-8 text-right text-2xl font-normal text-gray-900 lg:text-5xl md:text-3xl dark:text-white">Hi, I{"'"}m <span class="text-palette-400">John</span></h1>
-                  <Line className="absolute -translate-y-[70px] -translate-x-[20%]" />
-                  </div>
-                </div>
+
+                  
+                ))
+              }
+
             </div>
           </div>
         </div>
+
       </main>
     </div>
   )

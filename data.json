@@ -1,0 +1,88 @@
+{
+    "proyects": [
+        {
+            "name": "Proyecto 1",
+            "description": "Descripción del proyecto 1",
+            "image": "dvsahkj",
+            "languages": [
+                "Java",
+                "C#",
+                "Python"
+            ],
+            "libraries": [
+                "Spring",
+                "Hibernate",
+                "Django"
+            ],
+            "databases": [
+                "MySQL",
+                "PostgreSQL",
+                "MongoDB"
+            ],
+            "status": "En proceso",
+            "startDate": "2019-01-01",
+            "endDate": "2019-12-31"
+        },
+        {
+            "name": "Proyecto 2",
+            "description": "Descripción del proyecto 2",
+            "image": "dvsahkj",
+            "languages": [
+                "Java",
+                "C#",
+                "Python"
+            ],
+            "libraries": [
+                "Spring",
+                "Hibernate",
+                "Django"
+            ],
+            "databases": [
+                "MySQL",
+                "PostgreSQL",
+                "MongoDB"
+            ],
+            "status": "En proceso",
+            "startDate": "2019-01-01",
+            "endDate": "2019-12-31"
+        }
+    ],
+    "skills": [
+        {
+            "name": "Java",
+            "level": "Avanzado"
+        },
+        {
+            "name": "C#",
+            "level": "Avanzado"
+        },
+        {
+            "name": "Python",
+            "level": "Avanzado"
+        },
+        {
+            "name": "Spring",
+            "level": "Avanzado"
+        },
+        {
+            "name": "Hibernate",
+            "level": "Avanzado"
+        },
+        {
+            "name": "Django",
+            "level": "Avanzado"
+        },
+        {
+            "name": "MySQL",
+            "level": "Avanzado"
+        },
+        {
+            "name": "PostgreSQL",
+            "level": "Avanzado"
+        },
+        {
+            "name": "MongoDB",
+            "level": "Avanzado"
+        }
+    ]
+}
