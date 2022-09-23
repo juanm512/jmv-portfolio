@@ -21,7 +21,7 @@ export default function Home() {
 
       <main className="w-full h-screen p-0 m-0">      
 
-        <nav class="bg-white border-gray-200 px-3 md:px-20 md:py-12 rounded dark:bg-gray-900">
+        <nav class="bg-white border-gray-200 px-3 md:px-20 md:py-8 rounded dark:bg-gray-900">
           <div class="container flex flex-wrap justify-between items-center mx-auto">
             <div class="md:flex md:justify-center md:w-auto md:order-2 mt-8 mx-2 md:mt-0">
               {/* <h1 class="md:basis-1/3 text-xl font-bold text-palette-400 font-mono text-center">Juan Manuel Vila</h1> */}
@@ -69,14 +69,39 @@ export default function Home() {
           </div>
         </nav>
 
+
+
+
+          <div class="flex flex-col items-center justify-center px-5 py-16 mx-auto lg:px-20 md:flex-row">
+              <h1 class="mb-4 text-2xl text-gray-900 lg:text-6xl md:text-3xl text-center font-normal ">
+                Hi, I{"'"}m <span class="text-palette-400">Juan Manuel Vila</span> <br class="hidden md:block" /><span class="text-palette-400">Full Stack Developer</span> <br class="hidden md:block" />from <span class="text-palette-400">Argentina</span>
+              </h1>
+          </div>
+
+
+
         <div class=" bg-white dark:bg-gray-900">
           <div class="flex flex-col items-center justify-center px-5 py-16 mx-auto lg:px-20 md:flex-row">
             
             <div class="basis-full md:basis-4/12 flex flex-col items-center justify-center text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:flex md:flex-col md:justify-center">
-              <h1 class="mb-4 text-2xl font-normal text-gray-900 lg:text-5xl md:text-3xl dark:text-white">Hi, I{"'"}m <span class="text-palette-400">Juan Manuel Vila</span></h1>
-              {/* add a line svg */}
-              <div class="transition w-64 h-1 mb-8 bg-palette-400 rounded-full md:mb-12"></div>
-              <p class="mb-8 text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              
+              <div class="flex flex-col">
+                <h4 class="mb-3 text-sm font-normal text-gray-900 uppercase"><span class="border-b-2 border-palette-400 text-palette-300">Biography</span></h4>
+                <p class="mb-12 text-base font-normal text-gray-700 md:text-md font-amiri">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ex ea commodo consequat.
+                </p>
+              </div>
+              <div class="flex flex-col">
+                <h4 class="mb-3 text-sm font-normal text-gray-900 uppercase"><span class="border-b-2 border-palette-400 text-palette-300">Contact</span></h4>
+                <p class="mb-12 text-base font-normal text-gray-700 md:text-md font-amiri">
+                  512juamn@gmail.com <br />
+                  +54 9 2346-570764 <br />
+                  La Plata, Buenos Aires, Argentina
+
+                </p>
+              </div>
+
+              
             </div>
 
             {/* IMAGE */}
@@ -107,56 +132,73 @@ export default function Home() {
 
             {/* LANGUAGES */}
             <div class="basis-4/12 relative flex flex-col items-center justify-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left md:flex md:flex-col md:justify-center">
-              <h1 class="mb-2 text-xl font-normal text-gray-900 lg:text-3xl md:text-2xl dark:text-white">My Skills</h1>
-              {/* add a line svg */}
-              <div class="w-24 h-0.5 mb-8 bg-palette-400 rounded-full md:mb-12"></div>
-              {/* list of languajes */}
-              <div class="flex flex-row justify-start gap-2 flex-wrap py-2">
-
-                <div class="flex flex-row items-center justify-center gap-0">
-                  <IoLogoHtml5 size={40} color="#3178C6" />
-                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">HTML</p>
-                </div>
-                <div class="flex flex-row items-center justify-center gap-0">
-                  <IoLogoCss3 size={40} color="#264DE4" />
-                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">CSS</p>
-                </div>
-              </div>
-              <div class="flex flex-row justify-start gap-2 flex-wrap py-2">
-                <div class="flex flex-row items-center justify-center gap-0">
-                  <IoLogoJavascript size={40} color="#F7DF1E" />
-                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">Javascript</p>
-                </div>
-                <div class="flex flex-row items-center justify-center gap-0">
-                  <IoLogoReact size={40} color="#61DAFB" />
-                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">React</p>
-                </div>
-                <div class="flex flex-row items-center justify-center gap-0">
-                  <IoLogoNodejs size={40} color="#339933" />
-                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">NodeJS</p>
-                </div>
-                <div class="flex flex-row items-center justify-center gap-0">
-                  <SiNextdotjs size={40} color="#3776AB" />
-                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">NextJS</p>
-                </div>
-              </div>
-              <div class="flex flex-row justify-start gap-2 flex-wrap py-2">
-                <div class="flex flex-row items-center justify-center gap-0">
-                  <GrMysql size={40} color="#4479A1" />
-                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">MySQL</p>
-                </div>
-                <div class="flex flex-row items-center justify-center gap-0">
-                  <SiMongodb size={40} color="#47A248" />
-                  <p class="text-base font-normal text-gray-500 lg:text-lg md:text-base dark:text-gray-400">MongoDB</p>
-                </div>
-              </div>
+              <h1 class="mb-2 text-xl font-normal text-gray-900 lg:text-3xl md:text-2xl dark:text-white border-b-2 border-palette-400">My Skills</h1>
 
             </div>
 
           </div>
 
         </div>
+{/* https://moonex.ibthemespro.com/home-freelancer */}
+        <div class="flex flex-col w-full bg-white">
+          <div class="flex flex-col items-center justify-center px-5 mx-auto lg:w-11/12 lg:px-10 md:flex-row py-20 border-y border-gray-700">
+            <div class="basis-full flex flex-col items-center justify-center text-center lg:flex-grow md:flex md:flex-col md:justify-center">
+              <h1 class="my-4 text-xl font-normal text-gray-900 md:text-4xl dark:text-white border-b-2 border-palette-400">My Knowledge</h1>
+              {/* list of languajes */}
+              <div class="flex flex-row justify-center gap-8 flex-wrap py-20">
 
+                <div class="flex flex-col items-center justify-center gap-0">
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                    <IoLogoHtml5 size={45} color="#3178C6" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                    <p class="text-base font-semibold group-hover:text-[#3178C6] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">HTML</p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-0">
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <IoLogoCss3 size={45} color="#264DE4" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <p class="text-base font-semibold group-hover:text-[#264DE4] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">CSS</p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-0">
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <IoLogoJavascript size={45} color="#F7DF1E" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <p class="text-base font-semibold group-hover:text-[#F7DF1E] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">Javascript</p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-0">
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <IoLogoReact size={45} color="#61DAFB" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <p class="text-base font-semibold group-hover:text-[#61DAFB] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">React</p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-0">
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <IoLogoNodejs size={45} color="#339933" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <p class="text-base font-semibold group-hover:text-[#339933] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">NodeJS</p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-0">
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <SiNextdotjs size={45} color="#3776AB" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <p class="text-base font-semibold group-hover:text-[#3776AB] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">NextJS</p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-0">
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <GrMysql size={45} color="#4479A1" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <p class="text-base font-semibold group-hover:text-[#4479A1] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">MySQL</p>
+                  </div>
+                </div>
+                <div class="flex flex-col items-center justify-center gap-0">
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <SiMongodb size={45} color="#47A248" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <p class="text-base font-semibold group-hover:text-[#47A248] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">MongoDB</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="flex flex-col w-full py-20 bg-gray-50 dark:bg-gray-800">
           <div class="flex flex-col items-center justify-center w-full py-20 bg-gray-50 dark:bg-gray-800">
@@ -191,11 +233,11 @@ export default function Home() {
                       <div class="flex flex-row items-center justify-center gap-0 flex-wrap py-2 group-hover:gap-4 transition-all transition-400">
                         <div class="flex flex-col items-center justify-center gap-0">
                           <IoLogoHtml5 size={40} color="#3178C6" />
-                          <p class="text-base font-normal text-gray-500 lg:text-xs md:text-base dark:text-gray-400">HTML</p>
+                          <p class="text-base font-semibold group-hover:text-palette-[] text-gray-500 lg:text-xs md:text-base dark:text-gray-400">HTML</p>
                         </div>
                         <div class="flex flex-col items-center justify-center gap-0">
                           <IoLogoCss3 size={40} color="#264DE4" />
-                          <p class="text-base font-normal text-gray-500 lg:text-xs md:text-base dark:text-gray-400">CSS</p>
+                          <p class="text-base font-semibold group-hover:text-palette-[] text-gray-500 lg:text-xs md:text-base dark:text-gray-400">CSS</p>
                         </div>
                       </div>
                     </div>
