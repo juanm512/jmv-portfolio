@@ -6,7 +6,7 @@ import data from '../data.json'
 import LogoSVG from '../components/LogoSVG'
 import LogoSVGsmall from '../components/LogoSVGsmall'
 
-import { IoLogoJavascript, IoLogoNodejs, IoLogoGithub, IoLogoInstagram, IoLogoLinkedin, IoLogoReact, IoLogoDiscord, IoLogoHtml5, IoLogoCss3 } from 'react-icons/io5';
+import { IoLogoJavascript, IoLogoNodejs, IoLogoGithub, IoLogoInstagram, IoLogoLinkedin, IoLogoReact, IoLogoDiscord, IoLogoHtml5, IoLogoCss3, IoChatboxEllipses } from 'react-icons/io5';
 import { SiMongodb, SiNextdotjs } from 'react-icons/si';
 import { GrMysql } from 'react-icons/gr';
 
@@ -73,8 +73,8 @@ export default function Home() {
 
 
           <div class="flex flex-col items-center justify-center px-5 py-16 mx-auto lg:px-20 md:flex-row">
-              <h1 class="mb-4 text-2xl text-gray-900 lg:text-6xl md:text-3xl text-center font-normal ">
-                Hi, I{"'"}m <span class="text-palette-400">Juan Manuel Vila</span> <br class="hidden md:block" /><span class="text-palette-400">Full Stack Developer</span> <br class="hidden md:block" />from <span class="text-palette-400">Argentina</span>
+              <h1 class="mb-4 text-3xl text-gray-900 lg:text-6xl md:text-3xl text-center font-normal ">
+                Hi, I{"'"}m <span class="text-palette-400">Juan Manuel Vila</span> <br /><span class="text-palette-400">Full Stack Developer</span> <br class="hidden md:block" />from <span class="text-palette-400">Argentina</span>
               </h1>
           </div>
 
@@ -83,7 +83,7 @@ export default function Home() {
         <div class=" bg-white dark:bg-gray-900">
           <div class="flex flex-col items-center justify-center px-5 py-16 mx-auto lg:px-20 md:flex-row">
             
-            <div class="basis-full md:basis-4/12 flex flex-col items-center justify-center text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:flex md:flex-col md:justify-center">
+            <div class="order-2 md:order-1 basis-full md:basis-4/12 flex flex-col items-center justify-center text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:flex md:flex-col md:justify-center">
               
               <div class="flex flex-col">
                 <h4 class="mb-3 text-sm font-normal text-gray-900 uppercase"><span class="border-b-2 border-palette-400 text-palette-300">Biography</span></h4>
@@ -94,7 +94,7 @@ export default function Home() {
               <div class="flex flex-col">
                 <h4 class="mb-3 text-sm font-normal text-gray-900 uppercase"><span class="border-b-2 border-palette-400 text-palette-300">Contact</span></h4>
                 <p class="mb-12 text-base font-normal text-gray-700 md:text-md font-amiri">
-                  512juamn@gmail.com <br />
+                  512juanm@gmail.com <br />
                   +54 9 2346-570764 <br />
                   La Plata, Buenos Aires, Argentina
 
@@ -105,7 +105,7 @@ export default function Home() {
             </div>
 
             {/* IMAGE */}
-            <div class="basis-4/12 relative p-4 w-64 md:w-full">
+            <div class="basis-4/12 relative p-2 w-64 md:w-full order-1 md:order-2">
               <Image width="500" height="500" class="relative mx-auto z-10 object-cover object-center" alt="hero" src="/heroIMG.jpg"
                 style={
                   {
@@ -114,84 +114,87 @@ export default function Home() {
                     'border-bottom-right-radius': "12rem 12rem",
                     'border-bottom-left-radius': "12rem 12rem",
                     border: "10px solid #fefefe",
-                    boxShadow: "0.1px 0.1px 1px 0.5px rgba(18, 164, 42, 0.9), -0.1px -0.1px 1px 0.5px rgba(18, 164, 42, 0.9)",
+                    boxShadow: "0.1px 0.1px 1px 0.5px rgba(18, 164, 42, 0.4), -0.1px -0.1px 1px 0.5px rgba(18, 164, 42, 0.4)",
                   }
                 }
-                // style={{
-                //   maskImage: "url(/about-me-main-image-mask.png)",
-                //   WebkitMaskImage: "url(/about-me-main-image-mask.png)",
-                //   maskRepeat: "no-repeat",
-                //   maskSize: "cover", 
-                //   WebkitMaskRepeat: "no-repeat",
-                //   WebkitMaskSize: "cover",
-                //   maskPosition: "center",
-                //   WebkitMaskPosition: "center",
-                // }}
               />
             </div>
 
-            {/* LANGUAGES */}
-            <div class="basis-4/12 relative flex flex-col items-center justify-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left md:flex md:flex-col md:justify-center">
-              <h1 class="mb-2 text-xl font-normal text-gray-900 lg:text-3xl md:text-2xl dark:text-white border-b-2 border-palette-400">My Skills</h1>
+            <div class="order-3 md:order-3 basis-4/12 relative text-center flex flex-col items-end justify-end lg:flex-grow md:w-full lg:pl-24 md:pl-16 md:items-end md:text-rigth md:flex md:flex-col md:justify-end">
+              <div class="flex flex-col md:text-right">
+                <h4 class="mb-3 text-sm font-normal text-gray-900 uppercase"><span class="border-b-2 border-palette-400 text-palette-300">Contact</span></h4>
+                <p class="mb-12 text-base font-normal text-gray-700 md:text-md font-amiri">
+                  512juamn@gmail.com <br />
+                  +54 9 2346-570764 <br />
+                  La Plata, Buenos Aires, Argentina
+
+                </p>
+              </div>
 
             </div>
 
           </div>
 
+          <div class="flex flex-row items-center justify-center px-5 py-16 mx-auto lg:px-20 gap-8 flex-wrap">
+            <Image width="200" height="200" class="relative mx-auto object-cover object-center transition-all duration-200 opacity-50 hover:opacity-100 hover:-translate-y-1 " alt="hero" src="/education/logo-informatica.png" />
+            <Image width="250" height="250" class="relative mx-auto object-cover object-center transition-all duration-200 opacity-50 hover:opacity-100 hover:-translate-y-1 " alt="hero" src="/education/logo_facultad_ingenieria.png" />
+            <Image width="200" height="200" class="relative mx-auto object-cover object-center transition-all duration-200 opacity-50 hover:opacity-100 hover:-translate-y-1 " alt="hero" src="/education/FreeCodeCamp_logo.png" />
+            <Image width="200" height="200" class="relative mx-auto object-cover object-center transition-all duration-200 opacity-50 hover:opacity-100 hover:-translate-y-1 " alt="hero" src="/education/MDN_Web_Docs-Logo.svg" />
+            <Image width="200" height="200" class="relative mx-auto object-cover object-center transition-all duration-200 opacity-50 hover:opacity-100 hover:-translate-y-1 " alt="hero" src="/education/W3Schools_logo.png" />
+          </div>
         </div>
-{/* https://moonex.ibthemespro.com/home-freelancer */}
+
         <div class="flex flex-col w-full bg-white">
-          <div class="flex flex-col items-center justify-center px-5 mx-auto lg:w-11/12 lg:px-10 md:flex-row py-20 border-y border-gray-700">
+          <div class="flex flex-col items-center justify-center px-5 mx-auto lg:w-11/12 lg:px-10 md:flex-row py-20 border-t border-gray-700">
             <div class="basis-full flex flex-col items-center justify-center text-center lg:flex-grow md:flex md:flex-col md:justify-center">
-              <h1 class="my-4 text-xl font-normal text-gray-900 md:text-4xl dark:text-white border-b-2 border-palette-400">My Knowledge</h1>
-              {/* list of languajes */}
-              <div class="flex flex-row justify-center gap-8 flex-wrap py-20">
+              <h1 class="my-4 text-2xl font-normal text-gray-900 md:text-5xl dark:text-white border-b-2 border-palette-400">My Knowledge</h1>
+              <div class="flex flex-row justify-center gap-5 md:gap-12 flex-wrap py-20">
 
                 <div class="flex flex-col items-center justify-center gap-0">
-                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
-                    <IoLogoHtml5 size={45} color="#3178C6" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 md:w-40 h-48 md:h-64 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                    <IoLogoHtml5 size={55} color="#3178C6" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
                     <p class="text-base font-semibold group-hover:text-[#3178C6] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">HTML</p>
                   </div>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-0">
-                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
-                  <IoLogoCss3 size={45} color="#264DE4" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 md:w-40 h-48 md:h-64 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <IoLogoCss3 size={55} color="#264DE4" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
                   <p class="text-base font-semibold group-hover:text-[#264DE4] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">CSS</p>
                   </div>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-0">
-                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
-                  <IoLogoJavascript size={45} color="#F7DF1E" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 md:w-40 h-48 md:h-64 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <IoLogoJavascript size={55} color="#F7DF1E" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
                   <p class="text-base font-semibold group-hover:text-[#F7DF1E] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">Javascript</p>
                   </div>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-0">
-                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
-                  <IoLogoReact size={45} color="#61DAFB" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 md:w-40 h-48 md:h-64 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <IoLogoReact size={55} color="#61DAFB" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
                   <p class="text-base font-semibold group-hover:text-[#61DAFB] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">React</p>
                   </div>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-0">
-                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
-                  <IoLogoNodejs size={45} color="#339933" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 md:w-40 h-48 md:h-64 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <IoLogoNodejs size={55} color="#339933" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
                   <p class="text-base font-semibold group-hover:text-[#339933] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">NodeJS</p>
                   </div>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-0">
-                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
-                  <SiNextdotjs size={45} color="#3776AB" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 md:w-40 h-48 md:h-64 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <SiNextdotjs size={55} color="#3776AB" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
                   <p class="text-base font-semibold group-hover:text-[#3776AB] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">NextJS</p>
                   </div>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-0">
-                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
-                  <GrMysql size={45} color="#4479A1" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 md:w-40 h-48 md:h-64 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <GrMysql size={55} color="#4479A1" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
                   <p class="text-base font-semibold group-hover:text-[#4479A1] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">MySQL</p>
                   </div>
                 </div>
                 <div class="flex flex-col items-center justify-center gap-0">
-                  <div className='group flex flex-col items-center justify-center gap-2 w-32 h-48 bg-gray-200 grayscale hover:grayscale-0 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
-                  <SiMongodb size={45} color="#47A248" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
+                  <div className='group flex flex-col items-center justify-center gap-2 w-32 md:w-40 h-48 md:h-64 bg-gray-200 grayscale hover:grayscale-0 transition-all duration-500 hover:scale-110 rounded-[9.375rem]' style={{padding:"3.4375rem .9375rem 2.8125rem"}}>
+                  <SiMongodb size={55} color="#47A248" className='transition-all duration-500 group-hover:-translate-y-[20%] group-hover:scale-110 ' />
                   <p class="text-base font-semibold group-hover:text-[#47A248] text-gray-500 lg:text-lg md:text-base dark:text-gray-450">MongoDB</p>
                   </div>
                 </div>
@@ -200,56 +203,91 @@ export default function Home() {
           </div>
         </div>
 
-        <div class="flex flex-col w-full py-20 bg-gray-50 dark:bg-gray-800">
-          <div class="flex flex-col items-center justify-center w-full py-20 bg-gray-50 dark:bg-gray-800">
-            <h1 class="mb-2 text-xl font-normal text-gray-900 lg:text-3xl md:text-2xl dark:text-white">My Projects</h1>
-            {/* add a line svg */}
-            <div class="w-24 h-0.5 mb-8 bg-palette-400 rounded-full md:mb-12"></div>
-            <div class="flex flex-col md:flex-row justify-start gap-8 flex-wrap py-2">
-              {/* create cards for each proyect */}
-              {
-                data.proyects.map( (proyect, index) => (
-                  <div key={index} class="basis-1/3 m-12 md:m-0 group block overflow-hidden rounded-2xl hover:shadow-md hover:scale-110 border border-gray-900 transition-all duration-500 ease-out">
-                    <Image
-                      width={500}
-                      height={500}
-                      alt="Office"
-                      src="/donateloImg.png"
-                      class="object-cover w-full h-56 md:h-64 lg:h-80"
-                    />
+        {/* projects */}
+        <div class="flex flex-col w-full bg-white">
+          <div class="flex flex-col items-center justify-center px-5 mx-auto lg:w-11/12 lg:px-10 md:flex-row py-20 border-t border-gray-700">
+            <div class="basis-full flex flex-col items-center justify-center text-center lg:flex-grow md:flex md:flex-col md:justify-center">
+              <h1 class="my-4 text-2xl font-normal text-gray-900 md:text-5xl border-b-2 border-palette-400">My Projects</h1>
+              
+              <div class="flex flex-row justify-center gap-10 md:gap-16 flex-wrap py-20">
 
-                    <div class="p-4 bg-gray-200 shadow-2xl ">
-                      <a href='#' class="text-xs text-gray-500 hover:underline m-0">website.com</a>
-
-                      <h5 class="text-sm text-white">
-                        How to position your furniture for positivity
-                      </h5>
-
-                      <p class="mt-1 text-xs text-gray-500">
-                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Rerum nobis
-                        aliquid accusamus? Sint, sequi voluptas.
-                      </p>
-
-                      <div class="flex flex-row items-center justify-center gap-0 flex-wrap py-2 group-hover:gap-4 transition-all transition-400">
-                        <div class="flex flex-col items-center justify-center gap-0">
-                          <IoLogoHtml5 size={40} color="#3178C6" />
-                          <p class="text-base font-semibold group-hover:text-palette-[] text-gray-500 lg:text-xs md:text-base dark:text-gray-400">HTML</p>
-                        </div>
-                        <div class="flex flex-col items-center justify-center gap-0">
-                          <IoLogoCss3 size={40} color="#264DE4" />
-                          <p class="text-base font-semibold group-hover:text-palette-[] text-gray-500 lg:text-xs md:text-base dark:text-gray-400">CSS</p>
-                        </div>
-                      </div>
-                    </div>
+                <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                  <Image width={200} height={200} class="w-full" src="/donateloImg.png" alt="Sunset in the mountains" />
+                  <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2 text-gray-800">The Coldest Sunset</div>
+                    <p class="text-gray-700 text-base">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.
+                    </p>
                   </div>
+                  <div class="px-6 pt-4 pb-2">
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span>
+                  </div>
+                </div>
 
-                  
-                ))
-              }
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        {/* Contact me */}
+        <div class="flex flex-col w-full bg-white">
+          <div class="flex flex-col items-center justify-center px-5 mx-auto lg:w-11/12 lg:px-10 md:flex-row py-20 border-t border-gray-700">
+            <div class="basis-full flex items-center flex-row justify-center">
+              <div class=" group my-32 p-8 border-double border-y-4 transition-color duration-[2s] hover:border-palette-400 border-gray-900 border-offset-[96px] ">
+                <h2 class="text-2xl font-normal md:text-7xl">
+                  <a href="mailto:512juanm@gmail.com" class="text-colored font-semibold transition-scale duration-500 group-hover:-translate-y-[20%] group-hover:scale-110">
+                    Contact<br/> 
+                    Me
+                    <IoChatboxEllipses size={55} className='transition-all group-hover:rotate-180 duration-[1s] group-hover:text-palette-400 inline-block ' />
+                  </a>
+                </h2>
+              </div>
 
             </div>
           </div>
         </div>
+        
+        {/* footer */}
+        <div class="flex flex-col w-full bg-white">
+          <div class="flex flex-col items-center justify-center px-5 mx-auto lg:w-11/12 lg:px-10 md:flex-row py-20 border-t border-gray-700">
+            <div class="basis-full flex flex-col items-center justify-center lg:flex-grow md:flex md:flex-row md:justify-between gap-8 mx-auto">
+
+            <div className="md:basis-1/3 text-gray-600 text-center">
+              <p>
+              © 2022 Juan Manuel Vila. All Rights Reserved.
+              </p>
+            </div>
+
+            <div className="md:basis-1/3 text-gray-600 text-center">
+              <p>
+                512juanm@gmail.com
+              </p>
+            </div>
+
+            <div className="md:basis-1/3 flex flex-row justify-center">
+                <a href="#" class="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" aria-label="Reddit">
+                    <IoLogoGithub size={25} />
+                </a>
+                <a href="#" class="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" aria-label="Facebook">
+                    <IoLogoInstagram size={25} />
+                </a>
+                <a href="#" class="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" aria-label="Twitter">
+                    <IoLogoLinkedin size={25} />
+                </a>
+                <a href="#" class="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" aria-label="Twitter">
+                    <IoLogoDiscord size={25} />
+                </a>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+
 
       </main>
     </div>
