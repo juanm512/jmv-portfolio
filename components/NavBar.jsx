@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 import { IoLogoGithub, IoLogoInstagram, IoLogoLinkedin, IoLogoDiscord } from 'react-icons/io5';
@@ -9,8 +10,28 @@ const NavBar = () => {
       <div className="md:flex md:justify-center md:w-auto md:order-2 mt-8 mx-2 md:mt-0">
         {/* <h1 className="md:basis-1/3 text-xl font-bold text-palette-400 font-mono text-center">Juan Manuel Vila</h1> */}
         <div className="relative md:basis-1/3 text-xl font-bold text-palette-400 font-mono text-center ml-8">
-          {/* <LogoSVG className="w-28 h-28 hidden md:block" />
-          <LogoSVGsmall className="w-16 h-16 md:hidden" /> */}
+        <div class="relative flex justify-center items-center group cursor-pointer w-16 h-16 p-8 transition-color duration-[2s] hover:border-palette-400 border-gray-900 border-offset-[96px]  animate-[spin_10s_linear_infinite]">
+            {/* border-double border-y-4  */}
+            {/* <h2 class="text-md font-normal md:text-xs text-center">
+              <button class="text-colored font-semibold ">
+                Juan Manuel Vila
+              </button>
+            </h2> */}
+            <Image src="/Creatoravatar.svg" alt="Logo" 
+              style={{ transform: 'scaleX(-1)', filter: 'invert(1)' }}
+              className='rounded-full w-12 h-12 '
+              layout="fill"
+              objectFit="cover"
+            />
+            <svg className='absolute top-0 left-0 w-full h-full scale-[2]' viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <path fill="none" id="curve" d="M 50 100 A 50 50 0 1 1 150 100 A 50 50 0 1 1 50 100 " />
+              <text width="500">
+                <textPath alignment-baseline="top" href="#curve"style={{letterSpacing: "0.27em"}}>
+                  AVAILABLE FOR HIRE
+                </textPath>
+              </text>
+            </svg>
+          {/* 
           <i className='w-32 h-32'>{'JMV'}</i>
           
             <svg 
@@ -27,7 +48,8 @@ const NavBar = () => {
                 AVAILABLE FOR HIRE
                 </textPath>
               </text>
-            </svg>
+            </svg> */}
+        </div>
         </div>
       </div>
       <div className="md:basis-1/3 flex justify-center mt-6 lg:flex lg:mt-0 md:order-3">

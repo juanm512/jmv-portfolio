@@ -24,7 +24,7 @@ const FooterAndContact = () => {
     return(
       <>
       {
-       isMobile ? <ContactMobile /> : <ContactDesktop />
+       isMobile ? <ContactMobile /> : <ContactMobile />
       }
     
         {/* footer */}
@@ -213,30 +213,37 @@ const ContactMobile = () => {
                 >
                   <IoChatboxEllipses />
                 </motion.div>
-
-                <motion.svg xmlns="http://www.w3.org/2000/svg" onClick={ () => handleCopyContact("email") }
-                  fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
-                  className="absolute z-50 w-10 h-10 bg-palette-200 text-palette-400 rounded-xl p-2 cursor-pointer"
+                <motion.div
+                  class="absolute z-50 w-10 h-10"
                   style={{ position: "absolute"}}
                   initial={{ opacity: 0, y: 0, x: 0 }}
                   whileInView={{ opacity: 1, y: ['-150%','-75%','-75%'], x: ['-50%','-50%','100%'], scale: [ 1, 1, 1.4] }}
                   transition={{ duration: 3, delay: 3 }}
-                  whileTap={{ scale: 1 , transition: { duration: 0.1, delay: 0.05 } }}
                 >
-                  <path strokeLinecap="round" d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25" />
-                </motion.svg>
-              
-                <motion.svg xmlns="http://www.w3.org/2000/svg" onClick={ () => handleCopyContact("phone") }
-                  fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
-                  className="absolute z-50 w-10 h-10 bg-palette-200 text-palette-400 rounded-xl p-2 cursor-pointer"
+                  <motion.svg xmlns="http://www.w3.org/2000/svg" onClick={ () => handleCopyContact("email") }
+                    fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
+                    className="w-10 h-10 bg-palette-200 text-palette-400 rounded-xl p-1 cursor-pointer"
+                    whileTap={{ scale: 0.8 , transition: { duration: 0.05, delay: 0.05 } }}
+                  >
+                    <path strokeLinecap="round" d="M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zm0 0c0 1.657 1.007 3 2.25 3S21 13.657 21 12a9 9 0 10-2.636 6.364M16.5 12V8.25" />
+                  </motion.svg>
+                </motion.div>
+                <motion.div
+                  class="absolute z-50 w-10 h-10"
                   style={{ position: "absolute"}}
                   initial={{ opacity: 0, right: "10%", bottom: "-10%" }}
-                  whileInView={{ opacity: 1, y: ['-50%','-200%','-200%'], x: ['100%','100%','-50%'], scale: [ 1, 1, 1.4] }}
+                  whileInView={{ opacity: 1, y: ['-50%','-100%','-100%'], x: ['100%','100%','-100%'], scale: [ 1, 1, 1.4] }}
                   transition={{ duration: 3, delay: 3 }}
-                  whileTap={{ scale: 1 , transition: { duration: 0.1, delay: 0.05 } }}
                 >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
-                </motion.svg>
+                  <motion.svg xmlns="http://www.w3.org/2000/svg" onClick={ () => handleCopyContact("phone") }
+                    fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" 
+                    className="w-10 h-10 bg-palette-200 text-palette-400 rounded-xl p-1 cursor-pointer"
+                    whileTap={{ scale: 0.8 , transition: { duration: 0.06, delay: 0.05 } }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z" />
+                  </motion.svg>
+                </motion.div>
+
                 
               </button>
             </h2>
