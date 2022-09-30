@@ -1,9 +1,10 @@
 {
     "proyects": [
-        {
+        {   
+            "id": "Proyecto1",
             "name": "Proyecto 1",
-            "description": "Descripción del proyecto 1",
-            "image": "dvsahkj",
+            "description": "Descripción del proyecto 1Descripción del proyecto 1Descripción del proyecto 1grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3",
+            "images": ["donateloImg.png", "avatar.png"],
             "languages": [
                 "Java",
                 "C#",
@@ -19,14 +20,18 @@
                 "PostgreSQL",
                 "MongoDB"
             ],
-            "status": "En proceso",
+            "status": {
+                "text": "En desarrollo",
+                "color": "green"
+            },
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
         },
         {
+            "id": "Proyecto2",
             "name": "Proyecto 2",
-            "description": "Descripción del proyecto 2",
-            "image": "dvsahkj",
+            "description": "Descripción del proyecto 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj",
+            "images": ["donateloImg.png","donateloImg.png","donateloImg.png","donateloImg.png","donateloImg.png", "avatar.png"],
             "languages": [
                 "Java",
                 "C#",
@@ -37,52 +42,93 @@
                 "Hibernate",
                 "Django"
             ],
-            "databases": [
+            "databasesAndHosting": [
                 "MySQL",
-                "PostgreSQL",
-                "MongoDB"
+                "Vercel"
             ],
-            "status": "En proceso",
+            "status": {
+                "text": "En desarrollo",
+                "color": "green"
+            },
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
-        }
-    ],
-    "skills": [
-        {
-            "name": "Java",
-            "level": "Avanzado"
         },
         {
-            "name": "C#",
-            "level": "Avanzado"
+            "id": "Proyecto3",
+            "name": "Proyecto 3",
+            "description": "Descripción del proyecto 3",
+            "images": ["donateloImg.png", "avatar.png"],
+            "languages": [
+                "NodeJS + Express",
+                "EJS"
+            ],
+            "libraries": [
+                "leaflet",
+                "socket.io",
+                "passport"
+            ],
+            "databasesAndHosting": [
+                "MySQL",
+                "Vercel"
+            ],
+            "status": {
+                "text": "En desarrollo",
+                "color": "green"
+            },
+            "startDate": "2019-01-01",
+            "endDate": "2019-12-31"
         },
         {
-            "name": "Python",
-            "level": "Avanzado"
+            "id": "Proyecto4",
+            "name": "Proyecto 4",
+            "description": "Descripción del proyecto 4",
+            "images": ["donateloImg.png", "avatar.png"],
+            "languages": [
+                "Java",
+                "C#",
+                "Python"
+            ],
+            "libraries": [
+                "Spring",
+                "Hibernate",
+                "Django"
+            ],
+            "databasesAndHosting": [
+                "MySQL",
+                "Vercel"
+            ],
+            "status": {
+                "text": "En desarrollo",
+                "color": "green"
+            },
+            "startDate": "2019-01-01",
+            "endDate": "2019-12-31"
         },
         {
-            "name": "Spring",
-            "level": "Avanzado"
-        },
-        {
-            "name": "Hibernate",
-            "level": "Avanzado"
-        },
-        {
-            "name": "Django",
-            "level": "Avanzado"
-        },
-        {
-            "name": "MySQL",
-            "level": "Avanzado"
-        },
-        {
-            "name": "PostgreSQL",
-            "level": "Avanzado"
-        },
-        {
-            "name": "MongoDB",
-            "level": "Avanzado"
+            "id": "Proyecto5",
+            "name": "Proyecto 5",
+            "description": "Descripción del proyecto 5",
+            "images": ["donateloImg.png", "avatar.png"],
+            "languages": [
+                "Java",
+                "C#",
+                "Python"
+            ],
+            "libraries": [
+                "Spring",
+                "Hibernate",
+                "Django"
+            ],
+            "databasesAndHosting": [
+                "MySQL",
+                "Vercel"
+            ],
+            "status": {
+                "text": "En desarrollo",
+                "color": "green"
+            },
+            "startDate": "2019-01-01",
+            "endDate": "2019-12-31"
         }
     ]
 }
