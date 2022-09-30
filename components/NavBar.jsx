@@ -10,7 +10,7 @@ const NavBar = () => {
       <div className="md:flex md:justify-center md:w-auto md:order-2 mt-8 mx-2 md:mt-0">
         {/* <h1 className="md:basis-1/3 text-xl font-bold text-palette-400 font-mono text-center">Juan Manuel Vila</h1> */}
         <div className="relative md:basis-1/3 text-xl font-bold text-palette-400 font-mono text-center ml-8">
-        <div class="relative flex justify-center items-center group cursor-pointer w-16 h-16 p-8 transition-color duration-[2s] hover:border-palette-400 border-gray-900 border-offset-[96px]  animate-[spin_10s_linear_infinite]">
+        <div class="relative flex justify-center items-center group cursor-pointer w-16 h-16 p-8 transition-color duration-[2s] hover:border-palette-400 border-gray-900 border-offset-[96px] animate-[spin_20s_linear_infinite]">
             {/* border-double border-y-4  */}
             {/* <h2 class="text-md font-normal md:text-xs text-center">
               <button class="text-colored font-semibold ">
@@ -18,7 +18,7 @@ const NavBar = () => {
               </button>
             </h2> */}
             <Image src="/Creatoravatar.svg" alt="Logo" 
-              style={{ transform: 'scaleX(-1)', filter: 'invert(1)' }}
+              style={{ transform: 'scaleX(-1)', filter: 'invert(0)' }}
               className='rounded-full w-12 h-12 '
               layout="fill"
               objectFit="cover"
