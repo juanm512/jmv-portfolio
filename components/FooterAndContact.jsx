@@ -203,8 +203,8 @@ const ContactMobile = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             {/* border-double border-y-4  */}
-            <h2 class="text-7xl font-normal md:text-7xl text-center">
-              <button class="relative text-colored font-semibold ">
+
+              <div class="relative text-colored text-7xl font-normal md:text-7xl text-center">
                 <motion.div 
                   class=""
                   initial={{ scale: 1, opacity: 1 }}
@@ -213,6 +213,9 @@ const ContactMobile = () => {
                 >
                   <IoChatboxEllipses />
                 </motion.div>
+                
+
+                {/* botones de copy contact info */}
                 <motion.div
                   class="absolute z-50 w-10 h-10"
                   style={{ position: "absolute"}}
@@ -245,8 +248,8 @@ const ContactMobile = () => {
                 </motion.div>
 
                 
-              </button>
-            </h2>
+              </div>
+
             <motion.svg className='absolute top-0 left-0 w-full h-full scale-150' viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"
               initial={{ opacity: 1 }}
               whileInView={{ opacity: 0 }}
