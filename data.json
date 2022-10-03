@@ -29,7 +29,7 @@
         },
         {
             "id": "donatelo",
-            "name": "Donatelo - Donations webpage with cryptocurrency",
+            "name": "Donatelo - Donations with cryptocurrency",
             "description": "Descripción del proyecto 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj",
             "images": [
                 "donatelo/donateloImg.png",
@@ -61,7 +61,7 @@
         },
         {
             "id": "wordleclone",
-            "name": "Wordle Clone",
+            "name": "Wordle Clone (ES)",
             "description": "Descripción del proyecto 3",
             "images": ["wordleclone/wordlecloneImg.jpg"],
             "languages": [

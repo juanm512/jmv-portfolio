@@ -90,12 +90,12 @@ const ProyectCard = ({ proyect, index, activeID, setActiveID }) => {
             <Image
                 src={ "/" + proyect.images[0]}
                 alt={proyect.title} width={400} height={400}
-                layout="fill"
-                className="object-center object-contain w-full h-64"
+                
+                className="object-center object-cover w-full h-64"
                 // className="object-cover w-full h-64 transition-all duration-1000 transform group-hover:scale-110 grayscale group-hover:grayscale-0 cursor-pointer"
             />
         </motion.div>
-        <div className="flex justify-start  pt-8 pb-0">
+        <div className="flex justify-start pt-8 pb-0">
           {
               proyect.languages.map( (lang, i ) =>(
               <span key={i} className="inline-block bg-gray-200 rounded-sm px-3 py-1 text-sm font-semibold text-gray-700 transition-all duration-500 delay-100 mr-2 mb-2">
@@ -284,7 +284,7 @@ const ProyectActive = ({ proyect, currentImage, setCurrentImage }) => {
 
                     <div class="col-span-12 lg:col-span-8 flex flex-col">
                       <motion.h2 
-                        class="text-7xl font-bold text-palette-500 sm:pr-12 text-left basis-full"
+                        class="text-3xl md:text-7xl font-bold text-palette-500 sm:pr-12 text-left basis-full break-words"
                         layoutId={ "ProyectTitle-" + proyect.id}
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
