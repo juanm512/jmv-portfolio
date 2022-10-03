@@ -121,14 +121,14 @@ const ContactDesktop = () => {
     }
 
   return (
-    <div class="flex flex-col w-full show-on-scroll">
-      <div class="flex flex-col items-center justify-center px-5 mx-auto md:w-11/12 lg:px-10 md:flex-row py-20 border-t border-gray-700">
-        <div class="basis-full flex items-center flex-row justify-center">
-          <div class="relative flex justify-center items-center group cursor-pointer w-64 h-64 my-32 p-8 transition-color duration-[2s] hover:border-palette-400 border-gray-900 border-offset-[96px] "
+    <div className="flex flex-col w-full show-on-scroll">
+      <div className="flex flex-col items-center justify-center px-5 mx-auto md:w-11/12 lg:px-10 md:flex-row py-20 border-t border-gray-700">
+        <div className="basis-full flex items-center flex-row justify-center">
+          <div className="relative flex justify-center items-center group cursor-pointer w-64 h-64 my-32 p-8 transition-color duration-[2s] hover:border-palette-400 border-gray-900 border-offset-[96px] "
             onMouseEnter={() => handleContactMe()} onMouseLeave={() => handleContactMeLeave()} onClick={() => handleCopyContact()}>
             {/* border-double border-y-4  */}
-            <h2 class="text-7xl font-normal md:text-7xl text-center">
-              <button class="text-colored font-semibold ">
+            <h2 className="text-7xl font-normal md:text-7xl text-center">
+              <button className="text-colored font-semibold ">
                 {
                   contactStatus === "copied" ? 
                     (<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-full h-full text-green-500">
@@ -156,7 +156,7 @@ const ContactDesktop = () => {
             <svg className='absolute top-0 left-0 w-full h-full scale-110 md:scale-150 transition-all duration-[1s] delay-150 group-hover:rotate-[360deg] group-hover:scale-150 md:group-hover:scale-[2.2] ' viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
               <path fill="none" id="curve" d="M 50 100 A 50 50 0 1 1 150 100 A 50 50 0 1 1 50 100 " />
               <text width="500">
-                <textPath alignment-baseline="top" href="#curve">
+                <textPath alignmentBaseline="top" href="#curve">
                 {
                   contactStatus === "default" ? 
                     "- CONTACT ME-CONTACT ME-CONTACT ME" 
@@ -194,19 +194,19 @@ const ContactMobile = () => {
     );
   }
   return (
-    <div class="flex flex-col w-full show-on-scroll">
-      <div class="flex flex-col items-center justify-center px-5 mx-auto md:w-11/12 lg:px-10 md:flex-row py-20 border-t border-gray-700">
-        <div class="basis-full flex items-center flex-row justify-center">
-          <motion.div class="relative flex justify-center items-center group w-64 h-64 my-32 p-8 "
+    <div className="flex flex-col w-full show-on-scroll">
+      <div className="flex flex-col items-center justify-center px-5 mx-auto md:w-11/12 lg:px-10 md:flex-row py-20 border-t border-gray-700">
+        <div className="basis-full flex items-center flex-row justify-center">
+          <motion.div className="relative flex justify-center items-center group w-64 h-64 my-32 p-8 "
             initial={{ scale: 0.8, opacity: 0.5 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             {/* border-double border-y-4  */}
 
-              <div class="relative text-colored text-7xl font-normal md:text-7xl text-center">
+              <div className="relative text-colored text-7xl font-normal md:text-7xl text-center">
                 <motion.div 
-                  class=""
+                  className=""
                   initial={{ scale: 1, opacity: 1 }}
                   whileInView={{ scale: 0.5, opacity: 0 }}
                   transition={{ duration: 1, delay: 3 }}
@@ -217,7 +217,7 @@ const ContactMobile = () => {
 
                 {/* botones de copy contact info */}
                 <motion.div
-                  class="absolute z-50 w-10 h-10"
+                  className="absolute z-50 w-10 h-10"
                   style={{ position: "absolute"}}
                   initial={{ opacity: 0, y: 0, x: 0 }}
                   whileInView={{ opacity: 1, y: ['-150%','-75%','-75%'], x: ['-50%','-50%','100%'], scale: [ 1, 1, 1.4] }}
@@ -232,7 +232,7 @@ const ContactMobile = () => {
                   </motion.svg>
                 </motion.div>
                 <motion.div
-                  class="absolute z-50 w-10 h-10"
+                  className="absolute z-50 w-10 h-10"
                   style={{ position: "absolute"}}
                   initial={{ opacity: 0, right: "10%", bottom: "-10%" }}
                   whileInView={{ opacity: 1, y: ['-50%','-100%','-100%'], x: ['100%','100%','-100%'], scale: [ 1, 1, 1.4] }}
@@ -257,7 +257,7 @@ const ContactMobile = () => {
             >
               <path fill="none" id="curve" d="M 50 100 A 50 50 0 1 1 150 100 A 50 50 0 1 1 50 100 " />
               <text width="500">
-                <textPath layoutId="contactText" alignment-baseline="top" href="#curve">
+                <textPath alignmentBaseline="top" href="#curve">
                   CONTACT ME-CONTACT ME-CONTACT ME
                 </textPath>
               </text>
@@ -269,7 +269,7 @@ const ContactMobile = () => {
             >
               <path fill="none" id="curve" d="M 50 100 A 50 50 0 1 1 150 100 A 50 50 0 1 1 50 100 " />
               <text width="500">
-                <textPath  alignment-baseline="top" href="#curve" style={{letterSpacing: "0.25em"}}>
+                <textPath alignmentBaseline="top" href="#curve" style={{letterSpacing: "0.25em"}}>
                   TAP TO COPY CONTACT INFO
                 </textPath>
               </text>

@@ -28,10 +28,16 @@
             "endDate": "2019-12-31"
         },
         {
-            "id": "Proyecto2",
-            "name": "Proyecto 2",
+            "id": "donatelo",
+            "name": "Donatelo - Donations webpage with cryptocurrency",
             "description": "Descripción del proyecto 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj",
-            "images": ["donateloImg.png","donateloImg.png","donateloImg.png","donateloImg.png","donateloImg.png", "avatar.png"],
+            "images": [
+                "donatelo/donateloImg.png",
+                "donatelo/Screenshot 2022-05-02 at 12-03-07 Donatelo.png",
+                "donatelo/Screenshot 2022-05-02 at 12-03-24 Donatelo.png",
+                "donatelo/Screenshot 2022-05-02 at 12-03-46 Donatelo.png",
+                "donatelo/Screenshot 2022-05-02 at 12-03-58 Donatelo.png"
+            ],
             "languages": [
                 "Java",
                 "C#",
@@ -54,10 +60,10 @@
             "endDate": "2019-12-31"
         },
         {
-            "id": "Proyecto3",
-            "name": "Proyecto 3",
+            "id": "wordleclone",
+            "name": "Wordle Clone",
             "description": "Descripción del proyecto 3",
-            "images": ["donateloImg.png", "avatar.png"],
+            "images": ["wordleclone/wordlecloneImg.jpg"],
             "languages": [
                 "NodeJS + Express",
                 "EJS"

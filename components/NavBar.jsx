@@ -10,10 +10,10 @@ const NavBar = () => {
       <div className="md:flex md:justify-center md:w-auto md:order-2 mt-8 mx-2 md:mt-0">
         {/* <h1 className="md:basis-1/3 text-xl font-bold text-palette-400 font-mono text-center">Juan Manuel Vila</h1> */}
         <div className="relative md:basis-1/3 text-xl font-bold text-palette-400 font-mono text-center ml-8">
-        <div class="relative flex justify-center items-center group cursor-pointer w-16 h-16 p-8 transition-color duration-[2s] hover:border-palette-400 border-gray-900 border-offset-[96px] animate-[spin_20s_linear_infinite]">
+        <div className="relative flex justify-center items-center group cursor-pointer w-16 h-16 p-8 transition-color duration-[2s] hover:border-palette-400 border-gray-900 border-offset-[96px] animate-[spin_20s_linear_infinite]">
             {/* border-double border-y-4  */}
-            {/* <h2 class="text-md font-normal md:text-xs text-center">
-              <button class="text-colored font-semibold ">
+            {/* <h2 className="text-md font-normal md:text-xs text-center">
+              <button className="text-colored font-semibold ">
                 Juan Manuel Vila
               </button>
             </h2> */}
@@ -26,7 +26,7 @@ const NavBar = () => {
             <svg className='absolute top-0 left-0 w-full h-full scale-[2]' viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
               <path fill="none" id="curve" d="M 50 100 A 50 50 0 1 1 150 100 A 50 50 0 1 1 50 100 " />
               <text width="500">
-                <textPath alignment-baseline="top" href="#curve"style={{letterSpacing: "0.27em"}}>
+                <textPath alignmentBaseline="top" href="#curve"style={{letterSpacing: "0.27em"}}>
                   AVAILABLE FOR HIRE
                 </textPath>
               </text>

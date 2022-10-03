@@ -1,7 +1,7 @@
 import Image from 'next/future/image';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Link from 'next/link';
-import { motion, Page } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import data from '../data.json';
 
@@ -10,11 +10,42 @@ import { IoLogoGithub, IoGlobe, IoCheckmarkCircleOutline } from 'react-icons/io5
 const ProyectsList = () => {
 
   const { proyects } = data;
-
+  const [currentImage, setCurrentImage ] = useState(null);
   const [activeID, setActiveID] = useState(null);
 
 
     return (
+        <>
+        {
+          currentImage && (
+            <motion.div 
+              className="fixed inset-0 w-full h-full bg-black bg-opacity-50 z-50 overflow-y-auto py-16 flex justify-center" 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            >
+              {/* <div
+                className="absolute top-1/2 left-1/2 -translate-x-[50%] -translate-y-[50%] w-3/4 h-fit rounded-lg shadow-lg mt-32"
+                // initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
+              > */}
+                <div className="w-11/12 md:w-2/4 h-fit relative">
+                  <Image
+                    src={ "/" + currentImage}
+                    alt={currentImage} width={400} height={400}
+                    layout="fill"
+                    objectFit="contain"
+                    className="rounded-lg w-full h-full"
+                  />
+                  <button
+                    className="absolute top-2 right-2 text-2xl text-white bg-black bg-opacity-50 rounded-full px-4 py-2"
+                    onClick={() => setCurrentImage(null)}
+                  >
+                    X
+                  </button>
+                </div>
+              {/* </div> */}
+            </motion.div>
+          )
+        }
+
         <motion.div className="flex flex-col w-full bg-white" id="ProyectsList"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -28,7 +59,7 @@ const ProyectsList = () => {
                 {
                     proyects.map((proyect, index) => (
                         (activeID !== null && activeID === proyect.id) ?
-                            <ProyectActive proyect={proyect} index={index} activeID={activeID} setActiveID={setActiveID} />
+                            <ProyectActive currentImage={currentImage} setCurrentImage={setCurrentImage} proyect={proyect} index={index} activeID={activeID} setActiveID={setActiveID} />
                         :
                             <ProyectCard proyect={proyect} index={index} activeID={activeID} setActiveID={setActiveID} />
 
@@ -41,6 +72,7 @@ const ProyectsList = () => {
             </div>
             </div>
       </motion.div>
+      </>
     )
 }
 
@@ -56,11 +88,10 @@ const ProyectCard = ({ proyect, index, activeID, setActiveID }) => {
           whileTap={{ scale: 0.9 }}
         >
             <Image
-                src="/donateloImg.png"
-                layoutId={ "ProyectIMG-"+proyect.id}
+                src={ "/" + proyect.images[0]}
                 alt={proyect.title} width={400} height={400}
                 layout="fill"
-                className="object-center object-cover w-full h-64"
+                className="object-center object-contain w-full h-64"
                 // className="object-cover w-full h-64 transition-all duration-1000 transform group-hover:scale-110 grayscale group-hover:grayscale-0 cursor-pointer"
             />
         </motion.div>
@@ -88,25 +119,31 @@ const ProyectCard = ({ proyect, index, activeID, setActiveID }) => {
 }
 
 
-const ProyectActive = ({ proyect, index, activeID, setActiveID }) => {
+const ProyectActive = ({ proyect, currentImage, setCurrentImage }) => {
 
-    const [ currentImage, setCurrentImage ] = useState(0);
+    const [width, setWidth] = useState(0);
+    const carousel = useRef();
 
-    const handleNextImage = () => {
-        if(currentImage < proyect.images.length - 1){
-            setCurrentImage(currentImage + 1);
-        }else{
-            setCurrentImage(0);
-        }
-    }
+    useEffect(() => {
+      console.log(carousel.current.scrollWidth , carousel.current.offsetWidth)
+      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+    }, []);
 
-    const handlePrevImage = () => {
-        if(currentImage > 0){
-            setCurrentImage(currentImage - 1);
-        }else{
-            setCurrentImage(proyect.images.length - 1);
-        }
-    }
+    // const handleNextImage = () => {
+    //     if(currentImage < proyect.images.length - 1){
+    //         setCurrentImage(currentImage + 1);
+    //     }else{
+    //         setCurrentImage(0);
+    //     }
+    // }
+
+    // const handlePrevImage = () => {
+    //     if(currentImage > 0){
+    //         setCurrentImage(currentImage - 1);
+    //     }else{
+    //         setCurrentImage(proyect.images.length - 1);
+    //     }
+    // }
     
 
     return(
@@ -119,7 +156,7 @@ const ProyectActive = ({ proyect, index, activeID, setActiveID }) => {
                   <div class="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8 lg:py-10 sm:pt-8">
                     
                     <div class="col-span-12 flex flex-row justify-center ">
-
+                      {/* 
                         <motion.div 
                             class="w-full basis-2/12 md:basis-3/12 h-56 col-span-12 my-auto cursor-pointer z-0"
                             onClick={ () => handlePrevImage() } 
@@ -174,12 +211,47 @@ const ProyectActive = ({ proyect, index, activeID, setActiveID }) => {
                             className="object-cover object-center w-full h-56"
                             hover={{ scale: 1.1 }}
                             />
+                        </motion.div> */}
+                        <motion.div ref={carousel} className="carousel overflow-hidden">
+                          <motion.div 
+                            drag="x" 
+                            dragConstraints={{ right: 0, left: -width }} whileTap={{cursor : "grabbing"}}
+                            className="inner-carousel flex flex-row flex-nowrap cursor-grab gap-0 md:gap-12"
+                          >
+                            {proyect.images.map((image, i) => {
+                              return (
+                                <AnimatePresence key={i}>
+                                <motion.div 
+                                  key={image + i} 
+                                  className="item min-w-[80%] md:min-w-[33%] h-80" 
+                                  initial={{ scale: 0.8, opacity: 0.5}}
+                                  whileTap={{ scale: 0.8, transition: { duration: 0.2 } }}
+                                  whileInView={{ scale: 0.9, opacity: 1, transition: { duration: 0.8 } }}
+                                  whileHover={{ scale: 1, transition: { duration: 0.2 } }}
+                                  viewport={{ margin: "-50px" }}
+                                  exit={{ scale: 0.8, opacity: 0.5, transition: { duration: 0.8 } }}
+                                  onTap={() => setCurrentImage( image ) }
+                                >
+                                  <Image
+                                    src={ "/" + image}
+                                    alt={proyect.title + image + i}
+                                    width={800}
+                                    height={200}
+                                    layout="fill"
+                                    className="object-cover object-center w-full h-full pointer-events-none"
+                                    hover={{ scale: 1.1 }}
+                                  />
+                                </motion.div>
+                                </AnimatePresence>
+                              );
+                            })}
+                          </motion.div>
                         </motion.div>
                         
                     </div>
                     
-                    <div class="col-span-12 flex flex-row justify-center">
-                        {/* create pagination dots */}
+                    {/* create pagination dots */}
+                    {/* <div class="col-span-12 flex flex-row justify-center">
                         <motion.div class="flex flex-row justify-center"
                             initial={{ opacity: 0.5, filter: 'blur(2px)', width: '0%', height: '100%' }}
                             whileInView={{ opacity: 1, filter: 'blur(0px)', width: '100%', height: '100%' }}
@@ -208,7 +280,7 @@ const ProyectActive = ({ proyect, index, activeID, setActiveID }) => {
                                 ))
                             }
                         </motion.div>
-                    </div>
+                    </div> */}
 
                     <div class="col-span-12 lg:col-span-8 flex flex-col">
                       <motion.h2 
