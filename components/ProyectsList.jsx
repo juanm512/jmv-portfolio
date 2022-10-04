@@ -325,13 +325,20 @@ const ProyectActive = ({ proyect, currentImage, setCurrentImage }) => {
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.5 }}
                         class="mt-12 flex flex-row justify-start ">
-                        <a rel="noreferrer" href={proyect.github} target="_blank" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-palette-100 bg-gray-900 hover:bg-gray-700 hover:underline hover:cursor-pointer">
-                          Go to Github repo 
-                          <IoLogoGithub class="ml-2 h-5 w-5" aria-hidden="true" />
-                        </a>
 
+                        { proyect.github ?
+                          <a rel="noreferrer" href={proyect.github} target="_blank" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-palette-100 bg-gray-900 hover:bg-gray-700 hover:underline hover:cursor-pointer">
+                            Github repo 
+                            <IoLogoGithub class="ml-2 h-5 w-5" aria-hidden="true" />
+                          </a>
+                        : 
+                          <a class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-palette-100 bg-gray-900 hover:bg-gray-700 hover:underline hover:cursor-pointer">
+                            No repo/Private
+                            <IoLogoGithub class="ml-2 h-5 w-5" aria-hidden="true" />
+                          </a> 
+                        }
                         {
-                          proyect.website || 
+                          proyect.website && 
                           <a rel="noreferrer" href={proyect.website} target="_blank" class="ml-4 inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-palette-100 bg-gray-900 hover:bg-gray-700 hover:underline hover:cursor-pointer">
                             Website
                             <IoGlobe class="ml-2 h-5 w-5" aria-hidden="true" />

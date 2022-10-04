@@ -3,7 +3,7 @@
         {   
             "id": "VAS-ECOMMERCE",
             "name": "VAS Ecommerce Platform",
-            "description": "VAS Ecommerce Platform is ",
+            "description": "Ventas A Services Ecommerce is a freelance project that I developed for a client. It is a platform that allows the client to sell their products online, manage inventory and customers orders. The website have a shopping cart without payment option (client request). When a order is submited a message is sent to client Whatsapp number and continues the process manually. The platform is developed in NextJS. It also uses MongoDB as a database and Tailwind for the frontend style. ",
             "images": [
                 "vas-ecommerce/Screenshot 2022-10-03 at 18-48-56 Ventas a Services - Respuestos de refrigeracion y linea blanca.png",
                 "vas-ecommerce/Screenshot 2022-10-03 at 18-49-06 Ventas a Services - Respuestos de refrigeracion y linea blanca.png",
@@ -32,16 +32,18 @@
                 "Vercel"
             ],
             "status": {
-                "text": "In production (private)",
+                "text": "In production - deployed (private)",
                 "color": "green"
             },
+            "website": "https://vas-ecommerce.vercel.app/",
+            "github": "",
             "startDate": "2022-08-15",
             "endDate": "2022-09-15"
         },
         {   
             "id": "takearisk",
             "name": "Take a Risk",
-            "description": "VAS Ecommerce Platform is ",
+            "description": "This was a personal project. It was a platform that allows tournaments creation and management. The website have a one click login with metamask and JWT tokens. Also, it allows payments with cryptocurrency for the tournaments joins. The platform was developed in NodeJS + Express with EJS for the server side rendering files. It also uses MySQL as a database and Custom CSS for the frontend style.",
             "images": [
                 "tar/tar-logo.png",
                 "tar/Screenshot 2022-04-21 at 03-07-10 Take a Risk.png",
@@ -57,27 +59,28 @@
             ],
             "languages": [
                 "JavaScript",
-                "Next.js",
-                "React"
+                "Node.js + Express",
+                "EJS"
             ],
             "libraries": [
-                "tailwindcss",
-                "aws-sdk",
-                "axios",
-                "jsonwebtoken",
-                "mongoose",
-                "bcryptjs"
+                "passport",
+                "mysql2",
+                "bcryptjs",
+                "nodemailer",
+                "ethers.js"
             ],
             "databasesAndHosting": [
-                "MongoDB (Atlas)",
-                "Vercel"
+                "MySQL",
+                "Custom VPS"
             ],
             "status": {
                 "text": "Currently down (private)",
                 "color": "red"
             },
-            "startDate": "2022-08-15",
-            "endDate": "2022-09-15"
+            "website": "",
+            "github": "",
+            "startDate": "2021-12-15",
+            "endDate": "2022-01-20"
         },
         {   
             "id": "ms",
@@ -102,27 +105,34 @@
             ],
             "languages": [
                 "JavaScript",
-                "Next.js",
-                "React"
+                "Node.js + Express",
+                "EJS"
             ],
             "libraries": [
-                "tailwindcss",
-                "aws-sdk",
-                "axios",
-                "jsonwebtoken",
-                "mongoose",
-                "bcryptjs"
+                "bcryptjs",
+                "ejs",
+                "express",
+                "express-session",
+                "lunr",
+                "mercadopago",
+                "multer",
+                "mysql",
+                "nodemailer",
+                "passport",
+                "socket.io (chat)"
             ],
             "databasesAndHosting": [
-                "MongoDB (Atlas)",
-                "Vercel"
+                "MySQL",
+                "Custom VPS"
             ],
             "status": {
-                "text": "Proyect abandoned/archived (private)",
+                "text": "Project abandoned",
                 "color": "black"
             },
-            "startDate": "2022-08-15",
-            "endDate": "2022-09-15"
+            "website": "",
+            "github": "",
+            "startDate": "2020-12-15",
+            "endDate": "2021-01-20"
         },
         {
             "id": "donatelo",
@@ -157,6 +167,8 @@
                 "text": "En desarrollo",
                 "color": "green"
             },
+            "website": "https://vas-ecommerce.vercel.app/",
+            "github": "",
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
         },
@@ -187,6 +199,8 @@
                 "text": "En desarrollo",
                 "color": "green"
             },
+            "website": "https://vas-ecommerce.vercel.app/",
+            "github": "",
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
         },
@@ -220,6 +234,8 @@
                 "text": "En desarrollo",
                 "color": "green"
             },
+            "website": "https://vas-ecommerce.vercel.app/",
+            "github": "",
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
         },
@@ -252,6 +268,8 @@
                 "text": "In production (private)",
                 "color": "green"
             },
+            "website": "https://vas-ecommerce.vercel.app/",
+            "github": "",
             "startDate": "2022-08-15",
             "endDate": "2022-09-15"
         },
@@ -277,6 +295,8 @@
                 "text": "En desarrollo",
                 "color": "green"
             },
+            "website": "https://vas-ecommerce.vercel.app/",
+            "github": "",
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
         },
@@ -304,6 +324,8 @@
                 "text": "Already published",
                 "color": "green"
             },
+            "website": "https://vas-ecommerce.vercel.app/",
+            "github": "",
             "startDate": "2022-07-03",
             "endDate": "2022-07-04"
         },
@@ -330,6 +352,8 @@
                 "text": "Deployed",
                 "color": "green"
             },
+            "website": "https://vas-ecommerce.vercel.app/",
+            "github": "",
             "startDate": "2022-04-05",
             "endDate": "2022-04-09"
         },
@@ -359,6 +383,8 @@
                 "text": "Deployed",
                 "color": "green"
             },
+            "website": "https://vas-ecommerce.vercel.app/",
+            "github": "",
             "startDate": "2022-04-05",
             "endDate": "2022-04-09"
         }
