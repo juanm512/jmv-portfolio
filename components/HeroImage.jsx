@@ -56,20 +56,20 @@ const HeroImage = () => {
             <div className="flex flex-col md:text-right w-full">
               <h4 className="mb-3 text-sm font-normal text-gray-900 uppercase"><span className=" text-palette-500">Currently<br/> Learning</span></h4>
               <p className="mb-12 text-3xl font-base text-gray-700 md:text-3xl font-amiri">
-                <span className="text-palette-400 block">Typescript</span> <span className="text-palette-400 block">Next.js</span>
+                <span className="text-palette-400 block">Typescript</span> <span className="text-palette-400 block">Next.js</span> <span className="text-palette-400 block">Java</span>
 
               </p>
             </div>
             <div className="flex flex-col md:text-right w-full">
               <h4 className="mb-3 text-sm font-normal text-gray-900 uppercase"><span className=" text-palette-500">Working<br/> On</span></h4>
               <p className="mb-12 text-3xl font-base text-gray-700 md:text-3xl font-amiri">
-                  <span className="text-palette-400 block">VaS-Ecommerce</span> <span className="text-palette-400 block">Portfolio</span> <span className="text-palette-400 block">UNO web-game</span>
+                  <span className="text-palette-400 block">VaS-Ecommerce</span> <span className="text-palette-400 block">Portfolio</span> 
               </p>
             </div>
             <div className="flex flex-col md:text-right w-full">
               <h4 className="mb-3 text-sm font-normal text-gray-900 uppercase"><span className=" text-palette-500">Proyects<br/> done</span></h4>
               <p className="mb-12 font-base text-gray-700 text-4xl md:text-5xl font-amiri">
-                  <span className="text-palette-400 block">18</span>
+                  <span className="text-palette-400 block">11</span>
               </p>
             </div>
 

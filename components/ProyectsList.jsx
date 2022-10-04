@@ -312,7 +312,7 @@ const ProyectActive = ({ proyect, currentImage, setCurrentImage }) => {
                           animate={{ opacity: 1 }}
                           transition={{ delay: 0.5 }}
                           class="mt-8 space-y-6">
-                          <p class="text-lg font-medium text-gray-900 text-left">
+                          <p class="text-lg font-medium text-gray-900 text-left font-amiri">
                             { proyect.description }
                           </p>
                         </motion.div>
@@ -353,7 +353,7 @@ const ProyectActive = ({ proyect, currentImage, setCurrentImage }) => {
                         <ul class="text-lg font-medium text-gray-900">
                           {
                             proyect.languages.map( (tech, index) => (
-                              <li key={index} class="flex flex-row items-center">
+                              <li key={index} class="flex flex-row items-center font-amiri">
                                 <IoCheckmarkCircleOutline class="h-5 w-5 text-palette-500" aria-hidden="true" />
                                 <span class="ml-2">{tech}</span>
                               </li>
@@ -370,7 +370,7 @@ const ProyectActive = ({ proyect, currentImage, setCurrentImage }) => {
                         <ul class="text-lg font-medium text-gray-900">
                           {
                             proyect.libraries.map( (tech, index) => (
-                              <li key={index} class="flex flex-row items-center">
+                              <li key={index} class="flex flex-row items-center font-amiri">
                                 <IoCheckmarkCircleOutline class="h-5 w-5 text-palette-500" aria-hidden="true" />
                                 <span class="ml-2">{tech}</span>
                               </li>
@@ -386,8 +386,8 @@ const ProyectActive = ({ proyect, currentImage, setCurrentImage }) => {
                       <div class="mt-2 space-y-6">
                         <ul class="text-lg font-medium text-gray-900">
                           {
-                            proyect.libraries.map( (tech, index) => (
-                              <li key={index} class="flex flex-row items-center">
+                            proyect.databasesAndHosting.map( (tech, index) => (
+                              <li key={index} class="flex flex-row items-center font-amiri">
                                 <IoCheckmarkCircleOutline class="h-5 w-5 text-palette-500" aria-hidden="true" />
                                 <span class="ml-2">{tech}</span>
                               </li>

@@ -1,36 +1,133 @@
 {
     "proyects": [
         {   
-            "id": "Proyecto1",
-            "name": "Proyecto 1",
-            "description": "Descripción del proyecto 1Descripción del proyecto 1Descripción del proyecto 1grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3grid grid-cols-1 gap-8 mt-8 md:grid-cols-2 lg:grid-cols-3",
-            "images": ["donateloImg.png", "avatar.png"],
+            "id": "VAS-ECOMMERCE",
+            "name": "VAS Ecommerce Platform",
+            "description": "VAS Ecommerce Platform is ",
+            "images": [
+                "vas-ecommerce/Screenshot 2022-10-03 at 18-48-56 Ventas a Services - Respuestos de refrigeracion y linea blanca.png",
+                "vas-ecommerce/Screenshot 2022-10-03 at 18-49-06 Ventas a Services - Respuestos de refrigeracion y linea blanca.png",
+                "vas-ecommerce/Screenshot 2022-10-03 at 18-49-46 Resultados para aires_acondicionados.png",
+                "vas-ecommerce/Screenshot 2022-10-03 at 18-50-09 Resultados para aires_acondicionados.png",
+                "vas-ecommerce/Screenshot 2022-10-03 at 18-46-04 Admin Page.png",
+                "vas-ecommerce/Screenshot 2022-10-03 at 18-46-20 Admin Page.png",
+                "vas-ecommerce/Screenshot 2022-10-03 at 18-46-32 Admin Page.png",
+                "vas-ecommerce/Screenshot 2022-10-03 at 18-48-39 Admin Page.png"
+            ],
             "languages": [
-                "Java",
-                "C#",
-                "Python"
+                "JavaScript",
+                "Next.js",
+                "React"
             ],
             "libraries": [
-                "Spring",
-                "Hibernate",
-                "Django"
+                "tailwindcss",
+                "aws-sdk",
+                "axios",
+                "jsonwebtoken",
+                "mongoose",
+                "bcryptjs"
             ],
-            "databases": [
-                "MySQL",
-                "PostgreSQL",
-                "MongoDB"
+            "databasesAndHosting": [
+                "MongoDB (Atlas)",
+                "Vercel"
             ],
             "status": {
-                "text": "En desarrollo",
+                "text": "In production (private)",
                 "color": "green"
             },
-            "startDate": "2019-01-01",
-            "endDate": "2019-12-31"
+            "startDate": "2022-08-15",
+            "endDate": "2022-09-15"
+        },
+        {   
+            "id": "takearisk",
+            "name": "Take a Risk",
+            "description": "VAS Ecommerce Platform is ",
+            "images": [
+                "tar/tar-logo.png",
+                "tar/Screenshot 2022-04-21 at 03-07-10 Take a Risk.png",
+                "tar/Screenshot 2022-04-21 at 03-08-19 Take a Risk.png",
+                "tar/Screenshot 2022-04-21 at 03-08-31 Take a Risk.png",
+                "tar/Screenshot 2022-04-21 at 03-08-39 Take a Risk.png",
+                "tar/Screenshot 2022-05-02 at 11-36-32 Take a Risk.png",
+                "tar/Screenshot 2022-05-02 at 11-36-56 Take a Risk.png",
+                "tar/Screenshot 2022-05-02 at 11-37-13 Take a Risk.png",
+                "tar/Screenshot 2022-05-02 at 11-38-43 Take a Risk.png",
+                "tar/Screenshot 2022-05-02 at 11-39-18 Take a Risk.png",
+                "tar/Screenshot 2022-05-02 at 11-44-17 Take a Risk.png"
+            ],
+            "languages": [
+                "JavaScript",
+                "Next.js",
+                "React"
+            ],
+            "libraries": [
+                "tailwindcss",
+                "aws-sdk",
+                "axios",
+                "jsonwebtoken",
+                "mongoose",
+                "bcryptjs"
+            ],
+            "databasesAndHosting": [
+                "MongoDB (Atlas)",
+                "Vercel"
+            ],
+            "status": {
+                "text": "Currently down (private)",
+                "color": "red"
+            },
+            "startDate": "2022-08-15",
+            "endDate": "2022-09-15"
+        },
+        {   
+            "id": "ms",
+            "name": "Mercado Service",
+            "description": "",
+            "images": [
+                "MS/ms-logo.png",
+                "MS/api.url2png.com.png",
+                "MS/api.url2png.com2.png",
+                "MS/Screenshot 2022-05-02 at 11-46-40 Mercado Service - Reparación de telefonos-Servicio técnico.png",
+                "MS/Screenshot 2022-05-02 at 11-47-15 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+                "MS/Screenshot 2022-05-02 at 11-47-42 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+                "MS/Screenshot 2022-05-02 at 11-48-13 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+                "MS/Screenshot 2022-05-02 at 11-48-52 Perfil empresa - Repuestos - MercadoService.png",
+                "MS/Screenshot 2022-05-02 at 11-49-05 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+                "MS/Screenshot 2022-05-02 at 11-50-13 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+                "MS/Screenshot 2022-05-02 at 11-50-30 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+                "MS/Screenshot 2022-05-02 at 11-51-21 Perfil empresa - MercadoService.png",
+                "MS/Screenshot 2022-05-02 at 11-51-31 Perfil empresa - MercadoService.png",
+                "MS/Screenshot 2022-05-02 at 11-51-38 Perfil empresa - MercadoService.png",
+                "MS/Screenshot 2022-05-02 at 11-51-56 Perfil empresa - Turnos - MercadoService.png"
+            ],
+            "languages": [
+                "JavaScript",
+                "Next.js",
+                "React"
+            ],
+            "libraries": [
+                "tailwindcss",
+                "aws-sdk",
+                "axios",
+                "jsonwebtoken",
+                "mongoose",
+                "bcryptjs"
+            ],
+            "databasesAndHosting": [
+                "MongoDB (Atlas)",
+                "Vercel"
+            ],
+            "status": {
+                "text": "Proyect abandoned/archived (private)",
+                "color": "black"
+            },
+            "startDate": "2022-08-15",
+            "endDate": "2022-09-15"
         },
         {
             "id": "donatelo",
             "name": "Donatelo - Donations with cryptocurrency",
-            "description": "Descripción del proyecto 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj 2dvsahkj dvsahkj",
+            "description": "",
             "images": [
                 "donatelo/donateloImg.png",
                 "donatelo/Screenshot 2022-05-02 at 12-03-07 Donatelo.png",
@@ -39,18 +136,22 @@
                 "donatelo/Screenshot 2022-05-02 at 12-03-58 Donatelo.png"
             ],
             "languages": [
-                "Java",
-                "C#",
-                "Python"
+                "NodeJS + Express",
+                "React",
+                "JavaScript"
             ],
             "libraries": [
-                "Spring",
-                "Hibernate",
-                "Django"
+                "daisyui and tailwindcss",
+                "socket.io",
+                "sweetalert2",
+                "three.js",
+                "ethers",
+                "mongoose"
             ],
             "databasesAndHosting": [
-                "MySQL",
-                "Vercel"
+                "MongoDB (Atlas)",
+                "Heroku (backend)",
+                "Netlify (frontend)"
             ],
             "status": {
                 "text": "En desarrollo",
@@ -58,6 +159,101 @@
             },
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
+        },
+        {
+            "id": "crafteadle",
+            "name": "Crafteadle - Wordle like game",
+            "description": "",
+            "images": [
+                "crafteadle/Screenshot 2022-10-03 at 19-40-42 https __crafteadle-nextjs.vercel.app.png",
+                "crafteadle/Screenshot 2022-10-03 at 19-42-18 https __crafteadle-nextjs.vercel.app.png",
+                "crafteadle/Screenshot 2022-10-03 at 19-42-23 https __crafteadle-nextjs.vercel.app.png",
+                "crafteadle/Screenshot 2022-10-03 at 19-42-40 https __crafteadle-nextjs.vercel.app.png"
+            ],
+            "languages": [
+                "Next.js",
+                "React",
+                "JavaScript"
+            ],
+            "libraries": [
+                "tailwindcss",
+                "react-spline"
+            ],
+            "databasesAndHosting": [
+                "JSON file for all recipes (local)",
+                "Vercel (frontend)"
+            ],
+            "status": {
+                "text": "En desarrollo",
+                "color": "green"
+            },
+            "startDate": "2019-01-01",
+            "endDate": "2019-12-31"
+        },
+        {
+            "id": "todo-with-database",
+            "name": "To do App with database",
+            "description": "Challenge for a job application",
+            "images": [
+                "todo-with-database/Captura de pantalla 2022-10-03 202228.png",
+                "todo-with-database/Captura de pantalla 2022-10-03 200607.png",
+                "todo-with-database/Screenshot 2022-10-03 at 20-02-26 Notes App Ensolvers Test.png",
+                "todo-with-database/Screenshot 2022-10-03 at 20-22-52 Notes App Ensolvers Test.png"
+            ],
+            "languages": [
+                "NodeJS + Express",
+                "React",
+                "JavaScript"
+            ],
+            "libraries": [
+                "tailwindcss + daisyui",
+                "mongoose",
+                "sweetalert2",
+                "jsonwebtoken"
+            ],
+            "databasesAndHosting": [
+                "MongoDB (Atlas)",
+                "Heroku (backend)",
+                "Netlify (frontend)"
+            ],
+            "status": {
+                "text": "En desarrollo",
+                "color": "green"
+            },
+            "startDate": "2019-01-01",
+            "endDate": "2019-12-31"
+        },
+        {   
+            "id": "agg",
+            "name": "Axie Galaxy Guild",
+            "description": "",
+            "images": [
+                "agg/Screenshot 2022-04-21 at 03-12-28 Axie Galaxy.png",
+                "agg/Screenshot 2022-04-21 at 03-13-06 Axie Galaxy.png"
+            ],
+            "languages": [
+                "JavaScript",
+                "Next.js",
+                "React"
+            ],
+            "libraries": [
+                "tailwindcss",
+                "aws-sdk",
+                "axios",
+                "jsonwebtoken",
+                "mongoose",
+                "bcryptjs"
+            ],
+            "databasesAndHosting": [
+                "MongoDB (Atlas)",
+                "Vercel"
+            ],
+            "status": {
+                "text": "In production (private)",
+                "color": "green"
+            },
+            "startDate": "2022-08-15",
+            "endDate": "2022-09-15"
         },
         {
             "id": "wordleclone",
@@ -65,17 +261,17 @@
             "description": "Descripción del proyecto 3",
             "images": ["wordleclone/wordlecloneImg.jpg"],
             "languages": [
-                "NodeJS + Express",
-                "EJS"
+                "React",
+                "JavaScript"
             ],
             "libraries": [
-                "leaflet",
-                "socket.io",
-                "passport"
+                "tailwindcss",
+                "Custom file with all the posible words",
+                "sweetalert2"
             ],
             "databasesAndHosting": [
-                "MySQL",
-                "Vercel"
+                "No database",
+                "Netlify"
             ],
             "status": {
                 "text": "En desarrollo",
@@ -85,56 +281,86 @@
             "endDate": "2019-12-31"
         },
         {
-            "id": "Proyecto4",
-            "name": "Proyecto 4",
+            "id": "YT-Notes",
+            "name": "YT Notes - Google Chrome Extension",
             "description": "Descripción del proyecto 4",
-            "images": ["donateloImg.png", "avatar.png"],
+            "images": [
+                "YT-Notes/ytnotes1.jpg",
+                "YT-Notes/ytnotes2.jpg",
+                "YT-Notes/ytnoteslogo.png"
+            ],
             "languages": [
-                "Java",
-                "C#",
-                "Python"
+                "JavaScript",
+                "CSS"
             ],
             "libraries": [
-                "Spring",
-                "Hibernate",
-                "Django"
+                
             ],
             "databasesAndHosting": [
-                "MySQL",
-                "Vercel"
+                "No database",
+                "Google Chrome Web Store"
             ],
             "status": {
-                "text": "En desarrollo",
+                "text": "Already published",
                 "color": "green"
             },
-            "startDate": "2019-01-01",
-            "endDate": "2019-12-31"
+            "startDate": "2022-07-03",
+            "endDate": "2022-07-04"
         },
         {
-            "id": "Proyecto5",
-            "name": "Proyecto 5",
+            "id": "guesspokemon",
+            "name": "Guess Pokemon - Game challenge",
             "description": "Descripción del proyecto 5",
-            "images": ["donateloImg.png", "avatar.png"],
+            "images": [
+                "pokemon/guesspokemonImg.png"
+            ],
             "languages": [
-                "Java",
-                "C#",
-                "Python"
+                "React",
+                "JavaScript"
             ],
             "libraries": [
-                "Spring",
-                "Hibernate",
-                "Django"
+                "Custom CSS file",
+                "TS file with the API data"
             ],
             "databasesAndHosting": [
-                "MySQL",
-                "Vercel"
+                "No database",
+                "Netlify"
             ],
             "status": {
-                "text": "En desarrollo",
+                "text": "Deployed",
                 "color": "green"
             },
-            "startDate": "2019-01-01",
-            "endDate": "2019-12-31"
+            "startDate": "2022-04-05",
+            "endDate": "2022-04-09"
+        },
+        {
+            "id": "TodoApp",
+            "name": "To do App ( Gift list )",
+            "description": "Descripción del proyecto 5",
+            "images": [
+                "todo/giftslistImg.png",
+                "todo/Captura de pantalla 2022-04-21 055745.png",
+                "todo/Screenshot 2022-04-21 at 05-56-50 React App.png",
+                "todo/Screenshot 2022-04-21 at 05-56-59 React App.png"
+            ],
+            "languages": [
+                "React",
+                "JavaScript"
+            ],
+            "libraries": [
+                "daisyui and tailwindcss",
+                "sweetalert2"
+            ],
+            "databasesAndHosting": [
+                "No database",
+                "Netlify"
+            ],
+            "status": {
+                "text": "Deployed",
+                "color": "green"
+            },
+            "startDate": "2022-04-05",
+            "endDate": "2022-04-09"
         }
     ]
 }
