@@ -16,7 +16,10 @@ const HeroImage = () => {
             <div className="flex flex-col">
               <h4 className="mb-3 text-lg md:text-sm font-normal text-gray-900 uppercase"><span className="border-b-2 border-palette-400 text-palette-300">Biography</span></h4>
               <p className="mb-12 text-base font-normal text-gray-700 md:text-md font-amiri">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ex ea commodo consequat.
+              I would like to make more efficient and develop new digital tools/products.
+              I am comfortable using the JavaScript stack with MySQL or MongoDB. <br/>
+              I consider myself a fast learner and I am always looking for new challenges or new technologies to learn.
+              Now I am interested in the Machine Learning and Artificial Intelligence areas.
               </p>
             </div>
             <div className=" flex-col hidden md:flex">

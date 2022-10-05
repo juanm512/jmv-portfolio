@@ -121,7 +121,7 @@ const ContactDesktop = () => {
     }
 
   return (
-    <div className="flex flex-col w-full show-on-scroll">
+    <div className="flex flex-col w-full show-on-scroll" id="Contact">
       <div className="flex flex-col items-center justify-center px-5 mx-auto md:w-11/12 lg:px-10 md:flex-row py-20 border-t border-gray-700">
         <div className="basis-full flex items-center flex-row justify-center">
           <div className="relative flex justify-center items-center group cursor-pointer w-64 h-64 my-32 p-8 transition-color duration-[2s] hover:border-palette-400 border-gray-900 border-offset-[96px] "

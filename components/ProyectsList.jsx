@@ -46,7 +46,7 @@ const ProyectsList = () => {
           )
         }
 
-        <motion.div className="flex flex-col w-full bg-white" id="ProyectsList"
+        <motion.div className="flex flex-col w-full bg-white" id="Projects"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
