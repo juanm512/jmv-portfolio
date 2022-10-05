@@ -3,7 +3,7 @@
         {   
             "id": "VAS-ECOMMERCE",
             "name": "VAS Ecommerce Platform",
-            "description": "Ventas A Services Ecommerce is a freelance project that I developed for a client. It is a platform that allows the client to sell their products online, manage inventory and customers orders. The website have a shopping cart without payment option (client request). When a order is submited a message is sent to client Whatsapp number and continues the process manually. The platform is developed in NextJS. It also uses MongoDB as a database and Tailwind for the frontend style. ",
+            "description": "Ventas A Services Ecommerce is a freelance project that I developed for a client. It is a platform that allows the client to sell their products online, manage inventory and customers orders. The website have a shopping cart without payment option (client request). When a order is submited a message is sent to client Whatsapp number and continues the process manually. \n\nThe platform is developed in NextJS. It also uses MongoDB as a database and Tailwind for the frontend style. ",
             "images": [
                 "vas-ecommerce/Screenshot 2022-10-03 at 18-48-56 Ventas a Services - Respuestos de refrigeracion y linea blanca.png",
                 "vas-ecommerce/Screenshot 2022-10-03 at 18-49-06 Ventas a Services - Respuestos de refrigeracion y linea blanca.png",
@@ -43,7 +43,7 @@
         {   
             "id": "takearisk",
             "name": "Take a Risk",
-            "description": "This was a personal project. It was a platform that allows tournaments creation and management. The website have a one click login with metamask and JWT tokens. Also, it allows payments with cryptocurrency for the tournaments joins. The platform was developed in NodeJS + Express with EJS for the server side rendering files. It also uses MySQL as a database and Custom CSS for the frontend style.",
+            "description": "This was a personal project. It was a platform that allows tournaments creation and management. The website have a one click login with metamask and JWT tokens. Also, it allows payments with cryptocurrency for the tournaments joins. \n\nThe platform was developed in NodeJS + Express with EJS for the server side rendering files. It also uses MySQL as a database and Custom CSS for the frontend style.",
             "images": [
                 "tar/tar-logo.png",
                 "tar/Screenshot 2022-04-21 at 03-07-10 Take a Risk.png",
@@ -85,7 +85,7 @@
         {   
             "id": "ms",
             "name": "Mercado Service",
-            "description": "",
+            "description": "Personal proyect to find profesionals easier than usually and an e-commerce for profesionals stuffs. The website had typical features like shopping cart, payment methods, live chat between clients and profecionals, interactive maps and a simple login with email and password (with email checking process). \n\nThe platform was developed in NodeJS + Express with EJS for the server side rendering files. It also uses MySQL as a database and Custom CSS for the frontend style.",
             "images": [
                 "MS/ms-logo.png",
                 "MS/api.url2png.com.png",
@@ -113,13 +113,14 @@
                 "ejs",
                 "express",
                 "express-session",
-                "lunr",
-                "mercadopago",
+                "lunr: search engine",
+                "mercadopago: payment processor",
                 "multer",
                 "mysql",
                 "nodemailer",
                 "passport",
-                "socket.io (chat)"
+                "socket.io (chat)",
+                "leaflet: maps library"
             ],
             "databasesAndHosting": [
                 "MySQL",
@@ -164,11 +165,11 @@
                 "Netlify (frontend)"
             ],
             "status": {
-                "text": "En desarrollo",
+                "text": "Project deployed",
                 "color": "green"
             },
-            "website": "https://vas-ecommerce.vercel.app/",
-            "github": "",
+            "website": "https://donatelo.netlify.app/",
+            "github": "https://github.com/juanm512/streams-donations-realtime",
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
         },
@@ -196,11 +197,11 @@
                 "Vercel (frontend)"
             ],
             "status": {
-                "text": "En desarrollo",
+                "text": "Project deployed",
                 "color": "green"
             },
-            "website": "https://vas-ecommerce.vercel.app/",
-            "github": "",
+            "website": "https://crafteadle-nextjs.vercel.app/",
+            "github": "https://github.com/juanm512/crafteadle-nextjs",
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
         },
@@ -231,10 +232,10 @@
                 "Netlify (frontend)"
             ],
             "status": {
-                "text": "En desarrollo",
+                "text": "Already published (code is private)",
                 "color": "green"
             },
-            "website": "https://vas-ecommerce.vercel.app/",
+            "website": "https://tourmaline-gecko-704f42.netlify.app",
             "github": "",
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
@@ -242,36 +243,35 @@
         {   
             "id": "agg",
             "name": "Axie Galaxy Guild",
-            "description": "",
+            "description": "Website for Axie Galaxy guild. With Lottery and Raffles with SLP crypto. One click login with metamask and JWT. \nThe ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.",
             "images": [
                 "agg/Screenshot 2022-04-21 at 03-12-28 Axie Galaxy.png",
                 "agg/Screenshot 2022-04-21 at 03-13-06 Axie Galaxy.png"
             ],
             "languages": [
                 "JavaScript",
-                "Next.js",
-                "React"
+                "Node.js + Express",
+                "EJS"
             ],
             "libraries": [
-                "tailwindcss",
-                "aws-sdk",
-                "axios",
+                "ethers.js",
                 "jsonwebtoken",
-                "mongoose",
-                "bcryptjs"
+                "mysql2",
+                "bcryptjs",
+                "node-schedule"
             ],
             "databasesAndHosting": [
-                "MongoDB (Atlas)",
-                "Vercel"
+                "MySQL",
+                "Custom VPS"
             ],
             "status": {
-                "text": "In production (private)",
-                "color": "green"
+                "text": "Freelance work (private)",
+                "color": "yellow"
             },
-            "website": "https://vas-ecommerce.vercel.app/",
+            "website": "",
             "github": "",
-            "startDate": "2022-08-15",
-            "endDate": "2022-09-15"
+            "startDate": "2021-11-15",
+            "endDate": "2021-12-15"
         },
         {
             "id": "wordleclone",
@@ -292,11 +292,11 @@
                 "Netlify"
             ],
             "status": {
-                "text": "En desarrollo",
+                "text": "Project deployed",
                 "color": "green"
             },
-            "website": "https://vas-ecommerce.vercel.app/",
-            "github": "",
+            "website": "https://flourishing-hotteok-53ad8d.netlify.app/",
+            "github": "https://github.com/juanm512/wordleclone",
             "startDate": "2019-01-01",
             "endDate": "2019-12-31"
         },
@@ -324,8 +324,8 @@
                 "text": "Already published",
                 "color": "green"
             },
-            "website": "https://vas-ecommerce.vercel.app/",
-            "github": "",
+            "website": "https://chrome.google.com/webstore/detail/youtube-annotations/ijncjcnjgpblfbcfgoeoihejipekjbfb?hl=es-419&authuser=0",
+            "github": "https://github.com/juanm512/YT-NOTES",
             "startDate": "2022-07-03",
             "endDate": "2022-07-04"
         },
@@ -349,11 +349,11 @@
                 "Netlify"
             ],
             "status": {
-                "text": "Deployed",
+                "text": "Project deployed",
                 "color": "green"
             },
-            "website": "https://vas-ecommerce.vercel.app/",
-            "github": "",
+            "website": "https://delicate-cactus-717347.netlify.app/",
+            "github": "https://github.com/juanm512/guess-pokemon",
             "startDate": "2022-04-05",
             "endDate": "2022-04-09"
         },
@@ -380,11 +380,11 @@
                 "Netlify"
             ],
             "status": {
-                "text": "Deployed",
+                "text": "Project deployed",
                 "color": "green"
             },
-            "website": "https://vas-ecommerce.vercel.app/",
-            "github": "",
+            "website": "https://eclectic-elf-f93bd5.netlify.app/",
+            "github": "https://github.com/juanm512/gifts-list",
             "startDate": "2022-04-05",
             "endDate": "2022-04-09"
         }
