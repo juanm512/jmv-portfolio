@@ -138,7 +138,7 @@
         {
             "id": "donatelo",
             "name": "Donatelo - Donations with cryptocurrency",
-            "description": "",
+            "description": "This one was a project public project I develop for streamers. It was a platform that allows donations with cryptocurrency. The website have a one click login with metamask and JWT tokens. It allows payments with multiple cryptocurrency in various networks. Also, manage the alerts on live streams with socket.io (websocket).  \n\nThe platform was developed in NodeJS + Express for the server and React for the frontend, also uses MongoDB as a database and daisyui + tailwindcss for the frontend style.",
             "images": [
                 "donatelo/donateloImg.png",
                 "donatelo/Screenshot 2022-05-02 at 12-03-07 Donatelo.png",
@@ -176,7 +176,7 @@
         {
             "id": "crafteadle",
             "name": "Crafteadle - Wordle like game",
-            "description": "",
+            "description": "Crafteadle is a wordle like game with minecraft recipes and random inventory to craft them. The game is developed in NextJS and uses a custom API to get the recipes and inventory from a JSON file. The game is deployed in Vercel.",
             "images": [
                 "crafteadle/Screenshot 2022-10-03 at 19-40-42 https __crafteadle-nextjs.vercel.app.png",
                 "crafteadle/Screenshot 2022-10-03 at 19-42-18 https __crafteadle-nextjs.vercel.app.png",
@@ -208,7 +208,7 @@
         {
             "id": "todo-with-database",
             "name": "To do App with database",
-            "description": "Challenge for a job application",
+            "description": "Challenge for a job application in which I had to develop a To do app with a database. The app was developed in NodeJS + Express and uses MongoDB as a database. The frontend was developed in React and uses TailwindCSS + DaisyUI for the style.",
             "images": [
                 "todo-with-database/Captura de pantalla 2022-10-03 202228.png",
                 "todo-with-database/Captura de pantalla 2022-10-03 200607.png",
@@ -276,7 +276,7 @@
         {
             "id": "wordleclone",
             "name": "Wordle Clone (ES)",
-            "description": "Descripción del proyecto 3",
+            "description": "Clone of the Wordle website. The website is developed in React and uses the TailwindCSS library for the style. The website is deployed in Netlify.",
             "images": ["wordleclone/wordlecloneImg.jpg"],
             "languages": [
                 "React",
@@ -303,7 +303,7 @@
         {
             "id": "YT-Notes",
             "name": "YT Notes - Google Chrome Extension",
-            "description": "Descripción del proyecto 4",
+            "description": "Google Chrome extension to save notes in a video. The extension is deployed in Chrome Web Store.",
             "images": [
                 "YT-Notes/ytnotes1.jpg",
                 "YT-Notes/ytnotes2.jpg",
@@ -332,7 +332,7 @@
         {
             "id": "guesspokemon",
             "name": "Guess Pokemon - Game challenge",
-            "description": "Descripción del proyecto 5",
+            "description": "Game challenge in which I had to develop a game in which the user had to guess the name of a pokemon. The game was developed in React and uses a custom library for the style. The game is deployed in Netlify.",
             "images": [
                 "pokemon/guesspokemonImg.png"
             ],
@@ -360,7 +360,7 @@
         {
             "id": "TodoApp",
             "name": "To do App ( Gift list )",
-            "description": "Descripción del proyecto 5",
+            "description": "To do App developed in React. The app is deployed in Netlify.",
             "images": [
                 "todo/giftslistImg.png",
                 "todo/Captura de pantalla 2022-04-21 055745.png",
