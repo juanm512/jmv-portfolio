@@ -1,12 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react';
-import Head from 'next/head';
+import React, { useEffect, useState, useRef } from "react";
+import Head from "next/head";
 
-import NavBar from '../components/NavBar';
-import HeroTitle from '../components/HeroTitle';
-import HeroImage from '../components/HeroImage';
-import Skills from '../components/Skills';
-import ProyectsList from '../components/ProyectsList';
-import FooterAndContact from '../components/FooterAndContact';
+import NavBar from "../components/NavBar";
+import HeroTitle from "../components/HeroTitle";
+import HeroImage from "../components/HeroImage";
+import Skills from "../components/Skills";
+import ProyectsList from "../components/ProyectsList";
+import FooterAndContact from "../components/FooterAndContact";
 
 export default function Home() {
   return (
@@ -14,11 +14,10 @@ export default function Home() {
       <Head>
         <title>Juan Manuel Vila - Portfolio</title>
         <meta name="description" content="" />
-        <link rel="icon" href="/Creatoravatar.svg" />
+        <link rel="icon" href="/Ai2.jpg" />
       </Head>
 
-      <main className="w-full h-screen p-0 m-0">      
-
+      <main className="w-full h-screen p-0 m-0">
         <NavBar />
         <HeroTitle />
 
@@ -26,12 +25,11 @@ export default function Home() {
 
         <Skills />
 
-        {/* Proyects */} 
+        {/* Proyects */}
         <ProyectsList />
-
 
         <FooterAndContact />
       </main>
     </div>
-  )
+  );
 }

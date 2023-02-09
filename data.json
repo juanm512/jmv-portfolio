@@ -5,14 +5,14 @@
       "name": "Temako Market - Star Wars SpaceShips Market",
       "description": "This project is a Star Wars Spaceships Market. It is a project that I developed for learning more about animations in frontend. The project is developed in ReactJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed in Vercel.",
       "images": [
-        "/Temako-Market/Screenshot 2023-02-08 at 21-49-56 Temako Market.png",
-        "/Temako-Market/Temako-Hero.gif",
-        "/Temako-Market/animations modal.gif",
-        "/Temako-Market/Screenshot 2023-02-08 at 21-50-22 Temako Market.png",
-        "/Temako-Market/Screenshot 2023-02-08 at 21-50-34 Temako Market.png",
-        "/Temako-Market/Screenshot 2023-02-08 at 21-50-47 Temako Market.png",
-        "/Temako-Market/Screenshot 2023-02-08 at 21-50-59 Temako Market.png",
-        "/Temako-Market/Screenshot 2023-02-08 at 21-51-26 Temako Market.png"
+        "Temako-Market/Screenshot 2023-02-08 at 21-49-56 Temako Market.png",
+        "Temako-Market/Temako-Hero.gif",
+        "Temako-Market/animations modal.gif",
+        "Temako-Market/Screenshot 2023-02-08 at 21-50-22 Temako Market.png",
+        "Temako-Market/Screenshot 2023-02-08 at 21-50-34 Temako Market.png",
+        "Temako-Market/Screenshot 2023-02-08 at 21-50-47 Temako Market.png",
+        "Temako-Market/Screenshot 2023-02-08 at 21-50-59 Temako Market.png",
+        "Temako-Market/Screenshot 2023-02-08 at 21-51-26 Temako Market.png"
       ],
       "languages": ["JavaScript", "React"],
       "libraries": ["tailwindcss", "framer-motion"],
@@ -31,9 +31,9 @@
       "name": "Payment Screen - Frontend Animation",
       "description": "This project is a payment screen for the credit card data input. It is a project that I developed for learning more about frontend and animations(Framer Motion). The project is developed in ReactJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed .",
       "images": [
-        "/payment-screen/React App — Mozilla Firefox 2023-02-08 21-57-34_Trim.gif",
-        "/payment-screen/Screenshot 2023-02-08 at 21-51-44 React App.png",
-        "/payment-screen/Screenshot 2023-02-08 at 21-51-54 React App.png"
+        "payment-screen/React App — Mozilla Firefox 2023-02-08 21-57-34_Trim.gif",
+        "payment-screen/Screenshot 2023-02-08 at 21-51-44 React App.png",
+        "payment-screen/Screenshot 2023-02-08 at 21-51-54 React App.png"
       ],
       "languages": ["JavaScript", "React"],
       "libraries": ["tailwindcss", "framer-motion, react-use-measure"],
