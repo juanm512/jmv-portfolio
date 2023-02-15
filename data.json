@@ -1,6 +1,33 @@
 {
   "proyects": [
     {
+      "id": "frontend-lab",
+      "name": "FrontEnd Lab - Calendar Steps Menu Chart",
+      "description": "This project is a personal website that I developed for learn, develope and test frontend things. It has a calendar animated in the x value following the direction of the month change. It also has a steps container that animates the bullets and the svg path. The Menu is animated in the y value and have windows inside it. The chart is pending to be developed.The project is developed in ReactJS with Framer Motion and other hooks for measures and Dates helpers. It also uses Tailwind for the frontend style. The project is deployed in Vercel.",
+      "images": [
+        "frontend-lab/calendar.gif",
+        "frontend-lab/theme.gif",
+        "frontend-lab/steps.gif",
+        "frontend-lab/userMenu.gif"
+      ],
+      "languages": ["JavaScript", "React"],
+      "libraries": [
+        "tailwindcss",
+        "framer-motion",
+        "react-use-measure",
+        "date-fns"
+      ],
+      "databasesAndHosting": ["No database", "Vercel"],
+      "status": {
+        "text": "In production - deployed (public)",
+        "color": "green"
+      },
+      "website": "https://testing-lab.vercel.app/",
+      "github": "https://github.com/juanm512/calendar-steps-chart/",
+      "startDate": "2023-02-08",
+      "endDate": "2023-02-14"
+    },
+    {
       "id": "Temako-Market",
       "name": "Temako Market - Star Wars SpaceShips Market",
       "description": "This project is a Star Wars Spaceships Market. It is a project that I developed for learning more about animations in frontend. The project is developed in ReactJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed in Vercel.",
