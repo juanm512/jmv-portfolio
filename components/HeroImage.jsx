@@ -74,8 +74,7 @@ const HeroImage = () => {
             </h4>
             <p className="mb-12 text-3xl font-base text-gray-700 md:text-3xl font-amiri">
               <span className="text-palette-400 block">Typescript</span>{" "}
-              <span className="text-palette-400 block">Python(for ML)</span>{" "}
-              <span className="text-palette-400 block">Java</span>
+              <span className="text-palette-400 block">React Native</span>
             </p>
           </div>
           <div className="flex flex-col md:text-right w-full">
@@ -87,9 +86,11 @@ const HeroImage = () => {
             </h4>
             <p className="mb-12 text-3xl font-base text-gray-700 md:text-3xl font-amiri">
               <span className="text-palette-400 block">
-                FrontEnd-Animations
+                3D bone repository for medical university{" "}
               </span>{" "}
-              <span className="text-palette-400 block">Portfolio</span>
+              <span className="text-palette-400 block mt-3">
+                FrontEnd Animations
+              </span>{" "}
             </p>
           </div>
           <div className="flex flex-col md:text-right w-full">
