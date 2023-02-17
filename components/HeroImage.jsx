@@ -74,7 +74,8 @@ const HeroImage = () => {
             </h4>
             <p className="mb-12 text-3xl font-base text-gray-700 md:text-3xl font-amiri">
               <span className="text-palette-400 block">Typescript</span>{" "}
-              <span className="text-palette-400 block">React Native</span>
+              <span className="text-palette-400 block">React Native</span>{" "}
+              <span className="text-palette-400 block">Deno and Fresh</span>{" "}
             </p>
           </div>
           <div className="flex flex-col md:text-right w-full">
