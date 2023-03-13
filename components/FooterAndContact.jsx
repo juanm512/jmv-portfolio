@@ -4,8 +4,17 @@ import { motion } from "framer-motion";
 import { IoLogoDiscord, IoLogoGithub, IoLogoLinkedin, IoLogoInstagram, IoChatboxEllipses } from "react-icons/io5";
 
 const FooterAndContact = () => {
-
+  const [isDiscordCopied, setIsDiscordCopied] = React.useState(false);
   const [width, setWidth] = React.useState(null);
+
+  const handleDiscordCopy = () => {
+    navigator.clipboard.writeText("juanm512#5622");
+    setIsDiscordCopied(true);
+
+    setTimeout(() => {
+      setIsDiscordCopied(false);
+    }, 3000);
+  };
 
   function handleWindowSizeChange() {
       setWidth(window.innerWidth);
