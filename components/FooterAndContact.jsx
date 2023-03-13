@@ -96,10 +96,8 @@ const FooterAndContact = () => {
                   whileTap={{ scale: 0.8 }}
                 >
                   <IoLogoDiscord size={25} />
-                  <div className={"absolute top-0 left-0 translate-y-[60%] w-fit h-fit text-center rounded-sm px-2 block md:hidden md:group-hover:block bg-gray-900 bg-opacity-90 text-white text-sm font-bold"
-                    + isDiscordCopied ? "block" : "hidden"
-                    }>
-                      {isDiscordCopied ? "Copied succesfully!" : "juanm512#5622"}
+                  <div className={`absolute top-0 left-0 translate-y-[60%] w-fit h-fit text-center rounded-sm px-2 bg-gray-900 bg-opacity-90 text-white text-sm font-bold ${isDiscordCopied ? block : hidden}`}>
+                      Copied succesfully!
                     </div>
                 </motion.button>
               </div>

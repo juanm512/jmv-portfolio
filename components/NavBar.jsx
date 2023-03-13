@@ -66,7 +66,7 @@ const NavBar = () => {
             </div>
           </div>
         </div> */}
-        <div className="md:basis-1/3 flex justify-center mt-6 lg:flex lg:mt-0 md:order-3">
+        <div className="md:basis-1/3 flex justify-center mt-6 lg:flex md:mt-0 md:order-3">
           <div className={"hidden md:flex"}>
             <a
               rel="noreferrer"
@@ -101,10 +101,8 @@ const NavBar = () => {
               aria-label="Discord"
             >
               <IoLogoDiscord size={25} />
-              <div className={"absolute top-0 left-0 translate-y-[60%] w-fit h-fit text-center rounded-sm px-2 block md:hidden md:group-hover:block bg-gray-900 bg-opacity-90 text-white text-sm font-bold"
-              + isDiscordCopied ? "block" : "hidden"
-              }>
-                {isDiscordCopied ? "Copied succesfully!" : "juanm512#5622"}
+              <div className={`absolute top-0 left-0 translate-y-[60%] w-fit h-fit text-center rounded-sm px-2 bg-gray-900 bg-opacity-90 text-white text-sm font-bold ${isDiscordCopied ? block : hidden}`}>
+                Copied succesfully!
               </div>
             </button>
           </div>

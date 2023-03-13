@@ -46,27 +46,24 @@ const HeroImage = () => {
         {/* IMAGE */}
         <motion.div 
           initial={{
-            borderTopLeftRadius: "23rem",
-            borderTopRightRadius: "28rem",
-            borderBottomLeftRadius: "24rem",
-            borderBottomRightRadius: "18rem",
+            borderRadius: "23rem 28rem 24rem 18rem",
           }}
           animate={{
-            borderTopLeftRadius: ["23rem", "21rem", "26rem", "40rem"],
-            borderTopRightRadius: ["28rem", "32rem", "21rem", "40rem"],
-            borderBottomLeftRadius: ["24rem", "40rem", "26rem", "40rem"],
-            borderBottomRightRadius: ["18rem", "16rem", "32rem", "26rem"],
+            borderRadius: [
+              "23rem 28rem 24rem 18rem", 
+              "21rem 32rem 40rem 16rem",
+              "26rem 21rem 26rem 32rem",
+              "40rem 40rem 40rem 26rem"
+            ]
           }}
           transition={{  
             repeat: Infinity,
             repeatType: "reverse",
-            duration: 2,
-            borderTopLeftRadius: { duration: 5, delay: 0.7 },
-            borderTopRightRadius: { duration: 5.8, delay: 0.3 },
-            borderBottomLeftRadius: { duration: 5.4, delay: 0.1 },
-            borderBottomRightRadius: { duration: 5.2, delay: 0.5 },
+            repeatDelay: 0.5,
+            duration: 5,
+            // borderRadius: { duration: 5 },
           }}
-          className="basis-4/12 pb-4 md:pb-0 overflow-hidden relative w-64 md:w-full order-1 md:order-2"
+          className="basis-4/12 mb-4 mx-1 md:pb-0 overflow-hidden relative w-64 md:w-full order-1 md:order-2"
         >
           <Image
             width="500"
