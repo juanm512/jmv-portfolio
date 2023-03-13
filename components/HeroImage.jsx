@@ -12,7 +12,7 @@ const HeroImage = () => {
       transition={{ delay: 0.5 }}
       viewport={{ once: true }}
     >
-      <div className="flex flex-col items-center justify-center px-5 py-16 mx-auto lg:px-20 md:flex-row">
+      <div className="flex flex-col items-center justify-center px-5 pt-8 pb-8 mx-auto lg:px-20 md:flex-row">
         <div className="order-2 md:order-1 basis-full md:basis-4/12 flex flex-col items-center justify-center text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:flex md:flex-col md:justify-center">
           <div className="flex flex-col">
             <h4 className="mb-3 text-lg md:text-sm font-normal text-gray-900 uppercase">
@@ -44,7 +44,30 @@ const HeroImage = () => {
         </div>
 
         {/* IMAGE */}
-        <div className="basis-4/12 relative p-2 w-64 md:w-full order-1 md:order-2">
+        <motion.div 
+          initial={{
+            borderTopLeftRadius: "23rem",
+            borderTopRightRadius: "28rem",
+            borderBottomLeftRadius: "24rem",
+            borderBottomRightRadius: "18rem",
+          }}
+          animate={{
+            borderTopLeftRadius: ["23rem", "21rem", "26rem", "40rem"],
+            borderTopRightRadius: ["28rem", "32rem", "21rem", "40rem"],
+            borderBottomLeftRadius: ["24rem", "40rem", "26rem", "40rem"],
+            borderBottomRightRadius: ["18rem", "16rem", "32rem", "26rem"],
+          }}
+          transition={{  
+            repeat: Infinity,
+            repeatType: "reverse",
+            duration: 2,
+            borderTopLeftRadius: { duration: 5, delay: 0.7 },
+            borderTopRightRadius: { duration: 5.8, delay: 0.3 },
+            borderBottomLeftRadius: { duration: 5.4, delay: 0.1 },
+            borderBottomRightRadius: { duration: 5.2, delay: 0.5 },
+          }}
+          className="basis-4/12 pb-4 md:pb-0 overflow-hidden relative w-64 md:w-full order-1 md:order-2"
+        >
           <Image
             width="500"
             height="500"
@@ -52,17 +75,17 @@ const HeroImage = () => {
             alt="hero"
             // src="/Creatoravatar2.svg"
             src="/Ai2.jpg"
-            style={{
-              "border-top-left-radius": "12rem 12rem",
-              "border-top-right-radius": "12rem 12rem",
-              "border-bottom-right-radius": "12rem 12rem",
-              "border-bottom-left-radius": "12rem 12rem",
-              border: "10px solid #fefefe",
-              boxShadow:
-                "0.1px 0.1px 1px 0.5px rgba(232, 58, 20, 0.4), -0.1px -0.1px 1px 0.5px rgba(232, 58, 20, 0.4)",
-            }}
+            // style={{
+            //   "border-top-left-radius": "12rem 12rem",
+            //   "border-top-right-radius": "12rem 12rem",
+            //   "border-bottom-right-radius": "12rem 12rem",
+            //   "border-bottom-left-radius": "12rem 12rem",
+            //   border: "10px solid #fefefe",
+            //   boxShadow:
+            //     "0.1px 0.1px 1px 0.5px rgba(232, 58, 20, 0.4), -0.1px -0.1px 1px 0.5px rgba(232, 58, 20, 0.4)",
+            // }}
           />
-        </div>
+        </motion.div>
 
         <div className="order-3 md:order-3 basis-4/12 relative text-center flex flex-col items-end justify-end lg:flex-grow md:w-full lg:pl-24 md:pl-16 md:items-end md:text-rigth md:flex md:flex-col md:justify-end">
           <div className="flex flex-col md:text-right w-full">

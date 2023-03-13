@@ -24,14 +24,14 @@ const NavBar = () => {
 
   return (
     <nav
-      className="bg-white border-gray-200 px-3 md:px-20 md:py-8 rounded dark:bg-gray-900"
+      className="hidden md:flex bg-white border-gray-200 px-3 md:px-20 md:py-8 rounded dark:bg-gray-900"
       id="Home"
     >
       <div className="container flex flex-wrap justify-between items-center mx-auto">
-        <div className="md:flex md:justify-center md:w-auto md:order-2 mt-8 mx-2 md:mt-0">
+        {/* <div className="md:flex md:justify-center md:w-auto md:order-2 mt-8 mx-2 md:mt-0">
           <div className="relative md:basis-1/3 text-xl font-bold text-palette-400 font-mono text-center ml-8">
             <div className="relative flex justify-center items-center group w-16 h-16 p-8 border-gray-900 border-offset-[96px]">
-              {/* border-double border-y-4  transition-color duration-[2s] hover:border-palette-400 */}
+             
               <Image
                 src="/Ai5.jpg"
                 alt="Logo"
@@ -65,7 +65,7 @@ const NavBar = () => {
               </svg>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className="md:basis-1/3 flex justify-center mt-6 lg:flex lg:mt-0 md:order-3">
           <div className={"hidden md:flex"}>
             <a
@@ -95,16 +95,18 @@ const NavBar = () => {
             >
               <IoLogoLinkedin size={25} />
             </a>
-            <a
+            <button
               onClick={() => handleDiscordCopy()}
               className="cursor-pointer group relative mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300"
               aria-label="Discord"
             >
               <IoLogoDiscord size={25} />
-              <div className="absolute top-0 left-0 translate-y-[60%] w-fit h-fit text-center rounded-sm px-2 block md:hidden md:group-hover:block bg-gray-900 bg-opacity-90 text-white text-sm font-bold">
-                {isDiscordCopied ? "Copied succesfully!" : "Copy Username"}
+              <div className={"absolute top-0 left-0 translate-y-[60%] w-fit h-fit text-center rounded-sm px-2 block md:hidden md:group-hover:block bg-gray-900 bg-opacity-90 text-white text-sm font-bold"
+              + isDiscordCopied ? "block" : "hidden"
+              }>
+                {isDiscordCopied ? "Copied succesfully!" : "juanm512#5622"}
               </div>
-            </a>
+            </button>
           </div>
           <button
             onClick={() => setIsMenuOpen((pV) => !pV)}

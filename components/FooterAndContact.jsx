@@ -45,7 +45,10 @@ const FooterAndContact = () => {
             </div>
 
             <div className="md:basis-1/3 flex flex-row justify-center">
-                <motion.a href="#" className="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" aria-label="Reddit"
+                <motion.a className="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" 
+                aria-label="github"
+                target={"_blank"}
+                href="https://github.com/juanm512"
                   initial={{ scale: 1 }}
                   whileInView={{ scale: 1.1 }}
                   whileHover={{ scale: 1.2 }}
@@ -53,7 +56,10 @@ const FooterAndContact = () => {
                 >
                     <IoLogoGithub size={25} />
                 </motion.a>
-                <motion.a href="#" className="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" aria-label="Facebook"
+                <motion.a className="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300"
+                  aria-label="Instagram"
+                  target={"_blank"}
+                  href="https://www.instagram.com/juuanmav/"
                   initial={{ scale: 1 }}
                   whileInView={{ scale: 1.1 }}
                   whileHover={{ scale: 1.2 }}
@@ -61,7 +67,10 @@ const FooterAndContact = () => {
                 >
                     <IoLogoInstagram size={25} />
                 </motion.a>
-                <motion.a href="#" className="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" aria-label="Twitter"
+                <motion.a className="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300"
+                  aria-label="Linkedin"
+                  target={"_blank"}
+                  href="https://www.linkedin.com/in/juanmanuelvila"
                   initial={{ scale: 1 }}
                   whileInView={{ scale: 1.1 }}
                   whileHover={{ scale: 1.2 }}
@@ -69,14 +78,21 @@ const FooterAndContact = () => {
                 >
                     <IoLogoLinkedin size={25} />
                 </motion.a>
-                <motion.a href="#" className="mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" aria-label="Twitter"
+                <motion.button className="cursor-pointer group relative mx-2 text-gray-600 transition-colors duration-300 transform dark:text-palette-300 hover:text-palette-300 dark:hover:text-palette-300" 
+                  aria-label="Discord"
+                  onClick={() => handleDiscordCopy()}
                   initial={{ scale: 1 }}
                   whileInView={{ scale: 1.1 }}
                   whileHover={{ scale: 1.2 }}
                   whileTap={{ scale: 0.8 }}
                 >
-                    <IoLogoDiscord size={25} />
-                </motion.a>
+                  <IoLogoDiscord size={25} />
+                  <div className={"absolute top-0 left-0 translate-y-[60%] w-fit h-fit text-center rounded-sm px-2 block md:hidden md:group-hover:block bg-gray-900 bg-opacity-90 text-white text-sm font-bold"
+                    + isDiscordCopied ? "block" : "hidden"
+                    }>
+                      {isDiscordCopied ? "Copied succesfully!" : "juanm512#5622"}
+                    </div>
+                </motion.button>
               </div>
 
 
