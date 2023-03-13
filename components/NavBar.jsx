@@ -101,7 +101,7 @@ const NavBar = () => {
               aria-label="Discord"
             >
               <IoLogoDiscord size={25} />
-              <div className={`absolute top-0 left-0 translate-y-[60%] w-fit h-fit text-center rounded-sm px-2 bg-gray-900 bg-opacity-90 text-white text-sm font-bold ${isDiscordCopied ? block : hidden}`}>
+              <div className={`absolute top-0 left-0 translate-y-[60%] w-fit h-fit text-center rounded-sm px-2 bg-gray-900 bg-opacity-90 text-white text-sm font-bold ${isDiscordCopied ? "block" : "hidden"}`}>
                 Copied succesfully!
               </div>
             </button>
