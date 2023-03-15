@@ -1,6 +1,30 @@
 {
   "proyects": [
     {
+      "id": "f1-stats",
+      "name": "Formula 1 Season Summary App",
+      "description": "The Formula 1 Season Summary App is a mobile application built with React Native and Expo that displays a summary of the current Formula 1 season. The app allows users to view driver and constructor standings, race calendar, and results, and provides detailed information about each race, such as track information, lap records, and weather conditions. The app features a modern and intuitive design, and is easy to navigate through different sections using the bottom navigation bar. It's a great resource for Formula 1 fans who want to keep up to date with the latest season standings and race results.",
+      "images": [
+        "f1-stats/home.png",
+        "f1-stats/calendar.png",
+        "f1-stats/drivers.png",
+        "f1-stats/teams.png"
+      ],
+      "languages": ["JavaScript", "React Native", "Expo"],
+      "libraries": [
+        "date-fns"
+      ],
+      "databasesAndHosting": ["No database", "APK - Local"],
+      "status": {
+        "text": "In development (public)",
+        "color": "yellow"
+      },
+      "website": "",
+      "github": "https://github.com/juanm512/f1-stats",
+      "startDate": "2023-03-08",
+      "endDate": "2023-03-15"
+    },
+    {
       "id": "frontend-lab",
       "name": "FrontEnd Lab - Calendar Steps Menu Chart",
       "description": "This project is a personal website that I developed for learn, develope and test frontend things. It has a calendar animated in the x value following the direction of the month change. It also has a steps container that animates the bullets and the svg path. The Menu is animated in the y value and have windows inside it. The chart is pending to be developed.The project is developed in ReactJS with Framer Motion and other hooks for measures and Dates helpers. It also uses Tailwind for the frontend style. The project is deployed in Vercel.",
