@@ -1,6 +1,34 @@
 {
   "proyects": [
     {
+      "id": "Atlas3d",
+      "name": "Atlas 3D - 3D Models for students",
+      "description": "This project is an online human anatomy atlas designed specifically for medical students and professionals. Our atlas provides a comprehensive 3D model of every bone in the human body, complete with annotations detailing common bone injuries and conditions.Our interactive platform allows users to zoom in and rotate each bone model for a detailed view of its structure and location in the body. In addition, we will continue to add joint models to our atlas, allowing users to study the complex movements and connections between bones. With each new edition of our atlas, we plan to expand our coverage to include organs and muscles, providing students with a comprehensive understanding of the human body's intricate anatomy. Our easy-to-use interface and detailed models make our atlas an essential tool for any medical student or professional.",
+      "images": [
+        "Atlas3d/index.jpg",
+        "Atlas3d/home.gif",
+        "Atlas3d/listado.gif",
+        "Atlas3d/bonePage.gif",
+        "Atlas3d/annotations.gif"
+      ],
+      "languages": ["JavaScript", "Next.js", "React"],
+      "libraries": [
+        "tailwindcss",
+        "three.js",
+        "react-three-fiber",
+        "framer-motion"
+      ],
+      "databasesAndHosting": ["No database", "Vercel"],
+      "status": {
+        "text": "In production - deployed (private)",
+        "color": "green"
+      },
+      "website": "https://atlas3d.vercel.app/",
+      "github": "",
+      "startDate": "2023-02-15",
+      "endDate": "2023-04-15"
+    },
+    {
       "id": "f1-stats",
       "name": "Formula 1 Season Summary App",
       "description": "The Formula 1 Season Summary App is a mobile application built with React Native and Expo that displays a summary of the current Formula 1 season. The app allows users to view driver and constructor standings, race calendar, and results, and provides detailed information about each race, such as track information, lap records, and weather conditions. The app features a modern and intuitive design, and is easy to navigate through different sections using the bottom navigation bar. It's a great resource for Formula 1 fans who want to keep up to date with the latest season standings and race results.",
@@ -11,12 +39,10 @@
         "f1-stats/teams.png"
       ],
       "languages": ["JavaScript", "React Native", "Expo"],
-      "libraries": [
-        "date-fns"
-      ],
+      "libraries": ["date-fns"],
       "databasesAndHosting": ["No database", "APK - Local"],
       "status": {
-        "text": "In development (public)",
+        "text": "In development (public) - Archived",
         "color": "yellow"
       },
       "website": "",
