@@ -65,7 +65,7 @@ const NavBar = () => {
           </div>
         </div> */}
         <div className="md:basis-1/3 flex justify-center mt-6 lg:flex md:mt-0 md:order-3">
-          <div className={"hidden md:flex"}>
+          <div className={"hidden md:flex p-4 bg-white rounded-lg"}>
             <a
               rel="noreferrer"
               target={"_blank"}
