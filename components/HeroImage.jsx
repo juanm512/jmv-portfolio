@@ -29,7 +29,7 @@ const HeroImage = () => {
               Intelligence areas.
             </p>
           </div>
-          <div className=" flex-col hidden md:flex">
+          <div className=" flex-col flex">
             <h4 className="mb-3 text-lg md:text-sm font-normal text-gray-900 uppercase">
               <span className="border-b-2 border-palette-400 text-palette-300">
                 Contact
