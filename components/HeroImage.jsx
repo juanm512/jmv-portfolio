@@ -1,9 +1,9 @@
-import { motion } from "framer-motion";
-import Image from "next/future/image";
-import data from "../data.json";
+import { motion } from "framer-motion"
+import Image from "next/future/image"
+import data from "../data.json"
 
 const HeroImage = () => {
-  const { proyects } = data;
+  const { proyects } = data
   return (
     <motion.div
       className=" bg-white dark:bg-gray-900"
@@ -39,28 +39,37 @@ const HeroImage = () => {
               512juanm@gmail.com <br />
               +54 9 2346-570764 <br />
               La Plata, Buenos Aires, Argentina
+              <br />
+              <a
+                href="https://drive.google.com/uc?id=132L4f_w39rZHRaTpHu5Mo4FsX-Oe9FZn"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-palette-400 hover:text-palette-500"
+              >
+                Download CV
+              </a>
             </p>
           </div>
         </div>
 
         {/* IMAGE */}
-        <motion.div 
+        <motion.div
           initial={{
-            borderRadius: "23rem 28rem 24rem 18rem",
+            borderRadius: "23rem 28rem 24rem 18rem"
           }}
           animate={{
             borderRadius: [
-              "23rem 28rem 24rem 18rem", 
+              "23rem 28rem 24rem 18rem",
               "21rem 32rem 40rem 16rem",
               "26rem 21rem 26rem 32rem",
               "40rem 40rem 40rem 26rem"
             ]
           }}
-          transition={{  
+          transition={{
             repeat: Infinity,
             repeatType: "reverse",
             repeatDelay: 0.5,
-            duration: 5,
+            duration: 5
             // borderRadius: { duration: 5 },
           }}
           className="basis-4/12 mb-4 mx-1 md:pb-0 overflow-hidden relative w-64 md:w-full order-1 md:order-2"
@@ -167,7 +176,7 @@ const HeroImage = () => {
         />
       </div>
     </motion.div>
-  );
-};
+  )
+}
 
-export default HeroImage;
+export default HeroImage
