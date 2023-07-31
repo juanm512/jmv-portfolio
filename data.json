@@ -29,6 +29,51 @@
       "endDate": "2023-04-15"
     },
     {
+      "id": "RNews",
+      "name": "RNews - News App",
+      "description": "This project is a news app that I developed for learning more about animations in frontend. The project is developed in ReactJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed in Vercel. The NewsPaper used is only for learning purposes.",
+      "images": [
+        "Rnews/RNewsHomeLoad.gif",
+        "Rnews/darkmodechange.gif",
+        "Rnews/downtotopview.gif",
+        "Rnews/topdownview.gif",
+        "Rnews/topdownviewFromhome.gif"
+      ],
+      "languages": ["JavaScript", "Next.js", "React"],
+      "libraries": ["tailwindcss", "framer-motion"],
+      "databasesAndHosting": ["No database", "Vercel"],
+      "status": {
+        "text": "In production - deployed",
+        "color": "green"
+      },
+      "website": "https://right-news.vercel.app/",
+      "github": "https://github.com/juanm512/right-news",
+      "startDate": "2023-04-23",
+      "endDate": "2023-05-01"
+    },
+    {
+      "id": "BMusic",
+      "name": "BMusic - Music Artist Web Template",
+      "description": "This project is a music artist web template. The project is developed in ReactJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed in Vercel.",
+      "images": [
+        "BMusic/bmusichomepage.gif",
+        "BMusic/Bmusicsongs.gif",
+        "BMusic/homepage.gif",
+        "BMusic/tickets.gif"
+      ],
+      "languages": ["JavaScript", "Next.js", "React"],
+      "libraries": ["tailwindcss", "framer-motion"],
+      "databasesAndHosting": ["No database", "Vercel"],
+      "status": {
+        "text": "In production - deployed",
+        "color": "green"
+      },
+      "website": "https://bmmusic.vercel.app/",
+      "github": "https://github.com/juanm512/bmmusic",
+      "startDate": "2023-05-01",
+      "endDate": "2023-05-03"
+    },
+    {
       "id": "f1-stats",
       "name": "Formula 1 Season Summary App",
       "description": "The Formula 1 Season Summary App is a mobile application built with React Native and Expo that displays a summary of the current Formula 1 season. The app allows users to view driver and constructor standings, race calendar, and results, and provides detailed information about each race, such as track information, lap records, and weather conditions. The app features a modern and intuitive design, and is easy to navigate through different sections using the bottom navigation bar. It's a great resource for Formula 1 fans who want to keep up to date with the latest season standings and race results.",
