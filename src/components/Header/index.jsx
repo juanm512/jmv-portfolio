@@ -1,22 +1,23 @@
 "use client"
-
+import React from "react"
 import Link from "next/link"
-import { useState, useEffect, useCallback } from "react"
+// import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { opacity, background } from "./animation.js"
+
 import Nav from "./Nav"
 
 export default function index({ lang }) {
-  const [isActive, setIsActive] = useState(false)
-  const [languageChange, setLanguageChange] = useState(false)
+  const [isActive, setIsActive] = React.useState(false)
+  const [languageChange, setLanguageChange] = React.useState(false)
 
-  const handleKeyPressed = useCallback((event) => {
+  const handleKeyPressed = React.useCallback((event) => {
     console.log(`key pressed: `, event)
     if (event.key == "Escape" || event.keyCode == 27) setIsActive(!isActive)
     if (event.key == "l" || event.key == "L" || event.keyCode == 76)
       setLanguageChange(!languageChange)
   })
-  useEffect(() => {
+  React.useEffect(() => {
     window.addEventListener("keyup", handleKeyPressed)
     return () => window.removeEventListener("keyup", handleKeyPressed)
   }, [handleKeyPressed])

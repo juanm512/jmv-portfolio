@@ -114,6 +114,7 @@ function Bubbles() {
       />
       {data.map((data, i) => (
         <Float
+          key={i}
           speed={10} // Animation speed, defaults to 1
           rotationIntensity={0} // XYZ rotation intensity, defaults to 1
           floatIntensity={0.2} // Up/down float intensity, works like a multiplier with floatingRange,defaults to 1

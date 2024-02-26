@@ -72,6 +72,7 @@ const ProyectsList = () => {
                     setCurrentImage={setCurrentImage}
                     proyect={proyect}
                     index={index}
+                    key={index}
                     activeID={activeID}
                     setActiveID={setActiveID}
                   />
@@ -79,6 +80,7 @@ const ProyectsList = () => {
                   <ProyectCard
                     proyect={proyect}
                     index={index}
+                    key={index}
                     activeID={activeID}
                     setActiveID={setActiveID}
                   />
