@@ -1,0 +1,67 @@
+import { translate } from "../../animation"
+import { motion } from "framer-motion"
+
+export default function Footer() {
+  return (
+    <div className="flex items-end flex-wrap text-md uppercase mt-10">
+      <ul className="w-1/2 mt-3 overflow-hidden list-none p-0">
+        <motion.li
+          className="text-slate-700"
+          custom={[0.3, 0]}
+          variants={translate}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+        >
+          <span>Made by:</span>Studio Lumio
+        </motion.li>
+      </ul>
+      <ul>
+        <motion.li
+          className="text-slate-700"
+          custom={[0.3, 0]}
+          variants={translate}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+        >
+          <span>Typography:</span> Google Fonts
+        </motion.li>
+      </ul>
+      <ul>
+        <motion.li
+          className="text-slate-700"
+          custom={[0.3, 0]}
+          variants={translate}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+        >
+          <span>Images:</span> Freepik, Envato
+        </motion.li>
+      </ul>
+      <ul>
+        <motion.li
+          className="text-slate-700"
+          custom={[0.3, 0]}
+          variants={translate}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+        >
+          Privacy Policy
+        </motion.li>
+        <motion.li
+          className="text-slate-700"
+          custom={[0.3, 0]}
+          variants={translate}
+          initial="initial"
+          animate="enter"
+          exit="exit"
+        >
+          Terms & Conditions
+        </motion.li>
+      </ul>
+    </div>
+  )
+}
