@@ -7,7 +7,7 @@ import { opacity, background } from "./animation.js"
 
 import Nav from "./Nav"
 
-export default function index({ lang }) {
+export default function Index({ lang }) {
   const [isActive, setIsActive] = React.useState(false)
   const [languageChange, setLanguageChange] = React.useState(false)
 
