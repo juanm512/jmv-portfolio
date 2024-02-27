@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl"
 
 const Canvas = dynamic(() => import("@/components/Landing/Canvas.jsx"), {
   ssr: false,
-  loading: () => {
+  Loading: () => {
     const t = useTranslations("Landing")
 
     return (
@@ -82,17 +82,24 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </div>
-      <div className="absolute pointer-events-none overflow-hidden w-full top-[280vh] md:top-[278vh]">
-        <div className="relative">
-          <p
-            className="relative m-0 py-2 text-white text-5xl bg-red-500/50 backdrop-blur-md md:text-[100px] pr-16 font-kode"
-            style={{
-              textShadow: "#ff0800 2px 2px"
-            }}
-          >
-            {t("work_name")}
-          </p>
-        </div>
+      <div
+        data-scroll
+        data-scroll-speed={0.2}
+        className="absolute top-[280vh] md:top-[278vh] left-0 text-white text-2xl md:text-6xl font-kode"
+      >
+        <p className="mb-2 py-2 text-white bg-red-500/50 backdrop-blur-md  overflow-hidden">
+          {getChars(t("work_name"))}
+        </p>
+        {/* <div className="absolute pointer-events-none w-full top-[280vh] md:top-[278vh]">
+        <p
+          className="relative m-0 py-2 text-white text-4xl bg-red-500/50 backdrop-blur-md md:text-[100px] font-kode"
+          style={{
+            textShadow: "#ff0800 2px 2px"
+          }}
+        >
+          {t("work_name")}
+        </p>
+      </div> */}
       </div>
       <div
         data-scroll
