@@ -1,5 +1,5 @@
 import { MathUtils } from "three"
-import { useRef, useState } from "react"
+import { useRef, useState, useTransition } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import {
   useDetectGPU,
@@ -41,7 +41,9 @@ const parseColor = (color) =>
 const parseNumbers = (x, max, range) => (x / max) * range - range / 2
 
 export default function App() {
+  const GPUTier = useDetectGPU()
   const [dpr, setDpr] = useState(0.5)
+  const isMobile = !GPUTier.tier === "0" || !GPUTier.isMobile
   return (
     <Canvas
       className=" pointer-events-auto"
@@ -50,6 +52,7 @@ export default function App() {
       dpr={dpr}
       gl={{ antialias: false }}
       camera={{ fov: 50, position: [0, 0, 120] }}
+      // frameloop="demand"
     >
       <color
         attach="background"
@@ -104,6 +107,8 @@ export default function App() {
       {/* <AdaptiveDpr pixelated /> */}
       <AdaptiveEvents />
       <PerformanceMonitor
+        flipflops={5}
+        onFallback={() => setDpr(isMobile ? 0.1 : 0.5)}
         factor={1}
         onChange={({ factor }) => setDpr(Math.floor(0.1 + 1.5 * factor, 1))}
       />
@@ -156,14 +161,16 @@ function Bubbles() {
 
 function Bubble({ index, w, ...props }) {
   const GPUTier = useDetectGPU()
+  const [isPending, startTransition] = useTransition()
 
   const ref = useRef()
   useFrame((state, delta) => {
     const t = params.factor + state.clock.elapsedTime * 0.2
-
-    ref.current.scale.setScalar(
-      Math.max(1.5 * (1 / w), Math.cos(t) * 5 * (1 / w))
-    )
+    startTransition(() => {
+      ref.current.scale.setScalar(
+        Math.max(1.5 * (1 / w), Math.cos(t) * 5 * (1 / w))
+      )
+    })
     if (!GPUTier.tier === "0" || !GPUTier.isMobile) {
       ref.current.rotation.x = MathUtils.damp(
         ref.current.rotation.x,
