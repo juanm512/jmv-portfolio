@@ -2,6 +2,7 @@ import { MathUtils } from "three"
 import { useRef, useState } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import {
+  useDetectGPU,
   Instances,
   Instance,
   MeshTransmissionMaterial,
@@ -9,6 +10,7 @@ import {
   Float,
   Preload,
   AdaptiveDpr,
+  AdaptiveEvents,
   PerformanceMonitor
 } from "@react-three/drei"
 import {
@@ -39,12 +41,13 @@ const parseColor = (color) =>
 const parseNumbers = (x, max, range) => (x / max) * range - range / 2
 
 export default function App() {
-  const [dpr, setDpr] = useState(2)
+  const [dpr, setDpr] = useState(1.5)
   return (
     <Canvas
       className=" pointer-events-auto"
       shadows
-      dpr={[1, 2]}
+      // dpr={[1, 2]}
+      dpr={dpr}
       gl={{ antialias: false }}
       camera={{ fov: 50, position: [0, 0, 120] }}
     >
@@ -80,8 +83,6 @@ export default function App() {
 
       <Bubbles />
 
-      <BakeShadows />
-
       <EffectComposer disableNormalPass>
         <Bloom
           luminanceThreshold={0.2}
@@ -96,8 +97,12 @@ export default function App() {
           height={100}
         />
       </EffectComposer>
+
+      {/* performance */}
+      <BakeShadows />
       <Preload all />
       <AdaptiveDpr pixelated />
+      <AdaptiveEvents />
       <PerformanceMonitor
         factor={1}
         onChange={({ factor }) => setDpr(Math.floor(0.5 + 1.5 * factor, 1))}
@@ -150,6 +155,8 @@ function Bubbles() {
 }
 
 function Bubble({ index, w, ...props }) {
+  const GPUTier = useDetectGPU()
+
   const ref = useRef()
   useFrame((state, delta) => {
     const t = params.factor + state.clock.elapsedTime * 0.2
@@ -157,18 +164,20 @@ function Bubble({ index, w, ...props }) {
     ref.current.scale.setScalar(
       Math.max(1.5 * (1 / w), Math.cos(t) * 5 * (1 / w))
     )
-    ref.current.rotation.x = MathUtils.damp(
-      ref.current.rotation.x,
-      (-state.mouse.y * Math.PI) / 2,
-      1.8,
-      delta
-    )
-    ref.current.rotation.y = MathUtils.damp(
-      ref.current.rotation.y,
-      (state.mouse.x * Math.PI) / 2,
-      1.8,
-      delta
-    )
+    if (!GPUTier.tier === "0" || !GPUTier.isMobile) {
+      ref.current.rotation.x = MathUtils.damp(
+        ref.current.rotation.x,
+        (-state.mouse.y * Math.PI) / 2,
+        1.8,
+        delta
+      )
+      ref.current.rotation.y = MathUtils.damp(
+        ref.current.rotation.y,
+        (state.mouse.x * Math.PI) / 2,
+        1.8,
+        delta
+      )
+    }
   })
   return (
     <Instance
