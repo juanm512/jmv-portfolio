@@ -1,5 +1,32 @@
 {
-  "Index": {
-    "title": "Hola mundo!"
+  "Description": {
+    "title": "Sobre mí",
+    "first_p": "Soy un programador apasionado por usar la tecnología para crear soluciones y herramientas innovadoras. Me considero una persona que disfruta de aprender nuevas tecnologias, herramientas y de encontrar nuevos desafios para resolver. Me entusiasma el hecho de ingresar en algun proyecto desafiante.",
+    "second_p": {
+      "first": "Forjé mis conocimientos en un principio en la",
+      "second": ", dando un salto a la",
+      "third": "Soy un autodidacta nato, y comence aprendiendo de",
+      "fourth": "y"
+    },
+    "third_p": {
+      "first": "Domino lenguajes como",
+      "second": ", en conjunto con",
+      "third": "o",
+      "fourth": "con Express y EJS para SSR. Tambien estoy familiarizado con lo basico de",
+      "fifth": "y me encuentro aprendiendo",
+      "sixth": "Tambien tengo experiencia usando librerias como",
+      "seventh": "y algunos programas como"
+    },
+    "fourth_p": {
+      "first": "Actualmente estoy desarrollando un programa para interactuar con",
+      "second": "proporcionadas por",
+      "third": "localmente. Tambien me encuentro realizando actualizaciones de algunos proyectos e insvestigando acerca de"
+    }
+  },
+  "Landing": {
+    "who_i_am": "Hola, mi nombre es Juan Manuel Vila",
+    "page_description": "Este es mi portfolio, hecho en Argentina con ",
+    "work_name": "Desarrollador de Software - Desarrollador Web",
+    "loading": "Cargando . . ."
   }
 }

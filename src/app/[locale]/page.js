@@ -1,14 +1,13 @@
-import { useTranslations } from "next-intl"
 import Landing from "@/components/Landing"
+import Description from "@/components/Description"
 
 export default function Index() {
-  const t = useTranslations("Index")
   return (
     <main>
       <Landing />
+      <Description />
       <div className="h-[300vh]"></div>
-      {/* <Description />
-      <Projects />
+      {/* <Projects />
       <SlidingImages />
       <Contact /> */}
     </main>

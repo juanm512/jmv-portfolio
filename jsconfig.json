@@ -5,7 +5,8 @@
     // Using "paths" allows you to configure module path aliases
     "paths": {
       "@/components/*": ["/src/components/*"],
-      "@/styles/*": ["/styles/*"]
+      "@/styles/*": ["/styles/*"],
+      "@/lib/*": ["/lib/*"]
     }
   }
 }

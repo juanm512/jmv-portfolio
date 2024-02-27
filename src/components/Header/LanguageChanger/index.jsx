@@ -4,50 +4,29 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { height } from "../animation"
 import Body from "./Body"
-import Footer from "./Footer"
-import Image from "./Image"
 
 const links = [
   {
-    title: "Home",
-    href: "/",
-    src: "home.png"
+    title: "ES",
+    href: "/es"
   },
   {
-    title: "About me",
-    href: "#about_me",
-    src: "shop.png"
-  },
-  {
-    title: "About Us",
-    href: "/about_me",
-    src: "home.png"
-  },
-  {
-    title: "Lookbook",
-    href: "/lookbook",
-    src: "lookbook.png"
-  },
-  {
-    title: "Contact",
-    href: "/contact",
-    src: "contact.png"
+    title: "EN",
+    href: "/en"
   }
 ]
-
 export default function Index() {
   const [selectedLink, setSelectedLink] = useState({
     isActive: false,
     index: 0
   })
-
   return (
     <motion.div
       variants={height}
       initial="initial"
       animate="enter"
       exit="exit"
-      className="overflow-hidden"
+      className="overflow-hidden flex flex-row justify-evenly"
     >
       <div className="flex">
         <div className="mb-0 justify-between">
@@ -56,12 +35,7 @@ export default function Index() {
             selectedLink={selectedLink}
             setSelectedLink={setSelectedLink}
           />
-          <Footer />
         </div>
-        <Image
-          src={links[selectedLink.index].src}
-          selectedLink={selectedLink}
-        />
       </div>
     </motion.div>
   )

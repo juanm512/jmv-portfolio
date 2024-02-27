@@ -25,7 +25,7 @@ body {
     background-color: white;
     position: relative;
     display: block;
-    transition: all 1s cubic-bezier(0.76, 0, 0.24, 1);
+    transition: all 0.75s cubic-bezier(0.76, 0, 0.24, 1);
   }
 
   &::after {
@@ -38,6 +38,10 @@ body {
 }
 
 .burgerActive {
+  &::after,
+  &::before {
+    background-color: black;
+  }
   &::after {
     transform: rotate(45deg);
     top: -1px;

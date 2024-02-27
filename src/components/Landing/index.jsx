@@ -1,28 +1,28 @@
 "use client"
-import { useRef, useLayoutEffect } from "react"
+import { useRef } from "react"
 import Image from "next/image"
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/all"
+
 import { slideUp } from "./animation"
 import { useScroll, useTransform, motion } from "framer-motion"
 import dynamic from "next/dynamic"
+import { useTranslations } from "next-intl"
 
 const Canvas = dynamic(() => import("@/components/Landing/Canvas.jsx"), {
   ssr: false,
-  loading: () => (
-    <p className="absolute font-kode text-9xl top-1/3 transition-all tracking-widest">
-      Loading . . .
-    </p>
-  )
+  loading: () => {
+    const t = useTranslations("Landing")
+
+    return (
+      <p className="absolute font-kode text-xl md:text-9xl top-1/3 transition-all tracking-widest">
+        {t("loading")}
+      </p>
+    )
+  }
 })
 
 export default function Home() {
+  const t = useTranslations("Landing")
   const container = useRef(null)
-  const firstText = useRef(null)
-  const secondText = useRef(null)
-  const slider = useRef(null)
-  let xPercent = 0
-  let direction = -1
 
   const { scrollYProgress } = useScroll({
     target: container,
@@ -39,41 +39,16 @@ export default function Home() {
     [0, 0.5, 1],
     ["25vh", "28vh", "90vh"]
   )
-  const opacityImage = useTransform(scrollYProgress, [0, 0.75, 1], [1, 0.9, 0])
+  const opacityImage = useTransform(
+    scrollYProgress,
+    [0, 0.7, 0.71, 1],
+    [1, 0.9, 0, 0]
+  )
 
-  // const sliderY = useTransform(scrollYProgress, [0, 1], ["100vh", "200vh"])
   const opacityCanvas = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.2, 1])
 
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
-    gsap.to(slider.current, {
-      scrollTrigger: {
-        trigger: document.documentElement,
-        scrub: 0.25,
-        start: 0,
-        end: () => window.innerHeight,
-        onUpdate: (e) => (direction = e.direction * -1)
-      },
-      x: "-500px"
-    })
-    requestAnimationFrame(animate)
-  }, [])
-
-  const animate = () => {
-    if (xPercent < -100) {
-      xPercent = 0
-    } else if (xPercent > 0) {
-      xPercent = -100
-    }
-    gsap.set(firstText.current, { xPercent: xPercent })
-    gsap.set(secondText.current, { xPercent: xPercent })
-
-    requestAnimationFrame(animate)
-    xPercent += 0.01 * direction
-  }
-
   return (
-    <motion.main
+    <motion.section
       ref={container}
       variants={slideUp}
       initial="initial"
@@ -107,42 +82,25 @@ export default function Home() {
           </motion.div>
         </motion.div>
       </div>
-      <div
-        className="absolute bottom-[calc(100vh - 350px)] pointer-events-none"
-        style={{
-          top: "200vh"
-        }}
-      >
-        <div
-          ref={slider}
-          className="relative whitespace-nowrap"
-        >
+      <div className="absolute pointer-events-none overflow-hidden w-full top-[280vh] md:top-[278vh]">
+        <div className="relative">
           <p
-            className="relative m-0 text-white text-[200px] pr-16 font-kode"
-            ref={firstText}
+            className="relative m-0 py-2 text-white text-5xl bg-red-500/50 backdrop-blur-md md:text-[100px] pr-16 font-kode"
             style={{
-              textShadow: "red 0 -2px"
+              textShadow: "#ff0800 2px 2px"
             }}
           >
-            Software Developer -
-          </p>
-          <p
-            className=" absolute left-full top-0 m-0 text-white text-[200px] font-kode pr-16"
-            ref={secondText}
-            style={{
-              textShadow: "red 0 -2px"
-            }}
-          >
-            Software Developer -
+            {t("work_name")}
           </p>
         </div>
       </div>
       <div
         data-scroll
         data-scroll-speed={0.2}
-        className="absolute top-1/4 left-2/3 text-white text-2xl font-kode"
+        className="absolute top-[20%] left-4 md:top-1/4 md:left-2/3 text-white text-xl md:text-2xl font-kode"
       >
         <svg
+          className="-rotate-90 md:rotate-0"
           style={{
             transform: "scale(2)",
             marginBottom: "100px"
@@ -158,12 +116,10 @@ export default function Home() {
             fill="white"
           />
         </svg>
-        <p className="mb-2 overflow-hidden">
-          {getChars("I'm Juan Manuel Vila")}
-        </p>
+        <p className="mb-2 overflow-hidden">{getChars(t("who_i_am"))}</p>
 
         <p className="mb-2 pr-2 overflow-hidden">
-          {getChars("This is my portfolio, made from Argentina with ")}
+          {getChars(t("page_description"))}
           <motion.span
             initial={{ y: "100%", opacity: 0 }}
             whileInView={{
@@ -172,9 +128,7 @@ export default function Home() {
               transition: {
                 duration: 1,
                 ease: [0.76, 0, 0.24, 1],
-                delay:
-                  "This is my portfolio, made from Argentina with ".length *
-                  0.03
+                delay: t("page_description").length * 0.03
               }
             }}
           >
@@ -182,7 +136,7 @@ export default function Home() {
           </motion.span>
         </p>
       </div>
-    </motion.main>
+    </motion.section>
   )
 }
 

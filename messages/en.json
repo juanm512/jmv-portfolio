@@ -1,5 +1,32 @@
 {
-  "Index": {
-    "title": "Hello world!"
+  "Description": {
+    "title": "About me",
+    "first_p": "I am a programmer passionate about using technology to create innovative solutions and tools. I consider myself a person who enjoys learning new technologies, tools, and finding new challenges to solve. I am excited about the posibility of joining a challenging project.",
+    "second_p": {
+      "first": "I initially gained my knowledge at the",
+      "second": ", then moved on to the",
+      "third": "I am a natural autodidact, and I started learning from",
+      "fourth": "and"
+    },
+    "third_p": {
+      "first": "My main languages are",
+      "second": ", along with",
+      "third": "or",
+      "fourth": "with Express and EJS for SSR. I am also familiar with basics of",
+      "fifth": "and I am currently learning",
+      "sixth": "Also i've experience with some libraries like",
+      "seventh": "and some programs like"
+    },
+    "fourth_p": {
+      "first": "I am currently developing a program to interact with",
+      "second": "provided by",
+      "third": "locally. I am also updating some projects and researching about"
+    }
+  },
+  "Landing": {
+    "who_i_am": "Hi, my name is Juan Manuel Vila",
+    "page_description": "This is my portfolio, made from Argentina with ",
+    "work_name": "Software Developer - Web Developer",
+    "loading": "Loading . . ."
   }
 }

@@ -2,12 +2,12 @@ const transition = { duration: 1, ease: [0.76, 0, 0.24, 1] }
 
 export const opacity = {
   initial: {
-    opacity: 0,
-    y: "-100%"
+    y: "-100%",
+    opacity: 0
   },
   open: {
+    y: "0%",
     opacity: 1,
-    y: 0,
     transition: { duration: 0.35 }
   },
   closed: {
