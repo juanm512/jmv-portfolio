@@ -48,7 +48,16 @@ export default function Body({ links, selectedLink, setSelectedLink }) {
                   : "closed"
               }
             >
-              {getChars(title)}
+              <motion.span
+                custom={[index * 0.05, index * 0.02]}
+                variants={translate}
+                initial="initial"
+                animate="enter"
+                exit="exit"
+                key={title + index}
+              >
+                {title}
+              </motion.span>
             </motion.p>
           </Link>
         )

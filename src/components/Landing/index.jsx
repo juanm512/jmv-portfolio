@@ -3,7 +3,7 @@ import { useRef } from "react"
 import Image from "next/image"
 
 import { slideUp } from "./animation"
-import { useScroll, useTransform, motion } from "framer-motion"
+import { useScroll, useTransform, motion, useInView } from "framer-motion"
 import dynamic from "next/dynamic"
 import { useTranslations } from "next-intl"
 
@@ -23,6 +23,8 @@ const Canvas = dynamic(() => import("@/components/Landing/Canvas.jsx"), {
 export default function Home() {
   const t = useTranslations("Landing")
   const container = useRef(null)
+  const work_name_container = useRef(null)
+  const work_name_container_in_view = useInView(work_name_container)
 
   const { scrollYProgress } = useScroll({
     target: container,
@@ -31,21 +33,25 @@ export default function Home() {
 
   const wImage = useTransform(
     scrollYProgress,
-    [0, 0.75, 0.95, 1],
-    ["20rem", "30vw", "10vw", "0vw"]
+    [0, 0.75, 1],
+    ["24rem", "32vw", "0vw"]
   )
   const hImage = useTransform(
     scrollYProgress,
-    [0, 0.5, 1],
-    ["25vh", "28vh", "90vh"]
+    [0, 0.75, 1],
+    ["24vh", "48vh", "0vh"]
   )
   const opacityImage = useTransform(
     scrollYProgress,
-    [0, 0.7, 0.71, 1],
+    [0, 0.7, 0.75, 1],
     [1, 0.9, 0, 0]
   )
 
-  const opacityCanvas = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.2, 1])
+  const opacityCanvas = useTransform(
+    scrollYProgress,
+    [0, 0.4, 0.5, 1],
+    [0, 0, 0.2, 1]
+  )
 
   return (
     <motion.section
@@ -55,57 +61,6 @@ export default function Home() {
       animate="enter"
       className="relative flex h-[300vh] "
     >
-      <div className="sticky overflow-hidden top-0 h-screen w-full">
-        <motion.div
-          style={{ opacity: opacityCanvas }}
-          className="h-screen bottom-0 w-full flex justify-center items-center z-10 pointer-events-auto"
-        >
-          <div className="relative w-[100vw] h-[100vh] z-10">
-            <Canvas />
-          </div>
-        </motion.div>
-        <motion.div className="absolute inset-0 top-0 flex justify-center items-center pointer-events-none">
-          <motion.div
-            style={{
-              opacity: opacityImage,
-              width: wImage,
-              height: hImage
-            }}
-            className="relative overflow-hidden pointer-events-none"
-          >
-            <Image
-              src="/Landing.png"
-              fill={true}
-              alt="background"
-              className="object-cover"
-              priority
-            />
-          </motion.div>
-        </motion.div>
-      </div>
-      <div
-        data-scroll
-        data-scroll-speed={0.2}
-        className="absolute w-full top-[280vh] md:top-[278vh] left-0 text-white text-2xl md:text-6xl font-kode"
-      >
-        <motion.p
-          initial={{ opacity: 0, height: 0 }}
-          whileInView={{ opacity: 1, height: "auto" }}
-          className="mb-2 py-2 w-full text-center text-white bg-red-500/50 backdrop-blur-md  overflow-hidden"
-        >
-          {getChars(t("work_name"))}
-        </motion.p>
-        {/* <div className="absolute pointer-events-none w-full top-[280vh] md:top-[278vh]">
-        <p
-          className="relative m-0 py-2 text-white text-4xl bg-red-500/50 backdrop-blur-md md:text-[100px] font-kode"
-          style={{
-            textShadow: "#ff0800 2px 2px"
-          }}
-        >
-          {t("work_name")}
-        </p>
-      </div> */}
-      </div>
       <div
         data-scroll
         data-scroll-speed={0.2}
@@ -147,6 +102,50 @@ export default function Home() {
             &#128170;
           </motion.span>
         </p>
+      </div>
+      <div className="sticky overflow-hidden top-0 h-screen w-full">
+        <motion.div
+          style={{
+            opacity: opacityCanvas
+          }}
+          className="h-screen bottom-0 w-full justify-center items-center z-10 pointer-events-auto"
+        >
+          <div className="relative w-[100vw] h-[100vh] z-10">
+            <Canvas inView={work_name_container_in_view} />
+          </div>
+        </motion.div>
+        <motion.div className="absolute inset-0 top-0 flex justify-center items-center pointer-events-none">
+          <motion.div
+            style={{
+              opacity: opacityImage,
+              width: wImage,
+              height: hImage
+            }}
+            className="relative overflow-hidden pointer-events-none"
+          >
+            <Image
+              src="/Landing.png"
+              fill={true}
+              alt="background"
+              className="object-cover"
+              priority
+            />
+          </motion.div>
+        </motion.div>
+      </div>
+      <div
+        ref={work_name_container}
+        data-scroll
+        data-scroll-speed={0.2}
+        className="absolute w-full top-[280vh] md:top-[278vh] left-0 text-white text-2xl md:text-6xl font-kode"
+      >
+        <motion.p
+          initial={{ opacity: 0, height: 0 }}
+          whileInView={{ opacity: 1, height: "auto" }}
+          className="mb-2 py-2 w-full text-center text-white bg-red-500/50 backdrop-blur-md  overflow-hidden"
+        >
+          {getChars(t("work_name"))}
+        </motion.p>
       </div>
     </motion.section>
   )

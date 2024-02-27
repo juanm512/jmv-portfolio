@@ -3,10 +3,9 @@ import { AnimatePresence, motion, useInView } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useState, useEffect, useRef } from "react"
-import { useLocale, useTranslations } from "next-intl"
+import { useTranslations } from "next-intl"
 
 export default function Index() {
-  const lang = useLocale()
   const t = useTranslations("Description")
 
   const container = useRef(null)

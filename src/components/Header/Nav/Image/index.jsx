@@ -10,10 +10,10 @@ export default function Index({ src, isActive }) {
       variants={opacity}
       initial="initial"
       animate={isActive ? "open" : "closed"}
-      className="block relative"
+      className="block relative h-full"
     >
       <Image
-        src={`/images/${src}`}
+        src={`/Landing.png`}
         fill={true}
         alt="image"
         className=" object-cover"

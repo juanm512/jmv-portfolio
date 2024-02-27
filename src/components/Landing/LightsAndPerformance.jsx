@@ -1,5 +1,4 @@
 import {
-  useDetectGPU,
   BakeShadows,
   Preload,
   AdaptiveDpr,
@@ -12,9 +11,7 @@ import {
   DepthOfField
 } from "@react-three/postprocessing"
 
-export default function LandP({ setDpr }) {
-  const GPUTier = useDetectGPU()
-  const isMobile = !GPUTier.tier === "0" || !GPUTier.isMobile
+export default function LandP({ isMobile, setDpr }) {
   return (
     <>
       <color
