@@ -279,6 +279,7 @@ export default function Index() {
                 src={`${hovered}`}
                 fill={true}
                 alt="image"
+                loading="lazy"
                 className="px-1 object-contain drop-shadow-lg"
               />
             )}

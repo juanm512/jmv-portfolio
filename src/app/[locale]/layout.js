@@ -22,6 +22,14 @@ export default function LocaleLayout({ children, params: { locale } }) {
       lang={locale}
       className={`${myFont.variable}`}
     >
+      <head>
+        <link
+          rel="icon"
+          href="/Ai2.jpg"
+          type="image/jpg"
+          sizes="32x32"
+        />
+      </head>
       <body className="relative font-kode w-full min-h-screen p-0 m-0 overflow-x-hidden">
         <NextIntlClientProvider messages={messages}>
           <Header lang={locale} />

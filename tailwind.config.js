@@ -6,10 +6,10 @@ module.exports = {
   ],
   mode: "jit",
   darkMode: "class", // or 'media' or 'class'
-  // purge: [
-  //   "./src/app/**/*.{js,ts,jsx,tsx}",
-  //   "./src/components/**/*.{js,ts,jsx,tsx}"
-  // ],
+  purge: [
+    "./src/app/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}"
+  ],
   theme: {
     extend: {
       fontFamily: {

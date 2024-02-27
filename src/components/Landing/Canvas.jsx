@@ -1,18 +1,22 @@
 import { MathUtils } from "three"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import {
   Instances,
   Instance,
   MeshTransmissionMaterial,
   BakeShadows,
-  Float
+  Float,
+  Preload,
+  AdaptiveDpr,
+  PerformanceMonitor
 } from "@react-three/drei"
 import {
   EffectComposer,
   Bloom,
   DepthOfField
 } from "@react-three/postprocessing"
+
 import dataJSON from "./newData.json"
 
 const params = {
@@ -35,6 +39,7 @@ const parseColor = (color) =>
 const parseNumbers = (x, max, range) => (x / max) * range - range / 2
 
 export default function App() {
+  const [dpr, setDpr] = useState(2)
   return (
     <Canvas
       className=" pointer-events-auto"
@@ -91,6 +96,12 @@ export default function App() {
           height={100}
         />
       </EffectComposer>
+      <Preload all />
+      <AdaptiveDpr pixelated />
+      <PerformanceMonitor
+        factor={1}
+        onChange={({ factor }) => setDpr(Math.floor(0.5 + 1.5 * factor, 1))}
+      />
     </Canvas>
   )
 }

@@ -1,19 +1,24 @@
 "use client"
-import React from "react"
-import Link from "next/link"
-// import { useState, useEffect, useCallback } from "react"
+import dynamic from "next/dynamic"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { opacity, background, translate } from "./animation.js"
 
-import Nav from "./Nav"
-import LanguageChanger from "./LanguageChanger"
+const Nav = dynamic(() => import("./Nav"), {
+  ssr: false
+})
+const LanguageChanger = dynamic(() => import("./LanguageChanger"), {
+  ssr: false
+})
+// import Nav from "./Nav"
+// import LanguageChanger from "./LanguageChanger"
 
 export default function Index({ lang }) {
-  const [isActive, setIsActive] = React.useState(false)
-  const [languageChange, setLanguageChange] = React.useState(false)
+  const [isActive, setIsActive] = useState(false)
+  const [languageChange, setLanguageChange] = useState(false)
 
   // menus key handler
-  const handleKeyPressed = React.useCallback((event) => {
+  const handleKeyPressed = useCallback((event) => {
     // console.log(`key pressed: `, event)
     if (event.key == "Escape" || event.keyCode == 27) {
       setIsActive((prev) => {
@@ -28,7 +33,7 @@ export default function Index({ lang }) {
     } else return
   })
 
-  React.useEffect(() => {
+  useEffect(() => {
     window.addEventListener("keyup", handleKeyPressed)
     return () => window.removeEventListener("keyup", handleKeyPressed)
   }, [handleKeyPressed])

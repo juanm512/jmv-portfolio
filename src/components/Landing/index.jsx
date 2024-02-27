@@ -78,6 +78,7 @@ export default function Home() {
               fill={true}
               alt="background"
               className="object-cover"
+              priority
             />
           </motion.div>
         </motion.div>
@@ -85,26 +86,20 @@ export default function Home() {
       <div
         data-scroll
         data-scroll-speed={0.2}
-        className="absolute top-[280vh] md:top-[278vh] left-0 text-white text-2xl md:text-6xl font-kode"
+        className="absolute w-full top-[280vh] md:top-[278vh] left-0 text-white text-2xl md:text-6xl font-kode"
       >
-        <p className="mb-2 py-2 text-white bg-red-500/50 backdrop-blur-md  overflow-hidden">
-          {getChars(t("work_name"))}
-        </p>
-        {/* <div className="absolute pointer-events-none w-full top-[280vh] md:top-[278vh]">
-        <p
-          className="relative m-0 py-2 text-white text-4xl bg-red-500/50 backdrop-blur-md md:text-[100px] font-kode"
-          style={{
-            textShadow: "#ff0800 2px 2px"
-          }}
+        <motion.p
+          initial={{ opacity: 0, x: "100%" }}
+          whileInview={{ opacity: 1, x: 0 }}
+          className="mb-2 py-2 w-full text-center text-white bg-red-500/50 backdrop-blur-md  overflow-hidden"
         >
-          {t("work_name")}
-        </p>
-      </div> */}
+          {getChars(t("work_name"))}
+        </motion.p>
       </div>
       <div
         data-scroll
         data-scroll-speed={0.2}
-        className="absolute top-[20%] left-4 md:top-1/4 md:left-2/3 text-white text-xl md:text-2xl font-kode"
+        className="absolute top-[20%] left-4 xl:top-1/4 md:left-2/3 text-white text-xl md:text-2xl font-kode"
       >
         <svg
           className="-rotate-90 md:rotate-0"
