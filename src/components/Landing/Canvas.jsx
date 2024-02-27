@@ -41,7 +41,7 @@ const parseColor = (color) =>
 const parseNumbers = (x, max, range) => (x / max) * range - range / 2
 
 export default function App() {
-  const [dpr, setDpr] = useState(1.5)
+  const [dpr, setDpr] = useState(0.5)
   return (
     <Canvas
       className=" pointer-events-auto"
@@ -101,11 +101,11 @@ export default function App() {
       {/* performance */}
       <BakeShadows />
       <Preload all />
-      <AdaptiveDpr pixelated />
+      {/* <AdaptiveDpr pixelated /> */}
       <AdaptiveEvents />
       <PerformanceMonitor
         factor={1}
-        onChange={({ factor }) => setDpr(Math.floor(0.5 + 1.5 * factor, 1))}
+        onChange={({ factor }) => setDpr(Math.floor(0.1 + 1.5 * factor, 1))}
       />
     </Canvas>
   )
