@@ -1,5 +1,6 @@
-import Landing from "@/components/Landing"
-import Description from "@/components/Description"
+import dynamic from "next/dynamic"
+const Landing = dynamic(() => import("@/components/Landing"), {})
+const Description = dynamic(() => import("@/components/Description"), {})
 
 export default function Index() {
   return (

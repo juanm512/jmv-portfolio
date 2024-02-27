@@ -10,7 +10,7 @@ export default function Index() {
   const t = useTranslations("Description")
 
   const container = useRef(null)
-  const isInView = useInView(container, { amount: 0.5 })
+  const isInView = useInView(container)
 
   const [hovered, setHovered] = useState("")
   const [redirect, setRedirect] = useState("")
@@ -280,7 +280,7 @@ export default function Index() {
                 fill={true}
                 alt="image"
                 loading="lazy"
-                className="px-1 object-contain drop-shadow-lg"
+                className="px-1 object-contain drop-shadow-lg h-full"
               />
             )}
           </motion.div>

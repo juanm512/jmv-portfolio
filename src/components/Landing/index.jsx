@@ -89,12 +89,22 @@ export default function Home() {
         className="absolute w-full top-[280vh] md:top-[278vh] left-0 text-white text-2xl md:text-6xl font-kode"
       >
         <motion.p
-          initial={{ opacity: 0, x: "100%" }}
-          whileInview={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, height: 0 }}
+          whileInView={{ opacity: 1, height: "auto" }}
           className="mb-2 py-2 w-full text-center text-white bg-red-500/50 backdrop-blur-md  overflow-hidden"
         >
           {getChars(t("work_name"))}
         </motion.p>
+        {/* <div className="absolute pointer-events-none w-full top-[280vh] md:top-[278vh]">
+        <p
+          className="relative m-0 py-2 text-white text-4xl bg-red-500/50 backdrop-blur-md md:text-[100px] font-kode"
+          style={{
+            textShadow: "#ff0800 2px 2px"
+          }}
+        >
+          {t("work_name")}
+        </p>
+      </div> */}
       </div>
       <div
         data-scroll
@@ -147,13 +157,13 @@ const getChars = (word) => {
   word.split("").forEach((char, i) => {
     chars.push(
       <motion.span
-        initial={{ y: "200%", opacity: 0 }}
+        key={char + i}
+        initial={{ y: "-100%", opacity: 0 }}
         whileInView={{
-          y: "0%",
+          y: 0,
           opacity: 1,
           transition: { duration: 1, ease: [0.76, 0, 0.24, 1], delay: i * 0.03 }
         }}
-        key={char + i}
       >
         {char}
       </motion.span>
