@@ -1,11 +1,12 @@
 "use client"
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import Image from "next/image"
-
-import { slideUp } from "./animation"
+import Lenis from "@studio-freight/lenis"
 import { useScroll, useTransform, motion, useInView } from "framer-motion"
 import dynamic from "next/dynamic"
 import { useTranslations } from "next-intl"
+
+import { slideUp } from "./animation"
 
 const Canvas = dynamic(() => import("@/components/Landing/Canvas.jsx"), {
   ssr: false,
@@ -52,6 +53,18 @@ export default function Home() {
     [0, 0.4, 0.5, 1],
     [0, 0, 0.2, 1]
   )
+
+  useEffect(() => {
+    const lenis = new Lenis()
+
+    const raf = (time) => {
+      lenis.raf(time)
+
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+  }, [])
 
   return (
     <motion.section

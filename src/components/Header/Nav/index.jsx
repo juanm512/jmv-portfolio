@@ -19,23 +19,18 @@ const links = [
     src: "shop.png"
   },
   {
-    title: "About Us",
-    href: "/about_me",
+    title: "My work",
+    href: "#my_work",
     src: "home.png"
   },
   {
-    title: "Lookbook",
-    href: "/lookbook",
-    src: "lookbook.png"
-  },
-  {
     title: "Contact",
-    href: "/contact",
-    src: "contact.png"
+    href: "#contact",
+    src: "lookbook.png"
   }
 ]
 
-export default function Index() {
+export default function Index({ setActiveFalse }) {
   const [selectedLink, setSelectedLink] = useState({
     isActive: false,
     index: 0
@@ -52,6 +47,7 @@ export default function Index() {
       <div className="flex">
         <div className="mb-0 justify-between">
           <Body
+            setActiveFalse={setActiveFalse}
             links={links}
             selectedLink={selectedLink}
             setSelectedLink={setSelectedLink}

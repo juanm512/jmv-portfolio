@@ -179,12 +179,18 @@ export default function Index({ lang }) {
         </motion.button>
       </div>
       <motion.div
+        onClick={() => {
+          setIsActive(false)
+          setLanguageChange(false)
+        }}
         variants={background}
         initial="initial"
         animate={isActive || languageChange ? "open" : "closed"}
         className="absolute h-full w-full bg-black backdrop-blur opacity-50 left-0 top-full"
       ></motion.div>
-      <AnimatePresence mode="wait">{isActive && <Nav />}</AnimatePresence>
+      <AnimatePresence mode="wait">
+        {isActive && <Nav setActiveFalse={() => setIsActive(false)} />}
+      </AnimatePresence>
       <AnimatePresence mode="wait">
         {languageChange && <LanguageChanger lang={lang} />}
       </AnimatePresence>

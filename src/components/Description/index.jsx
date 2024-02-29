@@ -9,7 +9,7 @@ export default function Index() {
   const t = useTranslations("Description")
 
   const container = useRef(null)
-  const isInView = useInView(container)
+  const isInView = useInView(container, { amount: "all" })
 
   const [hovered, setHovered] = useState("")
   const [redirect, setRedirect] = useState("")
@@ -28,11 +28,11 @@ export default function Index() {
 
   return (
     <>
-      <main className="min-h-screen flex justify-center items-center px-4 md:px-16">
+      <main className="min-h-screen flex justify-center items-center px-4 md:px-16 my-32">
         <div
           id="about_me"
           ref={container}
-          className="w-full md:w-11/12 flex flex-col gap-8 text-2xl py-64"
+          className="w-full md:w-11/12 flex flex-col gap-8 text-2xl py-16"
         >
           <h2
             className="mb-6 px-2 py-1 bg-white w-fit text-red-700 text-5xl underline underline-offset-2"

@@ -13,7 +13,7 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>Made by:</span>Studio Lumio
+          <span>Made by:</span> Juan Manuel Vila
         </motion.li>
       </ul>
       <ul>
@@ -25,22 +25,10 @@ export default function Footer() {
           animate="enter"
           exit="exit"
         >
-          <span>Typography:</span> Google Fonts
+          <span>Typography:</span> Kode Mono
         </motion.li>
       </ul>
-      <ul>
-        <motion.li
-          className="text-slate-700"
-          custom={[0.3, 0]}
-          variants={translate}
-          initial="initial"
-          animate="enter"
-          exit="exit"
-        >
-          <span>Images:</span> Freepik, Envato
-        </motion.li>
-      </ul>
-      <ul>
+      {/* <ul>
         <motion.li
           className="text-slate-700"
           custom={[0.3, 0]}
@@ -61,7 +49,7 @@ export default function Footer() {
         >
           Terms & Conditions
         </motion.li>
-      </ul>
+      </ul> */}
     </div>
   )
 }
