@@ -1,0 +1,300 @@
+[
+  {
+    "id": "Atlas3d",
+    "name": "Atlas 3D - 3D Models for students",
+    "description": "This project is an online human anatomy atlas designed specifically for medical students and professionals. Our atlas provides a comprehensive 3D model of every bone in the human body, complete with annotations detailing common bone injuries and conditions.Our interactive platform allows users to zoom in and rotate each bone model for a detailed view of its structure and location in the body. In addition, we will continue to add joint models to our atlas, allowing users to study the complex movements and connections between bones. With each new edition of our atlas, we plan to expand our coverage to include organs and muscles, providing students with a comprehensive understanding of the human body's intricate anatomy. Our easy-to-use interface and detailed models make our atlas an essential tool for any medical student or professional.",
+    "images": [
+      "Atlas3d/index.jpg",
+      "Atlas3d/home.gif",
+      "Atlas3d/listado.gif",
+      "Atlas3d/bonePage.gif",
+      "Atlas3d/annotations.gif"
+    ],
+    "languages": ["JavaScript", "Next.js"],
+    "libraries": [
+      "tailwindcss",
+      "threejs",
+      "react-three-fiber",
+      "framer-motion"
+    ],
+    "database": [null],
+    "status": {
+      "text": "In production - deployed (private)",
+      "color": "green"
+    },
+    "website": "https://atlas3d.vercel.app/",
+    "github": "",
+    "startDate": "2023-02-15",
+    "endDate": "2023-04-15"
+  },
+  {
+    "id": "RNews",
+    "name": "RNews - News App",
+    "description": "This project is a news app that I developed for learning more about animations in frontend. The project is developed in ReactJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed in Vercel. The NewsPaper used is only for learning purposes.",
+    "images": [
+      "Rnews/RNewsHomeLoad.gif",
+      "Rnews/darkmodechange.gif",
+      "Rnews/downtotopview.gif",
+      "Rnews/topdownview.gif",
+      "Rnews/topdownviewFromhome.gif"
+    ],
+    "languages": ["JavaScript", "Next.js"],
+    "libraries": ["tailwindcss", "framer-motion"],
+    "database": [null],
+    "status": {
+      "text": "In production - deployed",
+      "color": "green"
+    },
+    "website": "https://right-news.vercel.app/",
+    "github": "https://github.com/juanm512/right-news",
+    "startDate": "2023-04-23",
+    "endDate": "2023-05-01"
+  },
+  {
+    "id": "BMusic",
+    "name": "BMusic - Music Artist Web Template",
+    "description": "This project is a music artist web template. The project is developed in ReactJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed in Vercel.",
+    "images": [
+      "BMusic/bmusichomepage.gif",
+      "BMusic/Bmusicsongs.gif",
+      "BMusic/homepage.gif",
+      "BMusic/tickets.gif"
+    ],
+    "languages": ["JavaScript", "Next.js"],
+    "libraries": ["tailwindcss", "framer-motion"],
+    "database": [null],
+    "status": {
+      "text": "In production - deployed",
+      "color": "green"
+    },
+    "website": "https://bmmusic.vercel.app/",
+    "github": "https://github.com/juanm512/bmmusic",
+    "startDate": "2023-05-01",
+    "endDate": "2023-05-03"
+  },
+
+  {
+    "id": "VAS-ECOMMERCE",
+    "name": "VAS Ecommerce Platform",
+    "description": "Ventas A Services Ecommerce is a freelance project that I developed for a client. It is a platform that allows the client to sell their products online, manage inventory and customers orders. The website have a shopping cart without payment option (client request). When a order is submited a message is sent to client Whatsapp number and continues the process manually. \n\nThe platform is developed in NextJS. It also uses MongoDB as a database and Tailwind for the frontend style. ",
+    "images": [
+      "vas-ecommerce/Screenshot 2022-10-03 at 18-48-56 Ventas a Services - Respuestos de refrigeracion y linea blanca.png",
+      "vas-ecommerce/Screenshot 2022-10-03 at 18-49-06 Ventas a Services - Respuestos de refrigeracion y linea blanca.png",
+      "vas-ecommerce/Screenshot 2022-10-03 at 18-49-46 Resultados para aires_acondicionados.png",
+      "vas-ecommerce/Screenshot 2022-10-03 at 18-50-09 Resultados para aires_acondicionados.png",
+      "vas-ecommerce/Screenshot 2022-10-03 at 18-46-04 Admin Page.png",
+      "vas-ecommerce/Screenshot 2022-10-03 at 18-46-20 Admin Page.png",
+      "vas-ecommerce/Screenshot 2022-10-03 at 18-46-32 Admin Page.png",
+      "vas-ecommerce/Screenshot 2022-10-03 at 18-48-39 Admin Page.png"
+    ],
+    "languages": ["JavaScript", "Next.js"],
+    "libraries": [
+      "tailwindcss",
+      "aws-sdk",
+      "axios",
+      "jsonwebtoken",
+      "mongoose",
+      "bcryptjs"
+    ],
+    "database": ["MongoDB"],
+    "status": {
+      "text": "In production - deployed (private)",
+      "color": "green"
+    },
+    "website": "https://vas-ecommerce.vercel.app/",
+    "github": "",
+    "startDate": "2022-08-15",
+    "endDate": "2022-09-15"
+  },
+  {
+    "id": "crafteadle",
+    "name": "Crafteadle - Wordle like game",
+    "description": "Crafteadle is a wordle like game with minecraft recipes and random inventory to craft them. The game is developed in NextJS and uses a custom API to get the recipes and inventory from a JSON file. The game is deployed in Vercel.",
+    "images": [
+      "crafteadle/home.png",
+      "crafteadle/Screenshot 2022-10-03 at 19-42-18 https __crafteadle-nextjs.vercel.app.png",
+      "crafteadle/Screenshot 2022-10-03 at 19-42-23 https __crafteadle-nextjs.vercel.app.png",
+      "crafteadle/Screenshot 2022-10-03 at 19-42-40 https __crafteadle-nextjs.vercel.app.png"
+    ],
+    "languages": ["JavaScript", "Next.js"],
+    "libraries": ["tailwindcss", "react-spline"],
+    "database": ["JSON file for all recipes (local)"],
+    "status": {
+      "text": "Project deployed",
+      "color": "green"
+    },
+    "website": "https://crafteadle-nextjs.vercel.app/",
+    "github": "https://github.com/juanm512/crafteadle-nextjs",
+    "startDate": "2019-01-01",
+    "endDate": "2019-12-31"
+  },
+  {
+    "id": "Temako-Market",
+    "name": "Temako Market - Star Wars SpaceShips Market",
+    "description": "This project is a Star Wars Spaceships Market. It is a project that I developed for learning more about animations in frontend. The project is developed in ReactJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed in Vercel.",
+    "images": [
+      "Temako-Market/Screenshot 2023-02-08 at 21-49-56 Temako Market.png",
+      "Temako-Market/Temako-Hero.gif",
+      "Temako-Market/animations modal.gif",
+      "Temako-Market/Screenshot 2023-02-08 at 21-50-22 Temako Market.png",
+      "Temako-Market/Screenshot 2023-02-08 at 21-50-34 Temako Market.png",
+      "Temako-Market/Screenshot 2023-02-08 at 21-50-47 Temako Market.png",
+      "Temako-Market/Screenshot 2023-02-08 at 21-50-59 Temako Market.png",
+      "Temako-Market/Screenshot 2023-02-08 at 21-51-26 Temako Market.png"
+    ],
+    "languages": ["JavaScript", "React"],
+    "libraries": ["tailwindcss", "framer-motion"],
+    "database": [null],
+    "status": {
+      "text": "In production - deployed (public)",
+      "color": "green"
+    },
+    "website": "https://star-wars-green.vercel.app/",
+    "github": "https://github.com/juanm512/star-wars",
+    "startDate": "2023-02-04",
+    "endDate": "2023-02-08"
+  },
+  {
+    "id": "takearisk",
+    "name": "Take a Risk",
+    "description": "This was a personal project. It was a platform that allows tournaments creation and management. The website have a one click login with metamask and JWT tokens. Also, it allows payments with cryptocurrency for the tournaments joins. \n\nThe platform was developed in NodeJS + Express with EJS for the server side rendering files. It also uses MySQL as a database and Custom CSS for the frontend style.",
+    "images": [
+      "tar/tar-logo.png",
+      "tar/Screenshot 2022-04-21 at 03-07-10 Take a Risk.png",
+      "tar/Screenshot 2022-04-21 at 03-08-19 Take a Risk.png",
+      "tar/Screenshot 2022-04-21 at 03-08-31 Take a Risk.png",
+      "tar/Screenshot 2022-04-21 at 03-08-39 Take a Risk.png",
+      "tar/Screenshot 2022-05-02 at 11-36-32 Take a Risk.png",
+      "tar/Screenshot 2022-05-02 at 11-36-56 Take a Risk.png",
+      "tar/Screenshot 2022-05-02 at 11-37-13 Take a Risk.png",
+      "tar/Screenshot 2022-05-02 at 11-38-43 Take a Risk.png",
+      "tar/Screenshot 2022-05-02 at 11-39-18 Take a Risk.png",
+      "tar/Screenshot 2022-05-02 at 11-44-17 Take a Risk.png"
+    ],
+    "languages": ["JavaScript", "Node.js"],
+    "libraries": [
+      "express",
+      "EJS",
+      "passport",
+      "mysql2",
+      "bcryptjs",
+      "nodemailer",
+      "ethers.js"
+    ],
+    "database": ["MySQL"],
+    "status": {
+      "text": "Currently down (private)",
+      "color": "red"
+    },
+    "website": "",
+    "github": "",
+    "startDate": "2021-12-15",
+    "endDate": "2022-01-20"
+  },
+  {
+    "id": "ms",
+    "name": "Mercado Service",
+    "description": "Personal proyect to find profesionals easier than usually and an e-commerce for profesionals stuffs. The website had typical features like shopping cart, payment methods, live chat between clients and profecionals, interactive maps and a simple login with email and password (with email checking process). \n\nThe platform was developed in NodeJS + Express with EJS for the server side rendering files. It also uses MySQL as a database and Custom CSS for the frontend style.",
+    "images": [
+      "MS/ms-logo.png",
+      "MS/api.url2png.com.png",
+      "MS/api.url2png.com2.png",
+      "MS/Screenshot 2022-05-02 at 11-46-40 Mercado Service - Reparación de telefonos-Servicio técnico.png",
+      "MS/Screenshot 2022-05-02 at 11-47-15 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+      "MS/Screenshot 2022-05-02 at 11-47-42 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+      "MS/Screenshot 2022-05-02 at 11-48-13 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+      "MS/Screenshot 2022-05-02 at 11-48-52 Perfil empresa - Repuestos - MercadoService.png",
+      "MS/Screenshot 2022-05-02 at 11-49-05 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+      "MS/Screenshot 2022-05-02 at 11-50-13 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+      "MS/Screenshot 2022-05-02 at 11-50-30 Mercado Service - Encontrá el Servicio Técnico que necesitas.png",
+      "MS/Screenshot 2022-05-02 at 11-51-21 Perfil empresa - MercadoService.png",
+      "MS/Screenshot 2022-05-02 at 11-51-31 Perfil empresa - MercadoService.png",
+      "MS/Screenshot 2022-05-02 at 11-51-38 Perfil empresa - MercadoService.png",
+      "MS/Screenshot 2022-05-02 at 11-51-56 Perfil empresa - Turnos - MercadoService.png"
+    ],
+    "languages": ["JavaScript", "Node.js"],
+    "libraries": [
+      "express",
+      "EJS",
+      "bcryptjs",
+      "express",
+      "express-session",
+      "lunr: search engine",
+      "mercadopago: payment processor",
+      "multer",
+      "mysql",
+      "nodemailer",
+      "passport",
+      "socket.io (chat)",
+      "leaflet: maps library"
+    ],
+    "database": ["MySQL"],
+    "status": {
+      "text": "Project abandoned",
+      "color": "black"
+    },
+    "website": "",
+    "github": "",
+    "startDate": "2020-12-15",
+    "endDate": "2021-01-20"
+  },
+  {
+    "id": "donatelo",
+    "name": "Donatelo - Donations with cryptocurrency",
+    "description": "This one was a project public project I develop for streamers. It was a platform that allows donations with cryptocurrency. The website have a one click login with metamask and JWT tokens. It allows payments with multiple cryptocurrency in various networks. Also, manage the alerts on live streams with socket.io (websocket).  \n\nThe platform was developed in NodeJS + Express for the server and React for the frontend, also uses MongoDB as a database and daisyui + tailwindcss for the frontend style.",
+    "images": [
+      "donatelo/donateloImg.png",
+      "donatelo/Screenshot 2022-05-02 at 12-03-07 Donatelo.png",
+      "donatelo/Screenshot 2022-05-02 at 12-03-24 Donatelo.png",
+      "donatelo/Screenshot 2022-05-02 at 12-03-46 Donatelo.png",
+      "donatelo/Screenshot 2022-05-02 at 12-03-58 Donatelo.png"
+    ],
+    "languages": ["JavaScript", "Node.js", "React"],
+    "libraries": [
+      "express",
+      "daisyui and tailwindcss",
+      "socket.io",
+      "sweetalert2",
+      "threejs",
+      "ethers",
+      "mongoose"
+    ],
+    "database": ["MongoDB"],
+    "status": {
+      "text": "Project deployed",
+      "color": "green"
+    },
+    "website": "https://donatelo.netlify.app/",
+    "github": "https://github.com/juanm512/streams-donations-realtime",
+    "startDate": "2019-01-01",
+    "endDate": "2019-12-31"
+  },
+  {
+    "id": "agg",
+    "name": "Axie Galaxy Guild",
+    "description": "Website for Axie Galaxy guild. With Lottery and Raffles with SLP crypto. One click login with metamask and JWT. \nThe ethers.js library aims to be a complete and compact library for interacting with the Ethereum Blockchain and its ecosystem.",
+    "images": [
+      "agg/Screenshot 2022-04-21 at 03-12-28 Axie Galaxy.png",
+      "agg/Screenshot 2022-04-21 at 03-13-06 Axie Galaxy.png"
+    ],
+    "languages": ["JavaScript", "Node.js"],
+    "libraries": [
+      "express",
+      "EJS",
+      "ethers.js",
+      "jsonwebtoken",
+      "mysql2",
+      "bcryptjs",
+      "node-schedule"
+    ],
+    "database": ["MySQL"],
+    "status": {
+      "text": "Freelance work (private)",
+      "color": "yellow"
+    },
+    "website": "",
+    "github": "",
+    "startDate": "2021-11-15",
+    "endDate": "2021-12-15"
+  }
+]

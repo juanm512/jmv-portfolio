@@ -162,7 +162,7 @@ export default function Index() {
             <Link
               target="_blank"
               href="https://www.framer.com/motion/"
-              className="mx-1 text-red-200"
+              className="mx-1 text-red-300"
               onMouseLeave={() => setRedirect("")}
               onMouseEnter={() => setRedirect("https://www.framer.com/motion/")}
             >
@@ -172,7 +172,7 @@ export default function Index() {
             <Link
               target="_blank"
               href="https://threejs.org/"
-              className="mx-1 text-red-200"
+              className="mx-1 text-red-300"
               onMouseLeave={() => setRedirect("")}
               onMouseEnter={() => setRedirect("https://threejs.org/")}
             >
@@ -193,7 +193,7 @@ export default function Index() {
             <Link
               target="_blank"
               href="https://es.wikipedia.org/wiki/Modelo_de_lenguaje_grande"
-              className="mx-1 text-red-200"
+              className="mx-1 text-red-300"
               onMouseLeave={() => setRedirect("")}
               onMouseEnter={() =>
                 setRedirect(
@@ -216,7 +216,7 @@ export default function Index() {
             <Link
               target="_blank"
               href="https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/"
-              className="mx-1 text-red-200"
+              className="mx-1 text-red-300"
               onMouseLeave={() => setRedirect("")}
               onMouseEnter={() =>
                 setRedirect(

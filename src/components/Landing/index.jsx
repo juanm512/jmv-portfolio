@@ -139,9 +139,11 @@ export default function Home() {
             <Image
               src="/Landing.png"
               fill={true}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt="background"
-              className="object-cover"
+              className="object-cover h-auto"
               priority
+              quality={100}
             />
           </motion.div>
         </motion.div>

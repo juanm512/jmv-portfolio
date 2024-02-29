@@ -1,13 +1,17 @@
 "use client"
 import { useScroll, useTransform, useSpring, motion } from "framer-motion"
-import Image from "next/image"
 import { useRef } from "react"
 
 import Card from "./Card"
 
+import data from "@/lib/data.json"
+
+const data1 = data.slice(0, 6)
+const data2 = data.slice(6)
+
 export default function Index() {
   const container = useRef(null)
-  const { scrollYProgress, scrollY } = useScroll({
+  const { scrollYProgress } = useScroll({
     target: container
   })
 
@@ -40,28 +44,47 @@ export default function Index() {
           y: y1
         }}
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {data1.map((element) => (
+          <Card
+            key={element.id}
+            data={{
+              id: element.id,
+              title: element.name,
+              image: element.images[0],
+              languages: [
+                ...element.languages,
+                ...element.database.filter((db) =>
+                  ["MongoDB", "MySQL"].includes(db)
+                ),
+                ...element.libraries.filter((lib) =>
+                  librariesImages.includes(lib)
+                )
+              ]
+            }}
+          />
+        ))}
       </motion.div>
       <motion.div
-        className="absolute flex flex-nowrap gap-[7.5vh] items-center h-screen"
+        className="absolute flex flex-nowrap flex-row-reverse gap-[7.5vh] items-center h-screen"
         style={{
           x: x2,
           y: y2
         }}
       >
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {data2.map((element) => (
+          <Card
+            key={element.id}
+            data={{
+              id: element.id,
+              title: element.name,
+              image: element.images[0],
+              languages: element.languages
+            }}
+          />
+        ))}
       </motion.div>
     </section>
   )
 }
+
+const librariesImages = ["threejs", "framer-motion", "tailwindcss"]
