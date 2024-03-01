@@ -2,6 +2,7 @@ import { motion } from "framer-motion"
 import Link from "next/link"
 
 import { blur, translate } from "../../animation"
+import { useTranslations } from "next-intl"
 
 export default function Body({
   links,
@@ -9,6 +10,7 @@ export default function Body({
   setSelectedLink,
   setActiveFalse
 }) {
+  const t = useTranslations("Header")
   return (
     <div className="flex flex-wrap mt-10">
       {links.map((link, index) => {
@@ -21,7 +23,7 @@ export default function Body({
             className="text-white uppercase"
           >
             <motion.p
-              className="m-0 flex overflow-hidden text-3xl pr-7 pt-2 font-medium"
+              className="m-0 flex overflow-hidden text-3xl pr-8 md:pr-10 pt-2 font-medium"
               onMouseOver={() => {
                 setSelectedLink({ isActive: true, index })
               }}
@@ -32,7 +34,7 @@ export default function Body({
               animate={
                 selectedLink.isActive && selectedLink.index != index
                   ? "open"
-                  : "closed"
+                  : t("close")
               }
             >
               <motion.span
@@ -43,7 +45,7 @@ export default function Body({
                 exit="exit"
                 key={title + index}
               >
-                {title}
+                {t(title)}
               </motion.span>
             </motion.p>
           </Link>

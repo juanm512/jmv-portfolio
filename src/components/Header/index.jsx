@@ -3,6 +3,7 @@ import dynamic from "next/dynamic"
 import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { opacity, background, translate } from "./animation.js"
+import { useTranslations } from "next-intl"
 
 const Nav = dynamic(() => import("./Nav"), {
   ssr: false
@@ -14,6 +15,8 @@ const LanguageChanger = dynamic(() => import("./LanguageChanger"), {
 // import LanguageChanger from "./LanguageChanger"
 
 export default function Index({ lang }) {
+  const t = useTranslations("Header")
+
   const [isActive, setIsActive] = useState(false)
   const [languageChange, setLanguageChange] = useState(false)
 
@@ -88,7 +91,7 @@ export default function Index({ lang }) {
                   animate="open"
                   exit="closed"
                 >
-                  Close
+                  {t("close")}
                 </motion.p>
               )}
             </AnimatePresence>

@@ -38,7 +38,7 @@ export default function Index() {
       <div className="relative basis-8/12 h-2/3 flex flex-col">
         <div className="relative w-full my-8 text-4xl md:text-8xl uppercase font-bold text-center">
           <span className="relative text-nowrap text-red-400 w-full h-fit">
-            Contact me!
+            {t("contact_text")}
           </span>
           <motion.span
             initial={{ transform: "translateX(-50%) translateY(-50%)" }}
@@ -50,7 +50,7 @@ export default function Index() {
             style={{ clipPath: "polygon(0 0, 100% 0, 100% 50%, 0 50%)" }}
             className="absolute text-nowrap left-1/2 top-1/2 pointer-events-none"
           >
-            Contact me!
+            {t("contact_text")}
           </motion.span>
           <motion.span
             initial={{ transform: "translateX(-50%) translateY(-50%)" }}
@@ -62,7 +62,7 @@ export default function Index() {
             style={{ clipPath: "polygon(0 50%, 100% 50%, 100% 100%, 0% 100%)" }}
             className="absolute text-nowrap left-1/2 top-1/2 pointer-events-none"
           >
-            Contact me!
+            {t("contact_text")}
           </motion.span>
         </div>
         <p className="text-sm font-normal md:text-2xl">JUAN MANUEL VILA</p>

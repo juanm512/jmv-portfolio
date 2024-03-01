@@ -30,9 +30,18 @@
     "loading": "Loading . . ."
   },
   "Contact": {
-    "contact_text": "contact me😀"
+    "contact_text": "Contact me!"
   },
   "Projects": {
     "view_more": "View more"
+  },
+  "Header": {
+    "home": "Home",
+    "about_me": "About me",
+    "my_work": "My work",
+    "contact": "Contact",
+    "close": "Close",
+    "typography": "typography:",
+    "made_by": "made by:"
   }
 }

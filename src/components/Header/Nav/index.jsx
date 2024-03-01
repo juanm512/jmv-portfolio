@@ -9,22 +9,22 @@ import Image from "./Image"
 
 const links = [
   {
-    title: "Home",
+    title: "home",
     href: "/",
     src: "home.png"
   },
   {
-    title: "About me",
+    title: "about_me",
     href: "#about_me",
     src: "shop.png"
   },
   {
-    title: "My work",
+    title: "my_work",
     href: "#my_work",
     src: "home.png"
   },
   {
-    title: "Contact",
+    title: "contact",
     href: "#contact",
     src: "lookbook.png"
   }
