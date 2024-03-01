@@ -35,7 +35,7 @@ export default function Index() {
     <section
       id="my_work"
       ref={container}
-      className="relative my-[10vh] h-[400vh] will-change-auto overflow-hidden"
+      className="relative mt-[10vh] mb-[30vh] h-[400vh] will-change-auto overflow-hidden"
     >
       <motion.div
         className="absolute flex flex-nowrap gap-[7.5vh] items-center h-screen"

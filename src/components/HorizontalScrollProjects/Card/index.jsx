@@ -57,7 +57,7 @@ export default function Index({ data }) {
         </div>
         <button
           onClick={handleRouting}
-          className="w-fit ml-auto uppercase text-base font-semibold py-2 px-4 ring-0 backdrop-blur-sm group-hover:ring-2 ring-white transition-all duration-200 ease-in-out hover:bg-white hover:text-black"
+          className="w-fit ml-auto uppercase text-base font-semibold py-2 px-4 ring-0 group-hover:ring-2 ring-white transition-all duration-200 ease-in-out hover:bg-white hover:text-black"
         >
           {t("view_more")} -{">"}
         </button>

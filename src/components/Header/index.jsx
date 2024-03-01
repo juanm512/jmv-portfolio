@@ -123,7 +123,7 @@ export default function Index({ lang }) {
           className="flex items-center justify-center gap-8"
         >
           <div className="relative flex flex-row-reverse gap-4 px-2 py-1 items-center transition-all duration-300 hover:ring-2 ring-white">
-            <p className="hidden">Language change</p>
+            <span className="sr-only">Language change</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className=""
