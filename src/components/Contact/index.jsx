@@ -3,7 +3,9 @@ import { useTranslations } from "next-intl"
 import Image from "next/image"
 import { motion } from "framer-motion"
 import { useRef } from "react"
-import { Copy, CopyCheck, FileDownload, MouseClick, TouchClick } from "./Icons"
+
+// import { Copy, CopyCheck, FileDownload, MouseClick, TouchClick } from "../Icons"
+
 import Link from "next/link"
 
 export default function Index() {

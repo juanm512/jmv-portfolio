@@ -3,7 +3,7 @@ import Link from "next/link"
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
 
-const Image = dynamic(() => import("./Image"))
+const Image = dynamic(() => import("@/components/ProjectComponents/Image"))
 
 export default function Images({ params }) {
   const { id, images } = getProjectById(params.project, params.locale)
