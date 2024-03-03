@@ -47,7 +47,7 @@ export default function Index({ data }) {
                   src={images_srcs[lang]}
                   fill={true}
                   sizes={"5vw"}
-                  alt={lang}
+                  alt={lang + title}
                   loading="lazy"
                   className="object-scale-down w-full h-8 aspect-square object-center drop-shadow-lg"
                 />

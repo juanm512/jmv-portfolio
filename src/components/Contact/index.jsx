@@ -31,7 +31,7 @@ export default function Index() {
           src="/Landing.png"
           fill={true}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          alt="background"
+          alt="contact Juan Manuel Vila IA picture"
           className="object-cover w-full aspect-video"
           priority
           quality={75}
@@ -49,7 +49,7 @@ export default function Index() {
               transition: { duration: 0.4, delay: 0.4, ease: "easeIn" }
             }}
             viewport={{ amount: 0.45, once: true }}
-            style={{ clipPath: "polygon(0 0, 50% 0, 50% 100%, 0% 100%)" }}
+            style={{ clipPath: "polygon(0 0, 100% 0, 100% 50%, 0 50%)" }}
             className="absolute text-nowrap left-1/2 top-1/2 pointer-events-none"
           >
             {t("contact_text")}
@@ -61,7 +61,7 @@ export default function Index() {
               transition: { duration: 0.4, delay: 0.4, ease: "easeIn" }
             }}
             viewport={{ amount: 0.45, once: true }}
-            style={{ clipPath: "polygon(50% 0, 100% 0, 100% 100%, 50% 100%)" }}
+            style={{ clipPath: "polygon(0 50%, 100% 50%, 100% 100%, 0% 100%)" }}
             className="absolute text-nowrap left-1/2 top-1/2 pointer-events-none"
           >
             {t("contact_text")}
@@ -73,118 +73,48 @@ export default function Index() {
             <Link
               href={"https://github.com/juanm512"}
               target="_blank"
-              className="relative group w-12 md:w-24 h-12 md:h-24 aspect-square transition-all duration-200 hover:scale-125"
+              className="relative group w-12 md:w-20 h-12 md:h-20 aspect-square transition-all duration-200 hover:scale-125"
             >
               <Image
                 src="/contact/brand-github.png"
                 fill={true}
                 sizes="(max-width: 768px) 10vw, (max-width: 1200px) 5vw, 4vw"
-                alt="background"
+                alt="github logo"
                 className="object-contain w-full aspect-square invert"
                 priority
                 quality={100}
               />
-              {/* <div className="absolute inset-0 group-hover:bg-red-300/20 group-hover:backdrop-blur">
-                <div className="absolute -right-1 md:right-0.5 -top-1 md:top-0.5 xs:opacity-100 md:opacity-0 flex w-fit h-4 md:h-8 items-center justify-center m-0 group-hover:opacity-80 transition-all duration-200">
-                  <MouseClick
-                    className={
-                      "hidden md:inline-block w-full h-full ring-1 ring-white px-1"
-                    }
-                  />
-                  <TouchClick
-                    className={
-                      "md:hidden inline-block w-full h-full ring-1 ring-white px-0.5 backdrop-blur-sm"
-                    }
-                  />
-                </div>
-                <div className="absolute left-1/2 top-1/2 -translate-y-[50%] -translate-x-[50%] opacity-0 flex w-5 md:w-10 h-5 md:h-10 m-0 group-hover:opacity-100 transition-all duration-200">
-                  <CopyCheck className={"w-full h-full"} />
-                </div>
-              </div> */}
             </Link>
             <Link
               href={"https://www.linkedin.com/in/juanmanuelvila/"}
               target="_blank"
-              className="relative group w-12 md:w-24 h-12 md:h-24 aspect-square transition-all duration-200 hover:scale-125"
+              className="relative group w-12 md:w-20 h-12 md:h-20 aspect-square transition-all duration-200 hover:scale-125"
             >
               <Image
                 src="/contact/brand-linkedin.png"
                 fill={true}
                 sizes="(max-width: 768px) 10vw, (max-width: 1200px) 5vw, 4vw"
-                alt="background"
+                alt="linkedin logo"
                 className="object-contain w-full aspect-square invert"
                 priority
                 quality={100}
               />
-              {/* <div className="absolute inset-0 group-hover:bg-red-300/20 group-hover:backdrop-blur">
-                <div className="absolute -right-1 md:right-0.5 -top-1 md:top-0.5 xs:opacity-100 md:opacity-0 flex w-fit h-4 md:h-8 items-center justify-center m-0 group-hover:opacity-80 transition-all duration-200">
-                  <MouseClick
-                    className={
-                      "hidden md:inline-block w-full h-full ring-1 ring-white px-1"
-                    }
-                  />
-                  <TouchClick
-                    className={
-                      "md:hidden inline-block w-full h-full ring-1 ring-white px-0.5 backdrop-blur-sm"
-                    }
-                  />
-                </div>
-                <div className="absolute left-1/2 top-1/2 -translate-y-[50%] -translate-x-[50%] opacity-0 flex w-5 md:w-10 h-5 md:h-10 m-0 group-hover:opacity-100 transition-all duration-200">
-                  <CopyCheck className={"w-full h-full"} />
-                </div>
-              </div> */}
             </Link>
             <Link
               href={"mailto:512juanm+job@gmail.com"}
               target="_blank"
-              className="relative group w-12 md:w-24 h-12 md:h-24 aspect-square transition-all duration-200 hover:scale-125"
+              className="relative group w-12 md:w-20 h-12 md:h-20 aspect-square transition-all duration-200 hover:scale-125"
             >
               <Image
                 src="/contact/mail.png"
                 fill={true}
                 sizes="(max-width: 768px) 10vw, (max-width: 1200px) 5vw, 4vw"
-                alt="background"
+                alt="email"
                 className="object-contain w-full aspect-square invert"
                 priority
                 quality={100}
               />
-              {/* <div className="absolute inset-0 group-hover:bg-red-300/20 group-hover:backdrop-blur">
-                <div className="absolute -right-1 md:right-0.5 -top-1 md:top-0.5 xs:opacity-100 md:opacity-0 flex w-fit h-4 md:h-8 items-center justify-center m-0 group-hover:opacity-80 transition-all duration-200">
-                  <MouseClick
-                    className={
-                      "hidden md:inline-block w-full h-full ring-1 ring-white px-1"
-                    }
-                  />
-                  <TouchClick
-                    className={
-                      "md:hidden inline-block w-full h-full ring-1 ring-white px-0.5 backdrop-blur-sm"
-                    }
-                  />
-                </div>
-                <div className="absolute left-1/2 top-1/2 -translate-y-[50%] -translate-x-[50%] opacity-0 flex w-5 md:w-10 h-5 md:h-10 m-0 group-hover:opacity-100 transition-all duration-200">
-                  <CopyCheck className={"w-full h-full"} />
-                </div>
-              </div> */}
             </Link>
-            {/* <div className="relative group w-12 md:w-24 h-12 md:h-24 aspect-square transition-all duration-200 hover:scale-125">
-              <Image
-                src="/contact/file-cv.png"
-                fill={true}
-                sizes="(max-width: 768px) 10vw, (max-width: 1200px) 5vw, 4vw"
-                alt="background"
-                className="object-contain w-full aspect-square invert"
-                priority
-                quality={100}
-              />
-              <div className="absolute inset-0 group-hover:bg-red-300/20 group-hover:backdrop-blur">
-                <div className="absolute -right-2 md:right-0.5 -top-2 md:top-0.5 xs:opacity-100 md:opacity-0 flex w-fit h-4 md:h-6 items-center justify-center m-0 md:p-0.5 group-hover:opacity-80 transition-all duration-200">
-                  <FileDownload
-                    className={"w-full h-full ring-1 ring-white px-1"}
-                  />
-                </div>
-
-              </div>
-            </div> */}
           </div>
         </div>
       </div>

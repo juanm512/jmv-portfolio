@@ -140,7 +140,7 @@ export default function Home() {
               src="/Landing.png"
               fill={true}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              alt="background"
+              alt="Juan Manuel Vila IA foto"
               className="object-cover h-auto"
               priority
               quality={100}
