@@ -5,11 +5,13 @@ import { useRef } from "react"
 import Card from "./Card"
 
 import data from "@/lib/data.json"
-
-const data1 = data.slice(0, 6)
-const data2 = data.slice(6)
+import { useLocale } from "next-intl"
 
 export default function Index() {
+  const lang = useLocale()
+  const data1 = data[lang].slice(0, 6)
+  const data2 = data[lang].slice(6)
+
   const container = useRef(null)
   const { scrollYProgress } = useScroll({
     target: container
@@ -49,7 +51,7 @@ export default function Index() {
             key={element.id}
             data={{
               id: element.id,
-              title: element.name,
+              title: element.title + " | " + element.subTitle,
               image: element.images[0],
               languages: [
                 ...element.languages,

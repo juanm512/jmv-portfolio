@@ -17,7 +17,7 @@ export default function Index({ data }) {
   }
 
   return (
-    <motion.div className="group relative w-[45vh] md:w-[50vh] h-[60vh] bg-black/50 backdrop-blur-md overflow-hidden shadow-lg shadow-transparent hover:shadow-red-500/70 hover:brightness-105">
+    <motion.div className="group relative w-[45vh] md:w-[50vh] h-[60vh] bg-black/50 backdrop-blur-md overflow-hidden transition-all duration-300 ease-in hover:brightness-105 hover:scale-105">
       <Image
         src={"/" + image}
         fill={true}

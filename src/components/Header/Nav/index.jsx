@@ -15,17 +15,17 @@ const links = [
   },
   {
     title: "about_me",
-    href: "#about_me",
+    href: "/#about_me",
     src: "shop.png"
   },
   {
     title: "my_work",
-    href: "#my_work",
+    href: "/#my_work",
     src: "home.png"
   },
   {
     title: "contact",
-    href: "#contact",
+    href: "/#contact",
     src: "lookbook.png"
   }
 ]

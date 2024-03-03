@@ -36,6 +36,7 @@
     "view_more": "Ver más"
   },
   "Header": {
+    "go_back": "<- Volver",
     "home": "Inicio",
     "about_me": "Sobre mi",
     "my_work": "Mi trabajo",

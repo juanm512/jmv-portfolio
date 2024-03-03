@@ -47,7 +47,7 @@ export default function Index() {
               transition: { duration: 0.4, delay: 0.4, ease: "easeIn" }
             }}
             viewport={{ amount: 0.45, once: true }}
-            style={{ clipPath: "polygon(0 0, 100% 0, 100% 50%, 0 50%)" }}
+            style={{ clipPath: "polygon(0 0, 50% 0, 50% 100%, 0% 100%)" }}
             className="absolute text-nowrap left-1/2 top-1/2 pointer-events-none"
           >
             {t("contact_text")}
@@ -59,7 +59,7 @@ export default function Index() {
               transition: { duration: 0.4, delay: 0.4, ease: "easeIn" }
             }}
             viewport={{ amount: 0.45, once: true }}
-            style={{ clipPath: "polygon(0 50%, 100% 50%, 100% 100%, 0% 100%)" }}
+            style={{ clipPath: "polygon(50% 0, 100% 0, 100% 100%, 50% 100%)" }}
             className="absolute text-nowrap left-1/2 top-1/2 pointer-events-none"
           >
             {t("contact_text")}
@@ -133,7 +133,7 @@ export default function Index() {
               </div> */}
             </Link>
             <Link
-              href={"mailto:512juanm@gmail.com"}
+              href={"mailto:512juanm+job@gmail.com"}
               target="_blank"
               className="relative group w-12 md:w-24 h-12 md:h-24 aspect-square transition-all duration-200 hover:scale-125"
             >

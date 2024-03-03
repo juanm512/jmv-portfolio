@@ -44,13 +44,6 @@ export default function Index({ lang }) {
   return (
     <div className="backdrop-blur-lg fixed w-screen p-3 box-border z-20">
       <div className="relative flex justify-center gap-4 uppercase text-md">
-        {/* si estas en otra web que no sea "/" habilitar un home */}
-        {/* <Link
-          className="absolute left-0 text-white"
-          href="/"
-        >
-          Olivier
-        </Link> */}
         <motion.button
           onClick={() =>
             setIsActive((prev) => {
