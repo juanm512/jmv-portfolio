@@ -1,11 +1,11 @@
 "use client"
-import { useRef, useEffect } from "react"
-import Image from "next/image"
-import Lenis from "@studio-freight/lenis"
+import { useRef, useEffect, useState, useLayoutEffect } from "react"
 import { useScroll, useTransform, motion, useInView } from "framer-motion"
 import dynamic from "next/dynamic"
 import { useTranslations } from "next-intl"
+import Lenis from "@studio-freight/lenis"
 
+import Image from "next/image"
 import { slideUp } from "./animation"
 
 const Canvas = dynamic(() => import("@/components/Landing/Canvas.jsx"), {
@@ -53,6 +53,11 @@ export default function Home() {
     [0, 0.4, 0.5, 1],
     [0, 0, 0.2, 1]
   )
+
+  const [width, setWidth] = useState(0)
+  useLayoutEffect(() => {
+    setWidth(window.innerWidth)
+  }, [])
 
   useEffect(() => {
     const lenis = new Lenis()
@@ -152,15 +157,32 @@ export default function Home() {
         ref={work_name_container}
         data-scroll
         data-scroll-speed={0.2}
-        className="absolute w-full top-[280vh] md:top-[278vh] left-0 text-white text-2xl md:text-6xl font-kode"
+        className="absolute w-full bottom-[-10px] left-0 text-white font-kode"
       >
         <motion.p
+          style={{
+            fontSize: ((width / t("work_name").length) * 62.7) / 47.5 + "px",
+            transform: "scaleY(1) scaleX(1)"
+          }}
           initial={{ opacity: 0, height: 0 }}
           whileInView={{ opacity: 1, height: "auto" }}
           className="mb-2 py-2 w-full text-center text-white bg-red-500/50 backdrop-blur-md  overflow-hidden"
         >
           {getChars(t("work_name"))}
         </motion.p>
+        {/* <motion.p
+          style={{
+            fontSize:
+              ((width / t("work_name").split(" - ")[1].length) * 42.7) / 47.5 +
+              "px",
+            transform: "scaleY(1) scaleX(1)"
+          }}
+          initial={{ opacity: 0, height: 0 }}
+          whileInView={{ opacity: 1, height: "auto" }}
+          className="mb-2 py-2 w-full text-center text-white bg-red-500/50 backdrop-blur-md  overflow-hidden"
+        >
+          {getChars(t("work_name").split(" - ")[1])}
+        </motion.p> */}
       </div>
     </motion.section>
   )

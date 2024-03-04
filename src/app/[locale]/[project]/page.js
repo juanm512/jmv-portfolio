@@ -33,7 +33,6 @@ export default function Page({ params }) {
 
   useLayoutEffect(() => {
     setWidth(window.innerWidth)
-    console.log(window.innerWidth, width, project.title.length)
   }, [])
 
   return (
