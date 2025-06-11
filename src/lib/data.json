@@ -432,30 +432,6 @@
       "endDate": "2023-04-15"
     },
     {
-      "id": "RNews",
-      "title": "News Web",
-      "subTitle": "Landing Template",
-      "description": "Este proyecto es una aplicación de noticias que desarrollé para aprender más sobre animaciones en el frontend. El proyecto está desarrollado en ReactJS. También utiliza Tailwind para el estilo de interfaz y Framer Motion para las animaciones. El proyecto se implementa en Vercel. El periódico utilizado es únicamente para fines de aprendizaje.",
-      "images": [
-        "Rnews/RNewsHomeLoad.gif",
-        "Rnews/darkmodechange.gif",
-        "Rnews/downtotopview.gif",
-        "Rnews/topdownview.gif",
-        "Rnews/topdownviewFromhome.gif"
-      ],
-      "languages": ["JavaScript", "Next.js"],
-      "libraries": ["tailwindcss", "framer-motion"],
-      "database": [null],
-      "status": {
-        "text": "In production - deployed",
-        "color": "green"
-      },
-      "website": "https://right-news.vercel.app/",
-      "github": "https://github.com/juanm512/right-news",
-      "startDate": "2023-04-23",
-      "endDate": "2023-05-01"
-    },
-    {
       "id": "BMusic",
       "title": "Music Artist",
       "subTitle": "Landing Template",
