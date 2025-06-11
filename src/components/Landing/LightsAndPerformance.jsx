@@ -49,9 +49,9 @@ export default function LandP({ isMobile, setDpr }) {
       <AdaptiveEvents />
       <PerformanceMonitor
         flipflops={5}
-        onFallback={() => setDpr(isMobile ? 0.1 : 0.5)}
+        onFallback={() => setDpr(isMobile ? 0.1 : 0.45)}
         factor={0.5}
-        onChange={({ factor }) => setDpr(Math.floor(0.1 + 1.5 * factor, 1))}
+        onChange={({ factor }) => setDpr(Math.floor(0.1 + 1.45 * factor, 1))}
       />
     </>
   )

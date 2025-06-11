@@ -4,7 +4,7 @@
       "id": "singleRestoWeb",
       "title": "Single Resto Website",
       "subTitle": "Restaurant Web",
-      "description": "This project is a restaurant web. The project is developed in NextJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed on a VPS with Docker and Node.js.",
+      "description": "(SOON MORE IMAGES) This project is a restaurant web. The project is developed in NextJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed on a VPS with Docker and Node.js.",
       "images": [
         "single_resto_website/portada.png"
       ],
@@ -29,7 +29,7 @@
       "id": "singleRestoDashboard",
       "title": "Single Resto Dashboard",
       "subTitle": "Restaurant Dashboard",
-      "description": "This project is a restaurant dashboard. The project is developed in NextJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed on a VPS with Docker and Node.js.",
+      "description": "(SOON MORE IMAGES) This project is a restaurant dashboard. The project is developed in NextJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed on a VPS with Docker and Node.js.",
       "images": [
         "single_resto_dashboard/portada.png"
       ],
@@ -348,7 +348,7 @@
       "id": "singleRestoWeb",
       "title": "Single Resto Web",
       "subTitle": "Restaurant Web",
-      "description": "Este proyecto es una web de restaurant. El proyecto se desarrolla en NextJS. También utiliza Tailwind para el estilo de interfaz y Framer Motion para las animaciones. El proyecto se implementa en un VPS con Docker y Node.js.",
+      "description": "(PRONTO MAS IMAGENES) Este proyecto es una web de restaurant. El proyecto se desarrolla en NextJS. También utiliza Tailwind para el estilo de interfaz y Framer Motion para las animaciones. El proyecto se implementa en un VPS con Docker y Node.js.",
       "images": [
         "single_resto_website/portada.png"
       ],
@@ -373,7 +373,7 @@
       "id": "singleRestoDashboard",
       "title": "Single Resto Dashboard",
       "subTitle": "Restaurant Dashboard",
-      "description": "Este proyecto es un dashboard de restaurant. El proyecto se desarrolla en NextJS. También utiliza Tailwind para el estilo de interfaz y Framer Motion para las animaciones. El proyecto se implementa en un VPS con Docker y Node.js.",
+      "description": "(PRONTO MAS IMAGENES) Este proyecto es un dashboard de restaurant. El proyecto se desarrolla en NextJS. También utiliza Tailwind para el estilo de interfaz y Framer Motion para las animaciones. El proyecto se implementa en un VPS con Docker y Node.js.",
       "images": [
         "single_resto_dashboard/portada.png"
       ],

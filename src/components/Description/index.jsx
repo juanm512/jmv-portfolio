@@ -17,7 +17,8 @@ export default function Index() {
   const size = hovered != "" ? 200 : 50
 
   const updateMousePosition = (e) => {
-    setMousePosition({ x: e.clientX, y: e.pageY })
+    if (isInView)
+      setMousePosition({ x: e.clientX, y: e.pageY })
   }
 
   useEffect(() => {
@@ -31,7 +32,6 @@ export default function Index() {
       <main className="min-h-screen flex justify-center items-center px-4 md:px-16 my-32">
         <div
           id="about_me"
-          ref={container}
           className="w-full md:w-11/12 flex flex-col gap-8 text-2xl py-16"
         >
           <h2
@@ -41,6 +41,10 @@ export default function Index() {
           >
             {t("title")}
           </h2>
+          <div 
+            className="w-auto flex flex-col gap-8 text-2xl py-16"
+            ref={container}
+          >
           <p className="">{t("first_p")}</p>
           <p className="">
             {t("second_p.first")}{" "}
@@ -50,7 +54,7 @@ export default function Index() {
               onMouseEnter={() =>
                 setHovered("/education/logo_facultad_ingenieria.png")
               }
-            >
+              >
               Facultad de Ingenieria de la UNLP
             </span>
             {t("second_p.second")}{" "}
@@ -58,7 +62,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/education/logo-informatica.png")}
-            >
+              >
               Facultad de Informatica de la UNLP
             </span>
             {". "}
@@ -69,7 +73,7 @@ export default function Index() {
               onMouseEnter={() =>
                 setHovered("/education/FreeCodeCamp_logo.png")
               }
-            >
+              >
               FreeCodeCamp
             </span>{" "}
             {t("second_p.fourth")}{" "}
@@ -79,7 +83,7 @@ export default function Index() {
               onMouseEnter={() =>
                 setHovered("/education/MDN_Web_Docs-Logo.svg")
               }
-            >
+              >
               MDN Web Docs
             </span>
             {"."}
@@ -90,7 +94,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/brand-javascript.png")}
-            >
+              >
               JavaScript
             </span>
             -{" "}
@@ -98,7 +102,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/brand-typescript.png")}
-            >
+              >
               TypeScript
             </span>
             {t("third_p.second")}{" "}
@@ -106,7 +110,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/brand-nextjs.png")}
-            >
+              >
               NextJS
             </span>
             ,{" "}
@@ -122,7 +126,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/brand-nodejs.png")}
-            >
+              >
               NodeJS
             </span>{" "}
             {t("third_p.fourth")}{" "}
@@ -130,7 +134,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/brand-java.png")}
-            >
+              >
               Java
             </span>
             ,{" "}
@@ -138,7 +142,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/sql.png")}
-            >
+              >
               SQL
             </span>
             ,{" "}
@@ -146,7 +150,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/brand-mongodb.png")}
-            >
+              >
               MongoDB
             </span>{" "}
             {t("third_p.fifth")}{" "}
@@ -154,7 +158,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/brand-rust.png")}
-            >
+              >
               Rust
             </span>
             .<br />
@@ -165,7 +169,7 @@ export default function Index() {
               className="mx-1 text-red-300"
               onMouseLeave={() => setRedirect("")}
               onMouseEnter={() => setRedirect("https://www.framer.com/motion/")}
-            >
+              >
               Framer-Motion
             </Link>
             ,
@@ -183,7 +187,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/brand-blender.png")}
-            >
+              >
               Blender
             </span>
             .
@@ -209,7 +213,7 @@ export default function Index() {
               className="bg-white text-red-700"
               onMouseLeave={() => setHovered("")}
               onMouseEnter={() => setHovered("/languages/ollama.png")}
-            >
+              >
               Ollama
             </span>{" "}
             {t("fourth_p.third")}{" "}
@@ -223,20 +227,21 @@ export default function Index() {
                   "https://repo-sam.inria.fr/fungraph/3d-gaussian-splatting/"
                 )
               }
-            >
+              >
               Gaussian Splatting
             </Link>
             .
           </p>
         </div>
+        </div>
       </main>
       <AnimatePresence mode="wait">
         {isInView && (
           <motion.div
-            className={
-              "absolute z-10 p-2 overflow-hidden backdrop-invert pointer-events-none shadow-md shadow-red-500 transition-colors" +
-              (hovered != "" ? " bg-red-300/80 " : " bg-red-600/80 ")
-            }
+          className={
+            "absolute z-10 p-2 overflow-hidden backdrop-invert pointer-events-none shadow-md shadow-red-500 transition-colors" +
+            (hovered != "" ? " bg-red-300/80 " : " bg-red-600/80 ")
+          }
             initial={{ scale: 0 }}
             animate={{
               scale: 1,

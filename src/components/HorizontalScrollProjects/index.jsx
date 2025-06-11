@@ -1,63 +1,32 @@
 "use client"
 import { useScroll, useTransform, useSpring, motion } from "framer-motion"
-import { useRef, useMemo } from "react"
+import { useRef } from "react"
 
 import Card from "./Card"
 
 import data from "@/lib/data.json"
 import { useLocale } from "next-intl"
 
-const librariesImages = ["threejs", "framer-motion", "tailwindcss"]
-
 export default function Index() {
   const lang = useLocale()
+  const data1 = data[lang].slice(0, 6)
+  const data2 = data[lang].slice(6)
+
   const container = useRef(null)
-
-  // 1. Memoize processed data to avoid recalculating on every render
-  const { data1, data2 } = useMemo(() => {
-    const allData = data[lang] || []
-    const processedData1 = allData.slice(0, 6).map((element) => ({
-      id: element.id,
-      title: `${element.title} | ${element.subTitle}`,
-      image: element.images[0],
-      languages: [
-        ...element.languages,
-        ...element.database.filter((db) => ["MongoDB", "MySQL"].includes(db)),
-        ...element.libraries.filter((lib) => librariesImages.includes(lib))
-      ]
-    }))
-    const processedData2 = allData.slice(6).map((element) => ({
-      id: element.id,
-      title: element.name,
-      image: element.images[0],
-      languages: element.languages
-    }))
-    return { data1: processedData1, data2: processedData2 }
-  }, [lang])
-
   const { scrollYProgress } = useScroll({
-    target: container,
-    offset: ["start start", "end end"] // 2. Add offset for better control
+    target: container
   })
 
-  // 3. Apply spring to transformed values for smoother animations
-  const springConfig = {
-    stiffness: 1000,
-    damping: 100,
-    mass: 0.5
-  }
+  const y1 = useTransform(scrollYProgress, [0, 0.5], ["0vh", "150vh"]);
+  const y2 = useTransform(scrollYProgress, [0.5, 1], ["150%", "300%"]);
 
-  // Row 1 animations
-  const x1 = useTransform(scrollYProgress, [0, 0.5], ["5%", "-110%"])
-  const y1 = useTransform(scrollYProgress, [0, 0.5], ["0vh", "150vh"])
-  const smoothX1 = useSpring(x1, springConfig)
-  const smoothY1 = useSpring(y1, springConfig)
-
-  // Row 2 animations
-  const x2 = useTransform(scrollYProgress, [0.5, 1], ["-100%", "5%"])
-  const y2 = useTransform(scrollYProgress, [0.5, 1], ["150%", "300%"])
-  const smoothX2 = useSpring(x2, springConfig)
-  const smoothY2 = useSpring(y2, springConfig)
+  const xTranslation = useSpring(scrollYProgress, {
+    stiffness: 2000,
+    damping: 10, // Aumentado de 100 a 150 para reducir el rebote
+    mass: 0.1
+  })
+  const x1 = useTransform(xTranslation, [0, 0.5], ["5%", "-110%"])
+  const x2 = useTransform(xTranslation, [0.5, 1], ["-100%", "5%"])
 
   return (
     <section
@@ -68,27 +37,53 @@ export default function Index() {
       <motion.div
         className="absolute flex flex-nowrap gap-[7.5vh] items-center h-screen"
         style={{
-          x: smoothX1,
-          y: smoothY1,
-          willChange: "transform" // 4. Correct will-change usage
+          x: x1,
+          y: y1,
+          willChange: "auto"
         }}
       >
-        {data1.map((cardData) => (
-          <Card key={cardData.id} data={cardData} />
+        {data1.map((element) => (
+          <Card
+            key={element.id}
+            data={{
+              id: element.id,
+              title: element.title + " | " + element.subTitle,
+              image: element.images[0],
+              languages: [
+                ...element.languages,
+                ...element.database.filter((db) =>
+                  ["MongoDB", "MySQL", "PostgreSQL"].includes(db)
+                ),
+                ...element.libraries.filter((lib) =>
+                  librariesImages.includes(lib)
+                )
+              ]
+            }}
+          />
         ))}
       </motion.div>
       <motion.div
         className="absolute flex flex-nowrap flex-row-reverse gap-[7.5vh] items-center h-screen"
         style={{
-          x: smoothX2,
-          y: smoothY2,
-          willChange: "transform" // 4. Correct will-change usage
+          x: x2,
+          y: y2,
+          willChange: "auto"
         }}
       >
-        {data2.map((cardData) => (
-          <Card key={cardData.id} data={cardData} />
+        {data2.map((element) => (
+          <Card
+            key={element.id}
+            data={{
+              id: element.id,
+              title: element.name,
+              image: element.images[0],
+              languages: element.languages
+            }}
+          />
         ))}
       </motion.div>
     </section>
   )
 }
+
+const librariesImages = ["threejs", "framer-motion", "tailwindcss"]

@@ -54,15 +54,11 @@ export default function Index({ lang }) {
           variants={opacity}
           initial="initial"
           animate="open"
-          style={{
-            backgroundColor: isActive ? "white" : "",
-            color: isActive ? "black" : "white"
-          }}
           whileHover={{
             scale: 1.1
           }}
           whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center gap-8"
+          className={`flex items-center justify-center gap-8 ${isActive ? 'bg-white text-black' : 'text-white'}`}
         >
           <div className="relative flex flex-row-reverse gap-4 px-2 py-1 items-center transition-all duration-300 hover:ring-2 ring-white">
             <AnimatePresence mode="wait">
@@ -108,15 +104,11 @@ export default function Index({ lang }) {
           variants={opacity}
           initial="initial"
           animate="open"
-          style={{
-            backgroundColor: languageChange ? "white" : "",
-            color: languageChange ? "black" : "white"
-          }}
           whileHover={{
             scale: 1.1
           }}
           whileTap={{ scale: 0.95 }}
-          className="flex items-center justify-center gap-8"
+          className={`flex items-center justify-center gap-8 ${languageChange ? 'bg-white text-black' : 'text-white'}`}
         >
           <div className="relative flex flex-row-reverse gap-4 px-2 py-1 items-center transition-all duration-300 hover:ring-2 ring-white">
             <span className="sr-only">Language change</span>
@@ -182,7 +174,7 @@ export default function Index({ lang }) {
         variants={background}
         initial="initial"
         animate={isActive || languageChange ? "open" : "closed"}
-        className="absolute h-full w-full bg-black backdrop-blur opacity-50 left-0 top-full"
+        className="absolute h-screen w-full bg-black backdrop-blur opacity-50 left-0 top-full will-change-auto"
       ></motion.div>
       <AnimatePresence mode="wait">
         {isActive && <Nav setActiveFalse={() => setIsActive(false)} />}

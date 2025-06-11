@@ -33,14 +33,17 @@ export const height = {
 
 export const background = {
   initial: {
-    height: 0
+    scaleY: 0,
+    transformOrigin: "top"
   },
   open: {
-    height: "100vh",
+    scaleY: 1,
+    transformOrigin: "top",
     transition
   },
   closed: {
-    height: 0,
+    scaleY: 0,
+    transformOrigin: "top",
     transition
   }
 }

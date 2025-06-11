@@ -1,5 +1,5 @@
 "use client"
-import { useRef, useEffect, useState, useLayoutEffect } from "react"
+import { useRef,useMemo, useEffect, useState, useLayoutEffect } from "react"
 import { useScroll, useTransform, motion, useInView } from "framer-motion"
 import dynamic from "next/dynamic"
 import { useTranslations } from "next-intl"
@@ -44,7 +44,7 @@ export default function Home() {
   )
   const opacityImage = useTransform(
     scrollYProgress,
-    [0, 0.7, 0.75, 1],
+    [0, 0.7, 0.90, 1],
     [1, 0.9, 0, 0]
   )
 
@@ -57,7 +57,16 @@ export default function Home() {
   const [width, setWidth] = useState(0)
   useLayoutEffect(() => {
     setWidth(window.innerWidth)
+    const handleResize = () => setWidth(window.innerWidth)
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  const workNameString = t("work_name")
+  const workNameFontSize = useMemo(() => {
+    if (width === 0 || !workNameString) return "inherit" // Evitar división por cero o errores
+    return ((width / workNameString.length) * 62.7) / 47.5 + "px"
+  }, [width, workNameString])
 
   useEffect(() => {
     const lenis = new Lenis()
@@ -71,13 +80,14 @@ export default function Home() {
     requestAnimationFrame(raf)
   }, [])
 
+  
   return (
     <motion.section
       ref={container}
       variants={slideUp}
       initial="initial"
       animate="enter"
-      className="relative flex h-[300vh] "
+      className="relative flex h-[300vh] will-change-auto"
     >
       <div
         data-scroll
@@ -141,14 +151,14 @@ export default function Home() {
             }}
             className="relative overflow-hidden pointer-events-none"
           >
-            <Image
+            <img
               src="/Landing.png"
-              fill={true}
+              // fill={true}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               alt="Juan Manuel Vila IA foto"
               className="object-cover h-auto"
-              priority
-              quality={100}
+              // priority
+              quality={85}
             />
           </motion.div>
         </motion.div>
@@ -161,24 +171,25 @@ export default function Home() {
       >
         <motion.p
           style={{
-            fontSize: ((width / t("work_name").length) * 62.7) / 47.5 + "px",
-            transform: "scaleY(1) scaleX(1)"
+            fontSize: workNameFontSize
           }}
-          initial={{ opacity: 0, height: 0 }}
-          whileInView={{ opacity: 1, height: "auto" }}
-          className="mb-2 py-2 w-full text-center text-white bg-red-500/50 backdrop-blur-md  overflow-hidden"
+          initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
+          whileInView={{ opacity: 1, scaleY: 1, transformOrigin: 'top' }}
+          transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+          className="mb-2 py-2 w-full text-center text-white bg-red-500/50 backdrop-blur-md overflow-hidden"
         >
-          {getChars(t("work_name"))}
+          {getChars(workNameString)}
         </motion.p>
         {/* <motion.p
           style={{
             fontSize:
               ((width / t("work_name").split(" - ")[1].length) * 42.7) / 47.5 +
               "px",
-            transform: "scaleY(1) scaleX(1)"
+            // transform: "scaleY(1) scaleX(1)" // Consider removing if static
           }}
-          initial={{ opacity: 0, height: 0 }}
-          whileInView={{ opacity: 1, height: "auto" }}
+          initial={{ opacity: 0, scaleY: 0, transformOrigin: 'top' }}
+          whileInView={{ opacity: 1, scaleY: 1, transformOrigin: 'top' }}
+          transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
           className="mb-2 py-2 w-full text-center text-white bg-red-500/50 backdrop-blur-md  overflow-hidden"
         >
           {getChars(t("work_name").split(" - ")[1])}
