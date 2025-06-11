@@ -1,6 +1,64 @@
 {
   "en": [
     {
+      "id": "singleRestoWeb",
+      "title": "Single Resto Website",
+      "subTitle": "Restaurant Web",
+      "description": "This project is a restaurant web. The project is developed in NextJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed on a VPS with Docker and Node.js.",
+      "images": [
+        "single_resto_website/portada.png"
+      ],
+      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "SQL"],
+      "libraries": [
+        "tailwindcss",
+        "Cloudflare R2",
+        "Pigeon maps",
+        "mercadopago"
+      ],
+      "database": ["PostgreSQL"],
+      "status": {
+        "text": "In Development - VPS demo (private)",
+        "color": "blue"
+      },
+      "website": "https://single-resto-website.vit.net.ar/",
+      "github": "",
+      "startDate": "2024-10-15",
+      "endDate": "2025-05-30"
+    },
+    {
+      "id": "singleRestoDashboard",
+      "title": "Single Resto Dashboard",
+      "subTitle": "Restaurant Dashboard",
+      "description": "This project is a restaurant dashboard. The project is developed in NextJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed on a VPS with Docker and Node.js.",
+      "images": [
+        "single_resto_dashboard/portada.png"
+      ],
+      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "SQL"],
+      "libraries": [
+        "tailwindcss",
+        "shadcn ui",
+        "better-auth",
+        "Cloudflare R2",
+        "aws-sdk",
+        "Routes Optimization",
+        "Pigeon maps",
+        "web-whatsapp on docker",
+        "mercadopago",
+        "drizzle",
+        "zod",
+        "nuqs","neverthrow", "dnd-kit"
+      ],
+      "database": ["PostgreSQL"],
+      "status": {
+        "text": "In Development - VPS demo (private)",
+        "color": "blue"
+      },
+      "website": "https://single-resto-dashboard.vit.net.ar/",
+      "github": "",
+      "startDate": "2024-10-15",
+      "endDate": "2025-05-30"
+    },
+    {
       "id": "Atlas_3D",
       "title": "Atlas 3D",
       "subTitle": "Models viewer",
@@ -28,30 +86,6 @@
       "github": "",
       "startDate": "2023-02-15",
       "endDate": "2023-04-15"
-    },
-    {
-      "id": "RNews",
-      "title": "News Web",
-      "subTitle": "Landing Template",
-      "description": "This project is a news app that I developed for learning more about animations in frontend. The project is developed in ReactJS. It also uses Tailwind for the frontend style and Framer Motion for the animations. The project is deployed in Vercel. The NewsPaper used is only for learning purposes.",
-      "images": [
-        "Rnews/RNewsHomeLoad.gif",
-        "Rnews/darkmodechange.gif",
-        "Rnews/downtotopview.gif",
-        "Rnews/topdownview.gif",
-        "Rnews/topdownviewFromhome.gif"
-      ],
-      "languages": ["JavaScript", "Next.js"],
-      "libraries": ["tailwindcss", "framer-motion"],
-      "database": [null],
-      "status": {
-        "text": "In production - deployed",
-        "color": "green"
-      },
-      "website": "https://right-news.vercel.app/",
-      "github": "https://github.com/juanm512/right-news",
-      "startDate": "2023-04-23",
-      "endDate": "2023-05-01"
     },
     {
       "id": "BMusic",
@@ -203,7 +237,7 @@
       "id": "Mercado_Service",
       "title": "Mercado Service",
       "subTitle": "Technical services hiring",
-      "description": "Personal proyect to find profesionals easier than usually and an e-commerce for profesionals stuffs. The website had typical features like shopping cart, payment methods, live chat between clients and profecionals, interactive maps and a simple login with email and password (with email checking process). \n\nThe platform was developed in NodeJS + Express with EJS for the server side rendering files. It also uses MySQL as a database and Custom CSS for the frontend style.",
+      "description": "Personal proyect to find profesionals easier than usually and an e-commerce for profesionals stuffs. The website had typical features like shopping cart, payment methods, live chat between clients and profecionals, interactive maps and a single login with email and password (with email checking process). \n\nThe platform was developed in NodeJS + Express with EJS for the server side rendering files. It also uses MySQL as a database and Custom CSS for the frontend style.",
       "images": [
         "MS/ms-logo.png",
         "MS/api.url2png.com.png",
@@ -310,6 +344,64 @@
     }
   ],
   "es": [
+    {
+      "id": "singleRestoWeb",
+      "title": "Single Resto Web",
+      "subTitle": "Restaurant Web",
+      "description": "Este proyecto es una web de restaurant. El proyecto se desarrolla en NextJS. También utiliza Tailwind para el estilo de interfaz y Framer Motion para las animaciones. El proyecto se implementa en un VPS con Docker y Node.js.",
+      "images": [
+        "single_resto_website/portada.png"
+      ],
+      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "SQL"],
+      "libraries": [
+        "tailwindcss",
+        "Cloudflare R2",
+        "Pigeon maps",
+        "mercadopago"
+      ],
+      "database": ["PostgreSQL"],
+      "status": {
+        "text": "En Desarrollo - Demo VPS (privado)",
+        "color": "blue"
+      },
+      "website": "https://single-resto-website.vit.net.ar/",
+      "github": "",
+      "startDate": "2024-10-15",
+      "endDate": "2025-05-30"
+    },
+    {
+      "id": "singleRestoDashboard",
+      "title": "Single Resto Dashboard",
+      "subTitle": "Restaurant Dashboard",
+      "description": "Este proyecto es un dashboard de restaurant. El proyecto se desarrolla en NextJS. También utiliza Tailwind para el estilo de interfaz y Framer Motion para las animaciones. El proyecto se implementa en un VPS con Docker y Node.js.",
+      "images": [
+        "single_resto_dashboard/portada.png"
+      ],
+      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "SQL"],
+      "libraries": [
+        "tailwindcss",
+        "shadcn ui",
+        "better-auth",
+        "Cloudflare R2",
+        "aws-sdk",
+        "Routes Optimization",
+        "Pigeon maps",
+        "web-whatsapp on docker",
+        "mercadopago",
+        "drizzle",
+        "zod",
+        "nuqs","neverthrow", "dnd-kit"
+      ],
+      "database": ["PostgreSQL"],
+      "status": {
+        "text": "En desarrollo - VPS demo (privado)",
+        "color": "blue"
+      },
+      "website": "https://single-resto-dashboard.vit.net.ar/",
+      "github": "",
+      "startDate": "2024-10-15",
+      "endDate": "2025-05-30"
+    },
     {
       "id": "Atlas_3D",
       "title": "Atlas 3D",
@@ -513,7 +605,7 @@
       "id": "Mercado_Service",
       "title": "Mercado Service",
       "subTitle": "Technical services hiring",
-      "description": "Proyecto personal para encontrar profesionales más fácil de lo habitual y un e-commerce para productos profesionales. El sitio web tenía características típicas como carrito de compras, métodos de pago, chat en vivo entre clientes y profesionales, mapas interactivos y un inicio de sesión simple con correo electrónico y contraseña (con proceso de verificación de correo electrónico). \n\nLa plataforma fue desarrollada en NodeJS + Express con EJS para los archivos de renderizado del lado del servidor. También utiliza MySQL como base de datos y CSS personalizado para el estilo de la interfaz.",
+      "description": "Proyecto personal para encontrar profesionales más fácil de lo habitual y un e-commerce para productos profesionales. El sitio web tenía características típicas como carrito de compras, métodos de pago, chat en vivo entre clientes y profesionales, mapas interactivos y un inicio de sesión single con correo electrónico y contraseña (con proceso de verificación de correo electrónico). \n\nLa plataforma fue desarrollada en NodeJS + Express con EJS para los archivos de renderizado del lado del servidor. También utiliza MySQL como base de datos y CSS personalizado para el estilo de la interfaz.",
       "images": [
         "MS/ms-logo.png",
         "MS/api.url2png.com.png",
