@@ -75,5 +75,9 @@ const images_srcs = {
   MongoDB: "/languages/brand-mongodb.png",
   threejs: "/languages/brand-threejs.png",
   "framer-motion": "/languages/brand-framer-motion.png",
-  tailwindcss: "/languages/brand-tailwind.png"
+  tailwindcss: "/languages/brand-tailwind.png",
+  docker: "/languages/brand_docker.png",
+  "PostgreSQL": "/languages/brand_postgresql.png",
+  typescript: "/languages/brand-typescript.png",
+
 }

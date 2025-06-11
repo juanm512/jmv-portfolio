@@ -8,7 +8,7 @@
       "images": [
         "single_resto_website/portada.png"
       ],
-      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "SQL"],
+      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "PostgreSQL"],
       "libraries": [
         "tailwindcss",
         "Cloudflare R2",
@@ -18,7 +18,7 @@
       "database": ["PostgreSQL"],
       "status": {
         "text": "In Development - VPS demo (private)",
-        "color": "blue"
+        "color": "yellow"
       },
       "website": "https://single-resto-website.vit.net.ar/",
       "github": "",
@@ -33,7 +33,7 @@
       "images": [
         "single_resto_dashboard/portada.png"
       ],
-      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "SQL"],
+      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "PostgreSQL"],
       "libraries": [
         "tailwindcss",
         "shadcn ui",
@@ -51,7 +51,7 @@
       "database": ["PostgreSQL"],
       "status": {
         "text": "In Development - VPS demo (private)",
-        "color": "blue"
+        "color": "yellow"
       },
       "website": "https://single-resto-dashboard.vit.net.ar/",
       "github": "",
@@ -352,7 +352,7 @@
       "images": [
         "single_resto_website/portada.png"
       ],
-      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "SQL"],
+      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "PostgreSQL"],
       "libraries": [
         "tailwindcss",
         "Cloudflare R2",
@@ -362,7 +362,7 @@
       "database": ["PostgreSQL"],
       "status": {
         "text": "En Desarrollo - Demo VPS (privado)",
-        "color": "blue"
+        "color": "yellow"
       },
       "website": "https://single-resto-website.vit.net.ar/",
       "github": "",
@@ -377,7 +377,7 @@
       "images": [
         "single_resto_dashboard/portada.png"
       ],
-      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "SQL"],
+      "languages": ["JavaScript", "TypeScript", "Next.js", "Docker", "PostgreSQL"],
       "libraries": [
         "tailwindcss",
         "shadcn ui",
@@ -395,7 +395,7 @@
       "database": ["PostgreSQL"],
       "status": {
         "text": "En desarrollo - VPS demo (privado)",
-        "color": "blue"
+        "color": "yellow"
       },
       "website": "https://single-resto-dashboard.vit.net.ar/",
       "github": "",
