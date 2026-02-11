@@ -44,6 +44,10 @@
     "title": "Juan Manuel Vila - Desarrollador FullStack",
     "description": "Portfolio de Juan Manuel Vila - Desarrollador FullStack especializado en crear sistemas que resuelven problemas reales."
   },
+  "Header": {
+    "close": "Cerrar",
+    "menu": "Menú"
+  },
   "Legacy": {
     "Description": {
       "title": "Sobre mí",

@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState, useMemo } from "react"
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion"
-import Image from "next/image"
 
 // Componente individual de partícula rectangular
 function Particle({
@@ -24,13 +23,13 @@ function Particle({
   const vibrateY = useMotionValue(0)
   
   // Spring suave para la vibración
-  const springX = useSpring(vibrateX, { stiffness: 300, damping: 20 })
-  const springY = useSpring(vibrateY, { stiffness: 300, damping: 20 })
+  const springX = useSpring(vibrateX, { stiffness: 400, damping: 15 })
+  const springY = useSpring(vibrateY, { stiffness: 400, damping: 15 })
 
   useEffect(() => {
     if (!isLoaded) return
     
-    // Animación de entrada desde el centro
+    // Animación de entrada con delay
     const timer = setTimeout(() => {
       setIsVisible(true)
     }, delay * 1000)
@@ -46,7 +45,7 @@ function Particle({
     let lastTime = 0
     
     const vibrate = (time) => {
-      if (time - lastTime > 50) { // Actualizar cada 50ms
+      if (time - lastTime > 33) { // ~30fps
         const offsetX = (Math.random() - 0.5) * vibrateIntensity
         const offsetY = (Math.random() - 0.5) * vibrateIntensity
         vibrateX.set(offsetX)
@@ -63,7 +62,7 @@ function Particle({
 
   return (
     <motion.div
-      className="absolute overflow-hidden"
+      className="absolute overflow-hidden will-change-transform"
       style={{
         left: x,
         top: y,
@@ -74,18 +73,14 @@ function Particle({
       }}
       initial={{ 
         scale: 0, 
-        opacity: 0,
-        x: totalWidth / 2 - x - width / 2,
-        y: totalHeight / 2 - y - height / 2
+        opacity: 0
       }}
       animate={isVisible ? { 
         scale: 1, 
-        opacity: 1,
-        x: 0,
-        y: 0
+        opacity: 1
       } : {}}
       transition={{
-        duration: 0.8,
+        duration: 0.5,
         ease: [0.22, 1, 0.36, 1]
       }}
     >
@@ -99,7 +94,7 @@ function Particle({
         }}
       />
       {/* Borde sutil para definir las partículas */}
-      <div className="absolute inset-0 border-[0.5px] border-green-glow/10" />
+      <div className="absolute inset-0 border-[0.5px] border-green-glow/5" />
     </motion.div>
   )
 }
@@ -110,18 +105,19 @@ export default function ParticleImage({
   alt,
   className = "",
   particleSize = 40,
-  particleGap = 2,
+  particleGap = 1,
   vibrateIntensity = 0.8,
   loadingDelay = 0,
   scrollZoom = true,
   zoomRange = [1, 3],
-  externalScale, // Escala externa desde el contenedor padre
+  externalScale,
   onLoad
 }) {
   const containerRef = useRef(null)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 })
   const [isReady, setIsReady] = useState(false)
+  const [viewportSize, setViewportSize] = useState({ width: 1920, height: 1080 })
 
   // Scroll progress para zoom
   const { scrollYProgress } = useScroll({
@@ -135,19 +131,48 @@ export default function ParticleImage({
     zoomRange
   )
 
+  // Obtener tamaño del viewport
+  useEffect(() => {
+    const updateSize = () => {
+      setViewportSize({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    }
+    updateSize()
+    window.addEventListener('resize', updateSize)
+    return () => window.removeEventListener('resize', updateSize)
+  }, [])
+
   // Precargar imagen para obtener dimensiones
   useEffect(() => {
     const img = new window.Image()
     img.src = src
     img.onload = () => {
-      setImageDimensions({ width: img.width, height: img.height })
+      // Calcular dimensiones para cover
+      const imageAspect = img.width / img.height
+      const viewportAspect = viewportSize.width / viewportSize.height
+      
+      let renderWidth, renderHeight
+      
+      if (imageAspect > viewportAspect) {
+        // Imagen más ancha que el viewport
+        renderHeight = viewportSize.height
+        renderWidth = renderHeight * imageAspect
+      } else {
+        // Imagen más alta que el viewport
+        renderWidth = viewportSize.width
+        renderHeight = renderWidth / imageAspect
+      }
+      
+      setImageDimensions({ width: renderWidth, height: renderHeight })
       setImageLoaded(true)
       setTimeout(() => {
         setIsReady(true)
         onLoad?.()
       }, loadingDelay * 1000)
     }
-  }, [src, loadingDelay, onLoad])
+  }, [src, loadingDelay, onLoad, viewportSize])
 
   // Generar grid de partículas
   const particles = useMemo(() => {
@@ -166,22 +191,23 @@ export default function ParticleImage({
     // Centrar el grid
     const offsetX = (totalWidth - imageDimensions.width) / 2
     const offsetY = (totalHeight - imageDimensions.height) / 2
+    
+    // Centro del grid
+    const centerCol = cols / 2
+    const centerRow = rows / 2
+    const maxDistance = Math.sqrt(centerCol * centerCol + centerRow * centerRow)
 
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         const x = col * effectiveSize - offsetX
         const y = row * effectiveSize - offsetY
         
-        // Calcular delay basado en distancia al centro (efecto onda)
-        const centerCol = cols / 2
-        const centerRow = rows / 2
+        // Calcular delay basado en distancia al centro (efecto onda desde centro)
         const distance = Math.sqrt(
           Math.pow(col - centerCol, 2) + Math.pow(row - centerRow, 2)
         )
-        const maxDistance = Math.sqrt(
-          Math.pow(cols / 2, 2) + Math.pow(rows / 2, 2)
-        )
-        const delay = (distance / maxDistance) * 0.5 + Math.random() * 0.1
+        const normalizedDistance = distance / maxDistance
+        const delay = normalizedDistance * 0.8 + loadingDelay
 
         particlesArray.push({
           id: `${row}-${col}`,
@@ -197,12 +223,12 @@ export default function ParticleImage({
     }
 
     return particlesArray
-  }, [imageLoaded, imageDimensions, particleSize, particleGap])
+  }, [imageLoaded, imageDimensions, particleSize, particleGap, loadingDelay])
 
   if (!imageLoaded) {
     return (
       <div ref={containerRef} className={`relative ${className}`}>
-        <div className="absolute inset-0 bg-green-primary/20 animate-pulse" />
+        <div className="absolute inset-0 bg-background-dark" />
       </div>
     )
   }
@@ -210,11 +236,7 @@ export default function ParticleImage({
   return (
     <div
       ref={containerRef}
-      className={`relative overflow-hidden ${className}`}
-      style={{
-        width: imageDimensions.width,
-        height: imageDimensions.height
-      }}
+      className={`relative w-full h-full overflow-hidden ${className}`}
     >
       <motion.div
         className="absolute inset-0 flex items-center justify-center"

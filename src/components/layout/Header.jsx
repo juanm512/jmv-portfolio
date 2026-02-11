@@ -1,154 +1,201 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import dynamic from "next/dynamic"
+import { useState, useEffect, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { useTranslations, useLocale } from "next-intl"
+import { useTranslations } from "next-intl"
 
-export default function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const pathname = usePathname()
-  const locale = useLocale()
-  const t = useTranslations("Navigation")
+const Nav = dynamic(() => import("@/components/Header/Nav"), {
+  ssr: false
+})
+const LanguageChanger = dynamic(() => import("@/components/Header/LanguageChanger"), {
+  ssr: false
+})
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+// Animation variants
+const opacity = {
+  initial: { opacity: 0 },
+  open: { opacity: 1 },
+  closed: { opacity: 0 }
+}
+
+const background = {
+  initial: { opacity: 0 },
+  open: { opacity: 0.6 },
+  closed: { opacity: 0 }
+}
+
+export default function Header({ lang }) {
+  const t = useTranslations("Header")
+  const [isActive, setIsActive] = useState(false)
+  const [languageChange, setLanguageChange] = useState(false)
+
+  // menus key handler
+  const handleKeyPressed = useCallback((event) => {
+    if (event.key == "Escape" || event.keyCode == 27) {
+      setIsActive((prev) => {
+        if (!prev) setLanguageChange(false)
+        return !prev
+      })
+    } else if (event.key == "l" || event.key == "L" || event.keyCode == 76) {
+      setLanguageChange((prev) => {
+        if (!prev) setIsActive(false)
+        return !prev
+      })
     }
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const navLinks = [
-    { href: `/${locale}`, label: t("home") },
-    { href: `/${locale}#projects`, label: t("projects") },
-    { href: `/${locale}#contact`, label: t("contact") }
-  ]
-
-  const toggleLocale = () => {
-    const newLocale = locale === "es" ? "en" : "es"
-    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`)
-    window.location.href = newPath
-  }
+  useEffect(() => {
+    window.addEventListener("keyup", handleKeyPressed)
+    return () => window.removeEventListener("keyup", handleKeyPressed)
+  }, [handleKeyPressed])
 
   return (
-    <>
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? "bg-background-dark/80 backdrop-blur-md border-b border-green-primary/20"
-            : "bg-transparent"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <Link
-              href={`/${locale}`}
-              className="font-mono text-lg tracking-tight hover:text-green-glow transition-colors"
-            >
-              <span className="text-green-glow">JMV</span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm text-white/70 hover:text-white transition-colors relative group"
+    <div className="fixed w-full p-3 box-border z-[100] pointer-events-none">
+      <div className="pointer-events-auto flex justify-center gap-4 uppercase text-md">
+        {/* Menu Button */}
+        <motion.button
+          onClick={() =>
+            setIsActive((prev) => {
+              if (!prev) setLanguageChange(false)
+              return !prev
+            })
+          }
+          variants={opacity}
+          initial="initial"
+          animate="open"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className={`flex items-center justify-center gap-8 transition-colors duration-300 ${
+            isActive 
+              ? 'bg-green-glow text-background-dark' 
+              : 'bg-background-dark/50 backdrop-blur-md text-white border border-green-glow/20 hover:border-green-glow/50'
+          }`}
+        >
+          <div className="relative flex flex-row-reverse gap-4 px-3 py-2 items-center transition-all duration-300">
+            <AnimatePresence mode="wait">
+              {!isActive ? (
+                <motion.p
+                  className="m-0 font-semibold text-sm tracking-wider"
+                  variants={opacity}
+                  initial="initial"
+                  animate="open"
+                  exit="closed"
                 >
-                  {link.label}
-                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-green-glow transition-all duration-300 group-hover:w-full" />
-                </Link>
-              ))}
-            </nav>
-
-            {/* Right side */}
-            <div className="flex items-center gap-4">
-              {/* Language toggle */}
-              <button
-                onClick={toggleLocale}
-                className="flex items-center gap-1 text-sm font-mono text-white/60 hover:text-green-glow transition-colors"
-              >
-                <span className={locale === "es" ? "text-white" : ""}>ES</span>
-                <span className="text-white/30">|</span>
-                <span className={locale === "en" ? "text-white" : ""}>EN</span>
-              </button>
-
-              {/* Contact button - Desktop */}
-              <Link
-                href={`/${locale}#contact`}
-                className="hidden md:inline-flex items-center px-4 py-2 text-sm font-medium bg-green-primary/20 text-green-glow border border-green-glow/30 rounded-full hover:bg-green-primary/30 transition-all"
-              >
-                {t("contact")}
-              </Link>
-
-              {/* Mobile menu button */}
-              <button
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="md:hidden relative w-8 h-8 flex flex-col items-center justify-center gap-1.5"
-                aria-label="Toggle menu"
-              >
-                <motion.span
-                  animate={{
-                    rotate: isMobileMenuOpen ? 45 : 0,
-                    y: isMobileMenuOpen ? 6 : 0
-                  }}
-                  className="w-5 h-px bg-white block"
-                />
-                <motion.span
-                  animate={{ opacity: isMobileMenuOpen ? 0 : 1 }}
-                  className="w-5 h-px bg-white block"
-                />
-                <motion.span
-                  animate={{
-                    rotate: isMobileMenuOpen ? -45 : 0,
-                    y: isMobileMenuOpen ? -6 : 0
-                  }}
-                  className="w-5 h-px bg-white block"
-                />
-              </button>
-            </div>
+                  Menu
+                </motion.p>
+              ) : (
+                <motion.p
+                  className="m-0 font-semibold text-sm tracking-wider"
+                  variants={opacity}
+                  initial="initial"
+                  animate="open"
+                  exit="closed"
+                >
+                  {t("close")}
+                </motion.p>
+              )}
+            </AnimatePresence>
+            <div
+              className={`sm:hidden block burger ${
+                isActive ? "burgerActive" : ""
+              }`}
+            />
+            <p className="hidden sm:flex m-0 text-xs font-mono ring-1 ring-current px-1.5 py-0.5 rounded">
+              Esc
+            </p>
           </div>
-        </div>
-      </motion.header>
+        </motion.button>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-background-dark/95 backdrop-blur-lg md:hidden"
-          >
-            <nav className="flex flex-col items-center justify-center h-full gap-8">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="text-2xl font-medium text-white hover:text-green-glow transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
-        )}
+        {/* Language Button */}
+        <motion.button
+          onClick={() =>
+            setLanguageChange((prev) => {
+              if (!prev) setIsActive(false)
+              return !prev
+            })
+          }
+          variants={opacity}
+          initial="initial"
+          animate="open"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className={`flex items-center justify-center gap-8 transition-colors duration-300 ${
+            languageChange 
+              ? 'bg-green-glow text-background-dark' 
+              : 'bg-background-dark/50 backdrop-blur-md text-white border border-green-glow/20 hover:border-green-glow/50'
+          }`}
+        >
+          <div className="relative flex flex-row-reverse gap-4 px-3 py-2 items-center transition-all duration-300">
+            <span className="sr-only">Language change</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="square"
+              strokeLinejoin="square"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <path d="M4 5h7" />
+              <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+              <path d="M5 9c0 2.144 2.952 3.908 6.7 4" />
+              <path d="M12 20l4 -9l4 9" />
+              <path d="M19.1 18h-6.2" />
+            </svg>
+            <p className="hidden sm:flex m-0 text-xs font-mono ring-1 ring-current px-1.5 py-0.5 rounded">
+              L
+            </p>
+            <p
+              className={
+                "sm:hidden flex m-0 text-sm font-semibold transition-transform duration-200" +
+                (languageChange ? " rotate-180" : "")
+              }
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="square"
+                strokeLinejoin="square"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M6 9l6 6l6 -6" />
+              </svg>
+            </p>
+          </div>
+        </motion.button>
+      </div>
+
+      {/* Backdrop */}
+      <motion.div
+        onClick={() => {
+          setIsActive(false)
+          setLanguageChange(false)
+        }}
+        variants={background}
+        initial="initial"
+        animate={isActive || languageChange ? "open" : "closed"}
+        className="fixed inset-0 bg-background-dark backdrop-blur-sm -z-10 pointer-events-auto"
+        style={{ opacity: 0 }}
+      />
+
+      {/* Nav Menu */}
+      <AnimatePresence mode="wait">
+        {isActive && <Nav setActiveFalse={() => setIsActive(false)} />}
       </AnimatePresence>
-    </>
+
+      {/* Language Menu */}
+      <AnimatePresence mode="wait">
+        {languageChange && <LanguageChanger lang={lang} />}
+      </AnimatePresence>
+    </div>
   )
 }

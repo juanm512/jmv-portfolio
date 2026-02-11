@@ -3,7 +3,6 @@ import { unstable_setRequestLocale } from "next-intl/server"
 import { getProjectBySlug, getAllProjectSlugs } from "@/lib/projects"
 import ProjectPage from "@/components/projects/ProjectPage"
 
-// Generate static params for all projects
 export async function generateStaticParams() {
   const slugs = getAllProjectSlugs()
   const locales = ["es", "en"]
@@ -17,7 +16,6 @@ export async function generateStaticParams() {
   return params
 }
 
-// Generate metadata for each project
 export async function generateMetadata({ params }) {
   const project = getProjectBySlug(params.slug)
 

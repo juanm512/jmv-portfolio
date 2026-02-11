@@ -17,57 +17,55 @@ export default function ChildhoodSection() {
   })
 
   // Crossfade de la imagen
-  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.7, 0.9], [0, 1, 1, 0])
+  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.25, 0.75, 0.9], [0, 1, 1, 0])
   
   // Zoom progresivo
-  const imageScale = useTransform(scrollYProgress, [0.2, 0.8], [1, 4])
+  const imageScale = useTransform(scrollYProgress, [0.15, 0.85], [1, 5])
   
   // Texto aparece y desaparece
-  const textOpacity = useTransform(scrollYProgress, [0.25, 0.4, 0.6, 0.75], [0, 1, 1, 0])
-  const textY = useTransform(scrollYProgress, [0.25, 0.4], [60, 0])
+  const textOpacity = useTransform(scrollYProgress, [0.2, 0.35, 0.65, 0.8], [0, 1, 1, 0])
+  const textY = useTransform(scrollYProgress, [0.2, 0.35], [50, 0])
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[300vh] -mt-[100vh]"
+      className="relative h-[350vh] -mt-[100vh]"
     >
       {/* Sticky container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-background-dark">
-        {/* Fondo gradient */}
-        <div className="absolute inset-0 bg-gradient-radial from-green-accent/20 via-background-dark to-background-dark" />
-
         {/* Particle Image con crossfade */}
         <motion.div
-          className="absolute inset-0 flex items-center justify-center"
-          style={{ opacity: imageOpacity }}
+          className="absolute inset-0"
+          style={{ 
+            opacity: imageOpacity,
+            scale: imageScale
+          }}
         >
-          <motion.div
-            className="w-full h-full flex items-center justify-center"
-            style={{ scale: imageScale }}
-          >
-            <ParticleImage
-              src="/Ai2.jpg"
-              alt="Childhood memories"
-              className="w-full h-full"
-              particleSize={30}
-              particleGap={1}
-              vibrateIntensity={1.5}
-              zoomRange={[1, 1]} // El zoom lo manejamos desde el contenedor padre
-              loadingDelay={0}
-              onLoad={() => setImageLoaded(true)}
-            />
-          </motion.div>
+          <ParticleImage
+            src="/Ai2.jpg"
+            alt="Childhood memories"
+            className="w-full h-full"
+            particleSize={24}
+            particleGap={0}
+            vibrateIntensity={1}
+            zoomRange={[1, 1]}
+            loadingDelay={0}
+            onLoad={() => setImageLoaded(true)}
+          />
         </motion.div>
 
         {/* Overlay oscuro para legibilidad */}
-        <div className="absolute inset-0 bg-background-dark/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-background-dark/30 pointer-events-none" />
         
         {/* Vignette */}
         <div className="absolute inset-0 bg-vignette pointer-events-none" />
 
+        {/* Gradient from bottom */}
+        <div className="absolute bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent pointer-events-none" />
+
         {/* Texto */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 z-10 pb-16 md:pb-24 px-6"
+          className="absolute bottom-0 left-0 right-0 z-10 pb-12 md:pb-20 px-6"
           style={{
             opacity: textOpacity,
             y: textY

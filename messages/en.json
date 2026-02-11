@@ -44,6 +44,10 @@
     "title": "Juan Manuel Vila - FullStack Developer",
     "description": "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems."
   },
+  "Header": {
+    "close": "Close",
+    "menu": "Menu"
+  },
   "Legacy": {
     "Description": {
       "title": "About me",
