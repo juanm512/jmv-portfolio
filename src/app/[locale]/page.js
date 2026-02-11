@@ -1,17 +1,29 @@
-import dynamic from "next/dynamic"
+import { unstable_setRequestLocale } from "next-intl/server"
+import { getAllProjects } from "@/lib/projects"
 
-const Landing = dynamic(() => import("@/components/Landing"))
-const Description = dynamic(() => import("@/components/Description"))
-const Projects = dynamic(() => import("@/components/HorizontalScrollProjects"))
-const Contact = dynamic(() => import("@/components/Contact"))
+import HeroSection from "@/components/home/HeroSection"
+import ChildhoodSection from "@/components/home/ChildhoodSection"
+import AbstractSection from "@/components/home/AbstractSection"
+import MemoryWall from "@/components/home/MemoryWall"
+import ContactSection from "@/components/home/ContactSection"
 
-export default function Index() {
+export const metadata = {
+  title: "Juan Manuel Vila - FullStack Developer",
+  description:
+    "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems."
+}
+
+export default function HomePage({ params: { locale } }) {
+  unstable_setRequestLocale(locale)
+  const projects = getAllProjects()
+
   return (
-    <main>
-      <Landing />
-      <Description />
-      <Projects />
-      <Contact />
+    <main className="bg-background-dark">
+      <HeroSection />
+      <ChildhoodSection />
+      <AbstractSection />
+      <MemoryWall projects={projects} locale={locale} />
+      <ContactSection />
     </main>
   )
 }

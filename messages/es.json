@@ -1,48 +1,95 @@
 {
-  "Description": {
-    "title": "Sobre mí",
-    "first_p": "Soy un programador apasionado por usar la tecnología para crear soluciones y herramientas innovadoras. Me considero una persona que disfruta de aprender nuevas tecnologias, herramientas y de encontrar nuevos desafios para resolver. Me entusiasma el hecho de ingresar en algun proyecto desafiante.",
-    "second_p": {
-      "first": "Forjé mis conocimientos en un principio en la",
-      "second": ", dando un salto a la",
-      "third": "Soy un autodidacta nato, y comence aprendiendo de",
-      "fourth": "y"
+  "Home": {
+    "hero": {
+      "title": "Construyo sistemas que resuelven problemas reales.",
+      "subtitle": "Desarrollador FullStack"
     },
-    "third_p": {
-      "first": "Domino lenguajes como",
-      "second": ", en conjunto con",
-      "third": "o",
-      "fourth": "con Express y EJS para SSR. Tambien estoy familiarizado con lo basico de",
-      "fifth": "y me encuentro aprendiendo",
-      "sixth": "Tambien tengo experiencia usando librerias como",
-      "seventh": "y algunos programas como"
+    "childhood": {
+      "title": "Todo comenzó con una pregunta...",
+      "text": "¿Cómo funcionan las cosas? Esa curiosidad me llevó a desarmar computadoras, a leer libros de programación que no entendía, y a escribir mis primeras líneas de código."
     },
-    "fourth_p": {
-      "first": "Actualmente estoy desarrollando un programa para interactuar con",
-      "second": "proporcionadas por",
-      "third": "localmente. Tambien me encuentro realizando actualizaciones de algunos proyectos e insvestigando acerca de"
+    "abstract": {
+      "title": "La curiosidad se convirtió en ingeniería.",
+      "text": "Cada proyecto es una oportunidad de transformar ideas abstractas en soluciones concretas que impactan la vida de las personas."
+    },
+    "projects": {
+      "title": "Proyectos",
+      "subtitle": "Una selección de trabajos que representan mi evolución como desarrollador",
+      "viewProject": "Ver proyecto"
+    },
+    "contact": {
+      "title": "Construyamos algo significativo.",
+      "subtitle": "¿Tienes un proyecto en mente? Hablemos.",
+      "email": "Email",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
     }
   },
-  "Landing": {
-    "who_i_am": "Hola, mi nombre es Juan Manuel Vila",
-    "page_description": "Este es mi portfolio, hecho en Argentina con ",
-    "work_name": "Desarrollador FullStack",
-    "loading": "Cargando . . ."
-  },
-  "Contact": {
-    "contact_text": "Contactame!"
-  },
-  "Projects": {
-    "view_more": "Ver más"
-  },
-  "Header": {
-    "go_back": "<- Volver",
+  "Navigation": {
     "home": "Inicio",
-    "about_me": "Sobre mi",
-    "my_work": "Mi trabajo",
-    "contact": "Contacto",
-    "close": "Cerrar",
-    "typography": "Tipografia:",
-    "made_by": "Hecho por:"
+    "projects": "Proyectos",
+    "about": "Sobre mí",
+    "contact": "Contacto"
+  },
+  "Project": {
+    "problem": "El desafío",
+    "solution": "La solución",
+    "stack": "Tecnologías",
+    "gallery": "Galería",
+    "results": "Resultados",
+    "viewLive": "Ver en vivo",
+    "viewCode": "Ver código"
+  },
+  "Meta": {
+    "title": "Juan Manuel Vila - Desarrollador FullStack",
+    "description": "Portfolio de Juan Manuel Vila - Desarrollador FullStack especializado en crear sistemas que resuelven problemas reales."
+  },
+  "Legacy": {
+    "Description": {
+      "title": "Sobre mí",
+      "first_p": "Soy un programador apasionado por usar la tecnología para crear soluciones y herramientas innovadoras. Me considero una persona que disfruta de aprender nuevas tecnologias, herramientas y de encontrar nuevos desafios para resolver. Me entusiasma el hecho de ingresar en algun proyecto desafiante.",
+      "second_p": {
+        "first": "Forjé mis conocimientos en un principio en la",
+        "second": ", dando un salto a la",
+        "third": "Soy un autodidacta nato, y comence aprendiendo de",
+        "fourth": "y"
+      },
+      "third_p": {
+        "first": "Domino lenguajes como",
+        "second": ", en conjunto con",
+        "third": "o",
+        "fourth": "con Express y EJS para SSR. Tambien estoy familiarizado con lo basico de",
+        "fifth": "y me encuentro aprendiendo",
+        "sixth": "Tambien tengo experiencia usando librerias como",
+        "seventh": "y algunos programas como"
+      },
+      "fourth_p": {
+        "first": "Actualmente estoy desarrollando un programa para interactuar con",
+        "second": "proporcionadas por",
+        "third": "localmente. Tambien me encuentro realizando actualizaciones de algunos proyectos e insvestigando acerca de"
+      }
+    },
+    "Landing": {
+      "who_i_am": "Hola, mi nombre es Juan Manuel Vila",
+      "page_description": "Este es mi portfolio, hecho en Argentina con ",
+      "work_name": "Desarrollador FullStack",
+      "loading": "Cargando . . ."
+    },
+    "Contact": {
+      "contact_text": "Contactame!"
+    },
+    "Projects": {
+      "view_more": "Ver más"
+    },
+    "Header": {
+      "go_back": "<- Volver",
+      "home": "Inicio",
+      "about_me": "Sobre mi",
+      "my_work": "Mi trabajo",
+      "contact": "Contacto",
+      "close": "Cerrar",
+      "typography": "Tipografia:",
+      "made_by": "Hecho por:"
+    }
   }
 }

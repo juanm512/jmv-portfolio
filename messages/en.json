@@ -1,48 +1,95 @@
 {
-  "Description": {
-    "title": "About me",
-    "first_p": "I am a programmer passionate about using technology to create innovative solutions and tools. I consider myself a person who enjoys learning new technologies, tools, and finding new challenges to solve. I am excited about the posibility of joining a challenging project.",
-    "second_p": {
-      "first": "I initially gained my knowledge at the",
-      "second": ", then moved on to the",
-      "third": "I am a natural autodidact, and I started learning from",
-      "fourth": "and"
+  "Home": {
+    "hero": {
+      "title": "I build systems that solve real problems.",
+      "subtitle": "FullStack Developer"
     },
-    "third_p": {
-      "first": "My main languages are",
-      "second": ", along with",
-      "third": "or",
-      "fourth": "with Express and EJS for SSR. I am also familiar with basics of",
-      "fifth": "and I am currently learning",
-      "sixth": "Also i've experience with some libraries like",
-      "seventh": "and some programs like"
+    "childhood": {
+      "title": "It all started with a question...",
+      "text": "How do things work? That curiosity led me to disassemble computers, read programming books I didn't understand, and write my first lines of code."
     },
-    "fourth_p": {
-      "first": "I am currently developing a program to interact with",
-      "second": "provided by",
-      "third": "locally. I am also updating some projects and researching about"
+    "abstract": {
+      "title": "Curiosity became engineering.",
+      "text": "Every project is an opportunity to transform abstract ideas into concrete solutions that impact people's lives."
+    },
+    "projects": {
+      "title": "Projects",
+      "subtitle": "A selection of works that represent my evolution as a developer",
+      "viewProject": "View project"
+    },
+    "contact": {
+      "title": "Let's build something meaningful.",
+      "subtitle": "Have a project in mind? Let's talk.",
+      "email": "Email",
+      "github": "GitHub",
+      "linkedin": "LinkedIn"
     }
   },
-  "Landing": {
-    "who_i_am": "Hi, my name is Juan Manuel Vila",
-    "page_description": "This is my portfolio, made from Argentina with ",
-    "work_name": "FullStack Developer",
-    "loading": "Loading . . ."
-  },
-  "Contact": {
-    "contact_text": "Contact me!"
-  },
-  "Projects": {
-    "view_more": "View more"
-  },
-  "Header": {
-    "go_back": "<- Go back",
+  "Navigation": {
     "home": "Home",
-    "about_me": "About me",
-    "my_work": "My work",
-    "contact": "Contact",
-    "close": "Close",
-    "typography": "typography:",
-    "made_by": "made by:"
+    "projects": "Projects",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "Project": {
+    "problem": "The Challenge",
+    "solution": "The Solution",
+    "stack": "Technologies",
+    "gallery": "Gallery",
+    "results": "Results",
+    "viewLive": "View live",
+    "viewCode": "View code"
+  },
+  "Meta": {
+    "title": "Juan Manuel Vila - FullStack Developer",
+    "description": "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems."
+  },
+  "Legacy": {
+    "Description": {
+      "title": "About me",
+      "first_p": "I'm a programmer passionate about using technology to create innovative solutions and tools. I consider myself a person who enjoys learning new technologies, tools and finding new challenges to solve. I'm excited about entering a challenging project.",
+      "second_p": {
+        "first": "I forged my knowledge initially at",
+        "second": ", taking a leap to",
+        "third": "I'm a born self-taught learner, and started learning from",
+        "fourth": "and"
+      },
+      "third_p": {
+        "first": "I master languages like",
+        "second": ", along with",
+        "third": "or",
+        "fourth": "with Express and EJS for SSR. I'm also familiar with the basics of",
+        "fifth": "and I'm currently learning",
+        "sixth": "I also have experience using libraries like",
+        "seventh": "and some programs like"
+      },
+      "fourth_p": {
+        "first": "I'm currently developing a program to interact with",
+        "second": "provided by",
+        "third": "locally. I'm also making updates to some projects and researching about"
+      }
+    },
+    "Landing": {
+      "who_i_am": "Hello, my name is Juan Manuel Vila",
+      "page_description": "This is my portfolio, made in Argentina with ",
+      "work_name": "FullStack Developer",
+      "loading": "Loading . . ."
+    },
+    "Contact": {
+      "contact_text": "Contact me!"
+    },
+    "Projects": {
+      "view_more": "View more"
+    },
+    "Header": {
+      "go_back": "<- Go back",
+      "home": "Home",
+      "about_me": "About me",
+      "my_work": "My work",
+      "contact": "Contact",
+      "close": "Close",
+      "typography": "Typography:",
+      "made_by": "Made by:"
+    }
   }
 }

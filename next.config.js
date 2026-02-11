@@ -1,4 +1,5 @@
 const createNextIntlPlugin = require("next-intl/plugin")
+const withMDX = require("@next/mdx")()
 
 const withNextIntl = createNextIntlPlugin()
 
@@ -9,7 +10,8 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: ["localhost"]
-  }
+  },
+  pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"]
 }
 
-module.exports = withNextIntl(nextConfig)
+module.exports = withNextIntl(withMDX(nextConfig))

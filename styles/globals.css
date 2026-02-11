@@ -2,53 +2,113 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --green-primary: #0f3d2e;
+  --green-accent: #1b5e3c;
+  --green-light: #2e7d57;
+  --green-glow: #00ff9c;
+  --background-dark: #050b08;
+  --background-darker: #020504;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 html,
 body {
-  background: #0d1117;
+  background: var(--background-dark);
   color: #fdfdfd;
   padding: 0;
   margin: 0;
-  font-family: BlinkMacSystemFont, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: var(--font-geist), system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  overflow-x: hidden;
 }
 
+/* Selection color */
+::selection {
+  background: rgba(0, 255, 156, 0.3);
+  color: #fff;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--green-accent);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--green-light);
+}
+
+/* Custom utilities */
+@layer utilities {
+  .text-glow {
+    text-shadow: 0 0 20px rgba(0, 255, 156, 0.5);
+  }
+
+  .bg-vignette {
+    background: radial-gradient(
+      ellipse at center,
+      transparent 0%,
+      rgba(5, 11, 8, 0.8) 70%,
+      rgba(5, 11, 8, 1) 100%
+    );
+  }
+
+  .glass {
+    background: rgba(15, 61, 46, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 156, 0.1);
+  }
+}
+
+/* Legacy burger styles - keep for compatibility */
 .burger {
   width: 22.5px;
   position: relative;
   pointer-events: none;
-
-  &::after,
-  &::before {
-    content: "";
-    height: 1px;
-    width: 100%;
-    background-color: white;
-    position: relative;
-    display: block;
-    transition: all 0.75s cubic-bezier(0.76, 0, 0.24, 1);
-  }
-
-  &::after {
-    top: -4px;
-  }
-
-  &::before {
-    top: 4px;
-  }
 }
 
-.burgerActive {
-  &::after,
-  &::before {
-    background-color: black;
-  }
-  &::after {
-    transform: rotate(45deg);
-    top: -1px;
-  }
+.burger::after,
+.burger::before {
+  content: "";
+  height: 1px;
+  width: 100%;
+  background-color: white;
+  position: relative;
+  display: block;
+  transition: all 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+}
 
-  &::before {
-    transform: rotate(-45deg);
-    top: 1px;
-  }
+.burger::after {
+  top: -4px;
+}
+
+.burger::before {
+  top: 4px;
+}
+
+.burgerActive::after,
+.burgerActive::before {
+  background-color: black;
+}
+
+.burgerActive::after {
+  transform: rotate(45deg);
+  top: -1px;
+}
+
+.burgerActive::before {
+  transform: rotate(-45deg);
+  top: 1px;
 }
