@@ -12,17 +12,17 @@ const LanguageChanger = dynamic(() => import("@/components/Header/LanguageChange
   ssr: false
 })
 
-// Animation variants
+// Animation variants - más rápidas
 const opacity = {
   initial: { opacity: 0 },
-  open: { opacity: 1 },
-  closed: { opacity: 0 }
+  open: { opacity: 1, transition: { duration: 0.15, ease: "easeOut" } },
+  closed: { opacity: 0, transition: { duration: 0.1, ease: "easeIn" } }
 }
 
 const background = {
   initial: { opacity: 0 },
-  open: { opacity: 0.6 },
-  closed: { opacity: 0 }
+  open: { opacity: 0.6, transition: { duration: 0.2 } },
+  closed: { opacity: 0, transition: { duration: 0.15 } }
 }
 
 export default function Header({ lang }) {
@@ -64,15 +64,15 @@ export default function Header({ lang }) {
           variants={opacity}
           initial="initial"
           animate="open"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className={`flex items-center justify-center gap-8 transition-colors duration-300 ${
+          whileHover={{ scale: 1.05, transition: { duration: 0.1 } }}
+          whileTap={{ scale: 0.95, transition: { duration: 0.05 } }}
+          className={`flex items-center justify-center gap-8 transition-colors duration-200 ${
             isActive 
               ? 'bg-green-glow text-background-dark' 
               : 'bg-background-dark/50 backdrop-blur-md text-white border border-green-glow/20 hover:border-green-glow/50'
           }`}
         >
-          <div className="relative flex flex-row-reverse gap-4 px-3 py-2 items-center transition-all duration-300">
+          <div className="relative flex flex-row-reverse gap-4 px-3 py-2 items-center transition-all duration-200">
             <AnimatePresence mode="wait">
               {!isActive ? (
                 <motion.p
@@ -118,15 +118,15 @@ export default function Header({ lang }) {
           variants={opacity}
           initial="initial"
           animate="open"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className={`flex items-center justify-center gap-8 transition-colors duration-300 ${
+          whileHover={{ scale: 1.05, transition: { duration: 0.1 } }}
+          whileTap={{ scale: 0.95, transition: { duration: 0.05 } }}
+          className={`flex items-center justify-center gap-8 transition-colors duration-200 ${
             languageChange 
               ? 'bg-green-glow text-background-dark' 
               : 'bg-background-dark/50 backdrop-blur-md text-white border border-green-glow/20 hover:border-green-glow/50'
           }`}
         >
-          <div className="relative flex flex-row-reverse gap-4 px-3 py-2 items-center transition-all duration-300">
+          <div className="relative flex flex-row-reverse gap-4 px-3 py-2 items-center transition-all duration-200">
             <span className="sr-only">Language change</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -151,7 +151,7 @@ export default function Header({ lang }) {
             </p>
             <p
               className={
-                "sm:hidden flex m-0 text-sm font-semibold transition-transform duration-200" +
+                "sm:hidden flex m-0 text-sm font-semibold transition-transform duration-150" +
                 (languageChange ? " rotate-180" : "")
               }
             >

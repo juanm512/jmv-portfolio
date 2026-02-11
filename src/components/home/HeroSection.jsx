@@ -16,31 +16,41 @@ export default function HeroSection() {
     offset: ["start start", "end start"]
   })
 
-  // Texto se mueve hacia abajo y desaparece
-  const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
-  const textY = useTransform(scrollYProgress, [0, 0.2], [0, 80])
+  // La imagen hace zoom hasta cierto punto (0.6 del scroll), luego se detiene y desvanece
+  const imageScale = useTransform(scrollYProgress, [0, 0.6], [1, 5])
+  const imageOpacity = useTransform(scrollYProgress, [0.5, 0.8], [1, 0])
+  
+  // Texto se mueve hacia abajo y desaparece más rápido
+  const textOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0])
+  const textY = useTransform(scrollYProgress, [0, 0.15], [0, 60])
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[300vh]"
+      className="relative h-[250vh]"
     >
-      {/* Sticky container para la imagen */}
+      {/* Sticky container para la imagen - se suelta después del scroll */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-background-dark">
         {/* Particle Image - Ocupa toda la pantalla */}
-        <div className="absolute inset-0">
+        <motion.div 
+          className="absolute inset-0"
+          style={{
+            scale: imageScale,
+            opacity: imageOpacity
+          }}
+        >
           <ParticleImage
             src="/Ai2.jpg"
             alt="Juan Manuel Vila"
             className="w-full h-full"
-            particleSize={20}
+            particleSize={5} // 1/4 del tamaño anterior
             particleGap={0}
-            vibrateIntensity={0.8}
-            zoomRange={[1, 6]}
-            loadingDelay={0.1}
+            vibrateIntensity={0.4}
+            zoomRange={[1, 1]} // El zoom lo manejamos desde el contenedor padre
+            loadingDelay={0}
             onLoad={() => setImageLoaded(true)}
           />
-        </div>
+        </motion.div>
 
         {/* Vignette */}
         <div className="absolute inset-0 bg-vignette pointer-events-none" />
@@ -61,7 +71,7 @@ export default function HeroSection() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={imageLoaded ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 1.2 }}
+              transition={{ duration: 0.6, delay: 2.2 }}
               className="text-xs md:text-sm font-mono text-green-glow mb-4 tracking-[0.3em] uppercase"
             >
               {t("subtitle")}
@@ -71,7 +81,7 @@ export default function HeroSection() {
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={imageLoaded ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 1, delay: 1.5 }}
+              transition={{ duration: 0.8, delay: 2.5 }}
               className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight"
             >
               <Balancer className="text-white">
@@ -83,7 +93,7 @@ export default function HeroSection() {
             <motion.div
               initial={{ scaleX: 0 }}
               animate={imageLoaded ? { scaleX: 1 } : {}}
-              transition={{ duration: 0.8, delay: 1.9 }}
+              transition={{ duration: 0.6, delay: 2.8 }}
               className="w-24 h-px bg-green-glow mx-auto mt-8"
             />
           </div>
@@ -93,7 +103,7 @@ export default function HeroSection() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={imageLoaded ? { opacity: 1 } : {}}
-          transition={{ delay: 2.2 }}
+          transition={{ delay: 3.2 }}
           className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
           style={{ opacity: textOpacity }}
         >

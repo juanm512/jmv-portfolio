@@ -17,19 +17,20 @@ export default function ChildhoodSection() {
   })
 
   // Crossfade de la imagen
-  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.25, 0.75, 0.9], [0, 1, 1, 0])
+  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.25, 0.7, 0.85], [0, 1, 1, 0])
   
-  // Zoom progresivo
-  const imageScale = useTransform(scrollYProgress, [0.15, 0.85], [1, 5])
+  // Zoom progresivo que se detiene y desvanece
+  const imageScale = useTransform(scrollYProgress, [0.15, 0.6], [1, 4])
+  const imageFinalOpacity = useTransform(scrollYProgress, [0.55, 0.8], [1, 0])
   
   // Texto aparece y desaparece
-  const textOpacity = useTransform(scrollYProgress, [0.2, 0.35, 0.65, 0.8], [0, 1, 1, 0])
+  const textOpacity = useTransform(scrollYProgress, [0.2, 0.35, 0.6, 0.75], [0, 1, 1, 0])
   const textY = useTransform(scrollYProgress, [0.2, 0.35], [50, 0])
 
   return (
     <section
       ref={containerRef}
-      className="relative h-[350vh] -mt-[100vh]"
+      className="relative h-[300vh] -mt-[100vh]"
     >
       {/* Sticky container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-background-dark">
@@ -37,7 +38,7 @@ export default function ChildhoodSection() {
         <motion.div
           className="absolute inset-0"
           style={{ 
-            opacity: imageOpacity,
+            opacity: Math.min(imageOpacity.get(), imageFinalOpacity.get()),
             scale: imageScale
           }}
         >
@@ -45,9 +46,9 @@ export default function ChildhoodSection() {
             src="/Ai2.jpg"
             alt="Childhood memories"
             className="w-full h-full"
-            particleSize={24}
+            particleSize={5} // 1/4 del tamaño
             particleGap={0}
-            vibrateIntensity={1}
+            vibrateIntensity={0.5}
             zoomRange={[1, 1]}
             loadingDelay={0}
             onLoad={() => setImageLoaded(true)}

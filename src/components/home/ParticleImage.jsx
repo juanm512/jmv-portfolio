@@ -3,15 +3,13 @@
 import { useRef, useEffect, useState, useMemo } from "react"
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion"
 
-// Componente individual de partícula rectangular
+// Componente individual de partícula rectangular con color promedio
 function Particle({
   x,
   y,
   width,
   height,
-  imageUrl,
-  totalWidth,
-  totalHeight,
+  color,
   delay,
   isLoaded,
   vibrateIntensity = 0.5
@@ -62,7 +60,7 @@ function Particle({
 
   return (
     <motion.div
-      className="absolute overflow-hidden will-change-transform"
+      className="absolute will-change-transform"
       style={{
         left: x,
         top: y,
@@ -70,6 +68,7 @@ function Particle({
         height,
         x: springX,
         y: springY,
+        backgroundColor: color,
       }}
       initial={{ 
         scale: 0, 
@@ -80,23 +79,37 @@ function Particle({
         opacity: 1
       } : {}}
       transition={{
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1]
+        duration: 0.4,
+        ease: [0, 0.55, 0.45, 1] // ease-out: lento al principio, rápido al final
       }}
     >
-      <div
-        className="absolute inset-0"
-        style={{
-          backgroundImage: `url(${imageUrl})`,
-          backgroundPosition: `${-x}px ${-y}px`,
-          backgroundSize: `${totalWidth}px ${totalHeight}px`,
-          backgroundRepeat: "no-repeat"
-        }}
-      />
       {/* Borde sutil para definir las partículas */}
       <div className="absolute inset-0 border-[0.5px] border-green-glow/5" />
     </motion.div>
   )
+}
+
+// Función para calcular el color promedio de una región de una imagen
+function getAverageColor(imageData, startX, startY, width, height, totalWidth) {
+  let r = 0, g = 0, b = 0
+  let count = 0
+
+  const data = imageData.data
+  const rowLength = totalWidth * 4
+
+  for (let y = startY; y < startY + height && y < imageData.height; y++) {
+    for (let x = startX; x < startX + width && x < imageData.width; x++) {
+      const index = y * rowLength + x * 4
+      r += data[index]
+      g += data[index + 1]
+      b += data[index + 2]
+      count++
+    }
+  }
+
+  if (count === 0) return 'rgb(15, 61, 46)' // color verde por defecto
+
+  return `rgb(${Math.round(r / count)}, ${Math.round(g / count)}, ${Math.round(b / count)})`
 }
 
 // Componente principal de imagen de partículas
@@ -104,9 +117,9 @@ export default function ParticleImage({
   src,
   alt,
   className = "",
-  particleSize = 40,
-  particleGap = 1,
-  vibrateIntensity = 0.8,
+  particleSize = 5, // 1/4 del tamaño anterior (era 20)
+  particleGap = 0,
+  vibrateIntensity = 0.5,
   loadingDelay = 0,
   scrollZoom = true,
   zoomRange = [1, 3],
@@ -117,6 +130,7 @@ export default function ParticleImage({
   const [imageLoaded, setImageLoaded] = useState(false)
   const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 })
   const [isReady, setIsReady] = useState(false)
+  const [particleColors, setParticleColors] = useState([])
   const [viewportSize, setViewportSize] = useState({ width: 1920, height: 1080 })
 
   // Scroll progress para zoom
@@ -144,11 +158,26 @@ export default function ParticleImage({
     return () => window.removeEventListener('resize', updateSize)
   }, [])
 
-  // Precargar imagen para obtener dimensiones
+  // Precargar imagen y calcular colores promedio
   useEffect(() => {
     const img = new window.Image()
+    img.crossOrigin = "anonymous"
     img.src = src
+    
     img.onload = () => {
+      // Crear canvas para extraer colores
+      const canvas = document.createElement('canvas')
+      const ctx = canvas.getContext('2d')
+      
+      // Redimensionar para rendimiento (máximo 200px de ancho)
+      const scaleFactor = Math.min(1, 200 / img.width)
+      canvas.width = img.width * scaleFactor
+      canvas.height = img.height * scaleFactor
+      
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+      
+      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+      
       // Calcular dimensiones para cover
       const imageAspect = img.width / img.height
       const viewportAspect = viewportSize.width / viewportSize.height
@@ -156,32 +185,64 @@ export default function ParticleImage({
       let renderWidth, renderHeight
       
       if (imageAspect > viewportAspect) {
-        // Imagen más ancha que el viewport
         renderHeight = viewportSize.height
         renderWidth = renderHeight * imageAspect
       } else {
-        // Imagen más alta que el viewport
         renderWidth = viewportSize.width
         renderHeight = renderWidth / imageAspect
       }
       
+      // Tamaño de partícula efectivo (1/4 del original)
+      const effectiveSize = Math.max(3, particleSize)
+      
+      // Calcular grid
+      const cols = Math.ceil(renderWidth / effectiveSize)
+      const rows = Math.ceil(renderHeight / effectiveSize)
+      
+      // Calcular colores para cada partícula
+      const colors = []
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          // Mapear coordenadas del grid a la imagen escalada
+          const imgX = Math.floor((col * effectiveSize / renderWidth) * canvas.width)
+          const imgY = Math.floor((row * effectiveSize / renderHeight) * canvas.height)
+          const sampleWidth = Math.max(1, Math.floor(effectiveSize / renderWidth * canvas.width))
+          const sampleHeight = Math.max(1, Math.floor(effectiveSize / renderHeight * canvas.height))
+          
+          const color = getAverageColor(imageData, imgX, imgY, sampleWidth, sampleHeight, canvas.width)
+          colors.push(color)
+        }
+      }
+      
+      setParticleColors(colors)
       setImageDimensions({ width: renderWidth, height: renderHeight })
       setImageLoaded(true)
+      
       setTimeout(() => {
         setIsReady(true)
         onLoad?.()
       }, loadingDelay * 1000)
     }
-  }, [src, loadingDelay, onLoad, viewportSize])
+    
+    img.onerror = () => {
+      // Fallback si la imagen no carga
+      setImageDimensions({ 
+        width: viewportSize.width, 
+        height: viewportSize.height 
+      })
+      setImageLoaded(true)
+      setIsReady(true)
+      onLoad?.()
+    }
+  }, [src, loadingDelay, onLoad, viewportSize, particleSize])
 
   // Generar grid de partículas
   const particles = useMemo(() => {
-    if (!imageLoaded || imageDimensions.width === 0) return []
+    if (!imageLoaded || imageDimensions.width === 0 || particleColors.length === 0) return []
 
     const particlesArray = []
-    const effectiveSize = particleSize + particleGap
+    const effectiveSize = Math.max(3, particleSize)
     
-    // Calcular cuántas partículas caben
     const cols = Math.ceil(imageDimensions.width / effectiveSize)
     const rows = Math.ceil(imageDimensions.height / effectiveSize)
     
@@ -197,17 +258,25 @@ export default function ParticleImage({
     const centerRow = rows / 2
     const maxDistance = Math.sqrt(centerCol * centerCol + centerRow * centerRow)
 
+    // Tiempo total de animación: 2 segundos
+    const totalAnimationTime = 2
+
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
         const x = col * effectiveSize - offsetX
         const y = row * effectiveSize - offsetY
+        const colorIndex = row * cols + col
         
         // Calcular delay basado en distancia al centro (efecto onda desde centro)
         const distance = Math.sqrt(
           Math.pow(col - centerCol, 2) + Math.pow(row - centerRow, 2)
         )
         const normalizedDistance = distance / maxDistance
-        const delay = normalizedDistance * 0.8 + loadingDelay
+        
+        // Ease-out: más lento al inicio (centro), más rápido al final (bordes)
+        // Usamos ease-out curve: 1 - (1 - x)^2
+        const easeOutDelay = 1 - Math.pow(1 - normalizedDistance, 2)
+        const delay = easeOutDelay * totalAnimationTime + loadingDelay
 
         particlesArray.push({
           id: `${row}-${col}`,
@@ -215,15 +284,14 @@ export default function ParticleImage({
           y,
           width: effectiveSize,
           height: effectiveSize,
-          delay,
-          totalWidth: imageDimensions.width,
-          totalHeight: imageDimensions.height
+          color: particleColors[colorIndex] || 'rgb(15, 61, 46)',
+          delay
         })
       }
     }
 
     return particlesArray
-  }, [imageLoaded, imageDimensions, particleSize, particleGap, loadingDelay])
+  }, [imageLoaded, imageDimensions, particleSize, particleColors, loadingDelay])
 
   if (!imageLoaded) {
     return (
@@ -253,7 +321,6 @@ export default function ParticleImage({
             <Particle
               key={particle.id}
               {...particle}
-              imageUrl={src}
               isLoaded={isReady}
               vibrateIntensity={vibrateIntensity}
             />
