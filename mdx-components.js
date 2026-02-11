@@ -28,6 +28,15 @@ export function useMDXComponents(components) {
         className="rounded-lg my-6"
       />
     ),
+    // video: ({ src, alt }) => (
+    //   <
+    //     src={src}
+    //     alt={alt}
+    //     width={800}
+    //     height={600}
+    //     className="rounded-lg my-6"
+    //   />
+    // ), 
     ...components
   }
 }

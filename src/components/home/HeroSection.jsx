@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
-import ParticleImage from "./ParticleImage"
+import ThreeParticleImage from "./ThreeParticleImage"
 
 export default function HeroSection() {
   const containerRef = useRef(null)
@@ -29,9 +29,9 @@ export default function HeroSection() {
       ref={containerRef}
       className="relative h-[250vh]"
     >
-      {/* Sticky container para la imagen - se suelta después del scroll */}
+      {/* Sticky container para la imagen */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-background-dark">
-        {/* Particle Image - Ocupa toda la pantalla */}
+        {/* Three.js Particle Image */}
         <motion.div 
           className="absolute inset-0"
           style={{
@@ -39,28 +39,21 @@ export default function HeroSection() {
             opacity: imageOpacity
           }}
         >
-          <ParticleImage
+          <ThreeParticleImage
             src="/Ai2.jpg"
-            alt="Juan Manuel Vila"
-            className="w-full h-full"
-            particleSize={5} // 1/4 del tamaño anterior
-            particleGap={0}
-            vibrateIntensity={0.4}
-            zoomRange={[1, 1]} // El zoom lo manejamos desde el contenedor padre
+            scrollProgress={scrollYProgress}
+            zoomRange={[1, 1]}
             loadingDelay={0}
             onLoad={() => setImageLoaded(true)}
           />
         </motion.div>
 
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-vignette pointer-events-none" />
-
         {/* Gradient from bottom for text readability */}
-        <div className="absolute bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent pointer-events-none" />
+        <div className="absolute bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent pointer-events-none z-30" />
 
         {/* Texto principal - Posicionado ABAJO */}
         <motion.div
-          className="absolute bottom-0 left-0 right-0 z-10 pb-12 md:pb-20 px-6"
+          className="absolute bottom-0 left-0 right-0 z-40 pb-12 md:pb-20 px-6"
           style={{
             opacity: textOpacity,
             y: textY
@@ -104,7 +97,7 @@ export default function HeroSection() {
           initial={{ opacity: 0 }}
           animate={imageLoaded ? { opacity: 1 } : {}}
           transition={{ delay: 3.2 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-40"
           style={{ opacity: textOpacity }}
         >
           <motion.div
