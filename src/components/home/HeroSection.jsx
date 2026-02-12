@@ -28,9 +28,8 @@ export default function HeroSection() {
 
   // ZOOM más pronunciado y fluido
   // La imagen crece y luego se desvanece
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 0.7], [1, 4, 6])
-  const imageOpacity = useTransform(scrollYProgress, [0.4, 0.65, 0.8], [1, 0.6, 0])
-  const imageY = useTransform(scrollYProgress, [0, 0.5], [0, -100])
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 0.7], [1, 2, 6])
+  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.25, 0.5], [1, 0.2, 0])
   
   // Texto
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
@@ -38,11 +37,8 @@ export default function HeroSection() {
 
   return (
     <section ref={containerRef} className="relative h-[300vh]">
-      {/* FONDO VERDE que se revela al hacer scroll */}
-      <div className="fixed inset-0 bg-gradient-to-b from-background-dark via-green-primary/30 to-background-dark -z-10" />
-      
       {/* Sticky container */}
-      <div className="sticky top-0 h-screen w-full overflow-hidden">
+      <div className="fixed top-0 h-screen w-full">
         {/* Imagen con zoom */}
         {mounted && (
           <motion.div 
@@ -50,13 +46,13 @@ export default function HeroSection() {
             style={{ 
               scale: imageScale,
               opacity: imageOpacity,
-              y: imageY
             }}
           >
             <CanvasParticleImage
               src="/Ai2.jpg"
               onLoad={() => setImageLoaded(true)}
             />
+            
           </motion.div>
         )}
 
@@ -69,9 +65,7 @@ export default function HeroSection() {
           }}
         />
 
-        {/* Gradient para legibilidad del texto */}
-        <div className="absolute bottom-0 left-0 right-0 h-[50vh] bg-gradient-to-t from-background-dark via-background-dark/70 to-transparent pointer-events-none z-30" />
-
+        
         {/* Texto */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 z-40 pb-12 md:pb-24 px-6"
@@ -103,21 +97,6 @@ export default function HeroSection() {
               className="w-24 h-px bg-green-glow mx-auto mt-8"
             />
           </div>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={imageLoaded ? { opacity: 1 } : {}}
-          transition={{ delay: 3.8 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40"
-          style={{ opacity: textOpacity }}
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-px h-12 bg-gradient-to-b from-green-glow/70 to-transparent"
-          />
         </motion.div>
       </div>
     </section>

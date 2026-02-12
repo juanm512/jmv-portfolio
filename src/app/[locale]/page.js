@@ -20,6 +20,9 @@ export default function HomePage({ params: { locale } }) {
   return (
     <main className="bg-background-dark">
       <HeroSection />
+
+      <div className="h-[100vh]"></div>
+
       <ChildhoodSection />
       <AbstractSection />
       <MemoryWall projects={projects} locale={locale} />

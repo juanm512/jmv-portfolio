@@ -189,7 +189,7 @@ export default function CanvasParticleImage({
   }, [isReady, animate])
 
   return (
-    <div className="relative w-full h-full bg-background-dark overflow-hidden">
+    <div className="relative w-full h-full bg-transparent overflow-hidden">
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
