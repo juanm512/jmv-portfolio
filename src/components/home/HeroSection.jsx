@@ -51,7 +51,6 @@ export default function HeroSection() {
               src="/Ai2.jpg"
               onLoad={() => setImageLoaded(true)}
               particleSize={10}
-              vibrateIntensity={0.7}
             />
             
             {/* OPCIÓN 3: CSS Mask (comenta la de arriba y descomenta esta) */}
