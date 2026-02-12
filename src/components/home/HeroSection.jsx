@@ -13,10 +13,10 @@ const CanvasParticleImage = dynamic(
 )
 
 // OPCIÓN 3: CSS Mask (descomenta para usar)
-// const CSSMaskImage = dynamic(
-//   () => import("./CSSMaskImage"),
-//   { ssr: false }
-// )
+const CSSMaskImage = dynamic(
+  () => import("./CSSMaskImage"),
+  { ssr: false }
+)
 
 export default function HeroSection() {
   const containerRef = useRef(null)
@@ -51,7 +51,7 @@ export default function HeroSection() {
               src="/Ai2.jpg"
               onLoad={() => setImageLoaded(true)}
               particleSize={10}
-              vibrateIntensity={0.5}
+              vibrateIntensity={0.7}
             />
             
             {/* OPCIÓN 3: CSS Mask (comenta la de arriba y descomenta esta) */}

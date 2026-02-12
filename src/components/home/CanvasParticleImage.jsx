@@ -6,7 +6,7 @@ export default function CanvasParticleImage({
   src,
   onLoad,
   particleSize = 12,
-  vibrateIntensity = 0.5
+  vibrateIntensity = 1.5
 }) {
   const canvasRef = useRef(null)
   const [particles, setParticles] = useState([])
@@ -38,12 +38,16 @@ export default function CanvasParticleImage({
       const cols = Math.ceil(window.innerWidth / particleSize)
       const rows = Math.ceil(window.innerHeight / particleSize)
       
-      const centerX = cols / 2
-      const centerY = rows / 2
+      // Centro de la pantalla
+      const centerX = (cols * particleSize) / 2
+      const centerY = (rows * particleSize) / 2
       const maxDist = Math.sqrt(centerX * centerX + centerY * centerY)
       
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
+          const x = col * particleSize
+          const y = row * particleSize
+          
           // Mapear a coordenadas de imagen
           const imgX = Math.floor((col / cols) * sampleSize)
           const imgY = Math.floor((row / rows) * sampleSize)
@@ -54,24 +58,24 @@ export default function CanvasParticleImage({
           const g = data[idx + 1]
           const b = data[idx + 2]
           
-          // Distancia al centro para delay
+          // Distancia al centro (0 en centro, 1 en bordes)
           const dist = Math.sqrt(
-            Math.pow(col - centerX, 2) + Math.pow(row - centerY, 2)
+            Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
           )
           const normalizedDist = dist / maxDist
           
-          // Delay: de 0 a 2 segundos, ease-out
+          // Delay para animación desde centro (ease-out)
           const delay = (1 - Math.pow(1 - normalizedDist, 2)) * 2
           
           newParticles.push({
-            x: col * particleSize,
-            y: row * particleSize,
+            x,
+            y,
             size: particleSize,
             color: `rgb(${r},${g},${b})`,
             delay,
             scale: 0,
-            vibeX: 0,
-            vibeY: 0
+            // Guardamos la distancia normalizada para la vibración
+            distFactor: normalizedDist // 0 = centro, 1 = borde
           })
         }
       }
@@ -104,9 +108,11 @@ export default function CanvasParticleImage({
       // Escala desde 0
       const scale = easeProgress
       
-      // Vibración
-      const vibeX = Math.sin(elapsed * 10 + p.x * 0.1) * vibrateIntensity
-      const vibeY = Math.cos(elapsed * 8 + p.y * 0.1) * vibrateIntensity
+      // VIBRACIÓN: Más errática en bordes, menos en centro
+      // distFactor: 0 = centro (sin vibración), 1 = borde (máxima vibración)
+      const baseVibe = Math.sin(elapsed * 10 + p.x * 0.05) * vibrateIntensity
+      const vibeX = baseVibe * p.distFactor
+      const vibeY = Math.cos(elapsed * 8 + p.y * 0.05) * vibrateIntensity * p.distFactor
       
       const drawSize = p.size * scale
       const drawX = p.x + vibeX
