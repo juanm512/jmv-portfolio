@@ -1,76 +1,64 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
+import dynamic from "next/dynamic"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
-import ThreeParticleImage from "./ThreeParticleImage"
+
+const ThreeParticleImage = dynamic(
+  () => import("./ThreeParticleImage"),
+  { ssr: false, loading: () => (
+    <div className="absolute inset-0 bg-background-dark" />
+  )}
+)
 
 export default function ChildhoodSection() {
   const containerRef = useRef(null)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const t = useTranslations("Home.childhood")
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   })
 
-  // Crossfade de la imagen
   const imageOpacity = useTransform(scrollYProgress, [0.1, 0.25, 0.7, 0.85], [0, 1, 1, 0])
-  
-  // Zoom progresivo
   const imageScale = useTransform(scrollYProgress, [0.15, 0.6], [1, 4])
-  
-  // Texto aparece y desaparece
   const textOpacity = useTransform(scrollYProgress, [0.2, 0.35, 0.6, 0.75], [0, 1, 1, 0])
   const textY = useTransform(scrollYProgress, [0.2, 0.35], [50, 0])
 
   return (
-    <section
-      ref={containerRef}
-      className="relative h-[300vh] -mt-[100vh]"
-    >
-      {/* Sticky container */}
+    <section ref={containerRef} className="relative h-[300vh] -mt-[100vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-background-dark">
-        {/* Particle Image con crossfade */}
-        <motion.div
-          className="absolute inset-0"
-          style={{ 
-            opacity: imageOpacity,
-            scale: imageScale
-          }}
-        >
-          <ThreeParticleImage
-            src="/Ai2.jpg"
-            scrollProgress={scrollYProgress}
-            zoomRange={[1, 1]}
-            loadingDelay={0}
-            onLoad={() => setImageLoaded(true)}
-          />
-        </motion.div>
+        {mounted && (
+          <motion.div
+            className="absolute inset-0"
+            style={{ opacity: imageOpacity, scale: imageScale }}
+          >
+            <ThreeParticleImage
+              src="/Ai2.jpg"
+              onLoad={() => setImageLoaded(true)}
+            />
+          </motion.div>
+        )}
 
-        {/* Overlay oscuro para legibilidad */}
         <div className="absolute inset-0 bg-background-dark/30 pointer-events-none z-20" />
-
-        {/* Gradient from bottom */}
         <div className="absolute bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent pointer-events-none z-30" />
 
-        {/* Texto */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 z-40 pb-12 md:pb-20 px-6"
-          style={{
-            opacity: textOpacity,
-            y: textY
-          }}
+          style={{ opacity: textOpacity, y: textY }}
         >
           <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              className="text-2xl md:text-4xl lg:text-5xl font-medium text-white mb-6"
-            >
+            <h2 className="text-2xl md:text-4xl lg:text-5xl font-medium text-white mb-6">
               <Balancer>{t("title")}</Balancer>
-            </motion.h2>
-
+            </h2>
             <p className="text-base md:text-lg text-white/70 leading-relaxed max-w-2xl mx-auto">
               <Balancer>{t("text")}</Balancer>
             </p>

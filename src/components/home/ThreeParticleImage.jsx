@@ -1,247 +1,195 @@
 "use client"
 
 import { useRef, useMemo, useState, useEffect } from "react"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { Canvas, useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 
-// Número máximo de partículas para rendimiento
-const MAX_PARTICLES = 15000
+const PARTICLE_COUNT = 6000
 
-// Geometría de partícula (cuadrado)
-const particleGeometry = new THREE.PlaneGeometry(1, 1)
-
-// Material base
-const createParticleMaterial = () => {
-  return new THREE.ShaderMaterial({
-    uniforms: {
-      uTime: { value: 0 },
-      uProgress: { value: 0 },
-      uCenter: { value: new THREE.Vector2(0.5, 0.5) }
-    },
-    vertexShader: `
-      uniform float uTime;
-      uniform float uProgress;
-      
-      attribute vec3 aColor;
-      attribute float aSize;
-      attribute float aPhase;
-      attribute float aDistance;
-      
-      varying vec3 vColor;
-      varying float vDistance;
-      varying float vAlpha;
-      
-      // Función de ease-out
-      float easeOut(float x) {
-        return 1.0 - pow(1.0 - x, 3.0);
-      }
-      
-      void main() {
-        vColor = aColor;
-        vDistance = aDistance;
-        
-        // Animación de entrada desde el centro
-        float delay = aDistance * 0.8;
-        float localProgress = clamp((uProgress - delay) / 0.2, 0.0, 1.0);
-        localProgress = easeOut(localProgress);
-        
-        // Escala desde 0 hasta tamaño final
-        float scale = localProgress * aSize;
-        
-        // Vibration effect (movimiento microscópico)
-        float vibeX = sin(uTime * 10.0 + aPhase) * 0.3 * (1.0 - aDistance * 0.5);
-        float vibeY = cos(uTime * 8.0 + aPhase) * 0.3 * (1.0 - aDistance * 0.5);
-        
-        vec3 pos = position;
-        pos.x *= scale;
-        pos.y *= scale;
-        pos.x += vibeX;
-        pos.y += vibeY;
-        
-        // Alpha basado en progreso de animación
-        vAlpha = localProgress;
-        
-        vec4 mvPosition = modelViewMatrix * vec4(instanceMatrix[3].xyz + pos, 1.0);
-        gl_Position = projectionMatrix * mvPosition;
-      }
-    `,
-    fragmentShader: `
-      varying vec3 vColor;
-      varying float vDistance;
-      varying float vAlpha;
-      
-      void main() {
-        // Blur en los costados (partículas más lejanas del centro)
-        float blurAmount = smoothstep(0.3, 0.8, vDistance);
-        
-        // Las partículas del centro son más nítidas
-        vec3 finalColor = vColor * (1.0 - blurAmount * 0.4);
-        
-        // Alpha con blur en bordes
-        float alpha = vAlpha * (0.9 - blurAmount * 0.3);
-        
-        gl_FragColor = vec4(finalColor, alpha);
-      }
-    `,
-    transparent: true,
-    depthWrite: false,
-    side: THREE.DoubleSide
-  })
-}
-
-// Componente de partículas
-function Particles({ imageUrl, onLoad, loadingDelay = 0 }) {
+function Particles({ imageUrl, onLoad }) {
   const meshRef = useRef()
-  const materialRef = useRef()
-  const [isReady, setIsReady] = useState(false)
-  const [progress, setProgress] = useState(0)
-  const { viewport } = useThree()
+  const [loaded, setLoaded] = useState(false)
+  const startTime = useRef(Date.now())
   
-  // Cargar imagen y crear partículas
+  // Datos de instancia
+  const { positions, colors, scales, delays } = useMemo(() => {
+    const pos = []
+    const col = []
+    const scl = []
+    const del = []
+    
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      const angle = Math.random() * Math.PI * 2
+      const r = Math.pow(Math.random(), 0.6) * 3
+      
+      pos.push(Math.cos(angle) * r, Math.sin(angle) * r, 0)
+      col.push(1, 1, 1)
+      scl.push(1)
+      del.push(r / 3)
+    }
+    
+    return {
+      positions: new Float32Array(pos),
+      colors: new Float32Array(col),
+      scales: new Float32Array(scl),
+      delays: new Float32Array(del)
+    }
+  }, [])
+  
+  // Cargar colores de imagen
   useEffect(() => {
     const img = new Image()
     img.crossOrigin = "anonymous"
     img.src = imageUrl
     
     img.onload = () => {
-      // Crear canvas pequeño para samplear colores
       const canvas = document.createElement('canvas')
       const ctx = canvas.getContext('2d')
-      const sampleSize = 80 // Tamaño del grid de sampleo
-      canvas.width = sampleSize
-      canvas.height = sampleSize
-      ctx.drawImage(img, 0, 0, sampleSize, sampleSize)
-      const imageData = ctx.getImageData(0, 0, sampleSize, sampleSize)
+      canvas.width = 50
+      canvas.height = 50
+      ctx.drawImage(img, 0, 0, 50, 50)
       
-      // Generar posiciones de partículas con densidad variable
-      const positions = []
-      const colors = []
-      const sizes = []
-      const phases = []
-      const distances = []
+      const data = ctx.getImageData(0, 0, 50, 50).data
+      const newColors = []
       
-      const centerX = 0
-      const centerY = 0
-      const aspectRatio = viewport.width / viewport.height
-      
-      for (let i = 0; i < MAX_PARTICLES; i++) {
-        // Distribución con más densidad en el centro usando distribución normal
-        const angle = Math.random() * Math.PI * 2
-        // Radio con distribución que favorece el centro
-        const r = Math.sqrt(Math.random()) * Math.sqrt(Math.random()) * 0.8
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        const x = positions[i * 3]
+        const y = positions[i * 3 + 1]
         
-        let x = centerX + Math.cos(angle) * r * aspectRatio
-        let y = centerY + Math.sin(angle) * r
+        const imgX = Math.floor(((x / 3 + 1) / 2) * 49)
+        const imgY = Math.floor(((-y / 3 + 1) / 2) * 49)
+        const idx = (Math.max(0, Math.min(49, imgY)) * 50 + Math.max(0, Math.min(49, imgX))) * 4
         
-        // Mapear a coordenadas de imagen
-        const imgX = Math.floor(((x / aspectRatio + 1) / 2) * sampleSize)
-        const imgY = Math.floor(((-y + 1) / 2) * sampleSize)
-        
-        // Obtener color
-        const idx = (Math.max(0, Math.min(sampleSize - 1, imgY)) * sampleSize + Math.max(0, Math.min(sampleSize - 1, imgX))) * 4
-        const rColor = imageData.data[idx] / 255
-        const gColor = imageData.data[idx + 1] / 255
-        const bColor = imageData.data[idx + 2] / 255
-        
-        // Calcular distancia al centro
-        const dist = Math.sqrt(x * x + y * y)
-        
-        // Tamaño variable: más grandes en los costados
-        const sizeBase = 0.008 + dist * 0.025
-        const sizeVariation = (Math.random() - 0.5) * 0.003
-        
-        positions.push(x * viewport.width, y * viewport.height, 0)
-        colors.push(rColor, gColor, bColor)
-        sizes.push(Math.max(0.005, sizeBase + sizeVariation))
-        phases.push(Math.random() * Math.PI * 2)
-        distances.push(dist)
+        newColors.push(data[idx] / 255, data[idx + 1] / 255, data[idx + 2] / 255)
       }
       
-      // Actualizar geometría instanciada
       if (meshRef.current) {
-        const dummy = new THREE.Object3D()
+        meshRef.current.geometry.setAttribute('aColor', new THREE.InstancedBufferAttribute(new Float32Array(newColors), 3))
+        meshRef.current.geometry.attributes.aColor.needsUpdate = true
+      }
+      
+      setLoaded(true)
+      onLoad?.()
+    }
+    
+    img.onerror = () => {
+      setLoaded(true)
+      onLoad?.()
+    }
+  }, [imageUrl, positions, onLoad])
+  
+  // Shader
+  const material = useMemo(() => {
+    return new THREE.ShaderMaterial({
+      uniforms: {
+        uTime: { value: 0 },
+        uProgress: { value: 0 }
+      },
+      vertexShader: `
+        uniform float uTime;
+        uniform float uProgress;
+        attribute vec3 aColor;
+        attribute float aScale;
+        attribute float aDelay;
+        varying vec3 vColor;
+        varying float vBlur;
         
-        for (let i = 0; i < MAX_PARTICLES; i++) {
-          dummy.position.set(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2])
-          dummy.updateMatrix()
-          meshRef.current.setMatrixAt(i, dummy.matrix)
+        float easeOut(float x) {
+          return 1.0 - pow(1.0 - x, 3.0);
         }
         
-        meshRef.current.instanceMatrix.needsUpdate = true
+        void main() {
+          vColor = aColor;
+          
+          float dist = length(position.xy);
+          vBlur = smoothstep(0.8, 3.0, dist);
+          
+          float anim = clamp((uProgress - aDelay) * 1.5, 0.0, 1.0);
+          anim = easeOut(anim);
+          
+          float vibe = sin(uTime * 10.0 + position.x * 5.0) * 0.015;
+          
+          vec3 pos = position;
+          pos.x += vibe;
+          pos.y += cos(uTime * 8.0 + position.y * 5.0) * 0.015;
+          
+          float size = (0.04 + dist * 0.03) * anim;
+          pos.xy *= size;
+          
+          vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
+          gl_Position = projectionMatrix * mvPosition;
+        }
+      `,
+      fragmentShader: `
+        varying vec3 vColor;
+        varying float vBlur;
         
-        // Guardar atributos
-        meshRef.current.geometry.setAttribute('aColor', new THREE.InstancedBufferAttribute(new Float32Array(colors), 3))
-        meshRef.current.geometry.setAttribute('aSize', new THREE.InstancedBufferAttribute(new Float32Array(sizes), 1))
-        meshRef.current.geometry.setAttribute('aPhase', new THREE.InstancedBufferAttribute(new Float32Array(phases), 1))
-        meshRef.current.geometry.setAttribute('aDistance', new THREE.InstancedBufferAttribute(new Float32Array(distances), 1))
-      }
-      
-      setIsReady(true)
-      setTimeout(() => onLoad?.(), loadingDelay * 1000)
+        void main() {
+          vec3 finalColor = vColor * (1.0 - vBlur * 0.6);
+          float alpha = 0.9 - vBlur * 0.5;
+          gl_FragColor = vec4(finalColor, alpha);
+        }
+      `,
+      transparent: true,
+      depthWrite: false
+    })
+  }, [])
+  
+  // Geometría base (cuadrado)
+  const geometry = useMemo(() => {
+    const geo = new THREE.PlaneGeometry(1, 1)
+    geo.setAttribute('aColor', new THREE.InstancedBufferAttribute(colors, 3))
+    geo.setAttribute('aScale', new THREE.InstancedBufferAttribute(scales, 1))
+    geo.setAttribute('aDelay', new THREE.InstancedBufferAttribute(delays, 1))
+    return geo
+  }, [colors, scales, delays])
+  
+  // Instanced mesh
+  const mesh = useMemo(() => {
+    const m = new THREE.InstancedMesh(geometry, material, PARTICLE_COUNT)
+    const dummy = new THREE.Object3D()
+    
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      dummy.position.set(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2])
+      dummy.updateMatrix()
+      m.setMatrixAt(i, dummy.matrix)
     }
-  }, [imageUrl, viewport, onLoad, loadingDelay])
+    
+    m.instanceMatrix.needsUpdate = true
+    return m
+  }, [geometry, material, positions])
   
   // Animación
-  useFrame((state) => {
-    if (materialRef.current) {
-      materialRef.current.uniforms.uTime.value = state.clock.elapsedTime
-      
-      // Animación de progreso de carga (2 segundos)
-      if (isReady && progress < 1) {
-        const newProgress = Math.min(1, progress + 0.016 / 2) // 60fps * 2s
-        setProgress(newProgress)
-        materialRef.current.uniforms.uProgress.value = newProgress
-      }
+  useFrame(() => {
+    if (material) {
+      material.uniforms.uTime.value = Date.now() * 0.001
+      const elapsed = (Date.now() - startTime.current) / 1000
+      material.uniforms.uProgress.value = Math.min(1.5, elapsed / 2)
     }
   })
   
-  const material = useMemo(() => createParticleMaterial(), [])
-  
-  return (
-    <instancedMesh
-      ref={meshRef}
-      args={[particleGeometry, material, MAX_PARTICLES]}
-    />
-  )
+  return <primitive ref={meshRef} object={mesh} />
 }
 
-// Escena
-function Scene({ imageUrl, onLoad, loadingDelay }) {
+function Scene({ imageUrl, onLoad }) {
   return (
     <>
       <ambientLight intensity={1} />
-      <Particles imageUrl={imageUrl} onLoad={onLoad} loadingDelay={loadingDelay} />
+      <Particles imageUrl={imageUrl} onLoad={onLoad} />
     </>
   )
 }
 
-// Componente principal
-export default function ThreeParticleImage({
-  src,
-  className = "",
-  loadingDelay = 0,
-  onLoad,
-  scrollProgress,
-  zoomRange = [1, 3]
-}) {
+export default function ThreeParticleImage({ src, onLoad }) {
   const [isLoaded, setIsLoaded] = useState(false)
-  const containerRef = useRef()
-  
-  // Zoom basado en scroll
-  const scale = useTransform(scrollProgress || 0, [0, 1], zoomRange)
   
   return (
-    <div ref={containerRef} className={`relative w-full h-full ${className}`}>
-      {/* Canvas de Three.js */}
-      <motion.div 
-        className="absolute inset-0"
-        style={{ scale }}
-      >
+    <div className="relative w-full h-full">
+      <div className="absolute inset-0">
         <Canvas
-          camera={{ position: [0, 0, 5], fov: 50 }}
-          gl={{ antialias: false, alpha: true }}
-          dpr={[1, 1.5]} // Limitar DPR para rendimiento
+          camera={{ position: [0, 0, 5], fov: 75 }}
+          gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+          dpr={1}
         >
           <Scene 
             imageUrl={src} 
@@ -249,20 +197,15 @@ export default function ThreeParticleImage({
               setIsLoaded(true)
               onLoad?.()
             }}
-            loadingDelay={loadingDelay}
           />
         </Canvas>
-      </motion.div>
+      </div>
       
-      {/* Overlay mientras carga */}
       {!isLoaded && (
         <div className="absolute inset-0 bg-background-dark flex items-center justify-center z-10">
           <div className="w-8 h-8 border-2 border-green-glow/30 border-t-green-glow rounded-full animate-spin" />
         </div>
       )}
-      
-      {/* Vignette */}
-      <div className="absolute inset-0 bg-vignette pointer-events-none z-20" />
     </div>
   )
 }

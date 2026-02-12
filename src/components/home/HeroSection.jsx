@@ -1,66 +1,71 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef, useState, useEffect } from "react"
+import dynamic from "next/dynamic"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
-import ThreeParticleImage from "./ThreeParticleImage"
+
+// Cargar Three.js dinámicamente sin SSR
+const ThreeParticleImage = dynamic(
+  () => import("./ThreeParticleImage"),
+  { ssr: false, loading: () => (
+    <div className="absolute inset-0 bg-background-dark flex items-center justify-center">
+      <div className="w-8 h-8 border-2 border-green-glow/30 border-t-green-glow rounded-full animate-spin" />
+    </div>
+  )}
+)
 
 export default function HeroSection() {
   const containerRef = useRef(null)
   const [imageLoaded, setImageLoaded] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const t = useTranslations("Home.hero")
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   })
 
-  // La imagen hace zoom hasta cierto punto (0.6 del scroll), luego se detiene y desvanece
   const imageScale = useTransform(scrollYProgress, [0, 0.6], [1, 5])
   const imageOpacity = useTransform(scrollYProgress, [0.5, 0.8], [1, 0])
-  
-  // Texto se mueve hacia abajo y desaparece más rápido
   const textOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0])
   const textY = useTransform(scrollYProgress, [0, 0.15], [0, 60])
 
   return (
-    <section
-      ref={containerRef}
-      className="relative h-[250vh]"
-    >
-      {/* Sticky container para la imagen */}
+    <section ref={containerRef} className="relative h-[250vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-background-dark">
         {/* Three.js Particle Image */}
-        <motion.div 
-          className="absolute inset-0"
-          style={{
-            scale: imageScale,
-            opacity: imageOpacity
-          }}
-        >
-          <ThreeParticleImage
-            src="/Ai2.jpg"
-            scrollProgress={scrollYProgress}
-            zoomRange={[1, 1]}
-            loadingDelay={0}
-            onLoad={() => setImageLoaded(true)}
-          />
-        </motion.div>
+        {mounted && (
+          <motion.div 
+            className="absolute inset-0"
+            style={{ scale: imageScale, opacity: imageOpacity }}
+          >
+            <ThreeParticleImage
+              src="/Ai2.jpg"
+              onLoad={() => setImageLoaded(true)}
+            />
+          </motion.div>
+        )}
 
-        {/* Gradient from bottom for text readability */}
+        {/* Fallback si no carga Three.js */}
+        {!mounted && (
+          <div className="absolute inset-0 bg-background-dark flex items-center justify-center">
+            <div className="text-green-glow/50 text-sm font-mono">Loading...</div>
+          </div>
+        )}
+
         <div className="absolute bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent pointer-events-none z-30" />
 
-        {/* Texto principal - Posicionado ABAJO */}
         <motion.div
           className="absolute bottom-0 left-0 right-0 z-40 pb-12 md:pb-20 px-6"
-          style={{
-            opacity: textOpacity,
-            y: textY
-          }}
+          style={{ opacity: textOpacity, y: textY }}
         >
           <div className="max-w-5xl mx-auto text-center">
-            {/* Subtítulo */}
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={imageLoaded ? { opacity: 1, y: 0 } : {}}
@@ -70,19 +75,15 @@ export default function HeroSection() {
               {t("subtitle")}
             </motion.p>
 
-            {/* Título principal */}
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={imageLoaded ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8, delay: 2.5 }}
               className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight"
             >
-              <Balancer className="text-white">
-                {t("title")}
-              </Balancer>
+              <Balancer className="text-white">{t("title")}</Balancer>
             </motion.h1>
 
-            {/* Línea decorativa */}
             <motion.div
               initial={{ scaleX: 0 }}
               animate={imageLoaded ? { scaleX: 1 } : {}}
@@ -92,12 +93,11 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Indicador de scroll */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={imageLoaded ? { opacity: 1 } : {}}
           transition={{ delay: 3.2 }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-40"
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 z-40"
           style={{ opacity: textOpacity }}
         >
           <motion.div
