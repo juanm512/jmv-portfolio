@@ -5,8 +5,8 @@ import { useRef, useEffect, useState, useCallback } from "react"
 export default function CanvasParticleImage({
   src,
   onLoad,
-  particleSize = 12,
-  vibrateIntensity = 1.5
+  baseSize = 18,
+  vibrateIntensity = 1.2
 }) {
   const canvasRef = useRef(null)
   const [particles, setParticles] = useState([])
@@ -24,8 +24,8 @@ export default function CanvasParticleImage({
     img.src = src
     
     img.onload = () => {
-      // Canvas pequeño para samplear colores
-      const sampleSize = 80
+      // Canvas para samplear colores
+      const sampleSize = 100
       canvas.width = sampleSize
       canvas.height = sampleSize
       ctx.drawImage(img, 0, 0, sampleSize, sampleSize)
@@ -33,51 +33,72 @@ export default function CanvasParticleImage({
       const imageData = ctx.getImageData(0, 0, sampleSize, sampleSize)
       const data = imageData.data
       
-      // Crear partículas
+      // Generar partículas con distribución orgánica (no grid exacto)
       const newParticles = []
-      const cols = Math.ceil(window.innerWidth / particleSize)
-      const rows = Math.ceil(window.innerHeight / particleSize)
-      
-      // Centro de la pantalla
-      const centerX = (cols * particleSize) / 2
-      const centerY = (rows * particleSize) / 2
+      const width = window.innerWidth
+      const height = window.innerHeight
+      const centerX = width / 2
+      const centerY = height / 2
       const maxDist = Math.sqrt(centerX * centerX + centerY * centerY)
       
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
-          const x = col * particleSize
-          const y = row * particleSize
-          
-          // Mapear a coordenadas de imagen
-          const imgX = Math.floor((col / cols) * sampleSize)
-          const imgY = Math.floor((row / rows) * sampleSize)
-          const idx = (imgY * sampleSize + imgX) * 4
-          
-          // Color promedio
-          const r = data[idx]
-          const g = data[idx + 1]
-          const b = data[idx + 2]
-          
-          // Distancia al centro (0 en centro, 1 en bordes)
-          const dist = Math.sqrt(
-            Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
-          )
-          const normalizedDist = dist / maxDist
-          
-          // Delay para animación desde centro (ease-out)
-          const delay = (1 - Math.pow(1 - normalizedDist, 2)) * 2
-          
-          newParticles.push({
-            x,
-            y,
-            size: particleSize,
-            color: `rgb(${r},${g},${b})`,
-            delay,
-            scale: 0,
-            // Guardamos la distancia normalizada para la vibración
-            distFactor: normalizedDist // 0 = centro, 1 = borde
-          })
-        }
+      // Más partículas en el centro, menos en bordes
+      // Usamos distribución polar con densidad variable
+      const totalParticles = 3500
+      
+      for (let i = 0; i < totalParticles; i++) {
+        // Distribución con más densidad en centro
+        const angle = Math.random() * Math.PI * 2
+        // Radio con distribución que favorece el centro (raíz cuadrada de random)
+        const r = Math.sqrt(Math.random()) * maxDist * 1.2 // 1.2 para cubrir bordes
+        
+        // Posición base
+        let x = centerX + Math.cos(angle) * r
+        let y = centerY + Math.sin(angle) * r
+        
+        // Jitter aleatorio para romper el patrón circular
+        x += (Math.random() - 0.5) * baseSize * 2
+        y += (Math.random() - 0.5) * baseSize * 2
+        
+        // Calcular distancia desde centro (0-1)
+        const distFromCenter = Math.sqrt(
+          Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2)
+        ) / maxDist
+        
+        // Mapear a coordenadas de imagen
+        const imgX = Math.floor(((x / width)) * sampleSize)
+        const imgY = Math.floor(((y / height)) * sampleSize)
+        const clampedX = Math.max(0, Math.min(sampleSize - 1, imgX))
+        const clampedY = Math.max(0, Math.min(sampleSize - 1, imgY))
+        const idx = (clampedY * sampleSize + clampedX) * 4
+        
+        // Color
+        const rCol = data[idx]
+        const gCol = data[idx + 1]
+        const bCol = data[idx + 2]
+        
+        // Tamaño variable: más grandes en bordes para overlap
+        // En centro: tamaño base, en bordes: hasta 2x
+        const sizeMultiplier = 1 + distFromCenter * 1.5
+        const size = baseSize * sizeMultiplier
+        
+        // Delay para animación desde centro
+        const delay = distFromCenter * 1.5
+        
+        // Blur amount: más blur en bordes
+        const blur = distFromCenter * 3
+        
+        newParticles.push({
+          x,
+          y,
+          size,
+          color: `rgb(${rCol},${gCol},${bCol})`,
+          delay,
+          distFactor: distFromCenter,
+          blur,
+          scale: 0,
+          // Offset de fase único para vibración
+          phase: Math.random() * Math.PI * 2
+        })
       }
       
       setParticles(newParticles)
@@ -86,7 +107,7 @@ export default function CanvasParticleImage({
     }
     
     img.onerror = () => onLoad?.()
-  }, [src, particleSize, onLoad])
+  }, [src, baseSize, onLoad])
 
   // Animación
   const animate = useCallback(() => {
@@ -98,34 +119,59 @@ export default function CanvasParticleImage({
     
     ctx.clearRect(0, 0, canvas.width, canvas.height)
     
-    particles.forEach(p => {
-      // Calcular progreso de animación
-      const progress = Math.max(0, Math.min(1, (elapsed - p.delay) * 2))
+    // Dibujar partículas de afuera hacia adentro (painter's algorithm)
+    // Ordenar por distancia (mayor distancia primero = dibujar primero)
+    const sortedParticles = [...particles].sort((a, b) => b.distFactor - a.distFactor)
+    
+    sortedParticles.forEach(p => {
+      // Progreso de animación
+      const progress = Math.max(0, Math.min(1, (elapsed - p.delay) * 1.5))
       const easeProgress = 1 - Math.pow(1 - progress, 3)
       
       if (progress <= 0) return
       
-      // Escala desde 0
       const scale = easeProgress
       
-      // VIBRACIÓN: Más errática en bordes, menos en centro
-      // distFactor: 0 = centro (sin vibración), 1 = borde (máxima vibración)
-      const baseVibe = Math.sin(elapsed * 10 + p.x * 0.05) * vibrateIntensity
-      const vibeX = baseVibe * p.distFactor
-      const vibeY = Math.cos(elapsed * 8 + p.y * 0.05) * vibrateIntensity * p.distFactor
+      // Vibración: más en bordes, menos en centro
+      const vibeAmount = vibrateIntensity * p.distFactor
+      const vibeX = Math.sin(elapsed * 8 + p.phase) * vibeAmount
+      const vibeY = Math.cos(elapsed * 6 + p.phase) * vibeAmount
       
       const drawSize = p.size * scale
       const drawX = p.x + vibeX
       const drawY = p.y + vibeY
+      const radius = drawSize / 2
       
+      ctx.beginPath()
+      ctx.arc(drawX, drawY, radius, 0, Math.PI * 2)
       ctx.fillStyle = p.color
-      ctx.fillRect(drawX, drawY, drawSize, drawSize)
+      
+      // Aplicar blur si es necesario
+      if (p.blur > 0) {
+        ctx.filter = `blur(${p.blur}px)`
+      } else {
+        ctx.filter = 'none'
+      }
+      
+      ctx.fill()
+      ctx.filter = 'none' // Reset
     })
+    
+    // Efecto de vignette/blur en bordes (overlay)
+    const gradient = ctx.createRadialGradient(
+      canvas.width / 2, canvas.height / 2, canvas.width * 0.3,
+      canvas.width / 2, canvas.height / 2, canvas.width * 0.8
+    )
+    gradient.addColorStop(0, 'rgba(5, 11, 8, 0)')
+    gradient.addColorStop(0.6, 'rgba(5, 11, 8, 0.3)')
+    gradient.addColorStop(1, 'rgba(5, 11, 8, 0.85)')
+    
+    ctx.fillStyle = gradient
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
     
     animationRef.current = requestAnimationFrame(animate)
   }, [particles, vibrateIntensity])
 
-  // Iniciar animación
   useEffect(() => {
     if (isReady && particles.length > 0) {
       const canvas = canvasRef.current
@@ -147,7 +193,7 @@ export default function CanvasParticleImage({
       <canvas
         ref={canvasRef}
         className="absolute inset-0 w-full h-full"
-        style={{ imageRendering: 'pixelated' }}
+        style={{ imageRendering: 'auto' }}
       />
       
       {!isReady && (
