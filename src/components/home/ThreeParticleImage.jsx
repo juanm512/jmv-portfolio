@@ -4,35 +4,43 @@ import { useRef, useMemo, useState, useEffect } from "react"
 import { Canvas, useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 
-const PARTICLE_COUNT = 6000
+const PARTICLE_COUNT = 4000
 
 function Particles({ imageUrl, onLoad }) {
   const meshRef = useRef()
   const [loaded, setLoaded] = useState(false)
   const startTime = useRef(Date.now())
   
-  // Datos de instancia
-  const { positions, colors, scales, delays } = useMemo(() => {
-    const pos = []
-    const col = []
-    const scl = []
-    const del = []
+  // Generar datos de partículas
+  const particleData = useMemo(() => {
+    const positions = []
+    const colors = []
+    const sizes = []
+    const delays = []
     
     for (let i = 0; i < PARTICLE_COUNT; i++) {
+      // Distribución circular con más densidad en el centro
       const angle = Math.random() * Math.PI * 2
-      const r = Math.pow(Math.random(), 0.6) * 3
+      const r = Math.pow(Math.random(), 0.5) * 2 // Radio máximo 2
       
-      pos.push(Math.cos(angle) * r, Math.sin(angle) * r, 0)
-      col.push(1, 1, 1)
-      scl.push(1)
-      del.push(r / 3)
+      const x = Math.cos(angle) * r
+      const y = Math.sin(angle) * r
+      
+      positions.push(x, y, 0)
+      colors.push(1, 1, 1) // Temporal, se actualiza con la imagen
+      
+      // Tamaño: más grandes en los bordes
+      sizes.push(0.15 + r * 0.1)
+      
+      // Delay para animación desde centro
+      delays.push(r / 2)
     }
     
     return {
-      positions: new Float32Array(pos),
-      colors: new Float32Array(col),
-      scales: new Float32Array(scl),
-      delays: new Float32Array(del)
+      positions: new Float32Array(positions),
+      colors: new Float32Array(colors),
+      sizes: new Float32Array(sizes),
+      delays: new Float32Array(delays)
     }
   }, [])
   
@@ -53,19 +61,30 @@ function Particles({ imageUrl, onLoad }) {
       const newColors = []
       
       for (let i = 0; i < PARTICLE_COUNT; i++) {
-        const x = positions[i * 3]
-        const y = positions[i * 3 + 1]
+        const x = particleData.positions[i * 3]
+        const y = particleData.positions[i * 3 + 1]
         
-        const imgX = Math.floor(((x / 3 + 1) / 2) * 49)
-        const imgY = Math.floor(((-y / 3 + 1) / 2) * 49)
-        const idx = (Math.max(0, Math.min(49, imgY)) * 50 + Math.max(0, Math.min(49, imgX))) * 4
+        // Mapear posición a coordenadas de imagen
+        const imgX = Math.floor(((x / 2 + 1) / 2) * 49)
+        const imgY = Math.floor(((-y / 2 + 1) / 2) * 49)
         
-        newColors.push(data[idx] / 255, data[idx + 1] / 255, data[idx + 2] / 255)
+        const clampedX = Math.max(0, Math.min(49, imgX))
+        const clampedY = Math.max(0, Math.min(49, imgY))
+        
+        const idx = (clampedY * 50 + clampedX) * 4
+        
+        newColors.push(
+          data[idx] / 255,
+          data[idx + 1] / 255,
+          data[idx + 2] / 255
+        )
       }
       
+      // Actualizar atributo de color
       if (meshRef.current) {
-        meshRef.current.geometry.setAttribute('aColor', new THREE.InstancedBufferAttribute(new Float32Array(newColors), 3))
-        meshRef.current.geometry.attributes.aColor.needsUpdate = true
+        const geometry = meshRef.current.geometry
+        geometry.setAttribute('color', new THREE.InstancedBufferAttribute(new Float32Array(newColors), 3))
+        geometry.attributes.color.needsUpdate = true
       }
       
       setLoaded(true)
@@ -76,9 +95,19 @@ function Particles({ imageUrl, onLoad }) {
       setLoaded(true)
       onLoad?.()
     }
-  }, [imageUrl, positions, onLoad])
+  }, [imageUrl, particleData, onLoad])
   
-  // Shader
+  // Crear geometría
+  const geometry = useMemo(() => {
+    const geo = new THREE.PlaneGeometry(1, 1)
+    geo.setAttribute('position', new THREE.BufferAttribute(particleData.positions, 3))
+    geo.setAttribute('color', new THREE.InstancedBufferAttribute(particleData.colors, 3))
+    geo.setAttribute('size', new THREE.InstancedBufferAttribute(particleData.sizes, 1))
+    geo.setAttribute('delay', new THREE.InstancedBufferAttribute(particleData.delays, 1))
+    return geo
+  }, [particleData])
+  
+  // Material con shader
   const material = useMemo(() => {
     return new THREE.ShaderMaterial({
       uniforms: {
@@ -86,35 +115,37 @@ function Particles({ imageUrl, onLoad }) {
         uProgress: { value: 0 }
       },
       vertexShader: `
+        attribute vec3 color;
+        attribute float size;
+        attribute float delay;
+        varying vec3 vColor;
+        varying float vDist;
         uniform float uTime;
         uniform float uProgress;
-        attribute vec3 aColor;
-        attribute float aScale;
-        attribute float aDelay;
-        varying vec3 vColor;
-        varying float vBlur;
         
         float easeOut(float x) {
           return 1.0 - pow(1.0 - x, 3.0);
         }
         
         void main() {
-          vColor = aColor;
+          vColor = color;
+          vDist = length(position.xy);
           
-          float dist = length(position.xy);
-          vBlur = smoothstep(0.8, 3.0, dist);
-          
-          float anim = clamp((uProgress - aDelay) * 1.5, 0.0, 1.0);
+          // Animación de entrada
+          float anim = clamp((uProgress - delay) * 2.0, 0.0, 1.0);
           anim = easeOut(anim);
           
-          float vibe = sin(uTime * 10.0 + position.x * 5.0) * 0.015;
+          // Vibración sutil
+          float vx = sin(uTime * 8.0 + position.x * 10.0) * 0.01;
+          float vy = cos(uTime * 6.0 + position.y * 10.0) * 0.01;
           
           vec3 pos = position;
-          pos.x += vibe;
-          pos.y += cos(uTime * 8.0 + position.y * 5.0) * 0.015;
+          pos.x += vx;
+          pos.y += vy;
           
-          float size = (0.04 + dist * 0.03) * anim;
-          pos.xy *= size;
+          // Escalar desde 0 hasta tamaño final
+          float finalSize = size * anim;
+          pos.xy *= finalSize;
           
           vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
           gl_Position = projectionMatrix * mvPosition;
@@ -122,42 +153,41 @@ function Particles({ imageUrl, onLoad }) {
       `,
       fragmentShader: `
         varying vec3 vColor;
-        varying float vBlur;
+        varying float vDist;
         
         void main() {
-          vec3 finalColor = vColor * (1.0 - vBlur * 0.6);
-          float alpha = 0.9 - vBlur * 0.5;
+          // Blur en bordes
+          float blur = smoothstep(1.0, 2.0, vDist);
+          vec3 finalColor = vColor * (1.0 - blur * 0.4);
+          float alpha = 0.95 - blur * 0.3;
+          
           gl_FragColor = vec4(finalColor, alpha);
         }
       `,
       transparent: true,
-      depthWrite: false
+      depthWrite: false,
+      side: THREE.DoubleSide
     })
   }, [])
   
-  // Geometría base (cuadrado)
-  const geometry = useMemo(() => {
-    const geo = new THREE.PlaneGeometry(1, 1)
-    geo.setAttribute('aColor', new THREE.InstancedBufferAttribute(colors, 3))
-    geo.setAttribute('aScale', new THREE.InstancedBufferAttribute(scales, 1))
-    geo.setAttribute('aDelay', new THREE.InstancedBufferAttribute(delays, 1))
-    return geo
-  }, [colors, scales, delays])
-  
-  // Instanced mesh
-  const mesh = useMemo(() => {
-    const m = new THREE.InstancedMesh(geometry, material, PARTICLE_COUNT)
-    const dummy = new THREE.Object3D()
-    
-    for (let i = 0; i < PARTICLE_COUNT; i++) {
-      dummy.position.set(positions[i * 3], positions[i * 3 + 1], positions[i * 3 + 2])
-      dummy.updateMatrix()
-      m.setMatrixAt(i, dummy.matrix)
+  // Crear instanced mesh
+  useEffect(() => {
+    if (meshRef.current && geometry) {
+      const dummy = new THREE.Object3D()
+      
+      for (let i = 0; i < PARTICLE_COUNT; i++) {
+        dummy.position.set(
+          particleData.positions[i * 3],
+          particleData.positions[i * 3 + 1],
+          particleData.positions[i * 3 + 2]
+        )
+        dummy.updateMatrix()
+        meshRef.current.setMatrixAt(i, dummy.matrix)
+      }
+      
+      meshRef.current.instanceMatrix.needsUpdate = true
     }
-    
-    m.instanceMatrix.needsUpdate = true
-    return m
-  }, [geometry, material, positions])
+  }, [geometry, particleData])
   
   // Animación
   useFrame(() => {
@@ -168,7 +198,14 @@ function Particles({ imageUrl, onLoad }) {
     }
   })
   
-  return <primitive ref={meshRef} object={mesh} />
+  if (!geometry) return null
+  
+  return (
+    <instancedMesh
+      ref={meshRef}
+      args={[geometry, material, PARTICLE_COUNT]}
+    />
+  )
 }
 
 function Scene({ imageUrl, onLoad }) {
@@ -184,12 +221,16 @@ export default function ThreeParticleImage({ src, onLoad }) {
   const [isLoaded, setIsLoaded] = useState(false)
   
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full bg-background-dark">
       <div className="absolute inset-0">
         <Canvas
-          camera={{ position: [0, 0, 5], fov: 75 }}
-          gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
-          dpr={1}
+          camera={{ position: [0, 0, 2.5], fov: 55 }}
+          gl={{ 
+            antialias: true, 
+            alpha: false,
+            powerPreference: "high-performance"
+          }}
+          dpr={[1, 1.5]}
         >
           <Scene 
             imageUrl={src} 

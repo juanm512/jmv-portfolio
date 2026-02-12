@@ -6,15 +6,17 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
 
-// Cargar Three.js dinámicamente sin SSR
-const ThreeParticleImage = dynamic(
-  () => import("./ThreeParticleImage"),
-  { ssr: false, loading: () => (
-    <div className="absolute inset-0 bg-background-dark flex items-center justify-center">
-      <div className="w-8 h-8 border-2 border-green-glow/30 border-t-green-glow rounded-full animate-spin" />
-    </div>
-  )}
+// OPCIÓN 2: Canvas 2D (descomenta para usar)
+const CanvasParticleImage = dynamic(
+  () => import("./CanvasParticleImage"),
+  { ssr: false }
 )
+
+// OPCIÓN 3: CSS Mask (descomenta para usar)
+// const CSSMaskImage = dynamic(
+//   () => import("./CSSMaskImage"),
+//   { ssr: false }
+// )
 
 export default function HeroSection() {
   const containerRef = useRef(null)
@@ -39,24 +41,25 @@ export default function HeroSection() {
   return (
     <section ref={containerRef} className="relative h-[250vh]">
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-background-dark">
-        {/* Three.js Particle Image */}
         {mounted && (
           <motion.div 
             className="absolute inset-0"
             style={{ scale: imageScale, opacity: imageOpacity }}
           >
-            <ThreeParticleImage
+            {/* OPCIÓN 2: Canvas 2D */}
+            <CanvasParticleImage
               src="/Ai2.jpg"
               onLoad={() => setImageLoaded(true)}
+              particleSize={10}
+              vibrateIntensity={0.5}
             />
+            
+            {/* OPCIÓN 3: CSS Mask (comenta la de arriba y descomenta esta) */}
+            {/* <CSSMaskImage
+              src="/Ai2.jpg"
+              onLoad={() => setImageLoaded(true)}
+            /> */}
           </motion.div>
-        )}
-
-        {/* Fallback si no carga Three.js */}
-        {!mounted && (
-          <div className="absolute inset-0 bg-background-dark flex items-center justify-center">
-            <div className="text-green-glow/50 text-sm font-mono">Loading...</div>
-          </div>
         )}
 
         <div className="absolute bottom-0 left-0 right-0 h-[60vh] bg-gradient-to-t from-background-dark via-background-dark/80 to-transparent pointer-events-none z-30" />

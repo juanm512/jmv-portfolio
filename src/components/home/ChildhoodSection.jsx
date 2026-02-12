@@ -6,11 +6,9 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
 
-const ThreeParticleImage = dynamic(
-  () => import("./ThreeParticleImage"),
-  { ssr: false, loading: () => (
-    <div className="absolute inset-0 bg-background-dark" />
-  )}
+const CanvasParticleImage = dynamic(
+  () => import("./CanvasParticleImage"),
+  { ssr: false }
 )
 
 export default function ChildhoodSection() {
@@ -41,9 +39,11 @@ export default function ChildhoodSection() {
             className="absolute inset-0"
             style={{ opacity: imageOpacity, scale: imageScale }}
           >
-            <ThreeParticleImage
+            <CanvasParticleImage
               src="/Ai2.jpg"
               onLoad={() => setImageLoaded(true)}
+              particleSize={10}
+              vibrateIntensity={0.5}
             />
           </motion.div>
         )}
