@@ -160,14 +160,14 @@ export default function AbstractSection() {
   return (
     <section
       ref={containerRef}
-      className="relative h-[100vh] w-full"
+      className="relative h-[100vh] w-full px-2"
     >
       {/* Connection lines */}
       <motion.div
         style={{ opacity: bgOpacity, visibility: isInView ? 'visible' : 'hidden' }}
         className="fixed inset-0 pointer-events-none"
       >
-        <ConnectionLines />
+        {/* <ConnectionLines /> */}
       </motion.div>
 
       {/* Floating nodes */}
@@ -179,7 +179,10 @@ export default function AbstractSection() {
       </motion.div>
 
       {/* Central glow */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-glow/5 rounded-full blur-[120px] pointer-events-none" style={{ visibility: isInView ? 'visible' : 'hidden' }} />
+      <motion.div 
+        className="fixed top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-glow/5 rounded-full blur-[120px] pointer-events-none" 
+        style={{ visibility: isInView ? 'visible' : 'hidden', opacity: bgOpacity }}
+      />
 
       {/* Grid pattern */}
       <div
@@ -196,13 +199,15 @@ export default function AbstractSection() {
 
       {/* Content — sticky centered */}
       <div className="fixed top-0 w-full h-screen flex items-center justify-center z-10" style={{ visibility: isInView ? 'visible' : 'hidden' }}>
-        <div className="max-w-3xl mx-auto w-full">
+        <div className="max-w-3xl mx-auto w-full px-2">
           {/* Title */}
           <motion.h2
             className="text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-4"
             style={{ opacity: titleOpacity, y: titleY }}
           >
+            <Balancer>
             {t("title")}
+            </Balancer>
           </motion.h2>
 
           {/* Subtitle */}

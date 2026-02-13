@@ -33,6 +33,11 @@ export default function HeroSection() {
     disperseRef.current = latest
   })
 
+  const [isInView, setIsInView] = useState(true)
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setIsInView(latest < 0.99)
+  })
+
   // ZOOM más pronunciado y fluido
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 0.75], [1, 2, 6])
   const imageOpacity = useTransform(scrollYProgress, [0.1, 0.5, 0.75], [1, 0.2, 0])
@@ -47,7 +52,7 @@ export default function HeroSection() {
   return (
     <section ref={containerRef} className="relative h-[300vh]">
       {/* Sticky container */}
-      <div className="fixed top-0 h-screen w-full">
+      <div className="fixed top-0 h-screen w-full" style={{ visibility: isInView ? 'visible' : 'hidden' }}>
         {/* Imagen con zoom */}
         {mounted && (
           <motion.div 
@@ -58,11 +63,21 @@ export default function HeroSection() {
             }}
           >
             <CanvasParticleImage
-              src="/Ai2.jpg"
+              src="/Landing.png"
               disperseProgressRef={disperseRef}
+              baseParticleSize={15}
+              maxGridParticles={3500}
+              extraOnCenter={300}
               onLoad={() => setImageLoaded(true)}
+              paused={!isInView}
             />
-            
+            {/* Vignette overlay */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "radial-gradient(ellipse at center, transparent 20%, transparent 40%, rgba(5,11,8,0.3) 60%, rgba(5,11,8,0.7) 80%, rgba(5,11,8,0.92) 100%)"
+              }}
+            />
           </motion.div>
         )}
 

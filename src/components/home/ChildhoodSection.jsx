@@ -29,7 +29,7 @@ export default function ChildhoodSection() {
   })
 
   // INVERSE disperse: starts at 1 (dispersed), goes to 0 (assembled)
-  const disperseMotion = useTransform(scrollYProgress, [0.05, 0.15, 0.35, 0.95], [1, 0.6, 0, 1])
+  const disperseMotion = useTransform(scrollYProgress, [0.05, 0.15, 0.25, 0.45, 0.75, 0.95], [1, 0.25, 0, 0, 0.25, 1])
 
   useMotionValueEvent(disperseMotion, "change", (latest) => {
     disperseRef.current = latest
@@ -66,14 +66,14 @@ export default function ChildhoodSection() {
   const overlayOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.8, 0.95], [0, 0.5, 0.6, 0.9])
 
   return (
-    <section ref={containerRef} className="relative h-[350vh]">
+    <section ref={containerRef} className="relative h-[400vh]">
       <div
         className="fixed top-0 h-screen w-full"
         style={{ visibility: isInView ? 'visible' : 'hidden' }}
       >
         {/* Particle Image */}
         {mounted && (
-          <motion.div
+           <motion.div
             className="absolute inset-0 flex items-center justify-center"
             style={{
               scale: imageScale,
@@ -84,9 +84,17 @@ export default function ChildhoodSection() {
               src="/5.jpg"
               baseParticleSize={15}
               maxGridParticles={3500}
-              extraOnCenter={1000}
+              extraOnCenter={600}
               disperseProgressRef={disperseRef}
               onLoad={() => setImageLoaded(true)}
+              paused={!isInView}
+            />
+            {/* Vignette overlay — CSS instead of canvas-drawn */}
+            <div
+              className="absolute inset-0 pointer-events-none"
+              style={{
+                background: "radial-gradient(ellipse at center, transparent 20%, transparent 40%, rgba(5,11,8,0.3) 60%, rgba(5,11,8,0.7) 80%, rgba(5,11,8,0.92) 100%)"
+              }}
             />
           </motion.div>
         )}

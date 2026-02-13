@@ -22,7 +22,7 @@ export default function HomePage({ params: { locale } }) {
       <HeroSection />
       <div className="h-[50vh]"></div>
       <ChildhoodSection />
-      <div className="h-[50vh]"></div>
+      <div className="h-[100vh]"></div>
       <AbstractSection />
       <div className="h-[150vh]"></div>
       <MemoryWall projects={projects} locale={locale} />
