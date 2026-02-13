@@ -139,13 +139,13 @@ export default function AbstractSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full overflow-hidden bg-background-dark"
+      className="relative min-h-screen w-full"
     >
       {/* Background gradient */}
-      <motion.div
+      {/* <motion.div
         style={{ opacity: bgOpacity }}
         className="absolute inset-0 bg-gradient-to-b from-background-dark via-green-primary/10 to-background-dark"
-      />
+      /> */}
 
       {/* Connection lines */}
       <motion.div
@@ -196,7 +196,7 @@ export default function AbstractSection() {
       </div>
 
       {/* Bottom vignette for transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background-dark to-transparent pointer-events-none" />
+      {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background-dark to-transparent pointer-events-none" /> */}
     </section>
   )
 }

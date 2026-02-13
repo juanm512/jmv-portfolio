@@ -6,7 +6,10 @@
     },
     "childhood": {
       "title": "It all started with a question...",
-      "text": "How do things work? That curiosity led me to disassemble computers, read programming books I didn't understand, and write my first lines of code."
+      "subtitle": "The first steps",
+      "text_1": "How do things work? That curiosity led me to disassemble computers, read programming books I didn't understand, and write my first lines of code. Every error was a discovery, every blue screen a lesson.",
+      "text_2": "Over time, that obsession with understanding became the ability to build. I went from copying tutorials to designing my own solutions, from solving small problems to tackling real challenges that impact real people.",
+      "text_3": "Today, every project is an extension of that same curiosity. The difference is that now I have the tools, the experience, and the discipline to turn ideas into systems that work — and that matter."
     },
     "abstract": {
       "title": "Curiosity became engineering.",

@@ -105,11 +105,11 @@ export default function MemoryWall({ projects, locale }) {
     <section
       id="projects"
       ref={containerRef}
-      className="relative py-32 bg-background-dark overflow-hidden"
+      className="relative py-32 overflow-hidden h-[350vh]"
     >
       {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background-dark via-green-primary/5 to-background-dark" />
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-glow/20 to-transparent" />
+      {/* <div className="absolute inset-0 bg-gradient-to-b from-background-dark via-green-primary/5 to-background-dark" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-glow/20 to-transparent" /> */}
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
         {/* Header */}
@@ -139,7 +139,7 @@ export default function MemoryWall({ projects, locale }) {
       </div>
 
       {/* Bottom transition */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background-dark to-transparent pointer-events-none" />
+      {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background-dark to-transparent pointer-events-none" /> */}
     </section>
   )
 }

@@ -6,7 +6,10 @@
     },
     "childhood": {
       "title": "Todo comenzó con una pregunta...",
-      "text": "¿Cómo funcionan las cosas? Esa curiosidad me llevó a desarmar computadoras, a leer libros de programación que no entendía, y a escribir mis primeras líneas de código."
+      "subtitle": "Los primeros pasos",
+      "text_1": "¿Cómo funcionan las cosas? Esa curiosidad me llevó a desarmar computadoras, a leer libros de programación que no entendía, y a escribir mis primeras líneas de código. Cada error era un descubrimiento, cada pantalla azul una lección.",
+      "text_2": "Con el tiempo, esa obsesión por entender se transformó en la capacidad de construir. Pasé de copiar tutoriales a diseñar mis propias soluciones, de resolver problemas pequeños a enfrentar desafíos reales que impactan a personas reales.",
+      "text_3": "Hoy, cada proyecto es una extensión de esa misma curiosidad. La diferencia es que ahora tengo las herramientas, la experiencia y la disciplina para convertir ideas en sistemas que funcionan — y que importan."
     },
     "abstract": {
       "title": "La curiosidad se convirtió en ingeniería.",
