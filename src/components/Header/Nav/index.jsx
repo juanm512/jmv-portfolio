@@ -42,23 +42,29 @@ export default function Index({ setActiveFalse }) {
       initial="initial"
       animate="enter"
       exit="exit"
-      className="overflow-hidden"
+      className="overflow-hidden mt-3"
     >
-      <div className="flex">
-        <div className="mb-0 justify-between">
-          <Body
-            setActiveFalse={setActiveFalse}
-            links={links}
+      <nav
+        role="navigation"
+        aria-label="Main menu"
+        className="rounded-2xl bg-background-dark/95 backdrop-blur-xl border border-white/10 shadow-2xl shadow-black/40 p-6"
+      >
+        <div className="flex">
+          <div className="mb-0 justify-between flex-1">
+            <Body
+              setActiveFalse={setActiveFalse}
+              links={links}
+              selectedLink={selectedLink}
+              setSelectedLink={setSelectedLink}
+            />
+            <Footer />
+          </div>
+          <Image
+            src={links[selectedLink.index].src}
             selectedLink={selectedLink}
-            setSelectedLink={setSelectedLink}
           />
-          <Footer />
         </div>
-        <Image
-          src={links[selectedLink.index].src}
-          selectedLink={selectedLink}
-        />
-      </div>
+      </nav>
     </motion.div>
   )
 }

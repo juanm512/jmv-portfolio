@@ -1,16 +1,14 @@
 import { translate } from "../../animation"
 import { motion } from "framer-motion"
 import { useTranslations } from "next-intl"
-import Link from "next/link"
-import Image from "next/image"
 
 export default function Footer() {
   const t = useTranslations("Header")
   return (
-    <div className="flex w-full items-end flex-wrap text-md uppercase mt-10">
-      <ul className="w-1/2 mt-3 overflow-hidden list-none p-0">
+    <div className="flex w-full items-end flex-wrap text-md uppercase mt-10 gap-6">
+      <ul className="mt-3 overflow-hidden list-none p-0">
         <motion.li
-          className="text-slate-700"
+          className="text-white/40 text-sm"
           custom={[0.3, 0]}
           variants={translate}
           initial="initial"
@@ -20,9 +18,9 @@ export default function Footer() {
           <span>{t("made_by")}</span> Juan Manuel Vila
         </motion.li>
       </ul>
-      <ul>
+      <ul className="list-none p-0">
         <motion.li
-          className="text-slate-700"
+          className="text-white/40 text-sm"
           custom={[0.3, 0]}
           variants={translate}
           initial="initial"
