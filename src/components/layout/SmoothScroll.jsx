@@ -11,8 +11,8 @@ export default function SmoothScroll({ children }) {
       orientation: "vertical",
       gestureOrientation: "vertical",
       smoothWheel: true,
-      wheelMultiplier: 1.2,
-      touchMultiplier: 2,
+      wheelMultiplier: 1.5,
+      touchMultiplier: 1.75,
     })
 
     function raf(time) {

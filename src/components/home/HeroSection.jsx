@@ -6,8 +6,8 @@ import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-mot
 import { useTranslations } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
 
-const CanvasParticleImage = dynamic(
-  () => import("./CanvasParticleImage"),
+const ThreeParticleImage = dynamic(
+  () => import("./ThreeParticleImage"),
   { ssr: false }
 )
 
@@ -40,7 +40,7 @@ export default function HeroSection() {
 
   // ZOOM más pronunciado y fluido
   const imageScale = useTransform(scrollYProgress, [0, 0.5, 0.75], [1, 2, 6])
-  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.5, 0.75], [1, 0.2, 0])
+  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.75, 1], [1, 0.75, 0])
   
   // Texto
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
@@ -58,16 +58,16 @@ export default function HeroSection() {
           <motion.div 
             className="absolute inset-0 flex items-center justify-center"
             style={{ 
-              scale: imageScale,
+              // scale: imageScale,
               opacity: imageOpacity,
             }}
           >
-            <CanvasParticleImage
+            <ThreeParticleImage
               src="/Landing.png"
               disperseProgressRef={disperseRef}
-              baseParticleSize={15}
-              maxGridParticles={3500}
-              extraOnCenter={300}
+              baseParticleSize={10}
+              maxGridParticles={7500}
+              extraOnCenter={2500}
               onLoad={() => setImageLoaded(true)}
               paused={!isInView}
             />

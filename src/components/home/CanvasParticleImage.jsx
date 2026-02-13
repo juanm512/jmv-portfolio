@@ -256,11 +256,12 @@ export default function CanvasParticleImage({
     const centerX = cw / 2
     const centerY = ch / 2
 
-    const baseAlpha = 0.96 * (1 - disperseProgress * 0.7)
-    const disperseFactor =
-      disperseProgress > 0 ? disperseProgress * disperseProgress * disperseProgress * 0.5 + disperseProgress * 0.5 : 0
-
+    const baseAlpha = 0.96
     const STRIDE = 5
+
+    // disperseProgress: 0 = fully assembled, 1 = fully exited
+    // Exit animation: particles scale down to 0 with stagger (edges first, center last)
+    const exitProgress = disperseProgress
 
     // Render particles
     const useFillRect = isMobileRef.current
@@ -275,35 +276,29 @@ export default function CanvasParticleImage({
           const py = floats[off + 1]
           const pSize = floats[off + 2]
           const pDelay = floats[off + 3]
+          const pDist = floats[off + 4]  // 0..1 from center
 
+          // Entrance animation
           const rawProgress = (elapsed - pDelay) * 0.8
           if (rawProgress <= 0.001) continue
-          const progress = rawProgress > 1 ? 1 : rawProgress
-          const easeProgress = 1 - (1 - progress) * (1 - progress)
-          const scale = easeProgress * (1 - disperseProgress * 0.5)
+          const entranceProgress = rawProgress > 1 ? 1 : rawProgress
+          const entranceEase = 1 - (1 - entranceProgress) * (1 - entranceProgress)
 
-          let disperseX = 0
-          let disperseY = 0
-          if (disperseFactor > 0.001) {
-            let dx = px - centerX
-            let dy = py - centerY
-            let dist = Math.sqrt(dx * dx + dy * dy)
-            if (dist < 1) {
-              const angle = (indices[j] * 2.399) % (Math.PI * 2)
-              dx = Math.cos(angle)
-              dy = Math.sin(angle)
-              dist = 1
-            }
-            const invDist = 1 / dist
-            const maxDisperse = dist * 1.5 + 300 * disperseFactor
-            disperseX = dx * invDist * maxDisperse * disperseFactor
-            disperseY = dy * invDist * maxDisperse * disperseFactor
+          // Exit animation: edges exit first (pDist=1 → immediate), center last (pDist=0 → delayed)
+          let exitScale = 1
+          if (exitProgress > 0.001) {
+            // Map exitProgress to per-particle exit: outer particles exit earlier
+            const particleExitStart = (1 - pDist) * 0.6  // center starts at 0.6, edges at 0
+            const particleExitProgress = Math.max(0, (exitProgress - particleExitStart) / (1 - particleExitStart))
+            exitScale = 1 - (particleExitProgress > 1 ? 1 : particleExitProgress)
+            exitScale = exitScale * exitScale  // ease out
+            if (exitScale < 0.01) continue  // Skip invisible particles
           }
 
-          const diameter = pSize * scale
+          const diameter = pSize * entranceEase * exitScale
           if (diameter > 0.8) {
             const half = diameter / 2
-            ctx.fillRect(px + disperseX - half, py + disperseY - half, diameter, diameter)
+            ctx.fillRect(px - half, py - half, diameter, diameter)
           }
         }
       }
@@ -319,34 +314,25 @@ export default function CanvasParticleImage({
           const py = floats[off + 1]
           const pSize = floats[off + 2]
           const pDelay = floats[off + 3]
+          const pDist = floats[off + 4]
 
           const rawProgress = (elapsed - pDelay) * 0.8
           if (rawProgress <= 0.001) continue
-          const progress = rawProgress > 1 ? 1 : rawProgress
-          const easeProgress = 1 - (1 - progress) * (1 - progress)
-          const scale = easeProgress * (1 - disperseProgress * 0.5)
+          const entranceProgress = rawProgress > 1 ? 1 : rawProgress
+          const entranceEase = 1 - (1 - entranceProgress) * (1 - entranceProgress)
 
-          let disperseX = 0
-          let disperseY = 0
-          if (disperseFactor > 0.001) {
-            let dx = px - centerX
-            let dy = py - centerY
-            let dist = Math.sqrt(dx * dx + dy * dy)
-            if (dist < 1) {
-              const angle = (indices[j] * 2.399) % (Math.PI * 2)
-              dx = Math.cos(angle)
-              dy = Math.sin(angle)
-              dist = 1
-            }
-            const invDist = 1 / dist
-            const maxDisperse = dist * 1.5 + 300 * disperseFactor
-            disperseX = dx * invDist * maxDisperse * disperseFactor
-            disperseY = dy * invDist * maxDisperse * disperseFactor
+          let exitScale = 1
+          if (exitProgress > 0.001) {
+            const particleExitStart = (1 - pDist) * 0.6
+            const particleExitProgress = Math.max(0, (exitProgress - particleExitStart) / (1 - particleExitStart))
+            exitScale = 1 - (particleExitProgress > 1 ? 1 : particleExitProgress)
+            exitScale = exitScale * exitScale
+            if (exitScale < 0.01) continue
           }
 
-          const diameter = pSize * scale
+          const diameter = pSize * entranceEase * exitScale
           if (diameter > 0.8) {
-            ctx.drawImage(sprite, px + disperseX - diameter / 2, py + disperseY - diameter / 2, diameter, diameter)
+            ctx.drawImage(sprite, px - diameter / 2, py - diameter / 2, diameter, diameter)
           }
         }
       }
