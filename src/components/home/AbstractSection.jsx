@@ -1,7 +1,7 @@
 "use client"
 
-import { useRef, useEffect, useState } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { useRef, useEffect, useState, useCallback } from "react"
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
 
@@ -34,7 +34,6 @@ function ConnectionLines() {
         </linearGradient>
       </defs>
 
-      {/* Animated paths */}
       <motion.path
         d="M0,300 Q400,100 800,300 T1600,300"
         fill="none"
@@ -125,6 +124,7 @@ function FloatingNodes() {
 
 export default function AbstractSection() {
   const containerRef = useRef(null)
+  const [isInView, setIsInView] = useState(false)
   const t = useTranslations("Home.abstract")
 
   const { scrollYProgress } = useScroll({
@@ -132,44 +132,60 @@ export default function AbstractSection() {
     offset: ["start end", "end start"]
   })
 
-  const textOpacity = useTransform(scrollYProgress, [0.2, 0.4], [0, 1])
-  const textY = useTransform(scrollYProgress, [0.2, 0.4], [50, 0])
-  const bgOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1])
+  const bgOpacity = useTransform(scrollYProgress, [0 , 0.25, 0.5, 0.75, 1], [0, 0, 1, 0.5, 0])
+
+  // Hide fixed layers when section is not in view
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setIsInView(latest > 0.01 && latest < 0.99)
+  })
+
+  // Title
+  const titleOpacity = useTransform(scrollYProgress, [0.15, 0.25, 0.8, 0.9], [0, 1, 1, 0])
+  const titleY = useTransform(scrollYProgress, [0.15, 0.25], [50, 0])
+
+  // Subtitle
+  const subtitleOpacity = useTransform(scrollYProgress, [0.2, 0.3, 0.78, 0.88], [0, 1, 1, 0])
+  const subtitleY = useTransform(scrollYProgress, [0.2, 0.3], [30, 0])
+
+  // Text paragraphs — staggered
+  const text1Opacity = useTransform(scrollYProgress, [0.25, 0.35, 0.75, 0.85], [0, 1, 1, 0])
+  const text1Y = useTransform(scrollYProgress, [0.25, 0.35], [25, 0])
+
+  const text2Opacity = useTransform(scrollYProgress, [0.3, 0.4, 0.72, 0.82], [0, 1, 1, 0])
+  const text2Y = useTransform(scrollYProgress, [0.3, 0.4], [25, 0])
+
+  const text3Opacity = useTransform(scrollYProgress, [0.35, 0.45, 0.7, 0.8], [0, 1, 1, 0])
+  const text3Y = useTransform(scrollYProgress, [0.35, 0.45], [25, 0])
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen w-full"
+      className="relative h-[100vh] w-full"
     >
-      {/* Background gradient */}
-      {/* <motion.div
-        style={{ opacity: bgOpacity }}
-        className="absolute inset-0 bg-gradient-to-b from-background-dark via-green-primary/10 to-background-dark"
-      /> */}
-
       {/* Connection lines */}
       <motion.div
-        style={{ opacity: bgOpacity }}
-        className="absolute inset-0"
+        style={{ opacity: bgOpacity, visibility: isInView ? 'visible' : 'hidden' }}
+        className="fixed inset-0 pointer-events-none"
       >
         <ConnectionLines />
       </motion.div>
 
       {/* Floating nodes */}
       <motion.div
-        style={{ opacity: bgOpacity }}
-        className="absolute inset-0"
+        style={{ opacity: bgOpacity, visibility: isInView ? 'visible' : 'hidden' }}
+        className="fixed inset-0 pointer-events-none"
       >
         <FloatingNodes />
       </motion.div>
 
       {/* Central glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-glow/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-glow/5 rounded-full blur-[120px] pointer-events-none" style={{ visibility: isInView ? 'visible' : 'hidden' }} />
 
       {/* Grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.03]"
+        className="fixed inset-0 opacity-[0.03] pointer-events-none"
         style={{
+          visibility: isInView ? 'visible' : 'hidden',
           backgroundImage: `
             linear-gradient(rgba(0,255,156,0.5) 1px, transparent 1px),
             linear-gradient(90deg, rgba(0,255,156,0.5) 1px, transparent 1px)
@@ -178,25 +194,54 @@ export default function AbstractSection() {
         }}
       />
 
-      {/* Content */}
-      <div className="relative z-10 min-h-screen flex items-center justify-center px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.div
-            style={{ opacity: textOpacity, y: textY }}
+      {/* Content — sticky centered */}
+      <div className="fixed top-0 w-full h-screen flex items-center justify-center z-10" style={{ visibility: isInView ? 'visible' : 'hidden' }}>
+        <div className="max-w-3xl mx-auto w-full">
+          {/* Title */}
+          <motion.h2
+            className="text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-4"
+            style={{ opacity: titleOpacity, y: titleY }}
           >
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-medium text-white mb-8">
-              <Balancer>{t("title")}</Balancer>
-            </h2>
+            {t("title")}
+          </motion.h2>
 
-            <p className="text-lg md:text-xl text-white/70 leading-relaxed max-w-2xl mx-auto">
-              <Balancer>{t("text")}</Balancer>
-            </p>
-          </motion.div>
+          {/* Subtitle */}
+          <motion.p
+            className="text-xs md:text-sm font-mono text-green-glow mb-8 tracking-[0.2em] uppercase"
+            style={{ opacity: subtitleOpacity, y: subtitleY }}
+          >
+            {t("subtitle")}
+          </motion.p>
+
+          {/* Divider */}
+          <motion.div
+            className="w-16 h-px bg-green-glow/50 mb-8"
+            style={{ opacity: subtitleOpacity }}
+          />
+
+          {/* Extended text paragraphs */}
+          <motion.p
+            className="text-base md:text-lg text-white/75 leading-relaxed mb-5"
+            style={{ opacity: text1Opacity, y: text1Y }}
+          >
+            {t("text_1")}
+          </motion.p>
+
+          <motion.p
+            className="text-base md:text-lg text-white/75 leading-relaxed mb-5"
+            style={{ opacity: text2Opacity, y: text2Y }}
+          >
+            {t("text_2")}
+          </motion.p>
+
+          <motion.p
+            className="text-base md:text-lg text-white/70 leading-relaxed"
+            style={{ opacity: text3Opacity, y: text3Y }}
+          >
+            {t("text_3")}
+          </motion.p>
         </div>
       </div>
-
-      {/* Bottom vignette for transition */}
-      {/* <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background-dark to-transparent pointer-events-none" /> */}
     </section>
   )
 }

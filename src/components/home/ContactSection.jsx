@@ -101,10 +101,10 @@ export default function ContactSection() {
     <section
       id="contact"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center bg-background-dark overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-glow/5 rounded-full blur-[150px] pointer-events-none" />
+      {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-green-glow/5 rounded-full blur-[150px] pointer-events-none" /> */}
 
       {/* Content */}
       <motion.div
@@ -157,7 +157,7 @@ export default function ContactSection() {
       </motion.div>
 
       {/* Decorative elements */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-glow/20 to-transparent" />
+      {/* <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-green-glow/20 to-transparent" /> */}
     </section>
   )
 }

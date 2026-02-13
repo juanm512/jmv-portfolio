@@ -15,6 +15,7 @@ export default function ChildhoodSection() {
   const containerRef = useRef(null)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [isInView, setIsInView] = useState(false)
   const disperseRef = useRef(1) // Start fully dispersed
   const t = useTranslations("Home.childhood")
 
@@ -32,6 +33,11 @@ export default function ChildhoodSection() {
 
   useMotionValueEvent(disperseMotion, "change", (latest) => {
     disperseRef.current = latest
+  })
+
+  // Hide fixed layer when section is not in view
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    setIsInView(latest > 0.01 && latest < 0.99)
   })
 
   // Image: fade in as particles assemble, hold, then fade out at end
@@ -61,7 +67,10 @@ export default function ChildhoodSection() {
 
   return (
     <section ref={containerRef} className="relative h-[350vh]">
-      <div className="fixed top-0 h-screen w-full">
+      <div
+        className="fixed top-0 h-screen w-full"
+        style={{ visibility: isInView ? 'visible' : 'hidden' }}
+      >
         {/* Particle Image */}
         {mounted && (
           <motion.div

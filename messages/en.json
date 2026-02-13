@@ -13,7 +13,10 @@
     },
     "abstract": {
       "title": "Curiosity became engineering.",
-      "text": "Every project is an opportunity to transform abstract ideas into concrete solutions that impact people's lives."
+      "subtitle": "Current learning & growth",
+      "text_1": "I'm currently deepening my understanding of software architecture, design patterns, and building scalable systems. Every project is an opportunity to apply new knowledge and challenge what I think I know.",
+      "text_2": "I'm exploring technologies like applied artificial intelligence, 3D processing on the web, and modern infrastructure tooling. I'm interested in understanding not just how to use the tools, but why they work the way they do.",
+      "text_3": "I firmly believe a good developer never stops learning. Technology evolves constantly, and keeping up isn't just a professional necessity — it's what makes this work genuinely exciting."
     },
     "projects": {
       "title": "Projects",

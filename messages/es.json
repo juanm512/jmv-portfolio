@@ -13,7 +13,10 @@
     },
     "abstract": {
       "title": "La curiosidad se convirtió en ingeniería.",
-      "text": "Cada proyecto es una oportunidad de transformar ideas abstractas en soluciones concretas que impactan la vida de las personas."
+      "subtitle": "Actualidad y aprendizaje",
+      "text_1": "Actualmente me encuentro profundizando en arquitectura de software, patrones de diseño y desarrollo de sistemas escalables. Cada proyecto es una oportunidad para aplicar nuevos conocimientos y desafiar lo que creo saber.",
+      "text_2": "Estoy explorando tecnologías como inteligencia artificial aplicada, procesamiento 3D en la web, y herramientas de infraestructura moderna. Me interesa entender no solo cómo usar las herramientas, sino por qué funcionan de la manera en que lo hacen.",
+      "text_3": "Creo firmemente que un buen desarrollador nunca deja de aprender. La tecnología evoluciona constantemente, y mantenerse al día no es solo una necesidad profesional — es lo que hace que este trabajo sea genuinamente emocionante."
     },
     "projects": {
       "title": "Proyectos",

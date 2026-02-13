@@ -24,7 +24,7 @@ export default function HomePage({ params: { locale } }) {
       <ChildhoodSection />
       <div className="h-[50vh]"></div>
       <AbstractSection />
-      <div className="h-[50vh]"></div>
+      <div className="h-[150vh]"></div>
       <MemoryWall projects={projects} locale={locale} />
       <div className="h-[50vh]"></div>
       <ContactSection />
