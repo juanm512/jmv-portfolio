@@ -4,6 +4,8 @@ import { GeistSans } from "geist/font/sans"
 import { NextIntlClientProvider, useMessages } from "next-intl"
 
 import Header from "@/components/layout/Header"
+import SmoothScroll from "@/components/layout/SmoothScroll"
+import CustomCursor from "@/components/layout/CustomCursor"
 
 const kodeMono = localFont({
   src: "../../../styles/Kode_Mono/KodeMono-VariableFont_wght.ttf",
@@ -88,8 +90,11 @@ export default function LocaleLayout({ children, params: { locale } }) {
       </head>
       <body className="relative font-sans w-full min-h-screen p-0 m-0 overflow-x-hidden bg-background-dark text-white">
         <NextIntlClientProvider messages={messages}>
-          <Header lang={locale} />
-          {children}
+          <SmoothScroll>
+            <CustomCursor />
+            <Header lang={locale} />
+            {children}
+          </SmoothScroll>
         </NextIntlClientProvider>
       </body>
     </html>

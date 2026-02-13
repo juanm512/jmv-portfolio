@@ -15,6 +15,8 @@ export default function CanvasParticleImage({
   src,
   onLoad,
   baseParticleSize = 20,
+  maxGridParticles = 2200,
+  extraOnCenter = 500,
   disperseProgressRef,
 }) {
   const canvasRef = useRef(null)
@@ -40,7 +42,7 @@ export default function CanvasParticleImage({
 
     img.onload = () => {
       // Smaller sample for faster pixel reads
-      const sampleWidth = 80
+      const sampleWidth = 800
       const sampleHeight = Math.floor(
         sampleWidth * (img.height / img.width)
       )
@@ -78,6 +80,8 @@ export default function CanvasParticleImage({
         const delay = 0.2 + distFromCenter * 2.0
         const colorKey = quantizeColor(r, g, b)
 
+        // if ( colorKey === 0 ) return
+
         newParticles.push({
           x: finalX,
           y: finalY,
@@ -99,7 +103,7 @@ export default function CanvasParticleImage({
       // PASS 1: Grid base — skip more at edges to leave room for center detail
       const cols = Math.ceil(width / baseParticleSize)
       const rows = Math.ceil(height / baseParticleSize)
-      const GRID_MAX = 2200
+      const GRID_MAX = maxGridParticles
 
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
@@ -115,18 +119,18 @@ export default function CanvasParticleImage({
 
           // Skip more particles at the edges
           if (distFromCenter > 0.4) {
-            const skipChance = ((distFromCenter - 0.4) / 0.6) * 0.9
+            const skipChance = ((distFromCenter - 0.4) / 0.6) * 0.95
             if (Math.random() < skipChance) continue
           }
 
-          const size = baseParticleSize * (0.75 + Math.random() * 0.5)
+          const size = baseParticleSize * (0.7 + Math.random() * 0.3)
           pushParticle(x, y, size, distFromCenter)
         }
         if (newParticles.length >= GRID_MAX) break
       }
 
       // PASS 2: Extra detail in center — 400 smaller particles for sharpness
-      const CENTER_EXTRA = 400
+      const CENTER_EXTRA = extraOnCenter
       const centerRadius = Math.min(width, height) * 0.4
       for (let i = 0; i < CENTER_EXTRA; i++) {
         const angle = Math.random() * Math.PI * 2

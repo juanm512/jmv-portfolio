@@ -102,7 +102,7 @@ function ProjectPoster({ project, index, locale, totalCount }) {
         style={{ scale, opacity, x, y, rotateY, rotateZ, filter }}
         className="w-full max-w-2xl mx-auto"
       >
-        <Link href={`/${locale}/projects/${project.slug}`} className="group block">
+        <Link href={`/${locale}/projects/${project.slug}`} className="group block" data-cursor="View">
           <div
             ref={innerRef}
             onMouseMove={handleMouseMove}

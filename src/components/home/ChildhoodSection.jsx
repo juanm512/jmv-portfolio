@@ -81,7 +81,10 @@ export default function ChildhoodSection() {
             }}
           >
             <CanvasParticleImage
-              src="/Ai2.jpg"
+              src="/5.jpg"
+              baseParticleSize={15}
+              maxGridParticles={3500}
+              extraOnCenter={1000}
               disperseProgressRef={disperseRef}
               onLoad={() => setImageLoaded(true)}
             />
