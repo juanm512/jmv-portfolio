@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from "react"
 import dynamic from "next/dynamic"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
 
@@ -15,6 +15,7 @@ export default function HeroSection() {
   const containerRef = useRef(null)
   const [imageLoaded, setImageLoaded] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const disperseRef = useRef(0)
   const t = useTranslations("Home.hero")
 
   useEffect(() => {
@@ -25,15 +26,23 @@ export default function HeroSection() {
     target: containerRef,
     offset: ["start start", "end start"]
   })
+  const disperseMotion = useTransform(scrollYProgress, [0, 0.1, 0.3, 0.75], [0, 0, 0.8, 1])
+
+  // Update ref directly — no setState, no re-render
+  useMotionValueEvent(disperseMotion, "change", (latest) => {
+    disperseRef.current = latest
+  })
 
   // ZOOM más pronunciado y fluido
-  // La imagen crece y luego se desvanece
-  const imageScale = useTransform(scrollYProgress, [0, 0.5, 0.7], [1, 2, 6])
-  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.25, 0.5], [1, 0.2, 0])
+  const imageScale = useTransform(scrollYProgress, [0, 0.5, 0.75], [1, 2, 6])
+  const imageOpacity = useTransform(scrollYProgress, [0.1, 0.5, 0.75], [1, 0.2, 0])
   
   // Texto
   const textOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0])
   const textY = useTransform(scrollYProgress, [0, 0.2], [0, 80])
+
+  // Green overlay opacity — extracted from inline JSX
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.3, 1])
 
   return (
     <section ref={containerRef} className="relative h-[300vh]">
@@ -50,6 +59,7 @@ export default function HeroSection() {
           >
             <CanvasParticleImage
               src="/Ai2.jpg"
+              disperseProgressRef={disperseRef}
               onLoad={() => setImageLoaded(true)}
             />
             
@@ -61,7 +71,7 @@ export default function HeroSection() {
           className="absolute inset-0 pointer-events-none"
           style={{
             background: `radial-gradient(ellipse at center, transparent 0%, rgba(15, 61, 46, 0.3) 100%)`,
-            opacity: useTransform(scrollYProgress, [0, 0.5], [0.3, 1])
+            opacity: overlayOpacity
           }}
         />
 
