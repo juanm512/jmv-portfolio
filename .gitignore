@@ -34,3 +34,26 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+.unlighthouse/localhost/473e/index.html
+.unlighthouse/localhost/473e/assets/index.a00ed98e.js
+.unlighthouse/localhost/473e/assets/index.ef53fc93.css
+.unlighthouse/localhost/473e/assets/lighthouse.fbx
+.unlighthouse/localhost/473e/assets/logo-dark.svg
+.unlighthouse/localhost/473e/assets/logo-light.svg
+.unlighthouse/localhost/473e/assets/logo.svg
+.unlighthouse/localhost/473e/assets/payload.js
+.unlighthouse/localhost/473e/reports/es/full-screenshot.jpeg
+.unlighthouse/localhost/473e/reports/es/lighthouse.html
+.unlighthouse/localhost/473e/reports/es/lighthouse.json
+.unlighthouse/localhost/473e/reports/es/payload.html
+.unlighthouse/localhost/473e/reports/es/screenshot.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/0.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/1.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/2.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/3.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/4.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/5.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/6.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/7.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/8.jpeg
+.unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/9.jpeg

@@ -16,28 +16,28 @@ export async function generateStaticParams() {
   return params
 }
 
-export async function generateMetadata({ params }) {
-  const project = getProjectBySlug(params.slug)
+export async function generateMetadata({ params: { slug, locale } }) {
+  const project = getProjectBySlug(slug, locale)
 
   if (!project) {
     return {
-      title: "Project Not Found"
+      title: "Project Not Found",
     }
   }
 
   return {
-    title: project.title,
-    description: project.description
+    title: `${project.title} | Juan Manuel Vila`,
+    description: project.description,
   }
 }
 
-export default function Project({ params }) {
-  unstable_setRequestLocale(params.locale)
-  const project = getProjectBySlug(params.slug)
+export default function Project({ params: { slug, locale } }) {
+  unstable_setRequestLocale(locale)
+  const project = getProjectBySlug(slug, locale)
 
   if (!project) {
     notFound()
   }
 
-  return <ProjectPage project={project} locale={params.locale} />
+  return <ProjectPage project={project} />
 }

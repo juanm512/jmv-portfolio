@@ -6,6 +6,9 @@ import { motion, AnimatePresence } from "framer-motion"
 export default function CustomCursor() {
   const cursorRef = useRef({ x: 0, y: 0 })
   const [pos, setPos] = useState({ x: -100, y: -100 })
+  /* eslint-disable @next/next/no-img-element */
+  const [cursorType, setCursorType] = useState("text") // "text" | "image"
+  const [cursorImage, setCursorImage] = useState("")
   const [isHovering, setIsHovering] = useState(false)
   const [hoverText, setHoverText] = useState("")
   const [isVisible, setIsVisible] = useState(false)
@@ -38,6 +41,13 @@ export default function CustomCursor() {
       if (target) {
         setIsHovering(true)
         setHoverText(target.getAttribute("data-cursor") || "")
+        
+        const type = target.getAttribute("data-cursor-type") || "text"
+        setCursorType(type)
+        
+        if (type === "image") {
+          setCursorImage(target.getAttribute("data-cursor-image") || "")
+        }
       }
     }
 
@@ -46,6 +56,8 @@ export default function CustomCursor() {
       if (target) {
         setIsHovering(false)
         setHoverText("")
+        setCursorType("text")
+        setCursorImage("")
       }
     }
 
@@ -65,6 +77,13 @@ export default function CustomCursor() {
 
   if (!isVisible) return null
 
+  // Size calculation
+  let size = 32
+  if (isHovering) {
+    if (cursorType === "image") size = 120 // Larger for images
+    else size = 80 // Normal hover
+  }
+
   return (
     <>
       {/* Hide default cursor */}
@@ -79,6 +98,7 @@ export default function CustomCursor() {
         className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference"
         style={{
           transform: `translate3d(${pos.x - 4}px, ${pos.y - 4}px, 0)`,
+          opacity: cursorType === "image" ? 0 : 1 // Hide dot when showing image
         }}
       >
         <div
@@ -97,27 +117,40 @@ export default function CustomCursor() {
         }}
       >
         <div
-          className="flex items-center justify-center rounded-full border transition-all duration-300 ease-out"
+          className="flex items-center justify-center rounded-full border transition-all duration-300 ease-out overflow-hidden"
           style={{
-            width: isHovering ? 80 : 32,
-            height: isHovering ? 80 : 32,
-            marginLeft: isHovering ? -40 : -16,
-            marginTop: isHovering ? -40 : -16,
+            width: size,
+            height: size,
+            marginLeft: -size / 2,
+            marginTop: -size / 2,
             borderColor: isHovering ? "rgba(0,255,156,0.6)" : "rgba(255,255,255,0.3)",
-            backgroundColor: isHovering ? "rgba(0,255,156,0.1)" : "transparent",
+            backgroundColor: cursorType === "image" ? "rgba(0,0,0,0.8)" : (isHovering ? "rgba(0,255,156,0.1)" : "transparent"),
             backdropFilter: isHovering ? "blur(4px)" : "none",
           }}
         >
-          <AnimatePresence>
-            {isHovering && hoverText && (
-              <motion.span
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.5 }}
-                className="text-[10px] font-mono text-green-glow uppercase tracking-wider whitespace-nowrap"
-              >
-                {hoverText}
-              </motion.span>
+          <AnimatePresence mode="wait">
+            {isHovering && (
+              cursorType === "image" && cursorImage ? (
+                <motion.img
+                  key="cursor-image"
+                  src={cursorImage}
+                  alt="cursor"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.8 }}
+                  className="w-1/2 h-1/2 object-contain"
+                />
+              ) : hoverText ? (
+                <motion.span
+                  key="cursor-text"
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.5 }}
+                  className="text-[10px] font-mono text-green-glow uppercase tracking-wider whitespace-nowrap"
+                >
+                  {hoverText}
+                </motion.span>
+              ) : null
             )}
           </AnimatePresence>
         </div>

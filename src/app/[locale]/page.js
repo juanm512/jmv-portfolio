@@ -15,7 +15,7 @@ export const metadata = {
 
 export default function HomePage({ params: { locale } }) {
   unstable_setRequestLocale(locale)
-  const projects = getAllProjects()
+  const projects = getAllProjects(locale)
 
   return (
     <main className="bg-background-dark">

@@ -115,9 +115,9 @@ function ProjectPoster({ project, index, locale, totalCount }) {
           >
             {/* Image */}
             <div className="relative aspect-[16/10] overflow-hidden">
-              {project.image ? (
+              {project.hero?.src ? (
                 <Image
-                  src={project.image}
+                  src={project.hero.src}
                   alt={project.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -201,7 +201,7 @@ export default function MemoryWall({ projects, locale }) {
 
   return (
     <section
-      id="projects"
+      id="my_work"
       ref={containerRef}
       className="relative"
       style={{ perspective: "1200px" }}

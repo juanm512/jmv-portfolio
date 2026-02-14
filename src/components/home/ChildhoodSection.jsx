@@ -62,11 +62,11 @@ export default function ChildhoodSection() {
   const text3Opacity = useTransform(scrollYProgress, [0.48, 0.56, 0.72, 0.80], [0, 1, 1, 0])
   const text3Y = useTransform(scrollYProgress, [0.48, 0.56], [25, 0])
 
-  // Overlay intensifies
-  const overlayOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.8, 0.95], [0, 0.5, 0.6, 0.9])
+  // Overlay intensifies - made darker (0.8 -> 0.9)
+  const overlayOpacity = useTransform(scrollYProgress, [0.1, 0.3, 0.8, 0.95], [0, 0.8, 0.9, 1])
 
   return (
-    <section ref={containerRef} className="relative h-[400vh]">
+    <section id="about_me" ref={containerRef} className="relative h-[400vh]">
       <div
         className="fixed top-0 h-screen w-full"
         style={{ visibility: isInView ? 'visible' : 'hidden' }}
@@ -99,15 +99,15 @@ export default function ChildhoodSection() {
           </motion.div>
         )}
 
-        {/* Dark overlay that intensifies for text readability */}
+        {/* Dark overlay that intensifies for text readability - Made darker */}
         <motion.div
           className="absolute inset-0 pointer-events-none z-10"
           style={{
             background: `linear-gradient(
               to top,
-              rgba(5, 11, 8, 0.95) 0%,
-              rgba(5, 11, 8, 0.7) 30%,
-              rgba(5, 11, 8, 0.3) 55%,
+              rgba(5, 11, 8, 0.98) 0%,
+              rgba(5, 11, 8, 0.8) 40%,
+              rgba(5, 11, 8, 0.4) 65%,
               transparent 100%
             )`,
             opacity: overlayOpacity
@@ -118,7 +118,7 @@ export default function ChildhoodSection() {
         <motion.div
           className="absolute inset-0 pointer-events-none z-10"
           style={{
-            background: `radial-gradient(ellipse at center, transparent 0%, rgba(15, 61, 46, 0.2) 100%)`,
+            background: `radial-gradient(ellipse at center, transparent 0%, rgba(15, 61, 46, 0.3) 100%)`,
             opacity: overlayOpacity
           }}
         />
@@ -128,7 +128,7 @@ export default function ChildhoodSection() {
           <div className="max-w-3xl mx-auto w-full">
             {/* Title */}
             <motion.h2
-              className="text-2xl md:text-4xl lg:text-5xl font-medium text-white mb-4"
+              className="text-2xl md:text-4xl lg:text-5xl font-medium text-white mb-4 drop-shadow-md"
               style={{ opacity: titleOpacity, y: titleY }}
             >
               <Balancer>{t("title")}</Balancer>
@@ -136,7 +136,7 @@ export default function ChildhoodSection() {
 
             {/* Subtitle */}
             <motion.p
-              className="text-xs md:text-sm font-mono text-green-glow mb-6 tracking-[0.2em] uppercase"
+              className="text-xs md:text-sm font-mono text-green-glow mb-6 tracking-[0.2em] uppercase drop-shadow-md"
               style={{ opacity: subtitleOpacity, y: subtitleY }}
             >
               {t("subtitle")}
@@ -144,27 +144,27 @@ export default function ChildhoodSection() {
 
             {/* Divider */}
             <motion.div
-              className="w-16 h-px bg-green-glow/50 mb-8"
+              className="w-16 h-px bg-green-glow/80 mb-8 drop-shadow-md"
               style={{ opacity: subtitleOpacity }}
             />
 
             {/* Extended text paragraphs */}
             <motion.p
-              className="text-base md:text-lg text-white/75 leading-relaxed mb-5"
+              className="text-base md:text-lg text-white leading-relaxed mb-5 drop-shadow-md font-light"
               style={{ opacity: text1Opacity, y: text1Y }}
             >
               <Balancer>{t("text_1")}</Balancer>
             </motion.p>
 
             <motion.p
-              className="text-base md:text-lg text-white/75 leading-relaxed mb-5"
+              className="text-base md:text-lg text-white leading-relaxed mb-5 drop-shadow-md font-light"
               style={{ opacity: text2Opacity, y: text2Y }}
             >
               <Balancer>{t("text_2")}</Balancer>
             </motion.p>
 
             <motion.p
-              className="text-base md:text-lg text-white/70 leading-relaxed"
+              className="text-base md:text-lg text-white leading-relaxed drop-shadow-md font-light"
               style={{ opacity: text3Opacity, y: text3Y }}
             >
               <Balancer>{t("text_3")}</Balancer>
