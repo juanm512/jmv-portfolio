@@ -112,21 +112,48 @@ function StatsBlock({ block }) {
   )
 }
 
+// ─── Animation Wrapper ──────────────────────────────────────────
+
+function AnimatedBlock({ children, index }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-10%" }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
 // ─── Block Renderer ──────────────────────────────────────────────
 
 function renderBlock(block, index, onMediaClick) {
+  let content = null
+  
   switch (block.type) {
     case "text":
-      return <TextBlock key={index} block={block} />
+      content = <TextBlock block={block} />
+      break
     case "grid":
-      return <GridBlock key={index} block={block} onMediaClick={onMediaClick} />
+      content = <GridBlock block={block} onMediaClick={onMediaClick} />
+      break
     case "full-width-image":
-      return <FullWidthImageBlock key={index} block={block} onMediaClick={onMediaClick} />
+      content = <FullWidthImageBlock block={block} onMediaClick={onMediaClick} />
+      break
     case "stats":
-      return <StatsBlock key={index} block={block} />
+      content = <StatsBlock block={block} />
+      break
     default:
       return null
   }
+
+  return (
+    <AnimatedBlock key={index} index={index}>
+      {content}
+    </AnimatedBlock>
+  )
 }
 
 // ─── Lightbox Component ──────────────────────────────────────────
