@@ -9,7 +9,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ["localhost"]
+    remotePatterns: []
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"]
 }

@@ -341,10 +341,45 @@ export default function ProjectPage({ project }) {
           {/* Tech Stack Chips */}
           <div className="mt-8 pt-8 border-t border-white/5 flex flex-wrap gap-2">
              {project.stack?.map(tech => {
-               // Simple mapping for demo — in production maybe a robust map
-               const slug = tech.toLowerCase().replace(".", "dot").replace(/\s+/g, "")
+               // Normalize tech names to SimpleIcons slugs with a small exceptions map
+               const key = String(tech).toLowerCase().trim()
+               const exceptions = {
+                 "next.js": "nextdotjs",
+                 "nextjs": "nextdotjs",
+                 "threejs": "three.js",
+                 "three.js": "three.js",
+                 "react-three-fiber": "react",
+                 "reactthreefiber": "react",
+                 "framer-motion": "framer",
+                 "framer motion": "framer",
+                 "framer": "framer",
+                 "react native": "react",
+                 "react-native": "react",
+                 "reactnative": "react",
+                 "node.js": "nodedotjs",
+                 "nodejs": "nodedotjs",
+                 "node": "nodedotjs",
+                 "socket.io": "socketdotio",
+                 "socketio": "socketdotio",
+                 "socket.io-client": "socketdotio",
+                 "monorepo": "turborepo",
+                 "turborepo": "turborepo",
+                 "rendering pipeline": "nvidia",
+                 "rendering": "nvidia",
+                 "pipeline": "nvidia",
+               }
+
+               let slug = exceptions[key]
+               if (!slug) {
+                 // default: remove spaces and dots (keep dashes)
+                 slug = key.replace(/\s+/g, "").replace(/\./g, "")
+               }
+
+               // final fallback to a generic icon if slug is empty or unknown
+               if (!slug) slug = "code"
+
                const iconUrl = `https://cdn.simpleicons.org/${slug}/white`
-               
+
                return (
                  <span 
                    key={tech} 
