@@ -112,6 +112,26 @@ function StatsBlock({ block }) {
   )
 }
 
+function CodeBlock({ block }) {
+  return (
+    <div className="py-12 md:py-16 max-w-5xl mx-auto px-6">
+      {block.title && (
+        <h3 className="text-xl md:text-2xl font-semibold text-white mb-6">
+          {block.title}
+        </h3>
+      )}
+      <div className="relative group">
+        <div className="absolute -inset-1 bg-gradient-to-r from-green-glow/20 to-green-glow/10 rounded-lg blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
+        <pre className="relative bg-black/80 border border-white/10 rounded-lg p-6 overflow-x-auto">
+          <code className="text-sm md:text-base font-mono text-green-400 whitespace-pre">
+            {block.text}
+          </code>
+        </pre>
+      </div>
+    </div>
+  )
+}
+
 // ─── Animation Wrapper ──────────────────────────────────────────
 
 function AnimatedBlock({ children, index }) {
@@ -144,6 +164,9 @@ function renderBlock(block, index, onMediaClick) {
       break
     case "stats":
       content = <StatsBlock block={block} />
+      break
+    case "code":
+      content = <CodeBlock block={block} />
       break
     default:
       return null

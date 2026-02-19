@@ -142,7 +142,53 @@ export const projects = [
           { type: "text", title: "Combined case study", text: "Grouped public website and admin dashboard to showcase customer-facing UI and internal management flows." },
           { type: "grid", items: [ { src: "/single_resto_website/portada.png", caption: "Public website" }, { src: "/single_resto_dashboard/portada.png", caption: "Admin dashboard" } ] },
           { type: "text", title: "Key achievements", text: "Implemented delivery mapping, order panel with ticket printing, WhatsApp messaging integration for quick actions, SSE-based near-realtime order notifications (polling every 30s) and MercadoPago payments." },
-          { type: "text", title: "Responsibilities", text: "Development, Docker-based deployment to a VPS (Oracle), DB and custom WhatsApp container. Ongoing refactor to cloud-native deployment and white‑label support for customer themes." }
+          { type: "text", title: "Responsibilities", text: "Development, Docker-based deployment to a VPS (Oracle), DB and custom WhatsApp container. Ongoing refactor to cloud-native deployment and white‑label support for customer themes." },
+          { type: "text", title: "Centralized Logging with Wide Events", text: "Implemented a modern logging system based on Wide Events (Canonical Log Lines) that replaced scattered console.log statements with structured, analytical events." },
+          { type: "text", title: "Why Wide Events?", text: "Instead of multiple scattered log lines, the system emits ONE structured event per request/action with all necessary context: timestamp, request_id, user, action_name, duration_ms, outcome and specific business data. This enables analytical queries instead of text searches." },
+          { type: "text", title: "Validation Integration", text: "The system automatically captures Zod validation errors and structures them in the log event. Real example of failed validation:" },
+          { type: "code", title: "Example: Validation Error", text: `[Zod Validation] Received data: {
+  "id": "J1526VKZ",
+  "title": "dafa",
+  "handle": "ff",
+  "price": "12.00",
+  "product_type_id": "",
+  "description": ""
+}
+[Zod Validation] Validation errors: {
+  errors: { product_type_id: 'Debe seleccionar un tipo de producto válido' },
+  zodErrors: [
+    {
+      path: ['product_type_id'],
+      message: 'Debe seleccionar un tipo de producto válido',
+      code: 'too_small'
+    }
+  ]
+}
+❌ [updateProduct] 23ms {
+  type: 'ValidationError',
+  code: 'VALIDATION_ERROR',
+  message: 'Error de validación. Revise los campos.',
+}` },
+          { type: "text", title: "Structured Wide Event", text: "The system transforms the above information into a structured JSON event, ready to be indexed and queried:" },
+          { type: "code", title: "Resulting Wide Event", text: `{
+  "timestamp": "2026-02-19T16:40:29.786Z",
+  "request_id": "mltot5y2-3pf6a",
+  "service": "unknown",
+  "environment": "development",
+  "action_name": "updateProduct",
+  "duration_ms": 23,
+  "outcome": "error",
+  "user": {
+    "id": "LE58YKCC",
+    "role": "admin"
+  },
+  "error": {
+    "type": "ValidationError",
+    "code": "VALIDATION_ERROR",
+    "message": "Error de validación. Revise los campos."
+  }
+}` },
+          { type: "text", title: "System Benefits", text: "• Single event per action with complete context (user, duration, outcome). • Automatic detection of errors and results using byethrow. • Ability to perform analytical queries: 'error rate by action', 'average response time by tenant'. • Complete traceability with unique request_id per request. • Significant reduction of log noise compared to traditional console.log." }
         ]
       },
       es: {
@@ -153,7 +199,53 @@ export const projects = [
           { type: "text", title: "Caso combinado", text: "Agrupa la web pública y el dashboard de administración para mostrar la UI orientada al cliente y los flujos internos de gestión." },
           { type: "grid", items: [ { src: "/single_resto_website/portada.png", caption: "Web pública" }, { src: "/single_resto_dashboard/portada.png", caption: "Dashboard admin" } ] },
           { type: "text", title: "Logros clave", text: "Implementé mapeo de entregas, panel de órdenes con impresión de tickets, integración con WhatsApp para acciones rápidas en el dashboard, notificaciones SSE de pedidos (cada 30s) y pagos con MercadoPago." },
-          { type: "text", title: "Responsabilidades", text: "Desarrollo completo, despliegue en Docker sobre VPS (Oracle), base de datos y container custom para WhatsApp. Refactor en curso para despliegue en la nube y soporte white‑label." }
+          { type: "text", title: "Responsabilidades", text: "Desarrollo completo, despliegue en Docker sobre VPS (Oracle), base de datos y container custom para WhatsApp. Refactor en curso para despliegue en la nube y soporte white‑label." },
+          { type: "text", title: "Logging Centralizado con Wide Events", text: "Se implementó un sistema de logging moderno basado en Wide Events (Canonical Log Lines) que reemplazó los console.log dispersos por eventos estructurados y analíticos." },
+          { type: "text", title: "¿Por qué Wide Events?", text: "En lugar de múltiples líneas de log dispersas, el sistema emite UN evento estructurado por request/acción con todo el contexto necesario: timestamp, request_id, user, action_name, duration_ms, outcome y datos de negocio específicos. Esto permite realizar queries analíticas en lugar de búsquedas de texto." },
+          { type: "text", title: "Integración con Validaciones", text: "El sistema captura automáticamente errores de validación de Zod y los estructura en el evento de log. Ejemplo real de validación fallida:" },
+          { type: "code", title: "Ejemplo: Error de Validación", text: `[Zod Validation] Datos recibidos: {
+  "id": "J1526VKZ",
+  "title": "dafa",
+  "handle": "ff",
+  "price": "12.00",
+  "product_type_id": "",
+  "description": ""
+}
+[Zod Validation] Errores de validación: {
+  errors: { product_type_id: 'Debe seleccionar un tipo de producto válido' },
+  zodErrors: [
+    {
+      path: ['product_type_id'],
+      message: 'Debe seleccionar un tipo de producto válido',
+      code: 'too_small'
+    }
+  ]
+}
+❌ [updateProduct] 23ms {
+  type: 'ValidationError',
+  code: 'VALIDATION_ERROR',
+  message: 'Error de validación. Revise los campos.',
+}` },
+          { type: "text", title: "Evento Wide Event Estructurado", text: "El sistema transforma la información anterior en un evento JSON estructurado, listo para ser indexado y consultado:" },
+          { type: "code", title: "Wide Event Resultante", text: `{
+  "timestamp": "2026-02-19T16:40:29.786Z",
+  "request_id": "mltot5y2-3pf6a",
+  "service": "unknown",
+  "environment": "development",
+  "action_name": "updateProduct",
+  "duration_ms": 23,
+  "outcome": "error",
+  "user": {
+    "id": "LE58YKCC",
+    "role": "admin"
+  },
+  "error": {
+    "type": "ValidationError",
+    "code": "VALIDATION_ERROR",
+    "message": "Error de validación. Revise los campos."
+  }
+}` },
+          { type: "text", title: "Beneficios del Sistema", text: "• Un solo evento por acción con contexto completo (user, duration, outcome). • Detección automática de errores y resultados usando byethrow. • Capacidad de realizar queries analíticas: 'tasa de error por acción', 'tiempo promedio de respuesta por tenant'. • Trazabilidad completa con request_id único por solicitud. • Reducción significativa de ruido en logs comparado con console.log tradicional." }
         ]
       }
     }
