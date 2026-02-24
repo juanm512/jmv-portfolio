@@ -17,6 +17,7 @@
     "@react-three/offscreen": "^0.0.8",
     "@react-three/postprocessing": "^2.16.0",
     "@studio-freight/lenis": "^1.0.39",
+    "date-fns": "^4.1.0",
     "framer-motion": "^11.0.6",
     "geist": "^1.7.0",
     "gray-matter": "^4.0.3",

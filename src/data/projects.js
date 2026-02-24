@@ -320,5 +320,38 @@ Call-to-action: enlace al repo (ya tienes) y nota de cómo pedir demo o acceso.`
         ]
       }
     }
+  },
+
+  {
+    slug: "relocate",
+    year: "2026",
+    client: "Personal Project",
+    stack: ["Flask", "Python", "JavaScript"],
+    links: { repo: "https://github.com/juanm512/relocate-app", live: "https://mudarg.vercel.app/" },
+    hero: { type: "image", src: "/relocate-app/inicial.png" },
+    locales: {
+      en: {
+        title: "Relocate - Commute Map",
+        description: "Visual tool that helps you discover where you can reasonably live based on your workplace and preferred commute mode.",
+        role: "Full Stack Developer",
+        content: [
+          { type: "text", title: "Overview", text: "Interactive map built with Leaflet and Turf.js to visualize reachable areas from a specific point using walking, cycling, driving, and public transport modes." },
+          { type: "grid", items: [ { src: "/relocate-app/inicial.png", caption: "Initial Search" }, { src: "/relocate-app/resultado_colectivos.png", caption: "Public Transport Engine" }, { src: "/relocate-app/resultado_subtes.png", caption: "Subway Routing" } ] },
+          { type: "text", title: "Highlights", text: "Developed a custom algorithm parsing real public transit GTFS data to generate precise isochrones. The Flask backend handles geocoding via Nominatim and routing logic via OpenRouteService." },
+          { type: "text", title: "Feature Overview", text: "Two-stage flow for UI interaction, customizable time sliders, exact route breakdown checkboxes, and custom point of interest layers like hospitals and safety alerts." }
+        ]
+      },
+      es: {
+        title: "Relocate - Mapa de Alcance CABA",
+        description: "Herramienta visual que permite ver hasta dónde se puede vivir razonablemente según el lugar de trabajo y el medio de transporte elegido.",
+        role: "Desarrollador Full Stack",
+        content: [
+          { type: "text", title: "Resumen", text: "Aplicación interactiva de mapas (Leaflet y Turf.js) para visualizar hasta qué barrios podés llegar en cierta cantidad de minutos usando caminando, bicicleta, auto o transporte público." },
+          { type: "grid", items: [ { src: "/relocate-app/inicial.png", caption: "Búsqueda de partida" }, { src: "/relocate-app/resultado_colectivos.png", caption: "Alcance en Colectivos" }, { src: "/relocate-app/resultado_auto.png", caption: "Alcance en Auto" } ] },
+          { type: "text", title: "Logros destacados", text: "Desarrollo de un algoritmo propio para calcular isócronas de transporte público usando datos reales de horarios (GTFS), uniendo backend en Python (Flask) con geocodificación de Nominatim." },
+          { type: "text", title: "Detalles", text: "Flujo de dos pantallas, controles deslizantes para el tiempo de viaje, desglose dinámico de líneas de transporte y filtros agregados de zonas de interés." }
+        ]
+      }
+    }
   }
 ]

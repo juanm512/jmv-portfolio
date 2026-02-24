@@ -18,6 +18,12 @@
       "text_2": "Estoy explorando tecnologías como inteligencia artificial aplicada, procesamiento 3D en la web, y herramientas de infraestructura moderna. Me interesa entender no solo cómo usar las herramientas, sino por qué funcionan de la manera en que lo hacen.",
       "text_3": "Creo firmemente que un buen desarrollador nunca deja de aprender. La tecnología evoluciona constantemente, y mantenerse al día no es solo una necesidad profesional — es lo que hace que este trabajo sea genuinamente emocionante."
     },
+    "contributions": {
+      "title": "Constancia sobre la inmediatez.",
+      "subtitle": "Historial de código",
+      "text_1": "La programación es una disciplina que requiere tiempo. Mi ritmo de contribuciones en GitHub se ha mantenido constante, incluso desde antes que las herramientas actuales basadas en inteligencia artificial facilitaran tanto el proceso de escritura de código.",
+      "text_2": "Si notas algunos vacíos en la gráfica, se deben a épocas de alta carga académica en la facultad. Sin embargo, ese tiempo nunca fue inactivo: durante esos periodos construí cerca de 5 proyectos complejos trabajando en equipo bajo metodologías ágiles (Scrum), utilizando Python, Rust, Node.js, NestJS, Next.js, Django y Flask."
+    },
     "projects": {
       "title": "Proyectos",
       "subtitle": "Una selección de trabajos que representan mi evolución como desarrollador",

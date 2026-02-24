@@ -4,6 +4,7 @@ import { getAllProjects } from "@/lib/projects"
 import HeroSection from "@/components/home/HeroSection"
 import ChildhoodSection from "@/components/home/ChildhoodSection"
 import AbstractSection from "@/components/home/AbstractSection"
+import ContributionSection from "@/components/home/ContributionSection"
 import MemoryWall from "@/components/home/MemoryWall"
 import ContactSection from "@/components/home/ContactSection"
 
@@ -24,7 +25,9 @@ export default function HomePage({ params: { locale } }) {
       <ChildhoodSection />
       <div className="h-[100vh]"></div>
       <AbstractSection />
-      <div className="h-[150vh]"></div>
+      <div className="h-[100vh]"></div>
+      <ContributionSection />
+      <div className="h-[80vh]"></div>
       <MemoryWall projects={projects} locale={locale} />
       <div className="h-[50vh]"></div>
       <ContactSection />

@@ -18,6 +18,12 @@
       "text_2": "I'm exploring technologies like applied artificial intelligence, 3D processing on the web, and modern infrastructure tooling. I'm interested in understanding not just how to use the tools, but why they work the way they do.",
       "text_3": "I firmly believe a good developer never stops learning. Technology evolves constantly, and keeping up isn't just a professional necessity — it's what makes this work genuinely exciting."
     },
+    "contributions": {
+      "title": "Consistency over immediacy.",
+      "subtitle": "Code history",
+      "text_1": "Programming is a discipline that requires time. My contribution rate on GitHub has remained steady, even since before current AI-based tools made the code writing process so widely accessible.",
+      "text_2": "If you notice some gaps in the graph, they correspond to periods of high academic workload at university. However, that time was never idle: during those periods I built around 5 complex projects working in teams under agile methodologies (Scrum), utilizing Python, Rust, Node.js, NestJS, Next.js, Django, and Flask."
+    },
     "projects": {
       "title": "Projects",
       "subtitle": "A selection of works that represent my evolution as a developer",
