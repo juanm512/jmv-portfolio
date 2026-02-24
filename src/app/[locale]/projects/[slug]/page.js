@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { unstable_setRequestLocale } from "next-intl/server"
-import { getProjectBySlug, getAllProjectSlugs } from "@/lib/projects"
+import { getProjectBySlug, getAllProjectSlugs, getAdjacentProjects } from "@/lib/projects"
 import ProjectPage from "@/components/projects/ProjectPage"
 
 export async function generateStaticParams() {
@@ -39,5 +39,7 @@ export default function Project({ params: { slug, locale } }) {
     notFound()
   }
 
-  return <ProjectPage project={project} />
+  const { next: nextProject } = getAdjacentProjects(slug, locale)
+
+  return <ProjectPage project={project} nextProject={nextProject} />
 }

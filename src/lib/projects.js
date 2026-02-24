@@ -31,3 +31,16 @@ export function getProjectBySlug(slug, locale = "en") {
 export function getAllProjectSlugs() {
   return projects.map((p) => ({ slug: p.slug }))
 }
+
+export function getAdjacentProjects(slug, locale = "en") {
+  const idx = projects.findIndex((p) => p.slug === slug)
+  if (idx === -1) return { next: null, prev: null }
+
+  const nextIdx = (idx + 1) % projects.length
+  const prevIdx = (idx - 1 + projects.length) % projects.length
+
+  return {
+    next: getLocalizedProject(projects[nextIdx], locale),
+    prev: getLocalizedProject(projects[prevIdx], locale),
+  }
+}

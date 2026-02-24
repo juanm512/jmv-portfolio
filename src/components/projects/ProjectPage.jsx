@@ -132,6 +132,36 @@ function CodeBlock({ block }) {
   )
 }
 
+function VideoBlock({ block, onMediaClick }) {
+  return (
+    <div className="py-12 px-4 md:px-0 max-w-7xl mx-auto">
+      {block.title && (
+        <h3 className="text-xl md:text-2xl font-semibold text-white mb-6 px-2 md:px-0">
+          {block.title}
+        </h3>
+      )}
+      <div
+        className="relative w-full rounded-sm overflow-hidden bg-white/5 cursor-pointer group"
+        data-cursor="Play"
+        onClick={() => onMediaClick(block.src, "video")}
+      >
+        <video
+          src={block.src}
+          controls
+          playsInline
+          preload="metadata"
+          className="w-full h-auto max-h-[80vh] object-contain bg-black"
+        />
+        {block.caption && (
+          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+            <p className="text-sm text-white/90 font-mono">{block.caption}</p>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+}
+
 // ─── Animation Wrapper ──────────────────────────────────────────
 
 function AnimatedBlock({ children, index }) {
@@ -167,6 +197,9 @@ function renderBlock(block, index, onMediaClick) {
       break
     case "code":
       content = <CodeBlock block={block} />
+      break
+    case "video":
+      content = <VideoBlock block={block} onMediaClick={onMediaClick} />
       break
     default:
       return null
@@ -239,7 +272,7 @@ function Lightbox({ media, onClose }) {
 
 // ─── Main Component ──────────────────────────────────────────────
 
-export default function ProjectPage({ project }) {
+export default function ProjectPage({ project, nextProject }) {
   const locale = useLocale()
   const t = useTranslations("Project")
   const [selectedMedia, setSelectedMedia] = useState(null)
@@ -424,16 +457,33 @@ export default function ProjectPage({ project }) {
         {project.content?.map((block, idx) => renderBlock(block, idx, openLightbox))}
       </section>
 
-      {/* 4. Next Project Navigation (Placeholder) */}
-      <section className="py-32 bg-background-dark border-t border-white/5 text-center">
-         <p className="text-white/40 font-mono mb-4">Next Project</p>
-         <h3 data-cursor="Next" className="text-4xl md:text-5xl font-bold text-white mb-8 hover:text-green-glow transition-colors cursor-pointer">
-           E-commerce Platform
-         </h3>
-         <Link href="/projects" className="inline-block px-8 py-3 border border-white/20 rounded-full hover:bg-white hover:text-background-dark transition-all">
-           View All Projects
-         </Link>
-      </section>
+      {/* 4. Next Project Navigation */}
+      {nextProject && (
+        <section className="flex flex-col items-center justify-center py-32 bg-background-dark border-t border-white/5 text-center">
+           <p className="text-white/40 font-mono mb-4">
+             {locale === "es" ? "Siguiente Proyecto" : "Next Project"}
+           </p>
+           <Link
+             href={`/${locale}/projects/${nextProject.slug}`}
+             data-cursor="Next"
+             className="inline-block group"
+           >
+             <h3 className="text-4xl md:text-5xl font-bold text-white mb-4 group-hover:text-green-glow transition-colors">
+               {nextProject.title}
+             </h3>
+             <p className="text-lg text-white/50 max-w-xl mx-auto mb-8 font-light">
+               {nextProject.description?.slice(0, 120)}{nextProject.description?.length > 120 ? "\u2026" : ""}
+             </p>
+           </Link>
+           <Link
+             href={`/${locale}/#my_work`}
+             className="inline-block px-8 py-3 border border-white/20 rounded-full hover:bg-white hover:text-background-dark transition-all"
+           >
+             {locale === "es" ? "Ver Todos los Proyectos" : "View All Projects"}
+           </Link>
+        </section>
+      )}
+        
 
     </main>
   )
