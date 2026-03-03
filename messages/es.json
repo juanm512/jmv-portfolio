@@ -50,7 +50,17 @@
     "gallery": "Galería",
     "results": "Resultados",
     "viewLive": "Ver en vivo",
-    "viewCode": "Ver código"
+    "viewCode": "Ver código",
+    "backToHome": "Volver al inicio",
+    "role": "Rol",
+    "client": "Cliente",
+    "year": "Año",
+    "links": "Enlaces",
+    "live": "En vivo",
+    "repo": "Repositorio",
+    "nextProject": "Siguiente Proyecto",
+    "viewAllProjects": "Ver Todos los Proyectos",
+    "projectNotFound": "Proyecto no encontrado"
   },
   "Meta": {
     "title": "Juan Manuel Vila - Desarrollador FullStack",
@@ -58,7 +68,13 @@
   },
   "Header": {
     "close": "Cerrar",
-    "menu": "Menú"
+    "menu": "Menú",
+    "home": "Inicio",
+    "about_me": "Sobre mí",
+    "my_work": "Mi trabajo",
+    "contact": "Contacto",
+    "made_by": "Hecho por:",
+    "typography": "Tipografía:"
   },
   "Legacy": {
     "Description": {

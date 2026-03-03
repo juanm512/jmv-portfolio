@@ -44,30 +44,46 @@ function TextBlock({ block }) {
   )
 }
 
+const VIDEO_EXTENSIONS = /\.(mp4|webm|mov|ogg)$/i
+
 function GridBlock({ block, onMediaClick }) {
   return (
     <div className="py-12 px-4 md:px-0 max-w-7xl mx-auto">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {block.items.map((item, idx) => (
-          <div 
-            key={idx} 
-            className="relative aspect-[4/3] rounded-sm overflow-hidden bg-white/5 cursor-zoom-in group" 
-            data-cursor="Expand"
-            onClick={() => onMediaClick(item.src, "image")}
-          >
-            <Image
-              src={item.src}
-              alt={item.caption || "Project image"}
-              fill
-              className="object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            {item.caption && (
-               <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
-                  <p className="text-sm text-white/90 font-mono">{item.caption}</p>
-               </div>
-            )}
-          </div>
-        ))}
+        {block.items.map((item, idx) => {
+          const isVideo = VIDEO_EXTENSIONS.test(item.src)
+          return (
+            <div 
+              key={idx} 
+              className="relative aspect-[4/3] rounded-sm overflow-hidden bg-white/5 cursor-zoom-in group" 
+              data-cursor={isVideo ? "Play" : "Expand"}
+              onClick={() => onMediaClick(item.src, isVideo ? "video" : "image")}
+            >
+              {isVideo ? (
+                <video
+                  src={item.src}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              ) : (
+                <Image
+                  src={item.src}
+                  alt={item.caption || "Project image"}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+              )}
+              {item.caption && (
+                 <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                    <p className="text-sm text-white/90 font-mono">{item.caption}</p>
+                 </div>
+              )}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
@@ -147,7 +163,9 @@ function VideoBlock({ block, onMediaClick }) {
       >
         <video
           src={block.src}
-          controls
+          autoPlay
+          muted
+          loop
           playsInline
           preload="metadata"
           className="w-full h-auto max-h-[80vh] object-contain bg-black"
@@ -217,18 +235,25 @@ function renderBlock(block, index, onMediaClick) {
 function Lightbox({ media, onClose }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") onClose()
+      if (e.key === "Escape") {
+        e.stopPropagation()
+        e.preventDefault()
+        onClose()
+      }
     }
-    document.addEventListener("keydown", handleKeyDown)
-    return () => document.removeEventListener("keydown", handleKeyDown)
+    // Use capture phase so we intercept before the Header handler
+    document.addEventListener("keydown", handleKeyDown, true)
+    return () => document.removeEventListener("keydown", handleKeyDown, true)
   }, [onClose])
 
   return (
     <motion.div
+      data-lightbox-open
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-12 cursor-zoom-out"
+      className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-12 cursor-pointer"
+      data-cursor="Close"
       onClick={onClose}
     >
       <motion.div
@@ -236,7 +261,8 @@ function Lightbox({ media, onClose }) {
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center"
+        className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center cursor-default"
+        data-cursor=""
         onClick={(e) => e.stopPropagation()} // Prevent closing when clicking content
       >
         {media.type === "video" ? (
@@ -261,7 +287,8 @@ function Lightbox({ media, onClose }) {
         {/* Close Button */}
         <button 
           onClick={onClose}
-          className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors p-2"
+          data-cursor="✕"
+          className="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors p-2 cursor-pointer"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
         </button>
@@ -336,7 +363,7 @@ export default function ProjectPage({ project, nextProject }) {
                <ArrowLeftIcon />
              </div>
              <span className="text-sm font-light tracking-wide hidden md:block opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0">
-               Back to Home
+               {t("backToHome")}
              </span>
            </Link>
         </div>
@@ -366,28 +393,33 @@ export default function ProjectPage({ project, nextProject }) {
         <div className="max-w-7xl mx-auto px-6 py-8 md:py-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
              <div>
-                <p className="text-xs text-white/40 uppercase tracking-widest mb-2 font-mono">Role</p>
+                <p className="text-xs text-white/40 uppercase tracking-widest mb-2 font-mono">{t("role")}</p>
                 <p className="text-lg text-white/90">{project.role}</p>
              </div>
              <div>
-                <p className="text-xs text-white/40 uppercase tracking-widest mb-2 font-mono">Client</p>
+                <p className="text-xs text-white/40 uppercase tracking-widest mb-2 font-mono">{t("client")}</p>
                 <p className="text-lg text-white/90">{project.client}</p>
              </div>
              <div>
-                <p className="text-xs text-white/40 uppercase tracking-widest mb-2 font-mono">Year</p>
+                <p className="text-xs text-white/40 uppercase tracking-widest mb-2 font-mono">{t("year")}</p>
                 <p className="text-lg text-white/90">{project.year}</p>
              </div>
              <div>
-                <p className="text-xs text-white/40 uppercase tracking-widest mb-2 font-mono">Links</p>
+                <p className="text-xs text-white/40 uppercase tracking-widest mb-2 font-mono">{t("links")}</p>
                 <div className="flex gap-4">
                   {project.links?.live && (
                     <a href={project.links.live} target="_blank" rel="noreferrer" data-cursor="Visit" className="text-green-glow hover:text-white transition-colors flex items-center gap-1 group">
-                       Live <ExternalLinkIcon />
+                       {t("live")} <ExternalLinkIcon />
+                    </a>
+                  )}
+                  {project.links?.live2 && (
+                    <a href={project.links.live2} target="_blank" rel="noreferrer" data-cursor="Visit" className="text-green-glow hover:text-white transition-colors flex items-center gap-1 group">
+                       {t("live")} <ExternalLinkIcon />
                     </a>
                   )}
                    {project.links?.repo && (
                     <a href={project.links.repo} target="_blank" rel="noreferrer" data-cursor="Code" className="text-white/60 hover:text-white transition-colors flex items-center gap-1">
-                       Repo <ExternalLinkIcon />
+                       {t("repo")} <ExternalLinkIcon />
                     </a>
                   )}
                 </div>
@@ -423,6 +455,13 @@ export default function ProjectPage({ project, nextProject }) {
                  "rendering pipeline": "nvidia",
                  "rendering": "nvidia",
                  "pipeline": "nvidia",
+                 "flask": "flask",
+                 "python": "python",
+                 "better-auth": "betterauth",
+                 "openrouteservice": "openrouteservice",
+                 "locationiq": "locationiq",
+                 "drizzle orm": "drizzle",
+                 "mercado pago": "mercadopago"
                }
 
                let slug = exceptions[key]
@@ -461,7 +500,7 @@ export default function ProjectPage({ project, nextProject }) {
       {nextProject && (
         <section className="flex flex-col items-center justify-center py-32 bg-background-dark border-t border-white/5 text-center">
            <p className="text-white/40 font-mono mb-4">
-             {locale === "es" ? "Siguiente Proyecto" : "Next Project"}
+             {t("nextProject")}
            </p>
            <Link
              href={`/${locale}/projects/${nextProject.slug}`}
@@ -479,7 +518,7 @@ export default function ProjectPage({ project, nextProject }) {
              href={`/${locale}/#my_work`}
              className="inline-block px-8 py-3 border border-white/20 rounded-full hover:bg-white hover:text-background-dark transition-all"
            >
-             {locale === "es" ? "Ver Todos los Proyectos" : "View All Projects"}
+             {t("viewAllProjects")}
            </Link>
         </section>
       )}

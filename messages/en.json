@@ -50,7 +50,17 @@
     "gallery": "Gallery",
     "results": "Results",
     "viewLive": "View live",
-    "viewCode": "View code"
+    "viewCode": "View code",
+    "backToHome": "Back to Home",
+    "role": "Role",
+    "client": "Client",
+    "year": "Year",
+    "links": "Links",
+    "live": "Live",
+    "repo": "Repo",
+    "nextProject": "Next Project",
+    "viewAllProjects": "View All Projects",
+    "projectNotFound": "Project Not Found"
   },
   "Meta": {
     "title": "Juan Manuel Vila - FullStack Developer",
@@ -58,7 +68,13 @@
   },
   "Header": {
     "close": "Close",
-    "menu": "Menu"
+    "menu": "Menu",
+    "home": "Home",
+    "about_me": "About me",
+    "my_work": "My work",
+    "contact": "Contact",
+    "made_by": "Made by:",
+    "typography": "Typography:"
   },
   "Legacy": {
     "Description": {

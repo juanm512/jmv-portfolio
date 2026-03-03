@@ -9,7 +9,13 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    remotePatterns: []
+    remotePatterns: [
+      {
+        hostname: "https://cdn.simpleicons.org/",
+        pathname: "/**",
+        protocol: "https",
+      }
+    ]
   },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"]
 }

@@ -79,7 +79,7 @@ export default function Body({
               animate={
                 selectedLink.isActive && selectedLink.index != index
                   ? "open"
-                  : t("close")
+                  : "closed"
               }
             >
               <motion.span

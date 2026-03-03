@@ -70,7 +70,7 @@ export default function Index({ lang }) {
                   animate="open"
                   exit="closed"
                 >
-                  Menu
+                  {t("menu")}
                 </motion.p>
               ) : (
                 <motion.p

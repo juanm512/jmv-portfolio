@@ -46,8 +46,10 @@ export default function Header({ lang }) {
         setLanguageChange(false)
         langButtonRef.current?.focus()
       } else {
-        // Nothing open — open the nav menu
-        setIsActive(true)
+        // Only open menu if no lightbox is active
+        if (!document.querySelector('[data-lightbox-open]')) {
+          setIsActive(true)
+        }
       }
       return
     }
@@ -123,7 +125,7 @@ export default function Header({ lang }) {
                 animate="open"
                 exit="closed"
               >
-                Menu
+                {t("menu")}
               </motion.span>
             ) : (
               <motion.span
