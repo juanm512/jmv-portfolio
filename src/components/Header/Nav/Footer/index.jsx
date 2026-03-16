@@ -18,18 +18,7 @@ export default function Footer() {
           <span>{t("made_by")}</span> Juan Manuel Vila
         </motion.li>
       </ul>
-      <ul className="list-none p-0">
-        <motion.li
-          className="text-white/40 text-sm"
-          custom={[0.3, 0]}
-          variants={translate}
-          initial="initial"
-          animate="enter"
-          exit="exit"
-        >
-          <span>{t("typography")}</span> Kode Mono
-        </motion.li>
-      </ul>
+      
     </div>
   )
 }
