@@ -15,7 +15,7 @@
     "abstract": {
       "title": "La práctica enseña lo que la teoría no puede.",
       "subtitle": "Formación y actualidad",
-      "text_1": "Desde que arranqué a programar fui aprendiendo a base de proyectos propios, errores y obsesión por entender. La facultad me formó en lo estructural, pero la práctica me la di yo solo — y hoy me siento preparado para resolver problemas diversos que la carrera sola no te enseña a enfrentar.",
+      "text_1": "Desde que arranqué a programar fui aprendiendo a base de proyectos propios, errores y obsesión por entender. La facultad me formó en lo estructural, pero la práctica la complemente con desafios propios — y hoy me siento preparado para resolver problemas diversos que la carrera sola no te enseña a enfrentar.",
       "text_2": "Últimamente estuve explorando cómo automatizar la generación de Gaussian Splattings, y estoy llevando a producción una app para técnicos, talleres y profesionales — publicando por primera vez en Play Store algo que apunta a un rubro con demanda real y creciente. En el camino fui acumulando experiencia en el ecosistema completo de JavaScript/TypeScript — React, Next.js, React Native con Expo — junto a Python, Django, Flask, Rust, PostgreSQL y herramientas como Power BI.",
       "text_3": "Creo que un buen desarrollador nunca deja de aprender. La tecnología evoluciona constantemente, y mantenerse al día no es solo una necesidad profesional — es lo que hace que este trabajo sea genuinamente emocionante."
     },
@@ -23,7 +23,7 @@
       "title": "Constancia sobre la inmediatez.",
       "subtitle": "Historial de código",
       "text_1": "Programar todos los días es un hábito que fui construyendo con el tiempo — no por obligación, sino porque siempre hay algo que aprender, mejorar o explorar. Este gráfico refleja eso.",
-      "text_2": "A lo largo de la carrera construí cerca de 5 proyectos complejos trabajando en equipo bajo metodologías ágiles, con Python, Rust, Node.js, NestJS, Next.js, Django y Flask — proyectos que me formaron tanto como cualquier materia, y que en esos períodos desplazaron las contribuciones a mis proyectos personales."
+      "text_2": "A lo largo de la carrera construí cerca de 5 proyectos complejos trabajando en equipo bajo metodologías ágiles, Scrum, con Python, Rust, Node.js, NestJS, Next.js, Django y Flask. Esos períodos desplazaron las contribuciones a mis proyectos personales, sin embargo me sirvieron para entender el funcionamiento de los equipos de trabajo y las diferentes metodologias para solventar distintas problematicas."
     },
     "projects": {
       "title": "Proyectos",
