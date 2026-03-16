@@ -83,8 +83,8 @@ export default function LocaleLayout({ children, params: { locale } }) {
       <head>
         <link
           rel="icon"
-          href="/Ai2.jpg"
-          type="image/jpg"
+          href="/favicon-32x32.png"
+          type="image/png"
           sizes="32x32"
         />
         <link rel="canonical" href={`https://jmvila.com/${locale}`} />
