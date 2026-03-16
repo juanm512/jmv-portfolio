@@ -1,37 +1,38 @@
 {
   "Home": {
     "hero": {
-      "title": "Construyo sistemas que resuelven problemas reales.",
-      "subtitle": "Desarrollador FullStack"
+      "title": "Desarrollador Full Stack — El problema siempre tiene solución.",
+      "title_alt": "Desarrollador Full Stack — Pienso en problemas, construyo soluciones.",
+      "subtitle": "Juan Manuel Vila"
     },
     "childhood": {
-      "title": "Todo comenzó con una pregunta...",
-      "subtitle": "Los primeros pasos",
-      "text_1": "¿Cómo funcionan las cosas? Esa curiosidad me llevó a desarmar computadoras, a leer libros de programación que no entendía, y a escribir mis primeras líneas de código. Cada error era un descubrimiento, cada pantalla azul una lección.",
-      "text_2": "Con el tiempo, esa obsesión por entender se transformó en la capacidad de construir. Pasé de copiar tutoriales a diseñar mis propias soluciones, de resolver problemas pequeños a enfrentar desafíos reales que impactan a personas reales.",
-      "text_3": "Hoy, cada proyecto es una extensión de esa misma curiosidad. La diferencia es que ahora tengo las herramientas, la experiencia y la disciplina para convertir ideas en sistemas que funcionan — y que importan."
+      "title": "Siempre quise saber cómo funcionan las cosas.",
+      "subtitle": "El origen",
+      "text_1": "Crecí en Chivilcoy metido en los trabajos de mi viejo — reparaciones, instalaciones de aire acondicionado, lo que fuera. Desde chico me enganchaba ver cómo funcionaban las cosas y cómo se agarraban con las manos. Esa curiosidad nunca se fue.",
+      "text_2": "Arranqué ingeniería electrónica, y en tercer año tuve mi primera materia de programación en C. Algo hizo click. Me di cuenta que programar tenía todo lo que me gustaba de la ingeniería — resolver problemas reales — pero con una ventaja enorme: podés probar, fallar y corregir en tiempo real.",
+      "text_3": "Eso me llevó a cambiarme de carrera y anotarme en la Licenciatura en Informática — buscando una base más formal para todo lo que ya estaba aprendiendo solo."
     },
     "abstract": {
-      "title": "La curiosidad se convirtió en ingeniería.",
-      "subtitle": "Actualidad y aprendizaje",
-      "text_1": "Actualmente me encuentro profundizando en arquitectura de software, patrones de diseño y desarrollo de sistemas escalables. Cada proyecto es una oportunidad para aplicar nuevos conocimientos y desafiar lo que creo saber.",
-      "text_2": "Estoy explorando tecnologías como inteligencia artificial aplicada, procesamiento 3D en la web, y herramientas de infraestructura moderna. Me interesa entender no solo cómo usar las herramientas, sino por qué funcionan de la manera en que lo hacen.",
-      "text_3": "Creo firmemente que un buen desarrollador nunca deja de aprender. La tecnología evoluciona constantemente, y mantenerse al día no es solo una necesidad profesional — es lo que hace que este trabajo sea genuinamente emocionante."
+      "title": "La práctica enseña lo que la teoría no puede.",
+      "subtitle": "Formación y actualidad",
+      "text_1": "Desde que arranqué a programar fui aprendiendo a base de proyectos propios, errores y obsesión por entender. La facultad me formó en lo estructural, pero la práctica me la di yo solo — y hoy me siento preparado para resolver problemas diversos que la carrera sola no te enseña a enfrentar.",
+      "text_2": "Últimamente estuve explorando cómo automatizar la generación de Gaussian Splattings, y estoy llevando a producción una app para técnicos, talleres y profesionales — publicando por primera vez en Play Store algo que apunta a un rubro con demanda real y creciente. En el camino fui acumulando experiencia en el ecosistema completo de JavaScript/TypeScript — React, Next.js, React Native con Expo — junto a Python, Django, Flask, Rust, PostgreSQL y herramientas como Power BI.",
+      "text_3": "Creo que un buen desarrollador nunca deja de aprender. La tecnología evoluciona constantemente, y mantenerse al día no es solo una necesidad profesional — es lo que hace que este trabajo sea genuinamente emocionante."
     },
     "contributions": {
       "title": "Constancia sobre la inmediatez.",
       "subtitle": "Historial de código",
-      "text_1": "La programación es una disciplina que requiere tiempo. Mi ritmo de contribuciones en GitHub se ha mantenido constante, incluso desde antes que las herramientas actuales basadas en inteligencia artificial facilitaran tanto el proceso de escritura de código.",
-      "text_2": "Si notas algunos vacíos en la gráfica, se deben a épocas de alta carga académica en la facultad. Sin embargo, ese tiempo nunca fue inactivo: durante esos periodos construí cerca de 5 proyectos complejos trabajando en equipo bajo metodologías ágiles (Scrum), utilizando Python, Rust, Node.js, NestJS, Next.js, Django y Flask."
+      "text_1": "Programar todos los días es un hábito que fui construyendo con el tiempo — no por obligación, sino porque siempre hay algo que aprender, mejorar o explorar. Este gráfico refleja eso.",
+      "text_2": "A lo largo de la carrera construí cerca de 5 proyectos complejos trabajando en equipo bajo metodologías ágiles, con Python, Rust, Node.js, NestJS, Next.js, Django y Flask — proyectos que me formaron tanto como cualquier materia, y que en esos períodos desplazaron las contribuciones a mis proyectos personales."
     },
     "projects": {
       "title": "Proyectos",
-      "subtitle": "Una selección de trabajos que representan mi evolución como desarrollador",
+      "subtitle": "Una selección de trabajos que muestran mi evolución como desarrollador y mi enfoque en resolver problemas reales",
       "viewProject": "Ver proyecto"
     },
     "contact": {
-      "title": "Construyamos algo significativo.",
-      "subtitle": "¿Tienes un proyecto en mente? Hablemos.",
+      "title": "Hablemos",
+      "subtitle": "Podes contactarme por los siguientes medios:",
       "email": "Email",
       "github": "GitHub",
       "linkedin": "LinkedIn"

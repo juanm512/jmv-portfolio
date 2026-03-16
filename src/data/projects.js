@@ -1,4 +1,55 @@
 export const projects = [
+  
+  {
+    slug: "tuerca",
+    year: "2026",
+    client: "Active / Production",
+    stack: ["React Native", "Expo", "tRPC", "Drizzle ORM", "PostgreSQL", "Better-Auth", "Supabase"],
+    links: { live: "https://tuerca.app", live2: "https://play.google.com/store/apps/details?id=app.tuerca.mobile" },
+    hero: { type: "image", src: "/tuerca/dash.png" },
+    locales: {
+      en: {
+        title: "TUERCA — Field Service Management Platform",
+        description: "Production mobile FSM platform for field service teams — evolved from a web prototype to a cross-platform React Native app with route optimization, team management, and real-time job tracking.",
+        role: "Sole Developer & Architect",
+        content: [
+          { type: "text", title: "Overview", text: "TUERCA started as a web-based SaaS dashboard for service professionals. After validating the core workflows, the project was rearchitected into a dedicated mobile-first platform — because the real users, field technicians, are always on-site, not at a desk.\n\nThe result is a production React Native app available on Google Play that gives technical teams the tools to manage jobs, optimize routes, track finances, and coordinate in real time — all from their phones." },
+          { type: "grid", items: [ { src: "/tuerca/dash.png", caption: "Main dashboard — card-based overview" }, { src: "/tuerca/jobs_list.png", caption: "Jobs list — filterable work orders" } ] },
+          { type: "text", title: "Route Optimization", text: "One of the core differentiators: technicians receive a list of stops and the app converts them into an optimized route, minimizing travel time. Each stop links directly to Google Maps with one tap for turn-by-turn navigation.\n\nThis removes the friction of manual planning and lets field workers focus entirely on execution." },
+          { type: "grid", items: [ { src: "/tuerca/routes.png", caption: "Routes panel — multi-stop planning" }, { src: "/tuerca/route_execution.png", caption: "Route in execution — field navigation" } ] },
+          { type: "text", title: "Job Lifecycle Management", text: "From creation to payment, the full job lifecycle is handled in-app:\n• Job creation with client assignment, priority, and scheduling.\n• Activity timeline — technicians log real-time updates from the field.\n• Supplies tracking — materials used, quantities and costs per job.\n• Payment recording — field collections tracked per work order.\n\nEvery status change and action is synced instantly across the team." },
+          { type: "grid", items: [ { src: "/tuerca/job_creation.png", caption: "Job creation — quick assignment flow" }, { src: "/tuerca/job.png", caption: "Job detail — full work order view" } ] },
+          { type: "grid", items: [ { src: "/tuerca/job_activities.png", caption: "Activity feed — real-time field reporting" }, { src: "/tuerca/job_payment.png", caption: "Payment tracking — field collections" } ] },
+          { type: "grid", items: [ { src: "/tuerca/job_supplies.png", caption: "Supplies log — materials and cost tracking" }, { src: "/tuerca/clients.png", caption: "Client management — contact and history" } ] },
+          { type: "text", title: "Team Management", text: "A granular role system (Owner, Admin, Member) controls exactly what each person can see and do. Admins can invite members, adjust permissions, and monitor team performance from a single view.\n\nDesigned for small-to-mid service companies where accountability and clear ownership matter." },
+          { type: "grid", items: [ { src: "/tuerca/team.png", caption: "Team panel — member overview" }, { src: "/tuerca/team_edit.png", caption: "Role & permission editing" } ] },
+          { type: "text", title: "Architecture & Technical Migration", text: "The platform was migrated from a React web + tRPC setup to a fully cross-platform mobile stack:\n• React Native + Expo for iOS/Android from a single codebase.\n• NativeWind (TailwindCSS for React Native) for consistent, dark-mode-first UI.\n• tRPC for end-to-end type-safe API — shared types between server and mobile client.\n• Drizzle ORM with PostgreSQL for typed schema definitions and migrations.\n• Better-Auth for session management and role-based access control.\n• Calendar Sync — jobs are dynamically pushed to the device's native calendar.\n• Multi-tenant architecture: each organization has isolated data, members and billing." },
+          { type: "text", title: "End-to-End Testing (Maestro)", text: "Critical user flows are covered by automated E2E tests using Maestro — a mobile UI testing framework that simulates real user interactions on an emulator.\n\nTests validate the full experience end-to-end: from gesture input and screen transitions to data persistence and error states. This ensures that updates don't break the core workflows that field teams depend on daily." },
+          { type: "video", src: "/tuerca/tests/registro.mp4", title: "E2E Test — Registration Flow", caption: "Maestro automated test: user registration & onboarding (emulator)" }
+        ]
+      },
+      es: {
+        title: "TUERCA — Plataforma de Gestión de Servicios de Campo",
+        description: "App móvil FSM en producción para equipos de campo — evolucionó de un prototipo web a una app React Native cross-platform con optimización de rutas, gestión de equipos y seguimiento de trabajos en tiempo real.",
+        role: "Desarrollador Único & Arquitecto",
+        content: [
+          { type: "text", title: "Resumen", text: "TUERCA comenzó como un dashboard SaaS web para profesionales de servicios. Después de validar los flujos de trabajo principales, el proyecto fue rediseñado como una plataforma mobile-first — porque los usuarios reales, los técnicos de campo, están siempre en terreno, no frente a un escritorio.\n\nEl resultado es una app React Native en producción, disponible en Google Play, que le da a los equipos técnicos las herramientas para gestionar trabajos, optimizar rutas, hacer seguimiento financiero y coordinar en tiempo real, todo desde el celular." },
+          { type: "grid", items: [ { src: "/tuerca/dash.png", caption: "Dashboard principal — resumen en tarjetas" }, { src: "/tuerca/jobs_list.png", caption: "Lista de trabajos — órdenes filtrables" } ] },
+          { type: "text", title: "Optimización de Rutas", text: "Uno de los diferenciadores centrales: los técnicos reciben una lista de paradas y la app las convierte en una ruta optimizada, minimizando tiempos de traslado. Cada parada se abre en Google Maps con un solo tap para navegación giro a giro.\n\nEsto elimina la fricción de la planificación manual y permite que los trabajadores de campo se concentren completamente en la ejecución." },
+          { type: "grid", items: [ { src: "/tuerca/routes.png", caption: "Panel de rutas — planificación multi-parada" }, { src: "/tuerca/route_execution.png", caption: "Ruta en ejecución — navegación en campo" } ] },
+          { type: "text", title: "Gestión del Ciclo de Vida del Trabajo", text: "Desde la creación hasta el cobro, el ciclo completo de un trabajo se maneja dentro de la app:\n• Creación de trabajo con asignación de cliente, prioridad y programación.\n• Línea de tiempo de actividades — los técnicos registran actualizaciones en tiempo real desde el campo.\n• Seguimiento de insumos — materiales usados, cantidades y costos por trabajo.\n• Registro de pagos — cobros en campo registrados por orden de trabajo.\n\nCada cambio de estado y acción se sincroniza al instante en todo el equipo." },
+          { type: "grid", items: [ { src: "/tuerca/job_creation.png", caption: "Creación de trabajo — flujo de asignación rápida" }, { src: "/tuerca/job.png", caption: "Detalle del trabajo — vista completa de la orden" } ] },
+          { type: "grid", items: [ { src: "/tuerca/job_activities.png", caption: "Feed de actividades — reporte en tiempo real desde el campo" }, { src: "/tuerca/job_payment.png", caption: "Seguimiento de pagos — cobros en campo" } ] },
+          { type: "grid", items: [ { src: "/tuerca/job_supplies.png", caption: "Registro de insumos — materiales y costos" }, { src: "/tuerca/clients.png", caption: "Gestión de clientes — contacto e historial" } ] },
+          { type: "text", title: "Gestión de Equipos", text: "Un sistema de roles granular (Propietario, Admin, Miembro) controla exactamente qué puede ver y hacer cada persona. Los administradores pueden invitar miembros, ajustar permisos y monitorear el rendimiento del equipo desde una sola vista.\n\nDiseñado para empresas de servicios pequeñas y medianas donde la responsabilidad y la claridad de roles son fundamentales." },
+          { type: "grid", items: [ { src: "/tuerca/team.png", caption: "Panel de equipo — vista general de miembros" }, { src: "/tuerca/team_edit.png", caption: "Edición de roles y permisos" } ] },
+          { type: "text", title: "Arquitectura y Migración Técnica", text: "La plataforma fue migrada de un stack React web + tRPC a una solución cross-platform móvil completa:\n• React Native + Expo para iOS/Android desde un único codebase.\n• NativeWind (TailwindCSS para React Native) para una UI consistente con dark mode nativo.\n• tRPC para una API completamente tipada de punta a punta — tipos compartidos entre servidor y cliente móvil.\n• Drizzle ORM con PostgreSQL para definiciones de esquema tipadas y migraciones.\n• Better-Auth para gestión de sesiones y control de acceso basado en roles.\n• Sincronización con Calendario — los trabajos se sincronizan dinámicamente al calendario nativo del dispositivo.\n• Arquitectura multi-tenant: cada organización tiene datos, miembros y facturación aislados." },
+          { type: "text", title: "Tests End-to-End (Maestro)", text: "Los flujos de usuario críticos están cubiertos por tests E2E automatizados con Maestro — un framework de testing de UI móvil que simula interacciones reales de usuario en un emulador.\n\nLos tests validan la experiencia completa de punta a punta: desde gestos e interacciones en pantalla hasta persistencia de datos y estados de error. Esto garantiza que las actualizaciones no rompan los flujos principales de los que dependen los equipos de campo a diario." },
+          { type: "video", src: "/tuerca/tests/registro.mp4", title: "Test E2E — Flujo de Registro", caption: "Test automatizado con Maestro: registro de usuario y onboarding (emulador)" }
+        ]
+      }
+    }
+  },
   {
     slug: "relocate",
     year: "2026",
@@ -24,7 +75,7 @@ export const projects = [
         role: "Desarrollador Full Stack",
         content: [
           { type: "text", title: "Resumen", text: "Aplicación interactiva de mapas (Leaflet y Turf.js) para visualizar hasta qué barrios podés llegar en cierta cantidad de minutos usando caminando, bicicleta, auto o transporte público." },
-          { type: "grid", items: [ { src: "/relocate-app/inicial.png", caption: "Búsqueda de partida" }, { src: "/relocate-app/resultado_colectivos.png", caption: "Alcance en Colectivos" }, { src: "/relocate-app/resultado_auto.png", caption: "Alcance en Auto" } ] },
+          { type: "grid", items: [ { src: "/relocate-app/inicial.png", caption: "Búsqueda de partida" }, { src: "/relocate-app/resultado_colectivos.png", caption: "Alcance en Colectivos" }, { src: "/relocate-app/resultado_subtes.png", caption: "Alcance en Subte" } ] },
           { type: "text", title: "Logros destacados", text: "Desarrollo de un algoritmo propio para calcular isócronas de transporte público usando datos reales de horarios (GTFS), uniendo backend en Python (Flask) con geocodificación de Nominatim." },
           { type: "text", title: "Detalles", text: "Flujo de dos pantallas, controles deslizantes para el tiempo de viaje, desglose dinámico de líneas de transporte y filtros agregados de zonas de interés." }
         ]
@@ -64,7 +115,7 @@ export const projects = [
           { type: "code", title: "Example: Structured Wide Event", text: `{
   "timestamp": "2026-02-19T16:40:29.786Z",
   "request_id": "mltot5y2-3pf6a",
-  "service": "unknown",
+  "service": "single-resto",
   "environment": "development",
   "action_name": "updateProduct",
   "duration_ms": 23,
@@ -108,7 +159,7 @@ export const projects = [
           { type: "code", title: "Ejemplo: Wide Event Estructurado", text: `{
   "timestamp": "2026-02-19T16:40:29.786Z",
   "request_id": "mltot5y2-3pf6a",
-  "service": "unknown",
+  "service": "single-resto",
   "environment": "development",
   "action_name": "updateProduct",
   "duration_ms": 23,
@@ -130,102 +181,41 @@ export const projects = [
     }
   },
 
+  
   {
-    slug: "tuerca",
+    slug: "gsp",
     year: "2025",
-    client: "Archived",
-    stack: ["React", "React Native", "tRPC", "Monorepo", "PostgreSQL", "Drizzle ORM", "Better-Auth", "Supabase"],
-    links: { repo: "" },
-    hero: { type: "image", src: "/tuerca/jobs.png" },
+    client: "Personal / Research",
+    stack: ["Next.js", "Node.js", "PostgreSQL", "Drizzle ORM", "Cloudflare R2", "Better-Auth"],
+    links: { repo: "https://github.com/juanm512/gsp" },
+    hero: { type: "image", src: "/gsp/thumbnail.webp" },
     locales: {
       en: {
-        title: "TUERCA — Professional Services Platform",
-        description: "Multi-tenant SaaS platform for service professionals to manage jobs, clients and teams — monorepo with React web dashboard, React Native mobile app and tRPC for end-to-end typesafety.",
-        role: "Sole Developer & Architect",
+        title: "GSP — Gaussian Splatting Platform",
+        description: "Self-hosted platform for uploading scenes and orchestrating GPU rendering jobs that produce Gaussian Splatting outputs — a research project exploring an emerging 3D reconstruction technology.",
+        role: "Developer / Research",
         content: [
-          { type: "text", title: "Overview", text: "TUERCA is a full-stack SaaS platform designed for independent professionals and service companies (technicians, installers, maintenance teams) to centralize their operations. The system features a web dashboard for in-depth management and a React Native mobile app for on-the-go access — all powered by a monorepo architecture with tRPC ensuring end-to-end type safety between frontend and backend." },
-          { type: "grid", items: [ { src: "/tuerca/jobs.png", caption: "Jobs board — Kanban-style view" }, { src: "/tuerca/clientes.png", caption: "Client management CRM" } ] },
-          { type: "text", title: "Web Dashboard", text: "The web dashboard provides a Kanban-style job board where work orders are grouped by status (Pending, Accepted, In Progress, Completed). Each job has a detailed view with multiple tabs:\n• General — job description, client info, assigned worker, priority and temporal progress tracking.\n• Object — detailed asset information (brand, model, serial number, condition, value and location).\n• Files — image and document attachments tied to each job.\n• Supplies — materials tracking with category, quantity, unit price, and automatic cost summaries.\n• Activities — timeline of actions performed on the job.\n• Payments — payment tracking per job." },
-          { type: "grid", items: [ { src: "/tuerca/jobs_especifico_general.png", caption: "Job detail — General tab" }, { src: "/tuerca/jobs_especifico_objeto.png", caption: "Job detail — Asset tracking" } ] },
-          { type: "grid", items: [ { src: "/tuerca/jobs_especifico_archivos.png", caption: "Job detail — File attachments" }, { src: "/tuerca/jobs_especifico_insumos.png", caption: "Job detail — Supplies & cost summary" } ] },
-          { type: "video", src: "/tuerca/job_actividades.mp4", title: "Job Activities Flow", caption: "Activity timeline within a specific job" },
-          { type: "text", title: "Mobile App (React Native)", text: "The companion mobile app shares the same backend via tRPC and provides:\n• Authentication with email/password (Better-Auth) and session management.\n• Multi-organization support — users can belong to or create multiple organizations, each with independent members and billing plans.\n• Full personalization: light/dark theme toggle, language switching (Spanish/English) and configurable date formats.\n• Account management with avatar upload, profile editing and international phone number support.\n• Bottom-tab navigation ready for Home, Calendar, Jobs, Routes and Clients modules." },
-          { type: "grid", items: [ { src: "/tuerca/mobile/Screenshot_20260226-191506.png", caption: "Login — light theme" }, { src: "/tuerca/mobile/Screenshot_20260226-191459.png", caption: "Login — dark theme with theme picker" } ] },
-          { type: "grid", items: [ { src: "/tuerca/mobile/Screenshot_20260226-191541.png", caption: "Organization selector" }, { src: "/tuerca/mobile/Screenshot_20260226-191547.png", caption: "Settings panel" } ] },
-          { type: "grid", items: [ { src: "/tuerca/mobile/Screenshot_20260226-191555.png", caption: "Account profile" }, { src: "/tuerca/mobile/Screenshot_20260226-191636.png", caption: "Personalization — i18n & date formats" } ] },
-          { type: "grid", items: [ { src: "/tuerca/mobile/Screenshot_20260226-191809.png", caption: "Navigation drawer" }, { src: "/tuerca/mobile/Screenshot_20260226-191819.png", caption: "Organization management" } ] },
-          { type: "text", title: "Architecture & Technical Highlights", text: "• Monorepo structure sharing types, validators and API contracts between web, mobile and server.\n• tRPC for fully typesafe client-server communication — zero runtime overhead, caught at compile time.\n• PostgreSQL database with Drizzle ORM for type-safe schema definitions and migrations.\n• Better-Auth for authentication with email/password, session handling and role-based access.\n• Supabase as database host with connection pooling.\n• Multi-tenant data isolation at the organization level, with member invitation flows and billing plan support.\n• Internationalization (i18n) across both web and mobile — Spanish and English with locale-aware date formatting.\n• Dark/light theme support across the entire platform." },
-          { type: "text", title: "Database Design", text: "The data model was designed in Excalidraw and implemented with Drizzle ORM migrations. It covers organizations, members, roles, jobs, clients, assets, supplies, payments, files and activity logs — all scoped per organization for multi-tenant isolation." },
-          { type: "grid", items: [ { src: "/tuerca/image.png", caption: "Database schema & architecture — Excalidraw" } ] },
-          { type: "text", title: "Status", text: "This project was archived due to time constraints. The user account system, organization management (with member invitations and billing), configuration and personalization features were fully implemented across web and mobile. The job management module on the web dashboard was substantially built but not fully polished. The project demonstrates full-stack SaaS architecture, monorepo coordination and cross-platform development at a professional level." }
+          { type: "text", title: "What is Gaussian Splatting?", text: "3D Gaussian Splatting is a real-time rendering technique that reconstructs photorealistic 3D scenes from a set of 2D images. Unlike traditional mesh-based rendering, it represents scenes as millions of semi-transparent ellipsoids (\"splats\"), enabling high-fidelity reconstruction of real environments with neural-network-level visual quality.\n\nThis project was built to explore the technology practically — by building the infrastructure needed to run these renders at scale." },
+          { type: "text", title: "What it does", text: "GSP is a multi-tenant platform where users upload a set of photos of a scene and receive a fully rendered Gaussian Splatting output. Under the hood:\n• Files are uploaded to Cloudflare R2 and a render job is queued.\n• A background worker rents GPU compute, runs the splatting algorithm, and stores the result.\n• Failed jobs are retried automatically with exponential backoff.\n• Organizations can invite members and manage their own render history and usage." },
+          { type: "full-width-image", src: "/gsp/pipeline.png", caption: "Rendering pipeline — upload → preprocessing → GPU queue → output → R2 storage" },
+          { type: "text", title: "Technical Highlights", text: "• Background job orchestration with retry logic and status tracking (pending / running / failed / success).\n• GPU rental pipeline — compute is provisioned on demand per job, minimizing idle costs.\n• Cloudflare R2 for asset storage — uploads and rendered outputs.\n• Multi-tenant architecture: organizations with member invitations and per-org job history.\n• Payment service integration for usage-based billing.\n• Next.js frontend with shadcn/ui; Drizzle ORM + PostgreSQL for job and user state." },
+          { type: "video", src: "/gsp/gsp_vista_rapida_funcionalidades_admin_cutted.mp4", title: "Admin Interface", caption: "Quick walkthrough of the admin panel — job queue, org management and render status" }
         ]
       },
       es: {
-        title: "TUERCA — Plataforma de Servicios Profesionales",
-        description: "Plataforma SaaS multi-tenant para profesionales de servicios: gestión de trabajos, clientes y equipos — monorepo con dashboard web en React, app móvil en React Native y tRPC para tipado end-to-end.",
-        role: "Desarrollador Único & Arquitecto",
+        title: "GSP — Plataforma de Gaussian Splatting",
+        description: "Plataforma self-hosted para subir escenas y orquestar trabajos de render GPU que producen salidas de Gaussian Splatting — un proyecto de investigación sobre una tecnología 3D emergente.",
+        role: "Desarrollador / Investigación",
         content: [
-          { type: "text", title: "Resumen", text: "TUERCA es una plataforma SaaS full-stack diseñada para profesionales independientes y empresas de servicios (técnicos, instaladores, equipos de mantenimiento) que necesitan centralizar sus operaciones. El sistema incluye un dashboard web para gestión detallada y una app móvil en React Native para acceso en movimiento — todo impulsado por una arquitectura monorepo con tRPC garantizando tipado seguro de punta a punta." },
-          { type: "grid", items: [ { src: "/tuerca/jobs.png", caption: "Tablero de trabajos — vista Kanban" }, { src: "/tuerca/clientes.png", caption: "CRM de gestión de clientes" } ] },
-          { type: "text", title: "Dashboard Web", text: "El dashboard web ofrece un tablero Kanban donde los trabajos se agrupan por estado (Pendiente, Aceptado, En Proceso, Completado). Cada trabajo tiene una vista detallada con múltiples pestañas:\n• General — descripción del trabajo, info del cliente, trabajador asignado, prioridad y seguimiento temporal.\n• Objeto — información detallada del activo (marca, modelo, número de serie, estado, valor y ubicación).\n• Archivos — imágenes y documentos adjuntos vinculados a cada trabajo.\n• Insumos — seguimiento de materiales con categoría, cantidad, precio unitario y resúmenes de costos automáticos.\n• Actividades — línea de tiempo de acciones realizadas en el trabajo.\n• Pagos — seguimiento de pagos por trabajo." },
-          { type: "grid", items: [ { src: "/tuerca/jobs_especifico_general.png", caption: "Detalle del trabajo — Pestaña General" }, { src: "/tuerca/jobs_especifico_objeto.png", caption: "Detalle del trabajo — Seguimiento de activos" } ] },
-          { type: "grid", items: [ { src: "/tuerca/jobs_especifico_archivos.png", caption: "Detalle del trabajo — Archivos adjuntos" }, { src: "/tuerca/jobs_especifico_insumos.png", caption: "Detalle del trabajo — Insumos y resumen de costos" } ] },
-          { type: "video", src: "/tuerca/job_actividades.mp4", title: "Flujo de Actividades", caption: "Línea de tiempo de actividades dentro de un trabajo específico" },
-          { type: "text", title: "App Móvil (React Native)", text: "La app móvil comparte el mismo backend vía tRPC y ofrece:\n• Autenticación con email/contraseña (Better-Auth) y gestión de sesiones.\n• Soporte multi-organización — los usuarios pueden pertenecer o crear múltiples organizaciones, cada una con miembros independientes y planes de facturación.\n• Personalización completa: tema claro/oscuro, cambio de idioma (Español/Inglés) y formatos de fecha configurables.\n• Gestión de cuenta con carga de avatar, edición de perfil y soporte de números telefónicos internacionales.\n• Navegación por tabs preparada para módulos de Inicio, Calendario, Trabajos, Recorridos y Clientes." },
-          { type: "grid", items: [ { src: "/tuerca/mobile/Screenshot_20260226-191506.png", caption: "Login — tema claro" }, { src: "/tuerca/mobile/Screenshot_20260226-191459.png", caption: "Login — tema oscuro con selector de tema" } ] },
-          { type: "grid", items: [ { src: "/tuerca/mobile/Screenshot_20260226-191541.png", caption: "Selector de organizaciones" }, { src: "/tuerca/mobile/Screenshot_20260226-191547.png", caption: "Panel de configuración" } ] },
-          { type: "grid", items: [ { src: "/tuerca/mobile/Screenshot_20260226-191555.png", caption: "Perfil de cuenta" }, { src: "/tuerca/mobile/Screenshot_20260226-191636.png", caption: "Personalización — i18n y formatos de fecha" } ] },
-          { type: "grid", items: [ { src: "/tuerca/mobile/Screenshot_20260226-191809.png", caption: "Drawer de navegación" }, { src: "/tuerca/mobile/Screenshot_20260226-191819.png", caption: "Gestión de organizaciones" } ] },
-          { type: "text", title: "Arquitectura y Destacados Técnicos", text: "• Estructura monorepo compartiendo tipos, validadores y contratos de API entre web, mobile y servidor.\n• tRPC para comunicación cliente-servidor completamente tipada — cero overhead en runtime, errores detectados en tiempo de compilación.\n• Base de datos PostgreSQL con Drizzle ORM para definiciones de esquema y migraciones tipadas.\n• Better-Auth para autenticación con email/contraseña, manejo de sesiones y acceso basado en roles.\n• Supabase como host de base de datos con connection pooling.\n• Aislamiento de datos multi-tenant a nivel de organización, con flujos de invitación de miembros y soporte de planes de facturación.\n• Internacionalización (i18n) en web y mobile — Español e Inglés con formateo de fechas según la localización.\n• Soporte de tema oscuro/claro en toda la plataforma." },
-          { type: "text", title: "Diseño de Base de Datos", text: "El modelo de datos fue diseñado en Excalidraw e implementado con migraciones de Drizzle ORM. Cubre organizaciones, miembros, roles, trabajos, clientes, activos, insumos, pagos, archivos y logs de actividad — todo aislado por organización para multi-tenancy." },
-          { type: "grid", items: [ { src: "/tuerca/image.png", caption: "Esquema de base de datos y arquitectura — Excalidraw" } ] },
-          { type: "text", title: "Estado", text: "Este proyecto fue archivado por limitaciones de tiempo. El sistema de cuentas de usuario, gestión de organizaciones (con invitaciones de miembros y facturación), configuración y personalización fueron completamente implementados en web y mobile. El módulo de gestión de trabajos en el dashboard web fue construido en gran parte. El proyecto demuestra arquitectura SaaS full-stack, coordinación de monorepo y desarrollo cross-platform a nivel profesional." }
+          { type: "text", title: "¿Qué es Gaussian Splatting?", text: "Gaussian Splatting es una técnica de renderizado en tiempo real que reconstruye escenas 3D fotorrealistas a partir de imágenes 2D. A diferencia del renderizado tradicional con mallas, representa las escenas como millones de elipsoides semitransparentes (\"splats\"), logrando una reconstrucción de alta fidelidad de entornos reales con calidad visual comparable a redes neuronales.\n\nEste proyecto fue construido para explorar la tecnología de forma práctica — desarrollando la infraestructura necesaria para correr estos renders a escala." },
+          { type: "text", title: "Qué hace", text: "GSP es una plataforma multi-tenant donde los usuarios suben un conjunto de fotos de una escena y reciben una salida de Gaussian Splatting completamente renderizada. Por debajo:\n• Los archivos se suben a Cloudflare R2 y se encola un trabajo de render.\n• Un worker en background alquila cómputo GPU, ejecuta el algoritmo de splatting y almacena el resultado.\n• Los trabajos fallidos se reintentan automáticamente con backoff exponencial.\n• Las organizaciones pueden invitar miembros y gestionar su propio historial de renders y uso." },
+          { type: "full-width-image", src: "/gsp/pipeline.png", caption: "Pipeline de renderizado — upload → preprocesamiento → cola GPU → salida → almacenamiento R2" },
+          { type: "text", title: "Destacados Técnicos", text: "• Orquestación de trabajos en background con lógica de reintentos y seguimiento de estado (pendiente / en proceso / fallido / exitoso).\n• Pipeline de alquiler de GPU — el cómputo se aprovisiona bajo demanda por trabajo, minimizando costos ociosos.\n• Cloudflare R2 para almacenamiento de assets — uploads y salidas renderizadas.\n• Arquitectura multi-tenant: organizaciones con invitaciones de miembros e historial de trabajos por organización.\n• Integración de servicio de pagos para facturación basada en uso.\n• Frontend en Next.js con shadcn/ui; Drizzle ORM + PostgreSQL para estado de trabajos y usuarios." },
+          { type: "video", src: "/gsp/gsp_vista_rapida_funcionalidades_admin_cutted.mp4", title: "Interfaz de Administrador", caption: "Recorrido por el panel de admin — cola de trabajos, gestión de organizaciones y estado de renders" }
         ]
       }
     }
   },
-  
-//   {
-//     slug: "gsp",
-//     year: "2025",
-//     client: "Personal / Research",
-//     stack: ["Node.js", "Next.js", "Rendering Pipeline"],
-//     links: { repo: "https://github.com/juanm512/gsp", live: "" },
-//     hero: { type: "image", src: "/gsp/thumbnail.webp" },
-//     locales: {
-//       en: {
-//         title: "gsp",
-//         description: "Platform for uploading content to be rendered with Gaussian Splattings — includes an upload pipeline and rendering orchestration.",
-//         role: "Developer / Research",
-//         content: [
-//           { type: "text", title: "What it is", text: "Site and toolchain to upload content, queue render jobs and produce Gaussian Splattings output. See the repository for demos and details." },
-//           { type: "text", title: "Highlights", text: "GPU rental pipeline with retries, payment service for organisations, member invitations and R2 storage for assets; background job orchestration." },
-//           { type: "text", title: "Responsibilities", text: "Infrastructure and backend design for rendering pipeline, basic frontend with shadcn, storage and job orchestration." }
-//         ]
-//       },
-//       es: {
-//         title: "gsp",
-//         description: "Sitio para subir contenido y renderizar usando Gaussian Splattings — incluye pipeline de uploads y orquestación de renders.",
-//         role: "Desarrollador / Investigación",
-//         content: [
-//           { type: "text", title: "Qué es", text: "Herramienta para subir contenido, encolar trabajos de render y generar salidas de Gaussian Splattings. Revisa el repositorio para ejemplos." },
-//           { type: "video", src: "/gsp/gsp_vista_rapida_funcionalidades_admin_cutted.mp4", title: "Interfaz de administrador vista rápida", caption: "Interfaz de administrador vista rápida" },
-//           { type: "video", src: "/gsp/gsp_pagina_admin_en_profundidad_cutted.mp4", title: "Interfaz de administradores - Presentaciones", caption: "Interfaz de administradores - Presentaciones" },
-//           { type: "text", title: "Destacados", text: "Pipeline de GPUs con reintentos, servicio de pago para organizaciones, invitaciones de miembros y uso de R2 para almacenamiento." },
-//           { type: "text", title: "Responsabilidades", text: "Diseño de infraestructura para trabajos en background, orquestación y frontend básico." },
-//           { type: "text", title: "Nota", text: `Arquitectura (diagrama): upload → preproc → queue → workers GPU → postproc → storage (R2) → entrega. Imagen SVG o captura de draw.io.
-// Flujo de usuario: screenshot/video corto del form de upload + progreso del job (barra/progreso en %).
-// Outputs finales: imágenes o video renderizado (before/after) — idealmente un par de comparativas.
-// Job queue UI: captura de la interfaz que muestra jobs encolados, retries y estado (pending/running/failed/success).
-// Métricas clave: tiempo medio de render, tasa de éxito, reintentos promedio, coste promedio por job (si tienes números).
-// Logs / retries: ejemplo de log que muestre reintento y manejo de fallos (o captura del panel de alertas).
-// Infra / ops: screenshot o lista corta de servicios (GPU rental, R2, worker pool, orquestador) y cómo se escalan.
-// Demo corto (opcional): video que muestre subir un archivo y la entrega del resultado.
-// Call-to-action: enlace al repo (ya tienes) y nota de cómo pedir demo o acceso.` }
-//         ]
-//       }
-//     }
-//   },
 
   {
     slug: "bmmusic",
@@ -236,7 +226,7 @@ export const projects = [
     hero: { type: "image", src: "/BMusic/bmusichomepage.gif" },
     locales: {
       en: {
-          title: "BM Music — Artist Landing",
+        title: "BM Music — Artist Landing",
         description: "Polished landing page template for music artists — rich animations, song previews, and event ticket integration. A 3-day design-to-deploy sprint.",
         role: "Frontend Developer / Designer",
         content: [

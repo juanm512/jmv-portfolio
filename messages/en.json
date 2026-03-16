@@ -1,28 +1,29 @@
 {
   "Home": {
     "hero": {
-      "title": "I build systems that solve real problems.",
-      "subtitle": "FullStack Developer"
+      "title": "Full Stack Developer — Every problem has a solution.",
+      "title_alt": "Full Stack Developer — I think in problems, I build solutions.",
+      "subtitle": "Juan Manuel Vila"
     },
     "childhood": {
-      "title": "It all started with a question...",
-      "subtitle": "The first steps",
-      "text_1": "How do things work? That curiosity led me to disassemble computers, read programming books I didn't understand, and write my first lines of code. Every error was a discovery, every blue screen a lesson.",
-      "text_2": "Over time, that obsession with understanding became the ability to build. I went from copying tutorials to designing my own solutions, from solving small problems to tackling real challenges that impact real people.",
-      "text_3": "Today, every project is an extension of that same curiosity. The difference is that now I have the tools, the experience, and the discipline to turn ideas into systems that work — and that matter."
+      "title": "I always wanted to know how things work.",
+      "subtitle": "The origin",
+      "text_1": "I grew up in Chivilcoy, Argentina, always getting into my dad's work — repairs, air conditioning installations, whatever he was doing. From an early age I was drawn to understanding how things worked and how to handle them with my hands. That curiosity never left.",
+      "text_2": "I started electronic engineering, and in my third year I had my first programming class in C. Something clicked. I realized that programming had everything I loved about engineering — solving real problems — but with a huge advantage: you can test, fail, and fix in real time.",
+      "text_3": "That led me to change careers and enroll in a Computer Science degree — looking for a more formal foundation for everything I was already teaching myself."
     },
     "abstract": {
-      "title": "Curiosity became engineering.",
-      "subtitle": "Current learning & growth",
-      "text_1": "I'm currently deepening my understanding of software architecture, design patterns, and building scalable systems. Every project is an opportunity to apply new knowledge and challenge what I think I know.",
-      "text_2": "I'm exploring technologies like applied artificial intelligence, 3D processing on the web, and modern infrastructure tooling. I'm interested in understanding not just how to use the tools, but why they work the way they do.",
+      "title": "Practice teaches what theory cannot.",
+      "subtitle": "Background & today",
+      "text_1": "Since I started programming I've been learning through personal projects, mistakes, and an obsession with understanding things deeply. University gave me the structural foundation, but the hands-on experience I built myself — and today I feel ready to tackle diverse problems that a degree alone doesn't prepare you for.",
+      "text_2": "Lately I've been exploring how to automate Gaussian Splatting generation, and I'm shipping a production app for technicians, workshops and service professionals — publishing on the Play Store for the first time, targeting a sector with real and growing demand. Along the way I've built up experience across the full JavaScript/TypeScript ecosystem — React, Next.js, React Native with Expo — alongside Python, Django, Flask, Rust and tools like Power BI.",
       "text_3": "I firmly believe a good developer never stops learning. Technology evolves constantly, and keeping up isn't just a professional necessity — it's what makes this work genuinely exciting."
     },
     "contributions": {
       "title": "Consistency over immediacy.",
       "subtitle": "Code history",
-      "text_1": "Programming is a discipline that requires time. My contribution rate on GitHub has remained steady, even since before current AI-based tools made the code writing process so widely accessible.",
-      "text_2": "If you notice some gaps in the graph, they correspond to periods of high academic workload at university. However, that time was never idle: during those periods I built around 5 complex projects working in teams under agile methodologies (Scrum), utilizing Python, Rust, Node.js, NestJS, Next.js, Django, and Flask."
+      "text_1": "Coding every day is a habit I built over time — not out of obligation, but because there's always something to learn, improve, or explore. This graph reflects that.",
+      "text_2": "Throughout my degree I built around 5 complex projects in team settings under agile methodologies, using Python, Rust, Node.js, NestJS, Next.js, Django and Flask — projects that taught me as much as any class, and that during those periods shifted contributions away from my personal work."
     },
     "projects": {
       "title": "Projects",
@@ -30,8 +31,8 @@
       "viewProject": "View project"
     },
     "contact": {
-      "title": "Let's build something meaningful.",
-      "subtitle": "Have a project in mind? Let's talk.",
+      "title": "Let's talk",
+      "subtitle": "You can reach me through:",
       "email": "Email",
       "github": "GitHub",
       "linkedin": "LinkedIn"
