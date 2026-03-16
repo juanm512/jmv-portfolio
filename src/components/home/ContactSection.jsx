@@ -60,13 +60,13 @@ export default function ContactSection() {
     },
     {
       label: t("github"),
-      href: "https://github.com/juanmvila",
+      href: "https://github.com/juanm512",
       icon: GitHubIcon,
       external: true
     },
     {
       label: t("linkedin"),
-      href: "https://linkedin.com/in/juanmvila",
+      href: "https://linkedin.com/in/juanmanuelvila/",
       icon: LinkedInIcon,
       external: true
     }
