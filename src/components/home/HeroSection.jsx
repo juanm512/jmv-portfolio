@@ -63,7 +63,7 @@ export default function HeroSection() {
             }}
           >
             <ThreeParticleImage
-              src="/Landing.png"
+              src="/L44.jpeg"
               disperseProgressRef={disperseRef}
               baseParticleSize={10}
               maxGridParticles={7500}

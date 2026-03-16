@@ -92,7 +92,7 @@ export default function LocaleLayout({ children, params: { locale } }) {
       <body className="relative font-sans w-full min-h-screen p-0 m-0 overflow-x-hidden bg-background-dark text-white">
         <NextIntlClientProvider messages={messages}>
           <SmoothScroll>
-            <FPSCounter />
+            {/* <FPSCounter /> */}
             <CustomCursor />
             <Header lang={locale} />
             {children}
