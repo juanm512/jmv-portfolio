@@ -1,7 +1,47 @@
 export const projects = [
-  
+
+  {
+    slug: "copon",
+    accentColor: "#00FF9C",
+    year: "2026",
+    client: "Freelance / Client Project",
+    stack: ["Next.js", "tRPC", "Drizzle ORM", "Supabase", "TanStack Query", "Better-Auth", "Tailwind", "shadcn/ui"],
+    links: { live: "https://copon.com.ar" },
+    hero: { type: "image", src: "/copon/hero.png" },
+    locales: {
+      en: {
+        title: "Copon — Football Prediction Tournaments",
+        description: "Full-stack platform to run private football prediction tournaments (prode) among friends, coworkers or communities — real-time standings, configurable point systems and round-based prize pools.",
+        role: "Full Stack Developer (client project)",
+        content: [
+          { type: "text", title: "Overview", text: "A third party approached with the need to organize their group's football prode beyond spreadsheets and WhatsApp threads. Copon turned that into a dedicated product: private tournaments with automatic scoring, live standings and round-based prize pools — not a betting platform, just the tool that replaces the Excel sheet." },
+          { type: "grid", items: [ { src: "/copon/hero.png", caption: "Landing — organize your tournament, manage the prode" } ] },
+          { type: "video", src: "/copon/join-tournament.mp4", title: "Joining a Tournament", caption: "Mobile flow: joining a tournament via invite link (2026 World Cup group stage)" },
+          { type: "text", title: "Tournament Formats", text: "Three configurable formats — round-robin League, Groups + Knockout, or Knockout only — with custom or real teams, editable fixtures and configurable point systems." },
+          { type: "grid", items: [ { src: "/copon/bracket.jpg", caption: "Groups + Knockout format — bracket view" }, { src: "/copon/team-standings.jpg", caption: "League format — standings table" } ] },
+          { type: "grid", items: [ { src: "/copon/matchday.jpg", caption: "Finished matchday — fixture and results" }, { src: "/copon/prode-standings.jpg", caption: "Prode standings — who's winning the pool" } ] },
+          { type: "text", title: "Architecture", text: "T3-turbo monorepo: @repo/db (Drizzle schema + queries), @repo/api (tRPC routers), @repo/auth (Better-Auth), @repo/core (pure business logic, Result<T,E>, no framework), @repo/ui (shadcn/ui), @repo/validators (Zod). Core business logic — scoring, standings — is unit-tested with Vitest following TDD." }
+        ]
+      },
+      es: {
+        title: "Copon — Torneos de Predicción de Fútbol",
+        description: "Plataforma full-stack para organizar torneos privados de prode entre amigos, laburo o comunidad — tabla en tiempo real, sistemas de puntos configurables y pozo de premios por ronda.",
+        role: "Desarrollador Full Stack (proyecto para cliente)",
+        content: [
+          { type: "text", title: "Resumen", text: "Un tercero se acercó con la necesidad de organizar el prode de su grupo más allá de un Excel o un chat de WhatsApp. Copon convirtió eso en un producto dedicado: torneos privados con puntaje automático, tabla en vivo y pozo de premios por ronda — no es una plataforma de apuestas, es la herramienta que reemplaza la planilla." },
+          { type: "grid", items: [ { src: "/copon/hero.png", caption: "Landing — organizá tu torneo, gestioná el prode" } ] },
+          { type: "video", src: "/copon/join-tournament.mp4", title: "Unirse a un torneo", caption: "Flujo mobile: unirse a un torneo por link de invitación (fase de grupos del Mundial 2026)" },
+          { type: "text", title: "Formatos de Torneo", text: "Tres formatos configurables — Liga (todos contra todos), Grupos + Llaves o Solo Llaves — con equipos custom o reales, fixture editable y sistemas de puntos configurables." },
+          { type: "grid", items: [ { src: "/copon/bracket.jpg", caption: "Formato Grupos + Llaves — vista de llave" }, { src: "/copon/team-standings.jpg", caption: "Formato Liga — tabla de posiciones" } ] },
+          { type: "grid", items: [ { src: "/copon/matchday.jpg", caption: "Jornada finalizada — fixture y resultados" }, { src: "/copon/prode-standings.jpg", caption: "Tabla del prode — quién va ganando el pozo" } ] },
+          { type: "text", title: "Arquitectura", text: "Monorepo T3-turbo: @repo/db (schema Drizzle + queries), @repo/api (routers tRPC), @repo/auth (Better-Auth), @repo/core (lógica de negocio pura, Result<T,E>, sin framework), @repo/ui (shadcn/ui), @repo/validators (Zod). La lógica central — puntaje, tabla de posiciones — está testeada con Vitest siguiendo TDD." }
+        ]
+      }
+    }
+  },
   {
     slug: "tuerca",
+    accentColor: "#F97316",
     year: "2026",
     client: "Active / Production",
     stack: ["React Native", "Expo", "tRPC", "Drizzle ORM", "PostgreSQL", "Better-Auth", "Supabase"],
@@ -52,6 +92,7 @@ export const projects = [
   },
   {
     slug: "relocate",
+    accentColor: "#3B82F6",
     year: "2026",
     client: "Personal Project",
     stack: ["Flask", "Python", "JavaScript"],
@@ -84,6 +125,7 @@ export const projects = [
   },
   {
     slug: "single-resto",
+    accentColor: "#F5A623",
     year: "2025",
     client: "Personal / Client",
     stack: ["Next.js", "TailwindCSS", "React", "Docker", "monorepo", "PostgreSQL", "Drizzle ORM", "mercadopago"],
@@ -184,6 +226,7 @@ export const projects = [
   
   {
     slug: "gsp",
+    accentColor: "#A855F7",
     year: "2025",
     client: "Personal / Research",
     stack: ["Next.js", "Node.js", "PostgreSQL", "Drizzle ORM", "Cloudflare R2", "Better-Auth"],
@@ -219,6 +262,7 @@ export const projects = [
 
   {
     slug: "bmmusic",
+    accentColor: "#EC4899",
     year: "2024",
     client: "Personal",
     stack: ["Next.js", "TailwindCSS", "Framer Motion"],
@@ -254,6 +298,7 @@ export const projects = [
 
   {
     slug: "atlas-3d",
+    accentColor: "#8B5A2B",
     year: "2023",
     client: "Freelance / Research",
     stack: ["Next.js", "threejs", "react-three-fiber", "framer-motion"],
@@ -292,6 +337,7 @@ export const projects = [
   
   {
     slug: "f1-stats",
+    accentColor: "#EF4444",
     year: "2023",
     client: "Personal / Learning",
     stack: ["React Native", "Expo", "JavaScript"],
@@ -327,6 +373,7 @@ export const projects = [
 
   {
     slug: "donatelo",
+    accentColor: "#FBBF24",
     year: "2022",
     client: "Personal / Research",
     stack: ["React", "Node.js", "socket.io", "MongoDB", "ethereum", "Express"],
@@ -360,6 +407,7 @@ export const projects = [
 
   {
     slug: "vas-ecommerce",
+    accentColor: "#22D3EE",
     year: "2022",
     client: "Freelance",
     stack: ["Next.js", "TailwindCSS", "MongoDB"],

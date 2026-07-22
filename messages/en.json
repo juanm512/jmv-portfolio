@@ -10,20 +10,20 @@
       "subtitle": "The origin",
       "text_1": "I grew up in Chivilcoy, Argentina, always getting into my dad's work — repairs, air conditioning installations, whatever he was doing. From an early age I was drawn to understanding how things worked and how to handle them with my hands. That curiosity never left.",
       "text_2": "I started electronic engineering, and in my third year I had my first programming class in C. Something clicked. I realized that programming had everything I loved about engineering — solving real problems — but with a huge advantage: you can test, fail, and fix in real time.",
-      "text_3": "That led me to change my major and enroll in a University Programmer Analyst program—seeking a more formal foundation for everything I was already learning on my own. In these times of increased productivity, analyst skills are increasingly important, and that training gave me a broader perspective on how to design effective solutions, not just code that works."
+      "text_3": "That led me to change my major and enroll in a University Programmer Analyst program — seeking a more formal foundation for everything I was already learning on my own. That training gave me a broader perspective on how to design effective solutions, not just code that works."
     },
     "abstract": {
       "title": "Practice teaches what theory cannot.",
       "subtitle": "Background & today",
-      "text_1": "Since I started programming I've been learning through personal projects, mistakes, and an obsession with understanding things deeply. University gave me the structural foundation, but the hands-on experience I built myself — and today I feel ready to tackle diverse problems that a degree alone doesn't prepare you for.",
-      "text_2": "Lately I've been exploring how to automate Gaussian Splatting generation, and I'm shipping a production app for technicians, workshops and service professionals — publishing on the Play Store for the first time, targeting a sector with real and growing demand. Along the way I've built up experience across the full JavaScript/TypeScript ecosystem — React, Next.js, React Native with Expo — alongside Python, Django, Flask, Rust and tools like Power BI.",
+      "text_1": "Since I started programming I've been learning through personal projects, mistakes, and an obsession with understanding things deeply. University gave me the structural foundation, but the hands-on experience I built myself — and with my degree now completed, I feel ready to tackle diverse problems that a title alone doesn't prepare you for.",
+      "text_2": "Lately I've been exploring how to automate Gaussian Splatting generation. Alongside that, I'm shipping a production app for technicians, workshops and service professionals — my first time publishing on the Play Store, targeting a sector with real and growing demand. Along the way I've built up experience across the full JavaScript/TypeScript ecosystem — React, Next.js, React Native with Expo — alongside Python, Django, Flask, Rust, PostgreSQL and tools like Power BI.",
       "text_3": "I firmly believe a good developer never stops learning. Technology evolves constantly, and keeping up isn't just a professional necessity — it's what makes this work genuinely exciting."
     },
     "contributions": {
       "title": "Consistency over immediacy.",
       "subtitle": "Code history",
       "text_1": "Coding every day is a habit I built over time — not out of obligation, but because there's always something to learn, improve, or explore. This graph reflects that.",
-      "text_2": "Throughout my career, I built approximately five complex projects working in teams using agile methodologies, Scrum, Python, Rust, Node.js, NestJS, Next.js, Django, and Flask. These periods took a backseat to my personal projects, but they helped me understand how teams work and the different methodologies for solving various problems."
+      "text_2": "Throughout my career, I built approximately five complex projects working in teams using agile methodologies (Scrum), Python, Rust, Node.js, NestJS, Next.js, Django, and Flask. These periods took a backseat to my personal projects, but they helped me understand how teams work and the different methodologies for solving various problems."
     },
     "projects": {
       "title": "Projects",
@@ -76,53 +76,5 @@
     "contact": "Contact",
     "made_by": "Made by:",
     "typography": "Typography:"
-  },
-  "Legacy": {
-    "Description": {
-      "title": "About me",
-      "first_p": "I'm a programmer passionate about using technology to create innovative solutions and tools. I consider myself a person who enjoys learning new technologies, tools and finding new challenges to solve. I'm excited about entering a challenging project.",
-      "second_p": {
-        "first": "I forged my knowledge initially at",
-        "second": ", taking a leap to",
-        "third": "I'm a born self-taught learner, and started learning from",
-        "fourth": "and"
-      },
-      "third_p": {
-        "first": "I master languages like",
-        "second": ", along with",
-        "third": "or",
-        "fourth": "with Express and EJS for SSR. I'm also familiar with the basics of",
-        "fifth": "and I'm currently learning",
-        "sixth": "I also have experience using libraries like",
-        "seventh": "and some programs like"
-      },
-      "fourth_p": {
-        "first": "I'm currently developing a program to interact with",
-        "second": "provided by",
-        "third": "locally. I'm also making updates to some projects and researching about"
-      }
-    },
-    "Landing": {
-      "who_i_am": "Hello, my name is Juan Manuel Vila",
-      "page_description": "This is my portfolio, made in Argentina with ",
-      "work_name": "FullStack Developer",
-      "loading": "Loading . . ."
-    },
-    "Contact": {
-      "contact_text": "Contact me!"
-    },
-    "Projects": {
-      "view_more": "View more"
-    },
-    "Header": {
-      "go_back": "<- Go back",
-      "home": "Home",
-      "about_me": "About me",
-      "my_work": "My work",
-      "contact": "Contact",
-      "close": "Close",
-      "typography": "Typography:",
-      "made_by": "Made by:"
-    }
   }
 }

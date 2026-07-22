@@ -7,6 +7,15 @@ import { motion, useScroll, useTransform } from "framer-motion"
 import { useTranslations } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
 
+// Converts a "#rrggbb" hex color to an "r, g, b" triplet for use in rgba()
+function hexToRgbTriplet(hex) {
+  const clean = hex.replace("#", "")
+  const r = parseInt(clean.substring(0, 2), 16)
+  const g = parseInt(clean.substring(2, 4), 16)
+  const b = parseInt(clean.substring(4, 6), 16)
+  return `${r}, ${g}, ${b}`
+}
+
 // 3D mouse-tracking hover hook
 function use3DTilt(ref) {
   const [tilt, setTilt] = useState({ rotateX: 0, rotateY: 0 })
@@ -39,6 +48,8 @@ function ProjectPoster({ project, index, locale, totalCount }) {
   const t = useTranslations("Home.projects")
 
   const { tilt, handleMouseMove, handleMouseLeave } = use3DTilt(innerRef)
+  const accent = project.accentColor || "#00FF9C"
+  const accentRgb = hexToRgbTriplet(accent)
 
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -107,10 +118,13 @@ function ProjectPoster({ project, index, locale, totalCount }) {
             ref={innerRef}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            className="relative overflow-hidden rounded-2xl bg-background-dark/90 backdrop-blur-sm border border-white/10 shadow-2xl shadow-black/50 transition-shadow duration-500 group-hover:border-green-glow/30 group-hover:shadow-[0_0_60px_rgba(0,255,156,0.15)]"
+            className="relative overflow-hidden rounded-2xl bg-background-dark/90 backdrop-blur-sm border border-white/10 shadow-2xl shadow-black/50 transition-shadow duration-500 group-hover:border-[var(--accent-border)] group-hover:shadow-[0_0_60px_var(--accent-shadow)]"
             style={{
               transform: `perspective(800px) rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
               transition: "transform 0.15s ease-out",
+              "--accent": accent,
+              "--accent-border": `rgba(${accentRgb}, 0.3)`,
+              "--accent-shadow": `rgba(${accentRgb}, 0.15)`,
             }}
           >
             {/* Image */}
@@ -136,7 +150,10 @@ function ProjectPoster({ project, index, locale, totalCount }) {
 
               {/* View label */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-white font-medium text-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 bg-green-glow/20 backdrop-blur-sm px-6 py-2 rounded-full">
+                <span
+                  className="text-white font-medium text-lg opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-4 group-hover:translate-y-0 backdrop-blur-sm px-6 py-2 rounded-full"
+                  style={{ backgroundColor: `rgba(${accentRgb}, 0.2)` }}
+                >
                   {t("viewProject")} →
                 </span>
               </div>
@@ -150,7 +167,7 @@ function ProjectPoster({ project, index, locale, totalCount }) {
             {/* Content — staggered reveal */}
             <div className="p-6">
               <motion.h3
-                className="text-xl md:text-2xl font-medium text-white mb-2 group-hover:text-green-glow transition-colors duration-300"
+                className="text-xl md:text-2xl font-medium text-white mb-2 group-hover:text-[var(--accent)] transition-colors duration-300"
                 style={{ opacity: titleOpacity, y: titleY }}
               >
                 {project.title}

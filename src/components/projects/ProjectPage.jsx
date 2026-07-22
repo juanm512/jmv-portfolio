@@ -3,10 +3,39 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion } from "framer-motion"
+import { motion, useInView } from "framer-motion"
 import { useTranslations, useLocale } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
 import { AnimatePresence } from "framer-motion"
+
+// Only loads/plays once scrolled near the viewport, pauses when it leaves —
+// avoids autoplaying every project video at once on page load.
+function LazyVideo({ src, className }) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { margin: "200px 0px" })
+
+  useEffect(() => {
+    const video = ref.current
+    if (!video) return
+    if (isInView) {
+      video.play().catch(() => {})
+    } else {
+      video.pause()
+    }
+  }, [isInView])
+
+  return (
+    <video
+      ref={ref}
+      src={src}
+      muted
+      loop
+      playsInline
+      preload="none"
+      className={className}
+    />
+  )
+}
 
 // Icons
 function ArrowLeftIcon() {
@@ -60,12 +89,8 @@ function GridBlock({ block, onMediaClick }) {
               onClick={() => onMediaClick(item.src, isVideo ? "video" : "image")}
             >
               {isVideo ? (
-                <video
+                <LazyVideo
                   src={item.src}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               ) : (
@@ -161,13 +186,8 @@ function VideoBlock({ block, onMediaClick }) {
         data-cursor="Play"
         onClick={() => onMediaClick(block.src, "video")}
       >
-        <video
+        <LazyVideo
           src={block.src}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
           className="w-full h-auto max-h-[80vh] object-contain bg-black"
         />
         {block.caption && (
@@ -297,6 +317,15 @@ function Lightbox({ media, onClose }) {
   )
 }
 
+// Converts a "#rrggbb" hex color to an "r, g, b" triplet for use in rgba()
+function hexToRgbTriplet(hex) {
+  const clean = hex.replace("#", "")
+  const r = parseInt(clean.substring(0, 2), 16)
+  const g = parseInt(clean.substring(2, 4), 16)
+  const b = parseInt(clean.substring(4, 6), 16)
+  return `${r}, ${g}, ${b}`
+}
+
 // ─── Main Component ──────────────────────────────────────────────
 
 export default function ProjectPage({ project, nextProject }) {
@@ -311,9 +340,18 @@ export default function ProjectPage({ project, nextProject }) {
     setSelectedMedia({ src, type })
   }
 
+  const accent = project.accentColor || "#00FF9C"
+  const accentRgb = hexToRgbTriplet(accent)
+
   return (
-    <main className="min-h-screen bg-background-dark text-white font-sans selection:bg-green-glow/30">
-      
+    <main
+      className="min-h-screen bg-background-dark text-white font-sans selection:bg-green-glow/30"
+      style={{
+        "--accent": accent,
+        "--accent-border": `rgba(${accentRgb}, 0.3)`,
+      }}
+    >
+
       {/* Lightbox */}
       <AnimatePresence>
         {selectedMedia && (
@@ -375,7 +413,7 @@ export default function ProjectPage({ project, nextProject }) {
              animate={{ opacity: 1, y: 0 }}
              transition={{ duration: 0.8, ease: "easeOut" }}
            >
-             <p className="text-green-glow font-mono text-sm tracking-[0.2em] uppercase mb-4">
+             <p className="text-[var(--accent)] font-mono text-sm tracking-[0.2em] uppercase mb-4">
                {project.client} • {project.year}
              </p>
              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6">
@@ -408,12 +446,12 @@ export default function ProjectPage({ project, nextProject }) {
                 <p className="text-xs text-white/40 uppercase tracking-widest mb-2 font-mono">{t("links")}</p>
                 <div className="flex gap-4">
                   {project.links?.live && (
-                    <a href={project.links.live} target="_blank" rel="noreferrer" data-cursor="Visit" className="text-green-glow hover:text-white transition-colors flex items-center gap-1 group">
+                    <a href={project.links.live} target="_blank" rel="noreferrer" data-cursor="Visit" className="text-[var(--accent)] hover:text-white transition-colors flex items-center gap-1 group">
                        {t("live")} <ExternalLinkIcon />
                     </a>
                   )}
                   {project.links?.live2 && (
-                    <a href={project.links.live2} target="_blank" rel="noreferrer" data-cursor="Visit" className="text-green-glow hover:text-white transition-colors flex items-center gap-1 group">
+                    <a href={project.links.live2} target="_blank" rel="noreferrer" data-cursor="Visit" className="text-[var(--accent)] hover:text-white transition-colors flex items-center gap-1 group">
                        {t("live")} <ExternalLinkIcon />
                     </a>
                   )}
@@ -478,7 +516,7 @@ export default function ProjectPage({ project, nextProject }) {
                return (
                  <span 
                    key={tech} 
-                   className="px-3 py-1 bg-white/5 rounded-full text-xs text-white/60 font-mono border border-white/5 hover:border-green-glow/30 hover:text-white transition-colors cursor-none"
+                   className="px-3 py-1 bg-white/5 rounded-full text-xs text-white/60 font-mono border border-white/5 hover:border-[var(--accent-border)] hover:text-white transition-colors cursor-none"
                    data-cursor={tech}
                    data-cursor-type="image"
                    data-cursor-image={iconUrl}
@@ -507,7 +545,10 @@ export default function ProjectPage({ project, nextProject }) {
              data-cursor="Next"
              className="inline-block group"
            >
-             <h3 className="text-4xl md:text-5xl font-bold text-white mb-4 group-hover:text-green-glow transition-colors">
+             <h3
+               className="text-4xl md:text-5xl font-bold text-white mb-4 group-hover:text-[var(--next-accent)] transition-colors"
+               style={{ "--next-accent": nextProject.accentColor || "#00FF9C" }}
+             >
                {nextProject.title}
              </h3>
              <p className="text-lg text-white/50 max-w-xl mx-auto mb-8 font-light">
