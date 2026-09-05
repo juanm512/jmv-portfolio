@@ -34,6 +34,26 @@ const GROUPS = [
       "3 — no particles: blurred gradient blobs that breathe; mouse parallax",
     ],
   },
+  {
+    name: "D. Beam (Overwatch)",
+    base: "/lab/beam",
+    note: "Energy beam with a Gaussian profile that sheds glowing squares, on rows (project accent) and buttons (green-glow). Variants differ only in WHERE the beam lives.",
+    items: [
+      "1 — edge beam: band on the bottom edge follows the cursor, squares boil upward from the peak",
+      "2 — sweep beam: vertical band sweeps left to right once on enter/click, leaving a trail of squares",
+      "3 — halo beam: glow wraps the outline and pulses, squares leave from random points of it",
+    ],
+  },
+  {
+    name: "E. Fondo cuadrados",
+    base: "/lab/bgsq",
+    note: "Floating glowing squares in the margins, low alpha, dissipate at the top. Variants differ only in WHAT the squares are.",
+    items: [
+      "1 — empty squares of mixed sizes (12–64px), some filled at very low alpha",
+      "2 — big squares (120–260px) rendered as tiny fake windows: shell, code, browser",
+      "3 — mixed: small squares + a few windows, whole field parallaxes with the mouse",
+    ],
+  },
 ]
 
 export default async function LabIndex({ params }) {
