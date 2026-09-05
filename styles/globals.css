@@ -1,6 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-kode: var(--font-kode-mono);
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+
+  --color-green-primary: #0f3d2e;
+  --color-green-accent: #1b5e3c;
+  --color-green-light: #2e7d57;
+  --color-green-glow: #00ff9c;
+  --color-background-dark: #050b08;
+  --color-background-darker: #020504;
+
+  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
+  --background-image-glow-center: radial-gradient(
+    ellipse at center,
+    rgba(0, 255, 156, 0.15) 0%,
+    transparent 70%
+  );
+
+  --animate-fade-in: fadeIn 1s ease-out forwards;
+  --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
+  --animate-float: float 6s ease-in-out infinite;
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+  }
+}
 
 :root {
   --green-primary: #0f3d2e;
@@ -21,7 +57,7 @@ body {
   color: #fdfdfd;
   padding: 0;
   margin: 0;
-  font-family: var(--font-geist), system-ui, -apple-system, BlinkMacSystemFont,
+  font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   overflow-x: hidden;
 }
@@ -51,25 +87,23 @@ body {
 }
 
 /* Custom utilities */
-@layer utilities {
-  .text-glow {
-    text-shadow: 0 0 20px rgba(0, 255, 156, 0.5);
-  }
+@utility text-glow {
+  text-shadow: 0 0 20px rgba(0, 255, 156, 0.5);
+}
 
-  .bg-vignette {
-    background: radial-gradient(
-      ellipse at center,
-      transparent 0%,
-      rgba(5, 11, 8, 0.8) 70%,
-      rgba(5, 11, 8, 1) 100%
-    );
-  }
+@utility bg-vignette {
+  background: radial-gradient(
+    ellipse at center,
+    transparent 0%,
+    rgba(5, 11, 8, 0.8) 70%,
+    rgba(5, 11, 8, 1) 100%
+  );
+}
 
-  .glass {
-    background: rgba(15, 61, 46, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 255, 156, 0.1);
-  }
+@utility glass {
+  background: rgba(15, 61, 46, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 255, 156, 0.1);
 }
 
 /* Legacy burger styles - keep for compatibility */

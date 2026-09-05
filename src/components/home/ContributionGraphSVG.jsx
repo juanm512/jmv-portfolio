@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, useTransform, useSpring } from "framer-motion"
+import { motion, useTransform, useSpring } from "motion/react"
 
 const FloatingParticles = ({ count = 60, fillOpacity }) => {
   const [particles, setParticles] = useState([])

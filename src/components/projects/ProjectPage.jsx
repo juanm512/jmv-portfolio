@@ -3,10 +3,10 @@
 import { useState, useEffect, useRef, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView } from "motion/react"
 import { useTranslations, useLocale } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
-import { AnimatePresence } from "framer-motion"
+import { AnimatePresence } from "motion/react"
 
 // Only loads/plays once scrolled near the viewport, pauses when it leaves —
 // avoids autoplaying every project video at once on page load.

@@ -2,7 +2,7 @@
 
 import dynamic from "next/dynamic"
 import { useState, useEffect, useCallback, useRef } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 import { useTranslations } from "next-intl"
 
 const Nav = dynamic(() => import("@/components/Header/Nav"), {

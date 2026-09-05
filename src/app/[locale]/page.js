@@ -1,12 +1,6 @@
-import { unstable_setRequestLocale } from "next-intl/server"
+import Link from "next/link"
+import { setRequestLocale } from "next-intl/server"
 import { getAllProjects } from "@/lib/projects"
-
-import HeroSection from "@/components/home/HeroSection"
-import ChildhoodSection from "@/components/home/ChildhoodSection"
-import AbstractSection from "@/components/home/AbstractSection"
-import ContributionSection from "@/components/home/ContributionSection"
-import MemoryWall from "@/components/home/MemoryWall"
-import ContactSection from "@/components/home/ContactSection"
 
 export const metadata = {
   title: "Juan Manuel Vila - FullStack Developer",
@@ -14,23 +8,21 @@ export const metadata = {
     "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems."
 }
 
-export default function HomePage({ params: { locale } }) {
-  unstable_setRequestLocale(locale)
+export default async function HomePage({ params }) {
+  const { locale } = await params
+  setRequestLocale(locale)
   const projects = getAllProjects(locale)
 
   return (
-    <main className="bg-background-dark">
-      <HeroSection />
-      <div className="h-[50vh]"></div>
-      <ChildhoodSection />
-      <div className="h-[100vh]"></div>
-      <AbstractSection />
-      <div className="h-[100vh]"></div>
-      <ContributionSection />
-      <div className="h-[80vh]"></div>
-      <MemoryWall projects={projects} locale={locale} />
-      <div className="h-[50vh]"></div>
-      <ContactSection />
+    <main className="min-h-screen px-6 py-24">
+      <h1 className="text-4xl font-bold">Juan Manuel Vila</h1>
+      <ul className="mt-8 flex flex-col gap-2">
+        {projects.map((project) => (
+          <li key={project.slug}>
+            <Link href={`/${locale}/projects/${project.slug}`}>{project.title}</Link>
+          </li>
+        ))}
+      </ul>
     </main>
   )
 }

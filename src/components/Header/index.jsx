@@ -1,7 +1,7 @@
 "use client"
 import dynamic from "next/dynamic"
 import { useState, useEffect, useCallback } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "motion/react"
 import { opacity, background, translate } from "./animation.js"
 import { useTranslations } from "next-intl"
 

@@ -1,5 +1,5 @@
 import { translate } from "../../animation"
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { useTranslations } from "next-intl"
 
 export default function Footer() {

@@ -1,17 +1,18 @@
 import "@/styles/globals.css"
 import localFont from "next/font/local"
 import { GeistSans } from "geist/font/sans"
-import { NextIntlClientProvider, useMessages } from "next-intl"
+import { hasLocale, NextIntlClientProvider } from "next-intl"
+import { setRequestLocale } from "next-intl/server"
+import { notFound } from "next/navigation"
+import { routing } from "@/i18n/routing"
 
 import Header from "@/components/layout/Header"
-import SmoothScroll from "@/components/layout/SmoothScroll"
 import CustomCursor from "@/components/layout/CustomCursor"
-import FPSCounter from "@/components/layout/FPSCounter"
 
 const kodeMono = localFont({
   src: "../../../styles/Kode_Mono/KodeMono-VariableFont_wght.ttf",
   display: "swap",
-  variable: "--font-kode"
+  variable: "--font-kode-mono"
 })
 
 export const metadata = {
@@ -72,8 +73,14 @@ export const metadata = {
   }
 }
 
-export default function LocaleLayout({ children, params: { locale } }) {
-  const messages = useMessages()
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+export default async function LocaleLayout({ children, params }) {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) notFound()
+  setRequestLocale(locale)
 
   return (
     <html
@@ -90,13 +97,10 @@ export default function LocaleLayout({ children, params: { locale } }) {
         <link rel="canonical" href={`https://jmvila.com/${locale}`} />
       </head>
       <body className="relative font-sans w-full min-h-screen p-0 m-0 overflow-x-hidden bg-background-dark text-white">
-        <NextIntlClientProvider messages={messages}>
-          <SmoothScroll>
-            {/* <FPSCounter /> */}
-            <CustomCursor />
-            <Header lang={locale} />
-            {children}
-          </SmoothScroll>
+        <NextIntlClientProvider>
+          <CustomCursor />
+          <Header lang={locale} />
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>
