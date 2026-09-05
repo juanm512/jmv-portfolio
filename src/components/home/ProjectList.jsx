@@ -5,7 +5,7 @@ import Arrow from "@/components/ui/Arrow"
 // baseline-aligned with the title), a hairline below that brightens on hover,
 // title takes the project accent, arrow slides in from the right.
 const rowBase =
-  "group grid grid-cols-[3.25rem_minmax(0,1fr)_auto] sm:grid-cols-[4rem_minmax(0,1fr)_auto] items-baseline gap-x-3 sm:gap-x-4 border-b border-line hover:border-line-strong transition-colors outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark rounded-sm"
+  "group grid grid-cols-[3.25rem_minmax(0,1fr)_auto] sm:grid-cols-[4rem_minmax(0,1fr)_auto] items-baseline gap-x-3 sm:gap-x-4 border-b border-line hover:border-line-strong transition-colors outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark rounded-none px-4 sm:px-5 sm:-mx-5"
 
 function Year({ year }) {
   return (

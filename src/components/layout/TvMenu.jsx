@@ -281,28 +281,27 @@ export default function TvMenu({ projects = [] }) {
                       itemRefs.current[item.id] = el
                     }
 
-                    const rowClasses = `flex items-baseline justify-between gap-4 w-full text-left px-3 -mx-3 py-2 rounded-sm outline-none text-lg sm:text-xl leading-[1.5] transition-colors duration-150 ${
-                      isHighlighted ? "text-ink bg-ink/6" : "text-ink-2 hover:text-ink"
+                    const isProject = Boolean(item.accentColor)
+                    const rowClasses = `flex items-baseline gap-4 w-full text-left px-3 -mx-3 py-2 rounded-none outline-none text-lg sm:text-xl leading-[1.5] transition-colors duration-150 ${
+                      isProject ? "border-b border-line" : ""
+                    } ${
+                      isHighlighted
+                        ? isProject ? "bg-ink/6 text-[var(--accent)]" : "text-ink bg-ink/6"
+                        : isProject ? "text-ink-2 hover:text-[var(--accent)]" : "text-ink-2 hover:text-ink"
                     }`
 
                     const content = (
                       <>
-                        <span className="flex items-baseline gap-3 min-w-0">
-                          {item.accentColor && (
-                            <span
-                              className="inline-block w-1.5 h-1.5 rounded-full shrink-0 self-center"
-                              style={{ backgroundColor: item.accentColor }}
-                              aria-hidden="true"
-                            />
-                          )}
+                        {item.year && (
+                          <span className="font-mono text-xs text-ink-3 tabular-nums shrink-0 w-10">{item.year}</span>
+                        )}
+                        <span className="flex items-baseline gap-3 min-w-0 flex-1">
                           <span className="truncate">{item.label}</span>
                           {item.active && (
                             <span className="font-mono text-xs text-green-glow shrink-0">{t("current")}</span>
                           )}
                         </span>
-                        {item.year && (
-                          <span className="font-mono text-xs text-ink-3 tabular-nums shrink-0">{item.year}</span>
-                        )}
+
                       </>
                     )
 
@@ -313,6 +312,7 @@ export default function TvMenu({ projects = [] }) {
                             href={item.href}
                             download={item.kind === "download" ? true : undefined}
                             ref={registerRef}
+                            style={item.accentColor ? { "--accent": item.accentColor } : undefined}
                             tabIndex={-1}
                             onMouseEnter={() => setItemIndex(selectableIndex)}
                             className={rowClasses}
@@ -328,6 +328,7 @@ export default function TvMenu({ projects = [] }) {
                         <button
                           type="button"
                           ref={registerRef}
+                          style={item.accentColor ? { "--accent": item.accentColor } : undefined}
                           tabIndex={-1}
                           onMouseEnter={() => setItemIndex(selectableIndex)}
                           onClick={() => activateItem(item)}
