@@ -115,7 +115,6 @@
     },
     "current": "actual",
     "touchHint": "Tocá una sección y después un ítem",
-    "helpHint": "Atajos de teclado",
     "projectGroups": {
       "featured": "Destacados",
       "other": "Otros"

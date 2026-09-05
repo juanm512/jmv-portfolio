@@ -42,11 +42,6 @@ export default function Navbar() {
               {t("button")}
               <Kbd className="hidden md:inline-flex">{t("buttonHint")}</Kbd>
             </button>
-            {/* "?" opens the shortcuts help; the cap makes the key visible. */}
-            <span className="hidden md:inline-flex items-center" title={t("helpHint")}>
-              <Kbd>?</Kbd>
-              <span className="sr-only">{t("helpHint")}</span>
-            </span>
           </span>
 
           <button

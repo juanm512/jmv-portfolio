@@ -115,7 +115,6 @@
     },
     "current": "current",
     "touchHint": "Tap a section, then an item",
-    "helpHint": "Keyboard shortcuts",
     "projectGroups": {
       "featured": "Featured",
       "other": "Other"

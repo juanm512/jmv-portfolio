@@ -9,7 +9,6 @@ import { SITE_URL, OG_LOCALE, localizedPath, pageAlternates } from "@/lib/metada
 
 import Navbar from "@/components/layout/Navbar"
 import Shortcuts from "@/components/layout/Shortcuts"
-import CustomCursor from "@/components/layout/CustomCursor"
 import TvMenu from "@/components/layout/TvMenu"
 import { getAllProjects } from "@/lib/projects"
 
@@ -101,7 +100,6 @@ export default async function LocaleLayout({ children, params }) {
     >
       <body className="relative font-sans w-full min-h-screen p-0 m-0 overflow-x-hidden bg-background-dark text-ink">
         <NextIntlClientProvider>
-          <CustomCursor />
           <Navbar />
           <Shortcuts />
           <TvMenu projects={projects} />

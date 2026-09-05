@@ -15,7 +15,7 @@ const focusRing =
 
 // Only loads/plays once scrolled near the viewport, pauses when it leaves,
 // so every project video does not autoplay at once on page load.
-function LazyVideo({ src, className }) {
+function LazyVideo({ src, poster, className }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { margin: "200px 0px" })
 
@@ -33,6 +33,7 @@ function LazyVideo({ src, className }) {
     <video
       ref={ref}
       src={src}
+      poster={poster}
       muted
       loop
       playsInline
@@ -175,7 +176,7 @@ function GridVideo({ item, onMediaClick, t }) {
         className="relative aspect-[4/3] rounded-sm overflow-hidden bg-ink/5"
         onClick={() => onMediaClick(item.src, "video", item.caption)}
       >
-        <LazyVideo src={item.src} className="w-full h-full object-cover" />
+        <LazyVideo src={item.src} poster={item.poster} className="w-full h-full object-cover" />
       </ZoomButton>
       <Caption text={item.caption} />
     </figure>
@@ -273,6 +274,7 @@ function VideoBlock({ block, onMediaClick, t }) {
       >
         <LazyVideo
           src={block.src}
+          poster={block.poster}
           className="w-full h-auto max-h-[80vh] object-contain bg-background-darker"
         />
       </ZoomButton>
