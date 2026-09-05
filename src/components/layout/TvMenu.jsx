@@ -23,6 +23,39 @@ export default function TvMenu({ projects = [] }) {
   const [open, setOpen] = useState(false)
   const [level, setLevel] = useState("sections") // "sections" | "items"
   const [sectionIndex, setSectionIndex] = useState(0)
+
+  // Hover intent ("safe triangle"): when the pointer leaves a section heading
+  // moving towards the items column, the section switch waits so the user can
+  // travel diagonally to the items without landing on the next heading.
+  const pointerRef = useRef({ x: 0, y: 0, dx: 0, dy: 0 })
+  const hoverTimerRef = useRef(null)
+  const trackPointer = useCallback((e) => {
+    const p = pointerRef.current
+    p.dx = e.clientX - p.x
+    p.dy = e.clientY - p.y
+    p.x = e.clientX
+    p.y = e.clientY
+  }, [])
+  const cancelHover = useCallback(() => {
+    if (hoverTimerRef.current) {
+      clearTimeout(hoverTimerRef.current)
+      hoverTimerRef.current = null
+    }
+  }, [])
+  const hoverSection = useCallback(
+    (sIndex) => {
+      cancelHover()
+      const { dx, dy } = pointerRef.current
+      const towardsItems = dx > 0 && dx >= Math.abs(dy) * 0.7
+      if (towardsItems) {
+        hoverTimerRef.current = setTimeout(() => setSectionIndex(sIndex), 320)
+      } else {
+        setSectionIndex(sIndex)
+      }
+    },
+    [cancelHover]
+  )
+  useEffect(() => cancelHover, [cancelHover])
   const [itemIndex, setItemIndex] = useState(0)
 
   const sectionRefs = useRef([])
@@ -43,6 +76,7 @@ export default function TvMenu({ projects = [] }) {
       tagline: p.tagline,
       year: p.year,
       accentColor: p.accentColor,
+      secondary: p.tier !== "featured",
       kind: "internal",
       route: `/projects/${p.slug}`
     })
@@ -232,7 +266,7 @@ export default function TvMenu({ projects = [] }) {
           {/* Both columns sit vertically centered in the viewport, like a console menu. */}
           <div className="flex-1 min-h-0 flex items-center">
             <div className="w-full max-w-5xl mx-auto px-6 sm:px-10 grid grid-cols-1 sm:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 sm:gap-16 max-h-full">
-              <ul className="flex flex-col gap-1 self-center" aria-label={t("button")}>
+              <ul className="flex flex-col gap-1 self-center" aria-label={t("button")} onMouseMove={trackPointer}>
                 {sections.map((section, sIndex) => {
                   const isHighlighted = sIndex === sectionIndex
                   return (
@@ -247,8 +281,9 @@ export default function TvMenu({ projects = [] }) {
                         ref={(el) => (sectionRefs.current[sIndex] = el)}
                         tabIndex={-1}
                         aria-current={isHighlighted ? "true" : undefined}
-                        onMouseEnter={() => setSectionIndex(sIndex)}
+                        onMouseEnter={() => hoverSection(sIndex)}
                         onClick={() => {
+                          cancelHover()
                           setSectionIndex(sIndex)
                           setItemIndex(0)
                           setLevel("items")
@@ -278,6 +313,7 @@ export default function TvMenu({ projects = [] }) {
                   exit={{ opacity: 0 }}
                   transition={fade(0.12)}
                   className="flex flex-col self-center overflow-y-auto max-h-[70vh] sm:max-h-[80vh] -mx-3 px-3"
+                  onMouseEnter={cancelHover}
                 >
                   {activeSection?.items.map((item) => {
                     if (item.heading) {
@@ -298,9 +334,9 @@ export default function TvMenu({ projects = [] }) {
                     }
 
                     const isProject = Boolean(item.accentColor)
-                    const rowClasses = `flex items-baseline gap-4 w-full text-left px-3 -mx-3 py-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-darker text-lg sm:text-xl leading-[1.5] transition-colors duration-150 ${
+                    const rowClasses = `flex items-baseline gap-4 w-full text-left px-3 -mx-3 py-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-darker text-base sm:text-lg leading-[1.5] transition-colors duration-150 ${
                       isProject ? "border-b border-line" : ""
-                    } ${
+                    } ${item.secondary ? "opacity-75 py-1.5" : ""} ${
                       isHighlighted
                         ? isProject ? "bg-ink/6 text-[var(--accent)]" : "text-ink bg-ink/6"
                         : isProject ? "text-ink-2 hover:text-[var(--accent)]" : "text-ink-2 hover:text-ink"

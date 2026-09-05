@@ -3,7 +3,7 @@ import { Link } from "@/i18n/navigation"
 import { getProjectsByTier } from "@/lib/projects"
 import { FeaturedProjectRow, SecondaryProjectRow } from "@/components/home/ProjectList"
 import Arrow from "@/components/ui/Arrow"
-import ContactBlock from "@/components/home/ContactBlock"
+import { ContactLinks } from "@/components/home/ContactBlock"
 
 export const metadata = {
   title: "Juan Manuel Vila - FullStack Developer",
@@ -26,9 +26,10 @@ export default async function HomePage({ params }) {
         <h1 className="text-2xl md:text-3xl font-semibold text-ink max-w-[30ch] leading-[1.3] text-balance">
           {t("hero.title")}
         </h1>
+        <ContactLinks className="mt-5" />
         <Link
           href="/about"
-          className="group inline-flex items-center gap-1.5 mt-5 py-2 -my-2 text-sm md:text-base text-ink-2 hover:text-green-glow transition-colors rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
+          className="group inline-flex items-center gap-1.5 mt-4 py-2 -my-2 text-sm md:text-base text-ink-2 hover:text-green-glow transition-colors rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
         >
           {t("cta.about")}
           <Arrow className="transition-transform duration-200 ease-out-expo group-hover:translate-x-0.5 motion-reduce:transform-none" />
@@ -50,12 +51,11 @@ export default async function HomePage({ params }) {
         </div>
       </section>
 
-      <ContactBlock className="mt-20" />
-
       <footer className="mt-auto pt-28 pb-10">
-        <p className="font-mono text-xs text-ink-3 pt-6 border-t border-line">
-          {t("footer.text", { year })}
-        </p>
+        <div className="pt-6 border-t border-line flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          <p className="font-mono text-xs text-ink-3">{t("footer.text", { year })}</p>
+          <ContactLinks className="text-xs" />
+        </div>
       </footer>
     </main>
   )
