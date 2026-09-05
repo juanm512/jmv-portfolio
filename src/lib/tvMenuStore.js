@@ -4,9 +4,11 @@ const TOGGLE_EVENT = "tvmenu:toggle"
 const OPEN_EVENT = "tvmenu:open"
 const CLOSE_EVENT = "tvmenu:close"
 
-export function openTvMenu() {
+// `opener` (optional element) gets focus back when the menu closes.
+export function openTvMenu(opener) {
   if (typeof window === "undefined") return
-  window.dispatchEvent(new CustomEvent(OPEN_EVENT))
+  const detail = opener instanceof Element ? opener : null
+  window.dispatchEvent(new CustomEvent(OPEN_EVENT, { detail }))
 }
 
 export function closeTvMenu() {
@@ -21,7 +23,7 @@ export function toggleTvMenu() {
 
 export function subscribeTvMenu({ onOpen, onClose, onToggle }) {
   if (typeof window === "undefined") return () => {}
-  const handleOpen = () => onOpen?.()
+  const handleOpen = (event) => onOpen?.(event.detail || null)
   const handleClose = () => onClose?.()
   const handleToggle = () => onToggle?.()
   window.addEventListener(OPEN_EVENT, handleOpen)

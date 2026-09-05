@@ -73,11 +73,17 @@
     "app": "App",
     "playStore": "Play Store",
     "code": "Code",
-    "prevProject": "Previous project"
+    "prevProject": "Previous project",
+    "openImage": "Open image",
+    "openVideo": "Open video",
+    "closeLightbox": "Close enlarged view",
+    "lightbox": "Enlarged view",
+    "projectImage": "Project image"
   },
   "Meta": {
     "title": "Juan Manuel Vila - FullStack Developer",
-    "description": "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems."
+    "description": "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems.",
+    "ogAlt": "Juan Manuel Vila, full stack developer"
   },
   "Menu": {
     "button": "Menu",
@@ -113,7 +119,9 @@
     "projectGroups": {
       "featured": "Featured",
       "other": "Other"
-    }
+    },
+    "switchLanguage": "Switch to {locale}",
+    "heading": "Navigation menu"
   },
   "About": {
     "title": "About",
@@ -130,5 +138,20 @@
     "backHome": "Back to home",
     "menuNav": "Navigate inside the menu",
     "help": "Show this help"
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Page not found",
+    "text": "The address you opened does not exist or has moved.",
+    "back": "Back to home"
+  },
+  "Error": {
+    "label": "Error",
+    "title": "Something went wrong",
+    "retry": "Try again"
+  },
+  "Locales": {
+    "es": "Spanish",
+    "en": "English"
   }
 }

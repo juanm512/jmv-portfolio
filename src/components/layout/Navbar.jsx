@@ -23,11 +23,12 @@ const navButton =
 
 export default function Navbar() {
   const t = useTranslations("Menu")
+  const tLocales = useTranslations("Locales")
   const { nextLocale, toggleLanguage } = useLanguageToggle()
 
   return (
     <header className="relative z-40">
-      <nav className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between border-b border-line">
+      <nav className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between border-b border-line">
         <Link
           href="/"
           className="inline-flex items-center min-h-11 font-kode text-sm sm:text-base text-ink hover:text-green-glow transition-colors tracking-tight rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
@@ -37,7 +38,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3 sm:gap-5">
           <span className="flex items-center gap-1.5">
-            <button type="button" onClick={openTvMenu} className={navButton}>
+            <button type="button" onClick={(e) => openTvMenu(e.currentTarget)} className={navButton}>
               {t("button")}
               <Kbd className="hidden md:inline-flex">{t("buttonHint")}</Kbd>
             </button>
@@ -51,7 +52,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={toggleLanguage}
-            aria-label={`Switch to ${nextLocale}`}
+            aria-label={t("switchLanguage", { locale: tLocales(nextLocale) })}
             className={navButton}
           >
             <LangIcon />

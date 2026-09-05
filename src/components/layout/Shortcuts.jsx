@@ -7,6 +7,7 @@ import { useTranslations } from "next-intl"
 import { useRouter, usePathname } from "@/i18n/navigation"
 import { useLanguageToggle } from "@/lib/useLanguageToggle"
 import { toggleTvMenu } from "@/lib/tvMenuStore"
+import { useFocusTrap } from "@/lib/useFocusTrap"
 
 function isTypingTarget(el) {
   if (!el) return false
@@ -26,6 +27,9 @@ export default function Shortcuts() {
   const [helpOpen, setHelpOpen] = useState(false)
   const dialogRef = useRef(null)
   const reduceMotion = useReducedMotion()
+
+  // Page behind goes inert, Tab stays inside, focus returns to the opener.
+  useFocusTrap(dialogRef, helpOpen)
 
   const isHome = pathname === "/"
 
@@ -159,9 +163,6 @@ export default function Shortcuts() {
     <AnimatePresence>
       {helpOpen && (
         <motion.div
-          role="dialog"
-          aria-modal="true"
-          aria-label={t("title")}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -170,13 +171,17 @@ export default function Shortcuts() {
         >
           <motion.div
             ref={dialogRef}
+            tabIndex={-1}
+            aria-labelledby="shortcuts-title"
             initial={reduceMotion ? false : { opacity: 0, y: 6 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full max-w-sm bg-background-dark border border-line-strong rounded-md p-6"
+            role="dialog"
+            aria-modal="true"
+            className="w-full max-w-sm bg-background-dark border border-line-strong rounded-md p-6 outline-none"
           >
-            <h2 className="font-kode text-sm text-ink mb-5">{t("title")}</h2>
+            <h2 id="shortcuts-title" className="font-kode text-sm text-ink mb-5">{t("title")}</h2>
             <ul className="flex flex-col gap-3">
               {shortcuts.map((s) => (
                 <li key={s.label} className="flex items-center justify-between gap-4 text-sm">

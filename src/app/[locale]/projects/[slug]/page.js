@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
+import { OG_LOCALE, localizedPath, pageAlternates } from "@/lib/metadata"
 import { routing } from "@/i18n/routing"
 import { getProjectBySlug, getAllProjectSlugs, getAdjacentProjects } from "@/lib/projects"
 import ProjectPage from "@/components/projects/ProjectPage"
@@ -21,14 +22,22 @@ export async function generateMetadata({ params }) {
   const project = getProjectBySlug(slug, locale)
 
   if (!project) {
-    return {
-      title: "Project Not Found"
-    }
+    const t = await getTranslations({ locale, namespace: "Project" })
+    return { title: t("projectNotFound"), robots: { index: false, follow: false } }
   }
 
+  const path = `/projects/${slug}`
+  const title = project.tagline ? `${project.title}: ${project.tagline}` : project.title
   return {
-    title: project.tagline ? `${project.title}: ${project.tagline}` : project.title,
-    description: project.description
+    title,
+    description: project.description,
+    alternates: pageAlternates(locale, path),
+    openGraph: {
+      url: localizedPath(locale, path),
+      locale: OG_LOCALE[locale],
+      title: `${title} | Juan Manuel Vila`,
+      description: project.description
+    }
   }
 }
 

@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 import Arrow from "@/components/ui/Arrow"
 
@@ -27,6 +28,7 @@ function RowArrow() {
 // hover popover. `line` lets the wrapper own the hairline instead of the link
 // (mobile: the inline popover sits between the row and its hairline).
 export function FeaturedProjectRow({ project, line = true, ref, ...rest }) {
+  const t = useTranslations("Project")
   return (
     <Link
       ref={ref}
@@ -40,19 +42,20 @@ export function FeaturedProjectRow({ project, line = true, ref, ...rest }) {
     >
       <Year year={project.year} />
       <div className="min-w-0">
-        <h3 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] group-hover:text-[var(--accent)] transition-colors duration-200">
+        <h2 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] group-hover:text-[var(--accent)] transition-colors duration-200">
           {project.title}
           {project.tagline && (
             <span className="block sm:inline sm:ml-3 text-base md:text-lg font-normal text-ink-2 sm:before:content-['·'] sm:before:mr-3 sm:before:text-ink-3">
               {project.tagline}
             </span>
           )}
-        </h3>
+        </h2>
         <p className="mt-2 text-ink-2 text-sm md:text-base max-w-[60ch] leading-[1.6]">
           {project.description}
         </p>
         {project.stack?.length > 0 && (
-          <p className="hidden sm:block mt-3 font-mono text-xs text-ink-3 truncate" aria-label="Stack">
+          <p className="hidden sm:block mt-3 font-mono text-xs text-ink-3 truncate">
+            <span className="sr-only">{t("stack")}: </span>
             {project.stack.join(" · ")}
           </p>
         )}

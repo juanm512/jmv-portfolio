@@ -8,6 +8,7 @@ import { useRouter, usePathname } from "@/i18n/navigation"
 import { useLanguageToggle } from "@/lib/useLanguageToggle"
 import { subscribeTvMenu, closeTvMenu } from "@/lib/tvMenuStore"
 import { useCoarsePointer } from "@/lib/useCoarsePointer"
+import { useFocusTrap } from "@/lib/useFocusTrap"
 
 const SECTION_IDS = ["pages", "projects", "links", "language"]
 
@@ -60,6 +61,10 @@ export default function TvMenu({ projects = [] }) {
 
   const sectionRefs = useRef([])
   const itemRefs = useRef({})
+  const dialogRef = useRef(null)
+  // Element that receives focus again when the menu closes: the "Menú"
+  // button when opened from it, otherwise whatever was focused at open time.
+  const openerRef = useRef(null)
 
   const sections = useMemo(() => {
     const pagesItems = [
@@ -119,7 +124,8 @@ export default function TvMenu({ projects = [] }) {
     return SECTION_IDS.indexOf("pages")
   }, [pathname])
 
-  const handleOpen = useCallback(() => {
+  const handleOpen = useCallback((opener) => {
+    openerRef.current = opener || document.activeElement
     setLevel("sections")
     setSectionIndex(initialSectionForPath())
     setItemIndex(0)
@@ -135,7 +141,7 @@ export default function TvMenu({ projects = [] }) {
       onToggle: () => {
         setOpen((prev) => {
           if (prev) return false
-          handleOpen()
+          handleOpen(null)
           return true
         })
       }
@@ -154,6 +160,13 @@ export default function TvMenu({ projects = [] }) {
     }
     return undefined
   }, [open])
+
+  // Page behind goes inert and Tab stays inside while open; on close, focus
+  // goes back to the opener. Rows are tabIndex={-1}: arrows/WASD move focus.
+  useFocusTrap(dialogRef, open, {
+    opener: () => openerRef.current,
+    initialFocus: () => sectionRefs.current[sectionIndex]
+  })
 
   // Move real DOM focus to the highlighted row so screen readers follow.
   useEffect(() => {
@@ -254,15 +267,18 @@ export default function TvMenu({ projects = [] }) {
     <AnimatePresence>
       {open && (
         <motion.div
+          ref={dialogRef}
           role="dialog"
           aria-modal="true"
-          aria-label={t("button")}
+          aria-labelledby="tv-menu-heading"
+          tabIndex={-1}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={fade()}
-          className="fixed inset-0 z-[100] flex flex-col bg-background-darker/95"
+          className="fixed inset-0 z-[100] flex flex-col bg-background-darker/95 outline-none"
         >
+          <h2 id="tv-menu-heading" className="sr-only">{t("heading")}</h2>
           {/* Both columns sit vertically centered in the viewport, like a console menu. */}
           <div className="flex-1 min-h-0 flex items-center">
             <div className="w-full max-w-5xl mx-auto px-6 sm:px-10 grid grid-cols-1 sm:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-10 sm:gap-16 max-h-full">
@@ -274,7 +290,7 @@ export default function TvMenu({ projects = [] }) {
                       key={section.id}
                       initial={reduceMotion ? false : { opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.16, delay: reduceMotion ? 0 : sIndex * 0.03, ease: easeOutExpo }}
+                      transition={reduceMotion ? { duration: 0 } : { duration: 0.16, delay: sIndex * 0.03, ease: easeOutExpo }}
                     >
                       <button
                         type="button"

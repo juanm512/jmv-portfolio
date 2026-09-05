@@ -46,7 +46,7 @@ export default function ContributionGraphSVG({ locale = "en" }) {
       transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
       <svg
-        viewBox="0 0 920 300"
+        viewBox="0 0 920 276"
         role="img"
         aria-label={t("legend", { from: longMonth(first, locale), to: longMonth(last, locale) })}
         className="w-full h-auto"
@@ -64,9 +64,9 @@ export default function ContributionGraphSVG({ locale = "en" }) {
         </defs>
 
         {/* Grid lines */}
-        <line x1="0" y1="82" x2="920" y2="82" stroke="rgba(255,255,255,0.04)" strokeWidth="1"></line>
-        <line x1="0" y1="144" x2="920" y2="144" stroke="rgba(255,255,255,0.04)" strokeWidth="1"></line>
-        <line x1="0" y1="206" x2="920" y2="206" stroke="rgba(255,255,255,0.04)" strokeWidth="1"></line>
+        <line x1="0" y1="82" x2="920" y2="82" stroke="var(--color-line)" strokeWidth="1"></line>
+        <line x1="0" y1="144" x2="920" y2="144" stroke="var(--color-line)" strokeWidth="1"></line>
+        <line x1="0" y1="206" x2="920" y2="206" stroke="var(--color-line)" strokeWidth="1"></line>
 
         {/* Area Fill */}
         <path
@@ -89,23 +89,27 @@ export default function ContributionGraphSVG({ locale = "en" }) {
         <circle cx="909.1764705882354" cy="41.88235294117648" r="8" fill="var(--color-green-glow)" opacity="0.15"></circle>
         <circle cx="909.1764705882354" cy="41.88235294117648" r="3.5" fill="var(--color-green-glow)"></circle>
 
-        {/* Axis labels: month names come from the locale. */}
-        <g>
-          {TICKS.map((tick) => (
-            <text
-              key={`${tick.year}-${tick.month}`}
-              x={tick.x}
-              y="294"
-              textAnchor="middle"
-              fill="var(--color-ink-3)"
-              fontSize="11"
-              fontFamily="var(--font-kode-mono), ui-monospace, monospace"
-            >
-              {shortMonth(tick, locale)}
-            </text>
-          ))}
-        </g>
       </svg>
+
+      {/* Axis labels live in HTML so they keep a readable size at any width:
+          every tick from `sm` up, one per year below (the legend names the
+          range for assistive tech; the axis itself is decorative). */}
+      <div className="relative w-full h-5 mt-2" aria-hidden="true">
+        {TICKS.map((tick, i) => {
+          const firstOfYear = i === 0 || tick.year !== TICKS[i - 1].year
+          const shift = i === 0 ? "none" : i === TICKS.length - 1 ? "translateX(-100%)" : "translateX(-50%)"
+          return (
+            <span
+              key={`${tick.year}-${tick.month}`}
+              className={`absolute top-0 font-mono text-xs text-ink-3 whitespace-nowrap tabular-nums ${firstOfYear ? "" : "hidden sm:block"}`}
+              style={{ left: `${(tick.x / 920) * 100}%`, transform: shift }}
+            >
+              <span className="sm:hidden">{`'${String(tick.year).slice(2)}`}</span>
+              <span className="hidden sm:inline">{shortMonth(tick, locale)}</span>
+            </span>
+          )
+        })}
+      </div>
       <p className="w-full mt-3 font-mono text-xs text-ink-3">
         {t("legend", { from: longMonth(first, locale), to: longMonth(last, locale) })}
       </p>

@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
   --font-kode: var(--font-kode-mono);
   --font-sans: var(--font-geist-sans), system-ui, sans-serif;
@@ -26,22 +24,14 @@
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-:root {
-  --green-primary: #0f3d2e;
-  --green-accent: #1b5e3c;
-  --green-light: #2e7d57;
-  --green-glow: #00ff9c;
-  --background-dark: #050b08;
-  --background-darker: #020504;
-}
-
 html {
+  color-scheme: dark;
   scroll-behavior: smooth;
 }
 
 html,
 body {
-  background: var(--background-dark);
+  background: var(--color-background-dark);
   color: var(--color-ink);
   padding: 0;
   margin: 0;
@@ -65,7 +55,7 @@ p {
 /* Selection color */
 ::selection {
   background: rgba(0, 255, 156, 0.3);
-  color: #fff;
+  color: var(--color-ink);
 }
 
 /* Scrollbar styling */
@@ -74,16 +64,16 @@ p {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--background-dark);
+  background: var(--color-background-dark);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--green-accent);
+  background: var(--color-green-accent);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--green-light);
+  background: var(--color-green-light);
 }
 
 @media (prefers-reduced-motion: reduce) {

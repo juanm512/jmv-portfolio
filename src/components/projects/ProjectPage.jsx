@@ -8,6 +8,7 @@ import Kbd from "@/components/ui/Kbd"
 import Arrow from "@/components/ui/Arrow"
 import { useTranslations, useLocale } from "next-intl"
 import { Balancer } from "react-wrap-balancer"
+import { useFocusTrap } from "@/lib/useFocusTrap"
 
 const focusRing =
   "rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
@@ -70,6 +71,21 @@ function useOrientation(initial = "portrait") {
   return [orientation, onLoad]
 }
 
+// Every clickable figure is a real button: keyboard reachable, labelled.
+// `fill` images need a positioned box, which the button itself provides.
+function ZoomButton({ label, className = "", onClick, children }) {
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      onClick={onClick}
+      className={`block w-full text-left cursor-zoom-in ${focusRing} ${className}`}
+    >
+      {children}
+    </button>
+  )
+}
+
 // "Label — explanation" inside a bullet becomes "Label: explanation";
 // dashes inside prose sentences are left as they are.
 function bulletText(line) {
@@ -124,40 +140,43 @@ function TextBlock({ block }) {
 
 const VIDEO_EXTENSIONS = /\.(mp4|webm|mov|ogg)$/i
 
-function GridImage({ item, onMediaClick }) {
+function GridImage({ item, onMediaClick, t }) {
   const [orientation, onLoad] = useOrientation("portrait")
   const portrait = orientation === "portrait"
+  const alt = item.caption || t("projectImage")
   return (
     <figure className={portrait ? "" : "sm:col-span-2 lg:col-span-3"}>
-      <div
-        className={`relative rounded-sm overflow-hidden cursor-zoom-in ${
+      <ZoomButton
+        label={t("openImage")}
+        className={`relative rounded-sm overflow-hidden ${
           portrait ? "aspect-[9/16] bg-background-darker" : "aspect-[4/3] bg-ink/5"
         }`}
-        onClick={() => onMediaClick(item.src, "image")}
+        onClick={() => onMediaClick(item.src, "image", alt)}
       >
         <Image
           src={item.src}
-          alt={item.caption || "Project image"}
+          alt={alt}
           fill
           sizes={portrait ? "(min-width: 1024px) 33vw, 50vw" : "(min-width: 1280px) 1280px, 100vw"}
           onLoad={onLoad}
           className={portrait ? "object-contain" : "object-cover"}
         />
-      </div>
+      </ZoomButton>
       <Caption text={item.caption} />
     </figure>
   )
 }
 
-function GridVideo({ item, onMediaClick }) {
+function GridVideo({ item, onMediaClick, t }) {
   return (
     <figure className="sm:col-span-2 lg:col-span-3">
-      <div
-        className="relative aspect-[4/3] rounded-sm overflow-hidden bg-ink/5 cursor-zoom-in"
-        onClick={() => onMediaClick(item.src, "video")}
+      <ZoomButton
+        label={t("openVideo")}
+        className="relative aspect-[4/3] rounded-sm overflow-hidden bg-ink/5"
+        onClick={() => onMediaClick(item.src, "video", item.caption)}
       >
         <LazyVideo src={item.src} className="w-full h-full object-cover" />
-      </div>
+      </ZoomButton>
       <Caption text={item.caption} />
     </figure>
   )
@@ -165,15 +184,15 @@ function GridVideo({ item, onMediaClick }) {
 
 // Portrait shots (phones) sit three across on desktop, two on mobile, in
 // 9/16 cells with `contain`; landscape shots span the row at 4/3 `cover`.
-function GridBlock({ block, onMediaClick }) {
+function GridBlock({ block, onMediaClick, t }) {
   return (
     <div className="py-12 px-6 max-w-7xl mx-auto">
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
         {block.items.map((item, idx) =>
           VIDEO_EXTENSIONS.test(item.src) ? (
-            <GridVideo key={idx} item={item} onMediaClick={onMediaClick} />
+            <GridVideo key={idx} item={item} onMediaClick={onMediaClick} t={t} />
           ) : (
-            <GridImage key={idx} item={item} onMediaClick={onMediaClick} />
+            <GridImage key={idx} item={item} onMediaClick={onMediaClick} t={t} />
           )
         )}
       </div>
@@ -181,21 +200,23 @@ function GridBlock({ block, onMediaClick }) {
   )
 }
 
-function FullWidthImageBlock({ block, onMediaClick }) {
+function FullWidthImageBlock({ block, onMediaClick, t }) {
+  const alt = block.caption || t("projectImage")
   return (
     <figure className="py-12 w-full">
-      <div
-        className="relative w-full h-[50vh] md:h-[80vh] cursor-zoom-in"
-        onClick={() => onMediaClick(block.src, "image")}
+      <ZoomButton
+        label={t("openImage")}
+        className="relative w-full h-[50vh] md:h-[80vh]"
+        onClick={() => onMediaClick(block.src, "image", alt)}
       >
         <Image
           src={block.src}
-          alt={block.caption || "Project banner"}
+          alt={alt}
           fill
           sizes="100vw"
           className="object-cover"
         />
-      </div>
+      </ZoomButton>
       {block.caption && (
         <div className="max-w-7xl mx-auto px-6">
           <Caption text={block.caption} />
@@ -237,7 +258,7 @@ function CodeBlock({ block }) {
   )
 }
 
-function VideoBlock({ block, onMediaClick }) {
+function VideoBlock({ block, onMediaClick, t }) {
   return (
     <figure className="py-12 px-6 max-w-7xl mx-auto">
       {block.title && (
@@ -245,15 +266,16 @@ function VideoBlock({ block, onMediaClick }) {
           {block.title}
         </h3>
       )}
-      <div
-        className="relative w-full rounded-sm overflow-hidden bg-ink/5 cursor-pointer"
-        onClick={() => onMediaClick(block.src, "video")}
+      <ZoomButton
+        label={t("openVideo")}
+        className="relative w-full rounded-sm overflow-hidden bg-ink/5"
+        onClick={() => onMediaClick(block.src, "video", block.caption)}
       >
         <LazyVideo
           src={block.src}
-          className="w-full h-auto max-h-[80vh] object-contain bg-black"
+          className="w-full h-auto max-h-[80vh] object-contain bg-background-darker"
         />
-      </div>
+      </ZoomButton>
       <Caption text={block.caption} />
     </figure>
   )
@@ -273,7 +295,7 @@ function AnimatedBlock({ children }) {
   )
 }
 
-function renderBlock(block, index, onMediaClick) {
+function renderBlock(block, index, onMediaClick, t) {
   let content = null
 
   switch (block.type) {
@@ -281,10 +303,10 @@ function renderBlock(block, index, onMediaClick) {
       content = <TextBlock block={block} />
       break
     case "grid":
-      content = <GridBlock block={block} onMediaClick={onMediaClick} />
+      content = <GridBlock block={block} onMediaClick={onMediaClick} t={t} />
       break
     case "full-width-image":
-      content = <FullWidthImageBlock block={block} onMediaClick={onMediaClick} />
+      content = <FullWidthImageBlock block={block} onMediaClick={onMediaClick} t={t} />
       break
     case "stats":
       content = <StatsBlock block={block} />
@@ -293,7 +315,7 @@ function renderBlock(block, index, onMediaClick) {
       content = <CodeBlock block={block} />
       break
     case "video":
-      content = <VideoBlock block={block} onMediaClick={onMediaClick} />
+      content = <VideoBlock block={block} onMediaClick={onMediaClick} t={t} />
       break
     default:
       return null
@@ -306,7 +328,15 @@ function renderBlock(block, index, onMediaClick) {
   )
 }
 
-function Lightbox({ media, onClose }) {
+function Lightbox({ media, onClose, t }) {
+  const reduceMotion = useReducedMotion()
+  const panelRef = useRef(null)
+  const closeRef = useRef(null)
+
+  // Focus lands on the close button; Tab stays inside; the page behind is
+  // inert; on close, focus returns to the figure button that opened it.
+  useFocusTrap(panelRef, true, { initialFocus: () => closeRef.current })
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
@@ -326,15 +356,20 @@ function Lightbox({ media, onClose }) {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-12 cursor-pointer"
+      transition={{ duration: reduceMotion ? 0 : 0.2 }}
+      className="fixed inset-0 z-[100] bg-background-darker/95 flex items-center justify-center p-4 md:p-12 cursor-pointer"
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.9, opacity: 0 }}
+        ref={panelRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label={media.alt ? `${t("lightbox")}: ${media.alt}` : t("lightbox")}
+        initial={reduceMotion ? { opacity: 0 } : { scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.9, opacity: 0 }}
-        transition={{ type: "spring", damping: 25, stiffness: 300 }}
-        className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center cursor-default"
+        exit={reduceMotion ? { opacity: 0 } : { scale: 0.9, opacity: 0 }}
+        transition={reduceMotion ? { duration: 0.15 } : { type: "spring", damping: 25, stiffness: 300 }}
+        className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center cursor-default outline-none"
         onClick={(e) => e.stopPropagation()}
       >
         {media.type === "video" ? (
@@ -348,7 +383,7 @@ function Lightbox({ media, onClose }) {
           <div className="relative w-full h-full">
             <Image
               src={media.src}
-              alt="Fullscreen view"
+              alt={media.alt || ""}
               fill
               sizes="100vw"
               className="object-contain"
@@ -358,9 +393,10 @@ function Lightbox({ media, onClose }) {
         )}
 
         <button
+          ref={closeRef}
           type="button"
           onClick={onClose}
-          aria-label="Close"
+          aria-label={t("closeLightbox")}
           className={`absolute -top-12 right-0 text-ink-2 hover:text-ink transition-colors p-2 cursor-pointer ${focusRing}`}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -370,33 +406,29 @@ function Lightbox({ media, onClose }) {
   )
 }
 
-// Converts "#rrggbb" to "r, g, b" for use inside rgba().
-function hexToRgbTriplet(hex) {
-  const clean = hex.replace("#", "")
-  const r = parseInt(clean.substring(0, 2), 16)
-  const g = parseInt(clean.substring(2, 4), 16)
-  const b = parseInt(clean.substring(4, 6), 16)
-  return `${r}, ${g}, ${b}`
-}
-
-// Hero media below the title, never behind it. Landscape shots fill a
-// 16/9 box; portrait shots sit centered on the darker ground, uncropped.
-function HeroMedia({ hero, title, onMediaClick }) {
-  const [orientation, onLoad] = useOrientation(hero?.orientation || "portrait")
+// Hero media below the title, never behind it. `hero.orientation` wins when
+// the data declares it; otherwise the natural size decides on load. Landscape
+// fills a 16/9 box; portrait gets a centered 9/16 box capped at 70vh.
+function HeroMedia({ hero, title, onMediaClick, t }) {
+  const [orientation, onLoad] = useOrientation(hero?.orientation || "landscape")
   const portrait = orientation === "portrait"
   if (!hero?.src) return null
 
   return (
     <figure className="max-w-7xl mx-auto px-6">
-      <div
-        className={`relative w-full aspect-video rounded-sm overflow-hidden cursor-zoom-in ${
-          portrait ? "bg-background-darker" : "bg-ink/5"
+      <ZoomButton
+        label={hero.type === "video" ? t("openVideo") : t("openImage")}
+        className={`relative rounded-sm overflow-hidden ${
+          portrait
+            ? "aspect-[9/16] max-h-[70vh] mx-auto bg-background-darker"
+            : "w-full aspect-video bg-ink/5"
         }`}
-        onClick={() => onMediaClick(hero.src, hero.type)}
+        onClick={() => onMediaClick(hero.src, hero.type, title)}
       >
         {hero.type === "video" ? (
           <video
             src={hero.src}
+            poster={hero.poster}
             autoPlay
             muted
             loop
@@ -414,7 +446,7 @@ function HeroMedia({ hero, title, onMediaClick }) {
             priority
           />
         )}
-      </div>
+      </ZoomButton>
     </figure>
   )
 }
@@ -462,12 +494,11 @@ export default function ProjectPage({ project, nextProject, prevProject }) {
 
   if (!project) return null
 
-  const openLightbox = (src, type = "image") => {
-    setSelectedMedia({ src, type })
+  const openLightbox = (src, type = "image", alt = "") => {
+    setSelectedMedia({ src, type, alt })
   }
 
   const accent = project.accentColor || "#00FF9C"
-  const accentRgb = hexToRgbTriplet(accent)
   const links = Object.entries(project.links || {}).filter(([, url]) => Boolean(url))
   const context = project.context || project.client
 
@@ -475,15 +506,12 @@ export default function ProjectPage({ project, nextProject, prevProject }) {
     <main
       data-prev={prevProject ? `/${locale}/projects/${prevProject.slug}` : undefined}
       data-next={nextProject ? `/${locale}/projects/${nextProject.slug}` : undefined}
-      className="min-h-screen bg-background-dark text-white font-sans selection:bg-green-glow/30"
-      style={{
-        "--accent": accent,
-        "--accent-border": `rgba(${accentRgb}, 0.3)`,
-      }}
+      className="min-h-screen bg-background-dark text-ink font-sans selection:bg-green-glow/30"
+      style={{ "--accent": accent }}
     >
       <AnimatePresence>
         {selectedMedia && (
-          <Lightbox media={selectedMedia} onClose={() => setSelectedMedia(null)} />
+          <Lightbox media={selectedMedia} onClose={() => setSelectedMedia(null)} t={t} />
         )}
       </AnimatePresence>
 
@@ -536,7 +564,7 @@ export default function ProjectPage({ project, nextProject, prevProject }) {
         </motion.div>
       </section>
 
-      <HeroMedia hero={project.hero} title={project.title} onMediaClick={openLightbox} />
+      <HeroMedia hero={project.hero} title={project.title} onMediaClick={openLightbox} t={t} />
 
       {/* 2. Metadata */}
       <section className="border-b border-line">
@@ -592,7 +620,7 @@ export default function ProjectPage({ project, nextProject, prevProject }) {
 
       {/* 3. Narrative blocks */}
       <section className="py-12 md:py-24">
-        {project.content?.map((block, idx) => renderBlock(block, idx, openLightbox))}
+        {project.content?.map((block, idx) => renderBlock(block, idx, openLightbox, t))}
       </section>
 
       {/* 4. Prev / next */}

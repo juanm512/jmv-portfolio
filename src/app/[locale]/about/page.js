@@ -1,12 +1,18 @@
 import { setRequestLocale, getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
+import { OG_LOCALE, localizedPath, pageAlternates } from "@/lib/metadata"
 import ContributionGraphSVG from "@/components/home/ContributionGraphSVG"
 import Arrow from "@/components/ui/Arrow"
 import ContactBlock from "@/components/home/ContactBlock"
 
-export async function generateMetadata() {
-  const t = await getTranslations("About")
-  return { title: t("title") }
+export async function generateMetadata({ params }) {
+  const { locale } = await params
+  const t = await getTranslations({ locale, namespace: "About" })
+  return {
+    title: t("title"),
+    alternates: pageAlternates(locale, "/about"),
+    openGraph: { url: localizedPath(locale, "/about"), locale: OG_LOCALE[locale] }
+  }
 }
 
 export default async function AboutPage({ params }) {
@@ -16,11 +22,11 @@ export default async function AboutPage({ params }) {
   const tAbout = await getTranslations("About")
   const year = new Date().getFullYear()
 
-  const prose = "flex flex-col gap-5 text-ink-2 text-[1.0625rem] md:text-lg leading-[1.7]"
+  const prose = "flex flex-col gap-5 max-w-[65ch] text-ink-2 text-[1.0625rem] md:text-lg leading-[1.7]"
 
   return (
     <main className="min-h-screen px-6 pb-10 flex flex-col">
-      <div className="max-w-[65ch] mx-auto">
+      <div className="max-w-7xl mx-auto w-full">
         <Link
           href="/"
           className="group inline-flex items-center gap-1.5 min-h-11 text-sm text-ink-2 hover:text-ink transition-colors mt-12 mb-10 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
@@ -61,11 +67,11 @@ export default async function AboutPage({ params }) {
         </section>
       </div>
 
-      <div className="max-w-4xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full">
         <ContributionGraphSVG locale={locale} />
       </div>
 
-      <div className="max-w-4xl mx-auto w-full">
+      <div className="max-w-7xl mx-auto w-full">
         <ContactBlock className="mt-20" />
         <footer className="mt-auto pt-28">
           <p className="font-mono text-xs text-ink-3 pt-6 border-t border-line">

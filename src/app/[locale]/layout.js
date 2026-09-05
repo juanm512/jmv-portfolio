@@ -2,9 +2,10 @@ import "@/styles/globals.css"
 import localFont from "next/font/local"
 import { GeistSans } from "geist/font/sans"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
-import { setRequestLocale } from "next-intl/server"
+import { setRequestLocale, getTranslations } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
+import { SITE_URL, OG_LOCALE, localizedPath, pageAlternates } from "@/lib/metadata"
 
 import Navbar from "@/components/layout/Navbar"
 import Shortcuts from "@/components/layout/Shortcuts"
@@ -18,60 +19,59 @@ const kodeMono = localFont({
   variable: "--font-kode-mono"
 })
 
-export const metadata = {
-  metadataBase: new URL("https://jmvila.com"),
-  title: {
-    default: "Juan Manuel Vila - FullStack Developer",
-    template: "%s | Juan Manuel Vila"
-  },
-  description:
-    "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems.",
-  keywords: [
-    "FullStack Developer",
-    "Web Development",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Node.js",
-    "JavaScript",
-    "Frontend",
-    "Backend"
-  ],
-  authors: [{ name: "Juan Manuel Vila" }],
-  creator: "Juan Manuel Vila",
-  openGraph: {
-    type: "website",
-    locale: "es_ES",
-    url: "https://jmvila.com",
-    siteName: "Juan Manuel Vila Portfolio",
-    title: "Juan Manuel Vila - FullStack Developer",
-    description:
-      "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Juan Manuel Vila Portfolio"
-      }
-    ]
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Juan Manuel Vila - FullStack Developer",
-    description:
-      "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems.",
-    images: ["/og-image.jpg"]
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+const KEYWORDS = [
+  "FullStack Developer",
+  "Web Development",
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Node.js",
+  "JavaScript",
+  "Frontend",
+  "Backend"
+]
+
+export async function generateMetadata({ params }) {
+  const { locale } = await params
+  if (!hasLocale(routing.locales, locale)) return {}
+  const t = await getTranslations({ locale, namespace: "Meta" })
+  const title = t("title")
+  const description = t("description")
+
+  return {
+    metadataBase: new URL(SITE_URL),
+    title: { default: title, template: "%s | Juan Manuel Vila" },
+    description,
+    keywords: KEYWORDS,
+    authors: [{ name: "Juan Manuel Vila" }],
+    creator: "Juan Manuel Vila",
+    alternates: pageAlternates(locale, "/"),
+    icons: { icon: [{ url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" }] },
+    openGraph: {
+      type: "website",
+      locale: OG_LOCALE[locale],
+      url: localizedPath(locale, "/"),
+      siteName: "Juan Manuel Vila",
+      title,
+      description,
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: t("ogAlt") }]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/og-image.png"]
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1
+      }
     }
   }
 }
@@ -99,16 +99,7 @@ export default async function LocaleLayout({ children, params }) {
       lang={locale}
       className={`${GeistSans.variable} ${kodeMono.variable}`}
     >
-      <head>
-        <link
-          rel="icon"
-          href="/favicon-32x32.png"
-          type="image/png"
-          sizes="32x32"
-        />
-        <link rel="canonical" href={`https://jmvila.com/${locale}`} />
-      </head>
-      <body className="relative font-sans w-full min-h-screen p-0 m-0 overflow-x-hidden bg-background-dark text-white">
+      <body className="relative font-sans w-full min-h-screen p-0 m-0 overflow-x-hidden bg-background-dark text-ink">
         <NextIntlClientProvider>
           <CustomCursor />
           <Navbar />

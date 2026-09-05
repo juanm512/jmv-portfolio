@@ -73,11 +73,17 @@
     "app": "App",
     "playStore": "Play Store",
     "code": "Código",
-    "prevProject": "Proyecto anterior"
+    "prevProject": "Proyecto anterior",
+    "openImage": "Ampliar imagen",
+    "openVideo": "Ampliar video",
+    "closeLightbox": "Cerrar vista ampliada",
+    "lightbox": "Vista ampliada",
+    "projectImage": "Imagen del proyecto"
   },
   "Meta": {
     "title": "Juan Manuel Vila - Desarrollador FullStack",
-    "description": "Portfolio de Juan Manuel Vila - Desarrollador FullStack especializado en crear sistemas que resuelven problemas reales."
+    "description": "Portfolio de Juan Manuel Vila - Desarrollador FullStack especializado en crear sistemas que resuelven problemas reales.",
+    "ogAlt": "Juan Manuel Vila, desarrollador full stack"
   },
   "Menu": {
     "button": "Menú",
@@ -113,7 +119,9 @@
     "projectGroups": {
       "featured": "Destacados",
       "other": "Otros"
-    }
+    },
+    "switchLanguage": "Cambiar a {locale}",
+    "heading": "Menú de navegación"
   },
   "About": {
     "title": "Sobre mí",
@@ -130,5 +138,20 @@
     "backHome": "Volver al inicio",
     "menuNav": "Navegar dentro del menú",
     "help": "Mostrar esta ayuda"
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Página no encontrada",
+    "text": "La dirección que abriste no existe o se movió.",
+    "back": "Volver al inicio"
+  },
+  "Error": {
+    "label": "Error",
+    "title": "Algo salió mal",
+    "retry": "Reintentar"
+  },
+  "Locales": {
+    "es": "español",
+    "en": "inglés"
   }
 }
