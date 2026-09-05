@@ -58,14 +58,14 @@ export function SecondaryProjectRow({ project }) {
       data-project-row
       data-slug={project.slug}
       style={{ "--accent": project.accentColor || "#00FF9C" }}
-      className={`${rowBase} py-3`}
+      className={`${rowBase} py-2.5`}
     >
       <Year year={project.year} />
       <span className="min-w-0 flex items-baseline gap-x-3">
-        <span className="shrink-0 text-ink text-sm md:text-base group-hover:text-[var(--accent)] transition-colors duration-200">
+        <span className="shrink-0 text-ink-2 text-sm group-hover:text-[var(--accent)] transition-colors duration-200">
           {project.title}
         </span>
-        <span className="hidden md:inline text-ink-3 text-sm truncate">
+        <span className="hidden md:inline text-ink-3 text-xs truncate">
           {project.description}
         </span>
       </span>
