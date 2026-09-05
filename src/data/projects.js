@@ -2,6 +2,7 @@ export const projects = [
 
   {
     slug: "copon",
+    tier: "featured",
     accentColor: "#00FF9C",
     year: "2026",
     client: "Freelance / Client Project",
@@ -41,6 +42,7 @@ export const projects = [
   },
   {
     slug: "tuerca",
+    tier: "featured",
     accentColor: "#F97316",
     year: "2026",
     client: "Active / Production",
@@ -92,6 +94,7 @@ export const projects = [
   },
   {
     slug: "relocate",
+    tier: "secondary",
     accentColor: "#3B82F6",
     year: "2026",
     client: "Personal Project",
@@ -125,6 +128,7 @@ export const projects = [
   },
   {
     slug: "single-resto",
+    tier: "featured",
     accentColor: "#F5A623",
     year: "2025",
     client: "Personal / Client",
@@ -226,6 +230,7 @@ export const projects = [
   
   {
     slug: "gsp",
+    tier: "featured",
     accentColor: "#A855F7",
     year: "2025",
     client: "Personal / Research",
@@ -262,6 +267,7 @@ export const projects = [
 
   {
     slug: "bmmusic",
+    tier: "secondary",
     accentColor: "#EC4899",
     year: "2024",
     client: "Personal",
@@ -298,6 +304,7 @@ export const projects = [
 
   {
     slug: "atlas-3d",
+    tier: "featured",
     accentColor: "#8B5A2B",
     year: "2023",
     client: "Freelance / Research",
@@ -337,6 +344,7 @@ export const projects = [
   
   {
     slug: "f1-stats",
+    tier: "secondary",
     accentColor: "#EF4444",
     year: "2023",
     client: "Personal / Learning",
@@ -373,6 +381,7 @@ export const projects = [
 
   {
     slug: "donatelo",
+    tier: "secondary",
     accentColor: "#FBBF24",
     year: "2022",
     client: "Personal / Research",
@@ -407,6 +416,7 @@ export const projects = [
 
   {
     slug: "vas-ecommerce",
+    tier: "secondary",
     accentColor: "#22D3EE",
     year: "2022",
     client: "Freelance",

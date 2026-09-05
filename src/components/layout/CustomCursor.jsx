@@ -6,13 +6,13 @@ import { motion, AnimatePresence } from "motion/react"
 export default function CustomCursor() {
   const cursorRef = useRef({ x: 0, y: 0 })
   const [pos, setPos] = useState({ x: -100, y: -100 })
-  /* eslint-disable @next/next/no-img-element */
   const [cursorType, setCursorType] = useState("text") // "text" | "image"
   const [cursorImage, setCursorImage] = useState("")
   const [isHovering, setIsHovering] = useState(false)
   const [hoverText, setHoverText] = useState("")
   const [isVisible, setIsVisible] = useState(false)
   const rafRef = useRef(null)
+  const animateRef = useRef(null)
 
   // Smooth cursor with lerp
   const targetRef = useRef({ x: -100, y: -100 })
@@ -22,14 +22,19 @@ export default function CustomCursor() {
     cursorRef.current.x += (targetRef.current.x - cursorRef.current.x) * lerp
     cursorRef.current.y += (targetRef.current.y - cursorRef.current.y) * lerp
     setPos({ x: cursorRef.current.x, y: cursorRef.current.y })
-    rafRef.current = requestAnimationFrame(animate)
+    rafRef.current = requestAnimationFrame(animateRef.current)
   }, [])
+
+  useEffect(() => {
+    animateRef.current = animate
+  }, [animate])
 
   useEffect(() => {
     // Only enable on non-touch devices
     const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0
     if (isTouchDevice) return
 
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- feature-detects touch before enabling the custom cursor
     setIsVisible(true)
 
     const handleMouseMove = (e) => {

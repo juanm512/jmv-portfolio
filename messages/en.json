@@ -28,7 +28,14 @@
     "projects": {
       "title": "Projects",
       "subtitle": "A selection of works that represent my evolution as a developer",
-      "viewProject": "View project"
+      "viewProject": "View project",
+      "other": "Other projects"
+    },
+    "cta": {
+      "about": "Who I am →"
+    },
+    "footer": {
+      "text": "© {year} Juan Manuel Vila · Kode Mono / Geist"
     },
     "contact": {
       "title": "Let's talk",
@@ -76,5 +83,20 @@
     "contact": "Contact",
     "made_by": "Made by:",
     "typography": "Typography:"
+  },
+  "About": {
+    "title": "About",
+    "back": "Back to home"
+  },
+  "Shortcuts": {
+    "title": "Keyboard shortcuts",
+    "moveDown": "Next project",
+    "moveUp": "Previous project",
+    "open": "Open project",
+    "prevNext": "Previous / next project",
+    "about": "Go to About",
+    "language": "Switch language",
+    "back": "Back / close",
+    "help": "Show this help"
   }
 }

@@ -328,7 +328,7 @@ function hexToRgbTriplet(hex) {
 
 // ─── Main Component ──────────────────────────────────────────────
 
-export default function ProjectPage({ project, nextProject }) {
+export default function ProjectPage({ project, nextProject, prevProject }) {
   const locale = useLocale()
   const t = useTranslations("Project")
   const [selectedMedia, setSelectedMedia] = useState(null)
@@ -345,6 +345,8 @@ export default function ProjectPage({ project, nextProject }) {
 
   return (
     <main
+      data-prev={prevProject ? `/${locale}/projects/${prevProject.slug}` : undefined}
+      data-next={nextProject ? `/${locale}/projects/${nextProject.slug}` : undefined}
       className="min-h-screen bg-background-dark text-white font-sans selection:bg-green-glow/30"
       style={{
         "--accent": accent,
@@ -402,6 +404,9 @@ export default function ProjectPage({ project, nextProject }) {
              </div>
              <span className="text-sm font-light tracking-wide hidden md:block opacity-0 group-hover:opacity-100 transition-opacity -translate-x-2 group-hover:translate-x-0">
                {t("backToHome")}
+             </span>
+             <span className="hidden md:inline-flex text-[10px] font-mono ring-1 ring-white/20 text-white/40 px-1.5 py-0.5 rounded-md">
+               Esc
              </span>
            </Link>
         </div>
@@ -537,8 +542,16 @@ export default function ProjectPage({ project, nextProject }) {
       {/* 4. Next Project Navigation */}
       {nextProject && (
         <section className="flex flex-col items-center justify-center py-32 bg-background-dark border-t border-white/5 text-center">
-           <p className="text-white/40 font-mono mb-4">
+           <p className="text-white/40 font-mono mb-4 flex items-center gap-2">
              {t("nextProject")}
+             <span className="text-[10px] font-mono ring-1 ring-white/20 text-white/40 px-1.5 py-0.5 rounded-md">
+               →
+             </span>
+             {prevProject && (
+               <span className="text-[10px] font-mono ring-1 ring-white/20 text-white/40 px-1.5 py-0.5 rounded-md">
+                 ←
+               </span>
+             )}
            </p>
            <Link
              href={`/${locale}/projects/${nextProject.slug}`}

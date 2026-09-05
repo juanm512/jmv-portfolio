@@ -6,7 +6,8 @@ import { setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 
-import Header from "@/components/layout/Header"
+import Navbar from "@/components/layout/Navbar"
+import Shortcuts from "@/components/layout/Shortcuts"
 import CustomCursor from "@/components/layout/CustomCursor"
 
 const kodeMono = localFont({
@@ -99,8 +100,9 @@ export default async function LocaleLayout({ children, params }) {
       <body className="relative font-sans w-full min-h-screen p-0 m-0 overflow-x-hidden bg-background-dark text-white">
         <NextIntlClientProvider>
           <CustomCursor />
-          <Header lang={locale} />
-          {children}
+          <Navbar />
+          <Shortcuts />
+          <div className="pt-14">{children}</div>
         </NextIntlClientProvider>
       </body>
     </html>

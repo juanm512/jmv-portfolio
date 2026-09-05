@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: `${project.title} | Juan Manuel Vila`,
+    title: project.title,
     description: project.description
   }
 }
@@ -41,7 +41,14 @@ export default async function Project({ params }) {
     notFound()
   }
 
-  const { next: nextProject } = getAdjacentProjects(slug, locale)
+  const { next: nextProject, prev: prevProject } = getAdjacentProjects(slug, locale)
 
-  return <ProjectPage project={project} nextProject={nextProject} />
+  return (
+    <ProjectPage
+      project={project}
+      nextProject={nextProject}
+      prevProject={prevProject}
+      locale={locale}
+    />
+  )
 }

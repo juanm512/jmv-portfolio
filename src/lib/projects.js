@@ -23,6 +23,10 @@ export function getAllProjects(locale = "en") {
     })
 }
 
+export function getProjectsByTier(tier, locale = "en") {
+  return getAllProjects(locale).filter((p) => p.tier === tier)
+}
+
 export function getProjectBySlug(slug, locale = "en") {
   const project = projects.find((p) => p.slug === slug)
   return getLocalizedProject(project, locale)
