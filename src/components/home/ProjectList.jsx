@@ -35,6 +35,11 @@ export function FeaturedProjectRow({ project }) {
       <div className="min-w-0">
         <h3 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] group-hover:text-[var(--accent)] transition-colors duration-200">
           {project.title}
+          {project.tagline && (
+            <span className="block sm:inline sm:ml-3 text-base md:text-lg font-normal text-ink-2 sm:before:content-['·'] sm:before:mr-3 sm:before:text-ink-3">
+              {project.tagline}
+            </span>
+          )}
         </h3>
         <p className="mt-2 text-ink-2 text-sm md:text-base max-w-[60ch] leading-[1.6]">
           {project.description}
@@ -58,7 +63,7 @@ export function SecondaryProjectRow({ project }) {
       data-project-row
       data-slug={project.slug}
       style={{ "--accent": project.accentColor || "#00FF9C" }}
-      className={`${rowBase} py-2.5`}
+      className={`${rowBase} py-2.5 min-h-11`}
     >
       <Year year={project.year} />
       <span className="min-w-0 flex items-baseline gap-x-3">
@@ -66,7 +71,7 @@ export function SecondaryProjectRow({ project }) {
           {project.title}
         </span>
         <span className="hidden md:inline text-ink-3 text-xs truncate">
-          {project.description}
+          {project.tagline || project.description}
         </span>
       </span>
       <RowArrow />

@@ -2,6 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import ContributionGraphSVG from "@/components/home/ContributionGraphSVG"
 import Arrow from "@/components/ui/Arrow"
+import ContactBlock from "@/components/home/ContactBlock"
 
 export async function generateMetadata() {
   const t = await getTranslations("About")
@@ -13,15 +14,16 @@ export default async function AboutPage({ params }) {
   setRequestLocale(locale)
   const t = await getTranslations("Home")
   const tAbout = await getTranslations("About")
+  const year = new Date().getFullYear()
 
   const prose = "flex flex-col gap-5 text-ink-2 text-[1.0625rem] md:text-lg leading-[1.7]"
 
   return (
-    <main className="min-h-screen px-6 pb-24">
+    <main className="min-h-screen px-6 pb-10 flex flex-col">
       <div className="max-w-[65ch] mx-auto">
         <Link
           href="/"
-          className="group inline-flex items-center gap-1.5 text-sm text-ink-2 hover:text-ink transition-colors mt-12 mb-10"
+          className="group inline-flex items-center gap-1.5 min-h-11 text-sm text-ink-2 hover:text-ink transition-colors mt-12 mb-10 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
         >
           <Arrow direction="left" className="transition-transform duration-200 ease-out-expo group-hover:-translate-x-0.5 motion-reduce:transform-none" />
           {tAbout("back")}
@@ -59,8 +61,17 @@ export default async function AboutPage({ params }) {
         </section>
       </div>
 
-      <div className="max-w-4xl mx-auto">
-        <ContributionGraphSVG />
+      <div className="max-w-4xl mx-auto w-full">
+        <ContributionGraphSVG locale={locale} />
+      </div>
+
+      <div className="max-w-4xl mx-auto w-full">
+        <ContactBlock className="mt-20" />
+        <footer className="mt-auto pt-28">
+          <p className="font-mono text-xs text-ink-3 pt-6 border-t border-line">
+            {t("footer.text", { year })}
+          </p>
+        </footer>
       </div>
     </main>
   )

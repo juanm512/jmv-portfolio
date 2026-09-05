@@ -52,8 +52,11 @@ export default function Shortcuts() {
       if (event.ctrlKey || event.metaKey || event.altKey) return
       if (isTypingTarget(document.activeElement)) return
 
+      // The help dialog owns Escape while open: it closes only the dialog.
       if (helpOpen) {
         if (event.key === "Escape") {
+          event.preventDefault()
+          event.stopPropagation()
           setHelpOpen(false)
         }
         return
@@ -68,17 +71,13 @@ export default function Shortcuts() {
         return
       }
 
-      // While the TV menu is open, it owns all keyboard input.
+      // While the TV menu is open, it owns all keyboard input (including "?",
+      // so the help scrim never stacks on top of the menu scrim).
       if (document.body.dataset.menuOpen === "true") return
 
       // Global shortcuts
       if (event.key === "l" || event.key === "L") {
         toggleLanguage()
-        return
-      }
-
-      if (event.key === "a" || event.key === "A") {
-        router.push("/about")
         return
       }
 
@@ -125,6 +124,13 @@ export default function Shortcuts() {
     return () => window.removeEventListener("keydown", handleKeyDown)
   }, [helpOpen, isHome, moveFocus, router, toggleLanguage])
 
+  // The TV menu forwards "?" here after closing itself.
+  useEffect(() => {
+    const openHelp = () => setHelpOpen(true)
+    window.addEventListener("shortcuts:help", openHelp)
+    return () => window.removeEventListener("shortcuts:help", openHelp)
+  }, [])
+
   useEffect(() => {
     if (!helpOpen) return
     function handleClickOutside(event) {
@@ -142,7 +148,6 @@ export default function Shortcuts() {
     { keys: ["K", "↑"], label: t("moveUp") },
     { keys: ["Enter"], label: t("open") },
     { keys: ["←", "→"], label: t("prevNext") },
-    { keys: ["A"], label: t("about") },
     { keys: ["L"], label: t("language") },
     { keys: ["Esc"], label: t("back") },
     { keys: ["Backspace"], label: t("backHome") },

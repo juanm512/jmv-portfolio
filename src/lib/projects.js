@@ -13,10 +13,15 @@ function getLocalizedProject(project, locale = "en") {
   }
 }
 
+// Home order: featured tier first, then secondary, each by year desc.
+const TIER_RANK = { featured: 0, secondary: 1 }
+
 export function getAllProjects(locale = "en") {
   return projects
     .map(p => getLocalizedProject(p, locale))
     .sort((a, b) => {
+      const tierDiff = (TIER_RANK[a.tier] ?? 9) - (TIER_RANK[b.tier] ?? 9)
+      if (tierDiff !== 0) return tierDiff
       const yearA = parseInt(a.year) || 0
       const yearB = parseInt(b.year) || 0
       return yearB - yearA
@@ -36,15 +41,17 @@ export function getAllProjectSlugs() {
   return projects.map((p) => ({ slug: p.slug }))
 }
 
+// Prev/next follow the same order the home list uses (see getAllProjects).
 export function getAdjacentProjects(slug, locale = "en") {
-  const idx = projects.findIndex((p) => p.slug === slug)
+  const ordered = getAllProjects(locale)
+  const idx = ordered.findIndex((p) => p.slug === slug)
   if (idx === -1) return { next: null, prev: null }
 
-  const nextIdx = (idx + 1) % projects.length
-  const prevIdx = (idx - 1 + projects.length) % projects.length
+  const nextIdx = (idx + 1) % ordered.length
+  const prevIdx = (idx - 1 + ordered.length) % ordered.length
 
   return {
-    next: getLocalizedProject(projects[nextIdx], locale),
-    prev: getLocalizedProject(projects[prevIdx], locale),
+    next: ordered[nextIdx],
+    prev: ordered[prevIdx],
   }
 }

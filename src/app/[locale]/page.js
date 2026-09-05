@@ -3,6 +3,7 @@ import { Link } from "@/i18n/navigation"
 import { getProjectsByTier } from "@/lib/projects"
 import { FeaturedProjectRow, SecondaryProjectRow } from "@/components/home/ProjectList"
 import Arrow from "@/components/ui/Arrow"
+import ContactBlock from "@/components/home/ContactBlock"
 
 export const metadata = {
   title: "Juan Manuel Vila - FullStack Developer",
@@ -27,7 +28,7 @@ export default async function HomePage({ params }) {
         </h1>
         <Link
           href="/about"
-          className="group inline-flex items-center gap-1.5 mt-5 text-sm md:text-base text-ink-2 hover:text-green-glow transition-colors"
+          className="group inline-flex items-center gap-1.5 mt-5 py-2 -my-2 text-sm md:text-base text-ink-2 hover:text-green-glow transition-colors rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
         >
           {t("cta.about")}
           <Arrow className="transition-transform duration-200 ease-out-expo group-hover:translate-x-0.5 motion-reduce:transform-none" />
@@ -48,6 +49,8 @@ export default async function HomePage({ params }) {
           ))}
         </div>
       </section>
+
+      <ContactBlock className="mt-20" />
 
       <footer className="mt-auto pt-28 pb-10">
         <p className="font-mono text-xs text-ink-3 pt-6 border-t border-line">

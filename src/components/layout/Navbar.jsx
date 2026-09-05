@@ -19,7 +19,7 @@ function LangIcon() {
 }
 
 const navButton =
-  "flex items-center gap-2 h-9 px-2 -mx-1 rounded-sm text-sm text-ink-2 hover:text-ink transition-colors outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
+  "flex items-center gap-2 h-9 min-h-11 md:min-h-9 px-2 -mx-1 rounded-sm text-sm text-ink-2 hover:text-ink transition-colors outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
 
 export default function Navbar() {
   const t = useTranslations("Menu")
@@ -30,16 +30,23 @@ export default function Navbar() {
       <nav className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between border-b border-line">
         <Link
           href="/"
-          className="font-kode text-sm sm:text-base text-ink hover:text-green-glow transition-colors tracking-tight rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
+          className="inline-flex items-center min-h-11 font-kode text-sm sm:text-base text-ink hover:text-green-glow transition-colors tracking-tight rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
         >
           Juan Manuel Vila
         </Link>
 
         <div className="flex items-center gap-3 sm:gap-5">
-          <button type="button" onClick={openTvMenu} className={navButton}>
-            {t("button")}
-            <Kbd className="hidden md:inline-flex">{t("buttonHint")}</Kbd>
-          </button>
+          <span className="flex items-center gap-1.5">
+            <button type="button" onClick={openTvMenu} className={navButton}>
+              {t("button")}
+              <Kbd className="hidden md:inline-flex">{t("buttonHint")}</Kbd>
+            </button>
+            {/* "?" opens the shortcuts help; the cap makes the key visible. */}
+            <span className="hidden md:inline-flex items-center" title={t("helpHint")}>
+              <Kbd>?</Kbd>
+              <span className="sr-only">{t("helpHint")}</span>
+            </span>
+          </span>
 
           <button
             type="button"

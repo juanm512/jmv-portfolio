@@ -1,57 +1,45 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
 import { motion, useReducedMotion } from "motion/react"
 
-const FloatingParticles = ({ count = 60 }) => {
-  const [particles, setParticles] = useState([])
+// Axis ticks of the (static) weekly series below, x in SVG units.
+const TICKS = [
+  { x: 0, year: 2019, month: 1 },
+  { x: 86.58823529411765, year: 2019, month: 9 },
+  { x: 162.3529411764706, year: 2020, month: 4 },
+  { x: 248.94117647058823, year: 2020, month: 12 },
+  { x: 335.52941176470586, year: 2021, month: 8 },
+  { x: 422.11764705882354, year: 2022, month: 4 },
+  { x: 497.88235294117646, year: 2022, month: 11 },
+  { x: 584.470588235294, year: 2023, month: 7 },
+  { x: 671.0588235294117, year: 2024, month: 3 },
+  { x: 757.6470588235294, year: 2024, month: 11 },
+  { x: 833.4117647058823, year: 2025, month: 6 },
+  { x: 920, year: 2026, month: 2 }
+]
 
-  useEffect(() => {
-    // Generate particles client-side to avoid hydration errors since we use Math.random()
-    const newParticles = Array.from({ length: count }).map((_, i) => ({
-      id: i,
-      x: Math.random() * 920, // distribute across the SVG width
-      y: 120 + Math.random() * 140, // distribute mostly in the bottom half of the SVG (120 to 260)
-      size: 0.5 + Math.random() * 2,
-      duration: 3 + Math.random() * 4,
-      delay: Math.random() * 5,
-      yOffset: -20 - Math.random() * 40
-    }))
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time client-only randomization to avoid SSR/client hydration mismatch
-    setParticles(newParticles)
-  }, [count])
-
-  return (
-    <g>
-      {particles.map((p) => (
-        <motion.circle
-          key={p.id}
-          cx={p.x}
-          cy={p.y}
-          r={p.size}
-          fill="#00ff87"
-          initial={{ opacity: 0, y: 0 }}
-          animate={{
-            opacity: [0, 0.6, 0],
-            y: [0, p.yOffset]
-          }}
-          transition={{
-            duration: p.duration,
-            repeat: Infinity,
-            delay: p.delay,
-            ease: "easeInOut"
-          }}
-        />
-      ))}
-    </g>
-  )
+function shortMonth(tick, locale) {
+  const date = new Date(Date.UTC(tick.year, tick.month - 1, 1))
+  const month = new Intl.DateTimeFormat(locale, { month: "short", timeZone: "UTC" })
+    .format(date)
+    .replace(/\.$/, "")
+  return `${month} '${String(tick.year).slice(2)}`
 }
 
-export default function ContributionGraphSVG() {
+function longMonth(tick, locale) {
+  const date = new Date(Date.UTC(tick.year, tick.month - 1, 1))
+  return new Intl.DateTimeFormat(locale, { month: "long", year: "numeric", timeZone: "UTC" }).format(date)
+}
+
+export default function ContributionGraphSVG({ locale = "en" }) {
   const reduceMotion = useReducedMotion()
+  const t = useTranslations("Home.contributions")
+  const first = TICKS[0]
+  const last = TICKS[TICKS.length - 1]
   return (
     <motion.div
-      className="w-full h-full flex items-center justify-center p-4 md:p-8"
+      className="w-full flex flex-col items-center justify-center p-4 md:p-8"
       initial={reduceMotion ? false : { opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
@@ -60,18 +48,18 @@ export default function ContributionGraphSVG() {
       <svg
         viewBox="0 0 920 300"
         role="img"
-        aria-label="Monthly contribution trend"
+        aria-label={t("legend", { from: longMonth(first, locale), to: longMonth(last, locale) })}
         className="w-full h-auto"
       >
         <defs>
           <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#00ff87" stopOpacity="0.2"></stop>
-            <stop offset="100%" stopColor="#00ff87" stopOpacity="0"></stop>
+            <stop offset="0%" stopColor="var(--color-green-glow)" stopOpacity="0.2"></stop>
+            <stop offset="100%" stopColor="var(--color-green-glow)" stopOpacity="0"></stop>
           </linearGradient>
           <linearGradient id="line-stroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#00ff87" stopOpacity="0.4"></stop>
-            <stop offset="30%" stopColor="#00ff87" stopOpacity="1"></stop>
-            <stop offset="100%" stopColor="#00ff87" stopOpacity="1"></stop>
+            <stop offset="0%" stopColor="var(--color-green-glow)" stopOpacity="0.4"></stop>
+            <stop offset="30%" stopColor="var(--color-green-glow)" stopOpacity="1"></stop>
+            <stop offset="100%" stopColor="var(--color-green-glow)" stopOpacity="1"></stop>
           </linearGradient>
         </defs>
 
@@ -86,7 +74,6 @@ export default function ContributionGraphSVG() {
           fill="url(#area-fill)"
         ></path>
 
-        {!reduceMotion && <FloatingParticles count={40} />}
 
         {/* Polyline Chart stroke */}
         <polyline
@@ -99,25 +86,29 @@ export default function ContributionGraphSVG() {
         ></polyline>
 
         {/* End Dots */}
-        <circle cx="909.1764705882354" cy="41.88235294117648" r="8" fill="#00ff87" opacity="0.15"></circle>
-        <circle cx="909.1764705882354" cy="41.88235294117648" r="3.5" fill="#00ff87"></circle>
+        <circle cx="909.1764705882354" cy="41.88235294117648" r="8" fill="var(--color-green-glow)" opacity="0.15"></circle>
+        <circle cx="909.1764705882354" cy="41.88235294117648" r="3.5" fill="var(--color-green-glow)"></circle>
 
-        {/* Text labels */}
+        {/* Axis labels: month names come from the locale. */}
         <g>
-          <text x="0" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Jan &apos;19</text>
-          <text x="86.58823529411765" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Sep &apos;19</text>
-          <text x="162.3529411764706" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Apr &apos;20</text>
-          <text x="248.94117647058823" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Dec &apos;20</text>
-          <text x="335.52941176470586" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Aug &apos;21</text>
-          <text x="422.11764705882354" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Apr &apos;22</text>
-          <text x="497.88235294117646" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Nov &apos;22</text>
-          <text x="584.470588235294" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Jul &apos;23</text>
-          <text x="671.0588235294117" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Mar &apos;24</text>
-          <text x="757.6470588235294" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Nov &apos;24</text>
-          <text x="833.4117647058823" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Jun &apos;25</text>
-          <text x="920" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Feb &apos;26</text>
+          {TICKS.map((tick) => (
+            <text
+              key={`${tick.year}-${tick.month}`}
+              x={tick.x}
+              y="294"
+              textAnchor="middle"
+              fill="var(--color-ink-3)"
+              fontSize="11"
+              fontFamily="var(--font-kode-mono), ui-monospace, monospace"
+            >
+              {shortMonth(tick, locale)}
+            </text>
+          ))}
         </g>
       </svg>
+      <p className="w-full mt-3 font-mono text-xs text-ink-3">
+        {t("legend", { from: longMonth(first, locale), to: longMonth(last, locale) })}
+      </p>
     </motion.div>
   )
 }

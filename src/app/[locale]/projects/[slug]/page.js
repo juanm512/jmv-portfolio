@@ -27,7 +27,7 @@ export async function generateMetadata({ params }) {
   }
 
   return {
-    title: project.title,
+    title: project.tagline ? `${project.title}: ${project.tagline}` : project.title,
     description: project.description
   }
 }

@@ -88,6 +88,7 @@ export default async function LocaleLayout({ children, params }) {
   const projects = getAllProjects(locale).map((p) => ({
     slug: p.slug,
     title: p.title,
+    tagline: p.tagline,
     year: p.year,
     tier: p.tier,
     accentColor: p.accentColor

@@ -7,6 +7,7 @@ import { useLocale, useTranslations } from "next-intl"
 import { useRouter, usePathname } from "@/i18n/navigation"
 import { useLanguageToggle } from "@/lib/useLanguageToggle"
 import { subscribeTvMenu, closeTvMenu } from "@/lib/tvMenuStore"
+import { useCoarsePointer } from "@/lib/useCoarsePointer"
 
 const SECTION_IDS = ["pages", "projects", "links", "language"]
 
@@ -17,6 +18,7 @@ export default function TvMenu({ projects = [] }) {
   const pathname = usePathname()
   const { toggleLanguage } = useLanguageToggle()
   const reduceMotion = useReducedMotion()
+  const coarsePointer = useCoarsePointer()
 
   const [open, setOpen] = useState(false)
   const [level, setLevel] = useState("sections") // "sections" | "items"
@@ -35,24 +37,21 @@ export default function TvMenu({ projects = [] }) {
 
     const featured = projects.filter((p) => p.tier === "featured")
     const secondary = projects.filter((p) => p.tier !== "featured")
+    const toItem = (p) => ({
+      id: `project-${p.slug}`,
+      label: p.title,
+      tagline: p.tagline,
+      year: p.year,
+      accentColor: p.accentColor,
+      kind: "internal",
+      route: `/projects/${p.slug}`
+    })
+    // Subtitles instead of a bare divider: "Destacados" / "Otros".
     const projectItems = [
-      ...featured.map((p) => ({
-        id: `project-${p.slug}`,
-        label: p.title,
-        year: p.year,
-        accentColor: p.accentColor,
-        kind: "internal",
-        route: `/projects/${p.slug}`
-      })),
-      ...(featured.length && secondary.length ? [{ id: "project-divider", divider: true }] : []),
-      ...secondary.map((p) => ({
-        id: `project-${p.slug}`,
-        label: p.title,
-        year: p.year,
-        accentColor: p.accentColor,
-        kind: "internal",
-        route: `/projects/${p.slug}`
-      }))
+      ...(featured.length ? [{ id: "project-heading-featured", heading: t("projectGroups.featured") }] : []),
+      ...featured.map(toItem),
+      ...(secondary.length ? [{ id: "project-heading-other", heading: t("projectGroups.other") }] : []),
+      ...secondary.map(toItem)
     ]
 
     const linksItems = [
@@ -77,7 +76,7 @@ export default function TvMenu({ projects = [] }) {
 
   const activeSection = sections[sectionIndex]
   const selectableItems = useMemo(
-    () => (activeSection ? activeSection.items.filter((i) => !i.divider) : []),
+    () => (activeSection ? activeSection.items.filter((i) => !i.heading) : []),
     [activeSection]
   )
 
@@ -157,6 +156,14 @@ export default function TvMenu({ projects = [] }) {
       const key = event.key
       const lower = key.length === 1 ? key.toLowerCase() : key
 
+      // "?" swaps the menu for the help dialog instead of stacking scrims.
+      if (key === "?") {
+        event.preventDefault()
+        closeTvMenu()
+        window.dispatchEvent(new CustomEvent("shortcuts:help"))
+        return
+      }
+
       if (level === "sections") {
         if (key === "ArrowDown" || lower === "s") {
           event.preventDefault()
@@ -205,7 +212,8 @@ export default function TvMenu({ projects = [] }) {
     { keys: ["\u2192"], alt: "D", label: t("legend.enter") },
     { keys: ["\u2190"], alt: "A", label: t("legend.back") },
     { keys: ["Enter"], label: t("legend.open") },
-    { keys: ["Esc"], label: t("legend.close") }
+    { keys: ["Esc"], label: t("legend.close") },
+    { keys: ["?"], label: t("legend.help") }
   ]
 
   return (
@@ -245,7 +253,7 @@ export default function TvMenu({ projects = [] }) {
                           setItemIndex(0)
                           setLevel("items")
                         }}
-                        className={`relative w-full text-left py-1.5 outline-none font-kode leading-[1.15] text-[clamp(1.75rem,4vw,2.5rem)] transition-colors duration-150 ${
+                        className={`relative w-full text-left py-1.5 outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-darker rounded-sm font-kode leading-[1.15] text-[clamp(1.75rem,4vw,2.5rem)] transition-colors duration-150 ${
                           isHighlighted ? "text-ink" : "text-ink-3 hover:text-ink-2"
                         }`}
                       >
@@ -272,8 +280,16 @@ export default function TvMenu({ projects = [] }) {
                   className="flex flex-col self-center overflow-y-auto max-h-[70vh] sm:max-h-[80vh] -mx-3 px-3"
                 >
                   {activeSection?.items.map((item) => {
-                    if (item.divider) {
-                      return <li key={item.id} className="my-3 border-t border-line" aria-hidden="true" />
+                    if (item.heading) {
+                      return (
+                        <li
+                          key={item.id}
+                          className="font-mono text-xs text-ink-3 pt-4 pb-1 first:pt-0"
+                          role="presentation"
+                        >
+                          {item.heading}
+                        </li>
+                      )
                     }
                     const selectableIndex = selectableItems.indexOf(item)
                     const isHighlighted = level === "items" && selectableIndex === itemIndex
@@ -282,7 +298,7 @@ export default function TvMenu({ projects = [] }) {
                     }
 
                     const isProject = Boolean(item.accentColor)
-                    const rowClasses = `flex items-baseline gap-4 w-full text-left px-3 -mx-3 py-2 rounded-none outline-none text-lg sm:text-xl leading-[1.5] transition-colors duration-150 ${
+                    const rowClasses = `flex items-baseline gap-4 w-full text-left px-3 -mx-3 py-2 rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-darker text-lg sm:text-xl leading-[1.5] transition-colors duration-150 ${
                       isProject ? "border-b border-line" : ""
                     } ${
                       isHighlighted
@@ -297,6 +313,9 @@ export default function TvMenu({ projects = [] }) {
                         )}
                         <span className="flex items-baseline gap-3 min-w-0 flex-1">
                           <span className="truncate">{item.label}</span>
+                          {item.tagline && (
+                            <span className="hidden sm:inline text-sm text-ink-3 truncate min-w-0">{item.tagline}</span>
+                          )}
                           {item.active && (
                             <span className="font-mono text-xs text-green-glow shrink-0">{t("current")}</span>
                           )}
@@ -345,17 +364,24 @@ export default function TvMenu({ projects = [] }) {
           </div>
 
           <div className="shrink-0 w-full max-w-5xl mx-auto px-6 sm:px-10 pb-8">
-            <ul className="flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[13px] text-ink-3 border-t border-line pt-4">
-              {legend.map((entry) => (
-                <li key={entry.label} className="flex items-center gap-1.5">
-                  {entry.keys.map((k) => (
-                    <Kbd key={k}>{k}</Kbd>
-                  ))}
-                  {entry.alt && <span>/ {entry.alt}</span>}
-                  <span className="ml-1">{entry.label}</span>
-                </li>
-              ))}
-            </ul>
+            {/* Keyboard legend on fine pointers; one-line touch hint on coarse ones.
+                The CSS variant covers the first paint before matchMedia resolves. */}
+            {!coarsePointer && (
+              <ul className="pointer-coarse:hidden flex flex-wrap items-center gap-x-6 gap-y-2 font-mono text-[13px] text-ink-3 border-t border-line pt-4">
+                {legend.map((entry) => (
+                  <li key={entry.label} className="flex items-center gap-1.5">
+                    {entry.keys.map((k) => (
+                      <Kbd key={k}>{k}</Kbd>
+                    ))}
+                    {entry.alt && <span>/ {entry.alt}</span>}
+                    <span className="ml-1">{entry.label}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+            <p className={`${coarsePointer ? "" : "hidden pointer-coarse:block"} font-mono text-[13px] text-ink-3 border-t border-line pt-4`}>
+              {t("touchHint")}
+            </p>
           </div>
         </motion.div>
       )}

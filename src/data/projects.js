@@ -11,9 +11,11 @@ export const projects = [
     hero: { type: "image", src: "/copon/hero.png" },
     locales: {
       en: {
-        title: "Copon — Football Prediction Tournaments",
+        title: "Copon",
+        tagline: "Football Prediction Tournaments",
         description: "Full-stack platform to run private football prediction tournaments (prode) among friends, coworkers or communities — real-time standings, configurable point systems and round-based prize pools.",
         role: "Full Stack Developer (client project)",
+        context: "Freelance / Client project",
         content: [
           { type: "text", title: "Overview", text: "A third party approached with the need to organize their group's football prode beyond spreadsheets and WhatsApp threads. Copon turned that into a dedicated product: private tournaments with automatic scoring, live standings and round-based prize pools — not a betting platform, just the tool that replaces the Excel sheet." },
           { type: "grid", items: [ { src: "/copon/hero.png", caption: "Landing — organize your tournament, manage the prode" } ] },
@@ -25,9 +27,11 @@ export const projects = [
         ]
       },
       es: {
-        title: "Copon — Torneos de Predicción de Fútbol",
+        title: "Copon",
+        tagline: "Torneos de Predicción de Fútbol",
         description: "Plataforma full-stack para organizar torneos privados de prode entre amigos, laburo o comunidad — tabla en tiempo real, sistemas de puntos configurables y pozo de premios por ronda.",
         role: "Desarrollador Full Stack (proyecto para cliente)",
+        context: "Freelance / Proyecto para cliente",
         content: [
           { type: "text", title: "Resumen", text: "Un tercero se acercó con la necesidad de organizar el prode de su grupo más allá de un Excel o un chat de WhatsApp. Copon convirtió eso en un producto dedicado: torneos privados con puntaje automático, tabla en vivo y pozo de premios por ronda — no es una plataforma de apuestas, es la herramienta que reemplaza la planilla." },
           { type: "grid", items: [ { src: "/copon/hero.png", caption: "Landing — organizá tu torneo, gestioná el prode" } ] },
@@ -51,9 +55,11 @@ export const projects = [
     hero: { type: "image", src: "/tuerca/dash.png" },
     locales: {
       en: {
-        title: "TUERCA — Field Service Management Platform",
+        title: "TUERCA",
+        tagline: "Field Service Management Platform",
         description: "Production mobile FSM platform for field service teams — evolved from a web prototype to a cross-platform React Native app with route optimization, team management, and real-time job tracking.",
         role: "Sole Developer & Architect",
+        context: "Active / Production",
         content: [
           { type: "text", title: "Overview", text: "TUERCA started as a web-based SaaS dashboard for service professionals. After validating the core workflows, the project was rearchitected into a dedicated mobile-first platform — because the real users, field technicians, are always on-site, not at a desk.\n\nThe result is a production React Native app available on Google Play that gives technical teams the tools to manage jobs, optimize routes, track finances, and coordinate in real time — all from their phones." },
           { type: "grid", items: [ { src: "/tuerca/dash.png", caption: "Main dashboard — card-based overview" }, { src: "/tuerca/jobs_list.png", caption: "Jobs list — filterable work orders" } ] },
@@ -71,9 +77,11 @@ export const projects = [
         ]
       },
       es: {
-        title: "TUERCA — Plataforma de Gestión de Servicios de Campo",
+        title: "TUERCA",
+        tagline: "Plataforma de Gestión de Servicios de Campo",
         description: "App móvil FSM en producción para equipos de campo — evolucionó de un prototipo web a una app React Native cross-platform con optimización de rutas, gestión de equipos y seguimiento de trabajos en tiempo real.",
         role: "Desarrollador Único & Arquitecto",
+        context: "Activo / En producción",
         content: [
           { type: "text", title: "Resumen", text: "TUERCA comenzó como un dashboard SaaS web para profesionales de servicios. Después de validar los flujos de trabajo principales, el proyecto fue rediseñado como una plataforma mobile-first — porque los usuarios reales, los técnicos de campo, están siempre en terreno, no frente a un escritorio.\n\nEl resultado es una app React Native en producción, disponible en Google Play, que le da a los equipos técnicos las herramientas para gestionar trabajos, optimizar rutas, hacer seguimiento financiero y coordinar en tiempo real, todo desde el celular." },
           { type: "grid", items: [ { src: "/tuerca/dash.png", caption: "Dashboard principal — resumen en tarjetas" }, { src: "/tuerca/jobs_list.png", caption: "Lista de trabajos — órdenes filtrables" } ] },
@@ -103,9 +111,11 @@ export const projects = [
     hero: { type: "image", src: "/relocate-app/inicial.png" },
     locales: {
       en: {
-        title: "Relocate - Commute Map",
+        title: "Relocate",
+        tagline: "Commute Map",
         description: "Visual tool that helps you discover where you can reasonably live based on your workplace and preferred commute mode.",
         role: "Full Stack Developer",
+        context: "Personal project",
         content: [
           { type: "text", title: "Overview", text: "Interactive map built with Leaflet and Turf.js to visualize reachable areas from a specific point using walking, cycling, driving, and public transport modes." },
           { type: "grid", items: [ { src: "/relocate-app/inicial.png", caption: "Initial Search" }, { src: "/relocate-app/resultado_colectivos.png", caption: "Public Transport Engine" }, { src: "/relocate-app/resultado_subtes.png", caption: "Subway Routing" } ] },
@@ -114,9 +124,11 @@ export const projects = [
         ]
       },
       es: {
-        title: "Relocate - Mapa de Alcance CABA",
+        title: "Relocate",
+        tagline: "Mapa de Alcance CABA",
         description: "Herramienta visual que permite ver hasta dónde se puede vivir razonablemente según el lugar de trabajo y el medio de transporte elegido.",
         role: "Desarrollador Full Stack",
+        context: "Proyecto personal",
         content: [
           { type: "text", title: "Resumen", text: "Aplicación interactiva de mapas (Leaflet y Turf.js) para visualizar hasta qué barrios podés llegar en cierta cantidad de minutos usando caminando, bicicleta, auto o transporte público." },
           { type: "grid", items: [ { src: "/relocate-app/inicial.png", caption: "Búsqueda de partida" }, { src: "/relocate-app/resultado_colectivos.png", caption: "Alcance en Colectivos" }, { src: "/relocate-app/resultado_subtes.png", caption: "Alcance en Subte" } ] },
@@ -137,9 +149,11 @@ export const projects = [
     hero: { type: "image", src: "/single_resto/portada.png" },
     locales: {
       en: {
-        title: "Single Resto — Web & Dashboard",
+        title: "Single Resto",
+        tagline: "Web & Dashboard",
         description: "Full-stack restaurant platform with public ordering website and admin dashboard — Docker-deployed to a VPS with real-time order notifications, MercadoPago payments, WhatsApp integration and white-label theming.",
         role: "Lead Developer",
+        context: "Personal / Client",
         content: [
           { type: "text", title: "Overview", text: "Single Resto is a complete restaurant management system consisting of a customer-facing ordering website and an admin dashboard for restaurant operators. The project started as a client engagement and evolved into a white-label template capable of serving multiple restaurant brands from a single codebase. It represents my most production-oriented project to date — tackling real-world challenges from payment processing to self-hosted infrastructure on a VPS." },
           { type: "grid", items: [ { src: "/single_resto/portada.png", caption: "Public restaurant website" } ] },
@@ -181,9 +195,11 @@ export const projects = [
         ]
       },
       es: {
-        title: "Single Resto — Web & Dashboard",
+        title: "Single Resto",
+        tagline: "Web & Dashboard",
         description: "Plataforma full-stack para restaurantes con web de pedidos y dashboard admin — deploy en Docker sobre VPS con notificaciones en tiempo real, pagos con MercadoPago, integración WhatsApp y soporte white-label.",
         role: "Desarrollador Principal",
+        context: "Personal / Cliente",
         content: [
           { type: "text", title: "Resumen", text: "Single Resto es un sistema completo de gestión para restaurantes que incluye una web de pedidos para los clientes y un dashboard de administración para los operadores del local. El proyecto empezó como un trabajo para un cliente y evolucionó a un template white-label capaz de servir múltiples marcas de restaurantes desde un solo codebase. Representa mi proyecto más orientado a producción hasta la fecha — enfrentando desafíos reales desde procesamiento de pagos hasta infraestructura self-hosted en un VPS." },
           { type: "grid", items: [ { src: "/single_resto/portada.png", caption: "Web pública del restaurante" } ] },
@@ -239,9 +255,11 @@ export const projects = [
     hero: { type: "image", src: "/gsp/thumbnail.webp" },
     locales: {
       en: {
-        title: "GSP — Gaussian Splatting Platform",
+        title: "GSP",
+        tagline: "Gaussian Splatting Platform",
         description: "Self-hosted platform for uploading scenes and orchestrating GPU rendering jobs that produce Gaussian Splatting outputs — a research project exploring an emerging 3D reconstruction technology.",
         role: "Developer / Research",
+        context: "Personal / Research",
         content: [
           { type: "text", title: "What is Gaussian Splatting?", text: "3D Gaussian Splatting is a real-time rendering technique that reconstructs photorealistic 3D scenes from a set of 2D images. Unlike traditional mesh-based rendering, it represents scenes as millions of semi-transparent ellipsoids (\"splats\"), enabling high-fidelity reconstruction of real environments with neural-network-level visual quality.\n\nThis project was built to explore the technology practically — by building the infrastructure needed to run these renders at scale." },
           { type: "text", title: "What it does", text: "GSP is a multi-tenant platform where users upload a set of photos of a scene and receive a fully rendered Gaussian Splatting output. Under the hood:\n• Files are uploaded to Cloudflare R2 and a render job is queued.\n• A background worker rents GPU compute, runs the splatting algorithm, and stores the result.\n• Failed jobs are retried automatically with exponential backoff.\n• Organizations can invite members and manage their own render history and usage." },
@@ -251,9 +269,11 @@ export const projects = [
         ]
       },
       es: {
-        title: "GSP — Plataforma de Gaussian Splatting",
+        title: "GSP",
+        tagline: "Plataforma de Gaussian Splatting",
         description: "Plataforma self-hosted para subir escenas y orquestar trabajos de render GPU que producen salidas de Gaussian Splatting — un proyecto de investigación sobre una tecnología 3D emergente.",
         role: "Desarrollador / Investigación",
+        context: "Personal / Investigación",
         content: [
           { type: "text", title: "¿Qué es Gaussian Splatting?", text: "Gaussian Splatting es una técnica de renderizado en tiempo real que reconstruye escenas 3D fotorrealistas a partir de imágenes 2D. A diferencia del renderizado tradicional con mallas, representa las escenas como millones de elipsoides semitransparentes (\"splats\"), logrando una reconstrucción de alta fidelidad de entornos reales con calidad visual comparable a redes neuronales.\n\nEste proyecto fue construido para explorar la tecnología de forma práctica — desarrollando la infraestructura necesaria para correr estos renders a escala." },
           { type: "text", title: "Qué hace", text: "GSP es una plataforma multi-tenant donde los usuarios suben un conjunto de fotos de una escena y reciben una salida de Gaussian Splatting completamente renderizada. Por debajo:\n• Los archivos se suben a Cloudflare R2 y se encola un trabajo de render.\n• Un worker en background alquila cómputo GPU, ejecuta el algoritmo de splatting y almacena el resultado.\n• Los trabajos fallidos se reintentan automáticamente con backoff exponencial.\n• Las organizaciones pueden invitar miembros y gestionar su propio historial de renders y uso." },
@@ -276,9 +296,11 @@ export const projects = [
     hero: { type: "image", src: "/BMusic/bmusichomepage.gif" },
     locales: {
       en: {
-        title: "BM Music — Artist Landing",
+        title: "BM Music",
+        tagline: "Artist Landing",
         description: "Polished landing page template for music artists — rich animations, song previews, and event ticket integration. A 3-day design-to-deploy sprint.",
         role: "Frontend Developer / Designer",
+        context: "Personal",
         content: [
           { type: "text", title: "Overview", text: "Designed and developed a modern, ready-to-use landing page template for independent music artists. The site features a hero with animated transitions, a discography section with embedded song previews, and an events/tickets page — all built in under 3 days." },
           { type: "grid", items: [ { src: "/BMusic/bmusichomepage.gif", caption: "Animated homepage hero" }, { src: "/BMusic/Bmusicsongs.gif", caption: "Discography browser" } ] },
@@ -288,9 +310,11 @@ export const projects = [
         ]
       },
       es: {
-        title: "BM Music — Landing de Artista",
+        title: "BM Music",
+        tagline: "Landing de Artista",
         description: "Landing page template pulida para artistas musicales — animaciones ricas, previews de canciones e integración de tickets para eventos. Sprint de diseño a deploy en 3 días.",
         role: "Frontend Developer / Diseñador",
+        context: "Personal",
         content: [
           { type: "text", title: "Resumen", text: "Diseñé y desarrollé una landing page moderna y lista para usar para artistas musicales independientes. El sitio incluye un hero con transiciones animadas, una sección de discografía con previews embebidos y una página de eventos/tickets — todo construido en menos de 3 días." },
           { type: "grid", items: [ { src: "/BMusic/bmusichomepage.gif", caption: "Hero animado de la homepage" }, { src: "/BMusic/Bmusicsongs.gif", caption: "Navegador de discografía" } ] },
@@ -316,9 +340,11 @@ export const projects = [
     hero: { type: "image", src: "/Atlas3d/index.jpg" },
     locales: {
       en: {
-        title: "Atlas 3D — Interactive Anatomy Atlas",
+        title: "Atlas 3D",
+        tagline: "Interactive Anatomy Atlas",
         description: "Interactive 3D anatomy atlas built with Three.js and React for a medical school textbook project — real-time rendering, zoom, rotation and model annotations designed for students and educators.",
         role: "Frontend / 3D Engineer",
+        context: "Freelance / Research",
         content: [
           { type: "text", title: "Origin", text: "This project started when a friend who was writing a textbook for an anatomy department at a medical school asked me to build an interactive companion tool. The goal was to create a web-based 3D atlas that students could use alongside the book to explore human bones in a way that static illustrations simply can't provide — with rotation, zoom and contextual annotations." },
           { type: "text", title: "Overview", text: "The result is a full-featured 3D anatomy atlas that renders human skeletal models in the browser using Three.js via react-three-fiber. Users can freely rotate, zoom and pan around each bone, while annotation overlays display anatomical names and descriptions anchored to specific 3D coordinates. The interface was designed to be intuitive enough for non-technical medical students while maintaining the precision required for academic use." },
@@ -328,9 +354,11 @@ export const projects = [
         ]
       },
       es: {
-        title: "Atlas 3D — Atlas de Anatomía Interactivo",
+        title: "Atlas 3D",
+        tagline: "Atlas de Anatomía Interactivo",
         description: "Atlas de anatomía 3D interactivo con Three.js y React para un proyecto de libro de texto de una facultad de medicina — renderizado en tiempo real, zoom, rotación y anotaciones sobre modelos diseñados para estudiantes y docentes.",
         role: "Frontend / Ingeniero 3D",
+        context: "Freelance / Investigación",
         content: [
           { type: "text", title: "Origen", text: "Este proyecto nació cuando un amigo que estaba escribiendo un libro para una cátedra de anatomía en la facultad de medicina me pidió construir una herramienta interactiva complementaria. El objetivo era crear un atlas 3D web que los estudiantes pudieran usar junto al libro para explorar huesos humanos de una manera que las ilustraciones estáticas simplemente no pueden ofrecer — con rotación, zoom y anotaciones contextuales." },
           { type: "text", title: "Resumen", text: "El resultado es un atlas de anatomía 3D completo que renderiza modelos esqueléticos humanos en el navegador usando Three.js mediante react-three-fiber. Los usuarios pueden rotar, hacer zoom y desplazarse libremente alrededor de cada hueso, mientras que las anotaciones superpuestas muestran nombres y descripciones anatómicas ancladas a coordenadas 3D específicas. La interfaz fue diseñada para ser lo suficientemente intuitiva para estudiantes de medicina no técnicos, manteniendo la precisión requerida para uso académico." },
@@ -356,6 +384,7 @@ export const projects = [
         title: "F1 Stats 2023",
         description: "Cross-platform mobile app built with React Native to browse the 2023 Formula 1 season — driver standings, team comparisons and race calendar, all fetched from a live API.",
         role: "Mobile Developer",
+        context: "Personal / Learning",
         content: [
           { type: "text", title: "Overview", text: "My first React Native project, developed to learn mobile development by building something I was passionate about. The app consumes the Ergast F1 API to display real-time standings, team profiles, and the full race calendar for the 2023 season." },
           { type: "grid", items: [ { src: "/f1-stats/home.png", caption: "Home — Season overview" }, { src: "/f1-stats/drivers.png", caption: "Driver standings" } ] },
@@ -368,6 +397,7 @@ export const projects = [
         title: "F1 Stats 2023",
         description: "App móvil multiplataforma construida con React Native para explorar la temporada 2023 de Fórmula 1 — clasificaciones de pilotos, comparaciones entre equipos y calendario de carreras, todo desde una API en vivo.",
         role: "Desarrollador Mobile",
+        context: "Personal / Aprendizaje",
         content: [
           { type: "text", title: "Resumen", text: "Mi primer proyecto en React Native, desarrollado para aprender desarrollo mobile construyendo algo que me apasiona. La app consume la API Ergast de F1 para mostrar clasificaciones en tiempo real, perfiles de equipos y el calendario completo de la temporada 2023." },
           { type: "grid", items: [ { src: "/f1-stats/home.png", caption: "Home — Resumen de temporada" }, { src: "/f1-stats/drivers.png", caption: "Clasificación de pilotos" } ] },
@@ -393,6 +423,7 @@ export const projects = [
         title: "Donatelo",
         description: "Real-time crypto donation platform for live streamers — multi-chain payments, WebSocket-driven on-screen alerts and a full donor/streamer dashboard.",
         role: "Full Stack Developer",
+        context: "Personal / Research",
         content: [
           { type: "text", title: "What it does", text: "Donatelo enables viewers to send cryptocurrency donations during live streams. Streamers get customizable on-screen alerts powered by WebSockets, while donors can track their history via a dedicated dashboard. Supports multiple blockchains and tokens through ethers.js." },
           { type: "video", src: "/donatelo/donatelo_video_breve_funcionalidad.mp4", title: "Platform Demo", caption: "Quick walkthrough of the core functionality" },
@@ -404,6 +435,7 @@ export const projects = [
         title: "Donatelo",
         description: "Plataforma de donaciones crypto en tiempo real para streamers — pagos multi-cadena, alertas en pantalla vía WebSocket y un dashboard completo para donantes y streamers.",
         role: "Full Stack Developer",
+        context: "Personal / Investigación",
         content: [
           { type: "text", title: "Qué hace", text: "Donatelo permite a los espectadores enviar donaciones en criptomonedas durante transmisiones en vivo. Los streamers reciben alertas personalizables en pantalla potenciadas por WebSockets, mientras que los donantes pueden rastrear su historial desde un dashboard dedicado. Soporta múltiples blockchains y tokens a través de ethers.js." },
           { type: "video", src: "/donatelo/donatelo_video_breve_funcionalidad.mp4", title: "Demo de la Plataforma", caption: "Recorrido rápido de la funcionalidad principal" },
@@ -428,6 +460,7 @@ export const projects = [
         title: "Ventas A Services",
         description: "Production e-commerce platform with product catalogue, admin dashboard, inventory management and WhatsApp-based order notifications for a retail client.",
         role: "Full Stack / Frontend",
+        context: "Freelance",
         content: [
           { type: "text", title: "Overview", text: "Built a complete e-commerce solution for a small retail business selling refrigeration and appliance parts. Includes a public storefront with search, filters and cart, plus a private admin dashboard for inventory and order management." },
           { type: "grid", items: [ { src: "/vas-ecommerce/Screenshot 2022-10-03 at 18-46-04 Admin Page.png", caption: "Admin dashboard" }, { src: "/vas-ecommerce/Screenshot 2022-10-03 at 18-49-06 Ventas a Services - Respuestos de refrigeracion y linea blanca.png", caption: "Product catalogue" } ] },
@@ -439,6 +472,7 @@ export const projects = [
         title: "Ventas A Services",
         description: "Plataforma e-commerce en producción con catálogo de productos, dashboard de administración, gestión de inventario y notificaciones de pedidos por WhatsApp para un cliente minorista.",
         role: "Full Stack / Frontend",
+        context: "Freelance",
         content: [
           { type: "text", title: "Resumen", text: "Solución e-commerce completa para un negocio minorista de repuestos de refrigeración y línea blanca. Incluye tienda pública con búsqueda, filtros y carrito, más un dashboard de administración privado para gestión de inventario y pedidos." },
           { type: "grid", items: [ { src: "/vas-ecommerce/Screenshot 2022-10-03 at 18-46-04 Admin Page.png", caption: "Panel de administración" }, { src: "/vas-ecommerce/Screenshot 2022-10-03 at 18-49-06 Ventas a Services - Respuestos de refrigeracion y linea blanca.png", caption: "Catálogo de productos" } ] },
