@@ -13,29 +13,17 @@
   --color-background-dark: #050b08;
   --color-background-darker: #020504;
 
-  --background-image-gradient-radial: radial-gradient(var(--tw-gradient-stops));
-  --background-image-glow-center: radial-gradient(
-    ellipse at center,
-    rgba(0, 255, 156, 0.15) 0%,
-    transparent 70%
-  );
+  /* Ink scale (text on the dark ground). All steps pass 4.5:1 on #050b08:
+     ink 20:1, ink-2 8.4:1, ink-3 5.2:1. */
+  --color-ink: #fdfdfd;
+  --color-ink-2: rgba(253, 253, 253, 0.66);
+  --color-ink-3: rgba(253, 253, 253, 0.5);
 
-  --animate-fade-in: fadeIn 1s ease-out forwards;
-  --animate-fade-in-up: fadeInUp 0.8s ease-out forwards;
-  --animate-float: float 6s ease-in-out infinite;
+  /* Hairlines */
+  --color-line: rgba(253, 253, 253, 0.08);
+  --color-line-strong: rgba(253, 253, 253, 0.18);
 
-  @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-  @keyframes fadeInUp {
-    0% { opacity: 0; transform: translateY(20px); }
-    100% { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(1deg); }
-  }
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
@@ -54,12 +42,24 @@ html {
 html,
 body {
   background: var(--background-dark);
-  color: #fdfdfd;
+  color: var(--color-ink);
   padding: 0;
   margin: 0;
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  /* Light-on-dark reads tighter; open the leading a touch. */
+  line-height: 1.6;
   overflow-x: hidden;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.02em;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 /* Selection color */
@@ -86,63 +86,15 @@ body {
   background: var(--green-light);
 }
 
-/* Custom utilities */
-@utility text-glow {
-  text-shadow: 0 0 20px rgba(0, 255, 156, 0.5);
-}
-
-@utility bg-vignette {
-  background: radial-gradient(
-    ellipse at center,
-    transparent 0%,
-    rgba(5, 11, 8, 0.8) 70%,
-    rgba(5, 11, 8, 1) 100%
-  );
-}
-
-@utility glass {
-  background: rgba(15, 61, 46, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(0, 255, 156, 0.1);
-}
-
-/* Legacy burger styles - keep for compatibility */
-.burger {
-  width: 22.5px;
-  position: relative;
-  pointer-events: none;
-}
-
-.burger::after,
-.burger::before {
-  content: "";
-  height: 1px;
-  width: 100%;
-  background-color: white;
-  position: relative;
-  display: block;
-  transition: all 0.75s cubic-bezier(0.76, 0, 0.24, 1);
-}
-
-.burger::after {
-  top: -4px;
-}
-
-.burger::before {
-  top: 4px;
-}
-
-.burgerActive::after,
-.burgerActive::before {
-  background-color: black;
-}
-
-.burgerActive::after {
-  transform: rotate(45deg);
-  top: -1px;
-}
-
-.burgerActive::before {
-  transform: rotate(-45deg);
-  top: 1px;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

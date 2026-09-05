@@ -3,5 +3,5 @@ import nextVitals from "eslint-config-next/core-web-vitals"
 
 export default defineConfig([
   ...nextVitals,
-  globalIgnores([".next/**", "node_modules/**", "public/**", "src/components/lab/**"])
+  globalIgnores([".next/**", "node_modules/**", "public/**", "src/components/lab/CanvasParticleImage.jsx"])
 ])

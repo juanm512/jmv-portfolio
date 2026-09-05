@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { motion } from "motion/react"
+import { motion, useReducedMotion } from "motion/react"
 
 const FloatingParticles = ({ count = 60 }) => {
   const [particles, setParticles] = useState([])
@@ -48,19 +48,20 @@ const FloatingParticles = ({ count = 60 }) => {
 }
 
 export default function ContributionGraphSVG() {
+  const reduceMotion = useReducedMotion()
   return (
     <motion.div
       className="w-full h-full flex items-center justify-center p-4 md:p-8"
-      initial={{ opacity: 0, y: 20 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-10%" }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
       <svg
         viewBox="0 0 920 300"
         role="img"
         aria-label="Monthly contribution trend"
-        className="w-full h-auto drop-shadow-2xl"
+        className="w-full h-auto"
       >
         <defs>
           <linearGradient id="area-fill" x1="0" y1="0" x2="0" y2="1">
@@ -85,7 +86,7 @@ export default function ContributionGraphSVG() {
           fill="url(#area-fill)"
         ></path>
 
-        <FloatingParticles count={60} />
+        {!reduceMotion && <FloatingParticles count={40} />}
 
         {/* Polyline Chart stroke */}
         <polyline
@@ -103,18 +104,18 @@ export default function ContributionGraphSVG() {
 
         {/* Text labels */}
         <g>
-          <text x="0" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Jan &apos;19</text>
-          <text x="86.58823529411765" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Sep &apos;19</text>
-          <text x="162.3529411764706" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Apr &apos;20</text>
-          <text x="248.94117647058823" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Dec &apos;20</text>
-          <text x="335.52941176470586" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Aug &apos;21</text>
-          <text x="422.11764705882354" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Apr &apos;22</text>
-          <text x="497.88235294117646" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Nov &apos;22</text>
-          <text x="584.470588235294" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Jul &apos;23</text>
-          <text x="671.0588235294117" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Mar &apos;24</text>
-          <text x="757.6470588235294" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Nov &apos;24</text>
-          <text x="833.4117647058823" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Jun &apos;25</text>
-          <text x="920" y="294" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="11" fontFamily="var(--font-mono), monospace">Feb &apos;26</text>
+          <text x="0" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Jan &apos;19</text>
+          <text x="86.58823529411765" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Sep &apos;19</text>
+          <text x="162.3529411764706" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Apr &apos;20</text>
+          <text x="248.94117647058823" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Dec &apos;20</text>
+          <text x="335.52941176470586" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Aug &apos;21</text>
+          <text x="422.11764705882354" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Apr &apos;22</text>
+          <text x="497.88235294117646" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Nov &apos;22</text>
+          <text x="584.470588235294" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Jul &apos;23</text>
+          <text x="671.0588235294117" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Mar &apos;24</text>
+          <text x="757.6470588235294" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Nov &apos;24</text>
+          <text x="833.4117647058823" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Jun &apos;25</text>
+          <text x="920" y="294" textAnchor="middle" fill="var(--color-ink-3)" fontSize="11" fontFamily="var(--font-kode-mono), ui-monospace, monospace">Feb &apos;26</text>
         </g>
       </svg>
     </motion.div>

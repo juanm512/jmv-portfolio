@@ -1,10 +1,12 @@
 "use client"
 
 import { useCallback, useEffect, useRef, useState } from "react"
-import { motion, AnimatePresence } from "motion/react"
+import { motion, AnimatePresence, useReducedMotion } from "motion/react"
+import Kbd from "@/components/ui/Kbd"
 import { useTranslations } from "next-intl"
 import { useRouter, usePathname } from "@/i18n/navigation"
 import { useLanguageToggle } from "@/lib/useLanguageToggle"
+import { toggleTvMenu } from "@/lib/tvMenuStore"
 
 function isTypingTarget(el) {
   if (!el) return false
@@ -23,6 +25,7 @@ export default function Shortcuts() {
   const { toggleLanguage } = useLanguageToggle()
   const [helpOpen, setHelpOpen] = useState(false)
   const dialogRef = useRef(null)
+  const reduceMotion = useReducedMotion()
 
   const isHome = pathname === "/"
 
@@ -56,6 +59,18 @@ export default function Shortcuts() {
         return
       }
 
+      const lightboxOpen = !!document.querySelector("[data-lightbox-open]")
+
+      // Escape always toggles the TV menu, unless the lightbox owns it.
+      if (event.key === "Escape") {
+        if (lightboxOpen) return
+        toggleTvMenu()
+        return
+      }
+
+      // While the TV menu is open, it owns all keyboard input.
+      if (document.body.dataset.menuOpen === "true") return
+
       // Global shortcuts
       if (event.key === "l" || event.key === "L") {
         toggleLanguage()
@@ -70,6 +85,12 @@ export default function Shortcuts() {
       if (event.key === "?") {
         event.preventDefault()
         setHelpOpen(true)
+        return
+      }
+
+      if (event.key === "Backspace" && !isHome && !lightboxOpen) {
+        event.preventDefault()
+        router.push("/")
         return
       }
 
@@ -96,10 +117,6 @@ export default function Shortcuts() {
         } else if (event.key === "ArrowRight") {
           const next = main.getAttribute("data-next")
           if (next) router.push(next)
-        } else if (event.key === "Escape") {
-          if (!document.querySelector("[data-lightbox-open]")) {
-            router.push("/")
-          }
         }
       }
     }
@@ -119,15 +136,18 @@ export default function Shortcuts() {
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [helpOpen])
 
+  // keys: alternatives for the same action are rendered as separate keycaps.
   const shortcuts = [
-    { key: "J / ↓", label: t("moveDown") },
-    { key: "K / ↑", label: t("moveUp") },
-    { key: "Enter", label: t("open") },
-    { key: "← / →", label: t("prevNext") },
-    { key: "A", label: t("about") },
-    { key: "L", label: t("language") },
-    { key: "Esc", label: t("back") },
-    { key: "?", label: t("help") }
+    { keys: ["J", "↓"], label: t("moveDown") },
+    { keys: ["K", "↑"], label: t("moveUp") },
+    { keys: ["Enter"], label: t("open") },
+    { keys: ["←", "→"], label: t("prevNext") },
+    { keys: ["A"], label: t("about") },
+    { keys: ["L"], label: t("language") },
+    { keys: ["Esc"], label: t("back") },
+    { keys: ["Backspace"], label: t("backHome") },
+    { keys: ["W", "A", "S", "D"], label: t("menuNav") },
+    { keys: ["?"], label: t("help") }
   ]
 
   return (
@@ -140,27 +160,31 @@ export default function Shortcuts() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.15 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/70 backdrop-blur-sm p-6"
+          transition={{ duration: reduceMotion ? 0 : 0.15 }}
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-background-darker/80 p-6"
         >
-          <div
+          <motion.div
             ref={dialogRef}
-            className="w-full max-w-sm bg-background-darker border border-white/10 rounded-lg p-6"
+            initial={reduceMotion ? false : { opacity: 0, y: 6 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full max-w-sm bg-background-dark border border-line-strong rounded-md p-6"
           >
-            <h2 className="font-kode text-sm text-white/90 mb-4 uppercase tracking-wide">
-              {t("title")}
-            </h2>
-            <ul className="flex flex-col gap-2.5">
+            <h2 className="font-kode text-sm text-ink mb-5">{t("title")}</h2>
+            <ul className="flex flex-col gap-3">
               {shortcuts.map((s) => (
-                <li key={s.label} className="flex items-center justify-between text-sm">
-                  <span className="text-white/70">{s.label}</span>
-                  <span className="font-mono text-[11px] text-green-glow/90 ring-1 ring-white/15 rounded px-1.5 py-0.5">
-                    {s.key}
+                <li key={s.label} className="flex items-center justify-between gap-4 text-sm">
+                  <span className="text-ink-2">{s.label}</span>
+                  <span className="flex items-center gap-1 shrink-0">
+                    {s.keys.map((k) => (
+                      <Kbd key={k}>{k}</Kbd>
+                    ))}
                   </span>
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -1,28 +1,23 @@
 import { Link } from "@/i18n/navigation"
+import Arrow from "@/components/ui/Arrow"
 
-const MAX_STACK_CHIPS = 5
+// Shared shell for both row kinds: leading year column (tabular figures,
+// baseline-aligned with the title), a hairline below that brightens on hover,
+// title takes the project accent, arrow slides in from the right.
+const rowBase =
+  "group grid grid-cols-[3.25rem_minmax(0,1fr)_auto] sm:grid-cols-[4rem_minmax(0,1fr)_auto] items-baseline gap-x-3 sm:gap-x-4 border-b border-line hover:border-line-strong transition-colors outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark rounded-sm"
 
-function StackChips({ stack }) {
-  if (!stack?.length) return null
-  const shown = stack.slice(0, MAX_STACK_CHIPS)
-  const remaining = stack.length - shown.length
-
+function Year({ year }) {
   return (
-    <div className="hidden sm:flex flex-wrap gap-1.5">
-      {shown.map((tech) => (
-        <span
-          key={tech}
-          className="px-2 py-0.5 rounded-full text-[11px] font-mono text-white/50 border border-white/10"
-        >
-          {tech}
-        </span>
-      ))}
-      {remaining > 0 && (
-        <span className="px-2 py-0.5 rounded-full text-[11px] font-mono text-white/40 border border-white/10">
-          +{remaining}
-        </span>
-      )}
-    </div>
+    <span className="font-mono text-xs text-ink-3 tabular-nums self-baseline pt-1 sm:pt-0">{year}</span>
+  )
+}
+
+function RowArrow() {
+  return (
+    <span className="text-ink-3 group-hover:text-[var(--accent)] transition-[color,transform] duration-200 ease-out-expo translate-x-0 group-hover:translate-x-0.5 motion-reduce:transform-none">
+      <Arrow />
+    </span>
   )
 }
 
@@ -34,20 +29,23 @@ export function FeaturedProjectRow({ project }) {
       data-project-row
       data-slug={project.slug}
       style={{ "--accent": project.accentColor || "#00FF9C" }}
-      className="group block border-l-2 border-transparent hover:border-[var(--accent)] pl-4 -ml-4 py-5 rounded-r-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
+      className={`${rowBase} py-6`}
     >
-      <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 sm:gap-4">
-        <h3 className="text-xl md:text-2xl font-semibold text-white/90 group-hover:text-[var(--accent)] transition-colors">
+      <Year year={project.year} />
+      <div className="min-w-0">
+        <h3 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] group-hover:text-[var(--accent)] transition-colors duration-200">
           {project.title}
         </h3>
-        <span className="shrink-0 font-mono text-xs text-white/40">{project.year}</span>
+        <p className="mt-2 text-ink-2 text-sm md:text-base max-w-[60ch] leading-[1.6]">
+          {project.description}
+        </p>
+        {project.stack?.length > 0 && (
+          <p className="hidden sm:block mt-3 font-mono text-xs text-ink-3 truncate" aria-label="Stack">
+            {project.stack.join(" · ")}
+          </p>
+        )}
       </div>
-      <p className="mt-1.5 text-white/70 text-sm md:text-base max-w-2xl">
-        {project.description}
-      </p>
-      <div className="mt-3">
-        <StackChips stack={project.stack} />
-      </div>
+      <RowArrow />
     </Link>
   )
 }
@@ -60,15 +58,18 @@ export function SecondaryProjectRow({ project }) {
       data-project-row
       data-slug={project.slug}
       style={{ "--accent": project.accentColor || "#00FF9C" }}
-      className="group flex items-baseline justify-between gap-4 border-l-2 border-transparent hover:border-[var(--accent)] pl-4 -ml-4 py-2.5 rounded-r-md transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark"
+      className={`${rowBase} py-3`}
     >
-      <span className="text-white/80 group-hover:text-[var(--accent)] transition-colors text-sm md:text-base">
-        {project.title}
+      <Year year={project.year} />
+      <span className="min-w-0 flex items-baseline gap-x-3">
+        <span className="shrink-0 text-ink text-sm md:text-base group-hover:text-[var(--accent)] transition-colors duration-200">
+          {project.title}
+        </span>
+        <span className="hidden md:inline text-ink-3 text-sm truncate">
+          {project.description}
+        </span>
       </span>
-      <span className="hidden md:inline text-white/60 text-sm truncate max-w-md">
-        {project.description}
-      </span>
-      <span className="shrink-0 font-mono text-xs text-white/40">{project.year}</span>
+      <RowArrow />
     </Link>
   )
 }

@@ -9,6 +9,8 @@ import { routing } from "@/i18n/routing"
 import Navbar from "@/components/layout/Navbar"
 import Shortcuts from "@/components/layout/Shortcuts"
 import CustomCursor from "@/components/layout/CustomCursor"
+import TvMenu from "@/components/layout/TvMenu"
+import { getAllProjects } from "@/lib/projects"
 
 const kodeMono = localFont({
   src: "../../../styles/Kode_Mono/KodeMono-VariableFont_wght.ttf",
@@ -83,6 +85,14 @@ export default async function LocaleLayout({ children, params }) {
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
 
+  const projects = getAllProjects(locale).map((p) => ({
+    slug: p.slug,
+    title: p.title,
+    year: p.year,
+    tier: p.tier,
+    accentColor: p.accentColor
+  }))
+
   return (
     <html
       lang={locale}
@@ -102,7 +112,8 @@ export default async function LocaleLayout({ children, params }) {
           <CustomCursor />
           <Navbar />
           <Shortcuts />
-          <div className="pt-14">{children}</div>
+          <TvMenu projects={projects} />
+          {children}
         </NextIntlClientProvider>
       </body>
     </html>

@@ -32,7 +32,7 @@
       "other": "Otros proyectos"
     },
     "cta": {
-      "about": "Quién soy →"
+      "about": "Quién soy"
     },
     "footer": {
       "text": "© {year} Juan Manuel Vila · Kode Mono / Geist"
@@ -74,15 +74,34 @@
     "title": "Juan Manuel Vila - Desarrollador FullStack",
     "description": "Portfolio de Juan Manuel Vila - Desarrollador FullStack especializado en crear sistemas que resuelven problemas reales."
   },
-  "Header": {
-    "close": "Cerrar",
-    "menu": "Menú",
-    "home": "Inicio",
-    "about_me": "Sobre mí",
-    "my_work": "Mi trabajo",
-    "contact": "Contacto",
-    "made_by": "Hecho por:",
-    "typography": "Tipografía:"
+  "Menu": {
+    "button": "Menú",
+    "buttonHint": "Esc",
+    "legend": {
+      "move": "mover",
+      "enter": "entrar",
+      "back": "volver",
+      "open": "abrir",
+      "close": "cerrar"
+    },
+    "sections": {
+      "pages": "Páginas",
+      "projects": "Proyectos",
+      "links": "Enlaces",
+      "language": "Idioma"
+    },
+    "items": {
+      "home": "Inicio",
+      "about": "Sobre mí",
+      "contact": "Contacto",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email",
+      "cv": "CV",
+      "spanish": "Español",
+      "english": "English"
+    },
+    "current": "actual"
   },
   "About": {
     "title": "Sobre mí",
@@ -96,7 +115,9 @@
     "prevNext": "Proyecto anterior / siguiente",
     "about": "Ir a Sobre mí",
     "language": "Cambiar idioma",
-    "back": "Volver / cerrar",
+    "back": "Abrir / cerrar menú",
+    "backHome": "Volver al inicio",
+    "menuNav": "Navegar dentro del menú",
     "help": "Mostrar esta ayuda"
   }
 }
