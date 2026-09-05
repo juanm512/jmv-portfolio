@@ -1,165 +1,169 @@
 "use client"
 
-import { useEffect, useRef, useState, useCallback } from "react"
-import { motion, AnimatePresence } from "motion/react"
+import { useEffect, useRef } from "react"
+import { motion, useMotionValue, useSpring } from "motion/react"
+import { useFinePointer } from "@/lib/useFinePointer"
 
-export default function CustomCursor() {
-  const cursorRef = useRef({ x: 0, y: 0 })
-  const [pos, setPos] = useState({ x: -100, y: -100 })
-  const [cursorType, setCursorType] = useState("text") // "text" | "image"
-  const [cursorImage, setCursorImage] = useState("")
-  const [isHovering, setIsHovering] = useState(false)
-  const [hoverText, setHoverText] = useState("")
-  const [isVisible, setIsVisible] = useState(false)
-  const rafRef = useRef(null)
-  const animateRef = useRef(null)
+/*
+ * CustomCursor — a magnetic ring that follows the pointer with a spring and,
+ * within `snapRadius` px of an interactive element, snaps to it, expands to
+ * wrap it and stretches a little toward the pointer. The native cursor stays
+ * visible: the ring is a follower, not a replacement. Not rendered on coarse
+ * pointers or under prefers-reduced-motion.
+ *
+ * Tunables: ringSize, snapRadius, padding, pull (0..1, how much the ring
+ * follows the pointer while snapped), spring { stiffness, damping, mass }.
+ * Z-index: above the TV menu (100) and the help dialog (200).
+ */
+const TARGETS = "a, button, [role=button], [data-project-row]"
 
-  // Smooth cursor with lerp
-  const targetRef = useRef({ x: -100, y: -100 })
+export default function CustomCursor(props) {
+  const fine = useFinePointer()
+  return fine ? <MagneticRing {...props} /> : null
+}
 
-  const animate = useCallback(() => {
-    const lerp = 0.75
-    cursorRef.current.x += (targetRef.current.x - cursorRef.current.x) * lerp
-    cursorRef.current.y += (targetRef.current.y - cursorRef.current.y) * lerp
-    setPos({ x: cursorRef.current.x, y: cursorRef.current.y })
-    rafRef.current = requestAnimationFrame(animateRef.current)
-  }, [])
+function MagneticRing({
+  ringSize = 28,
+  snapRadius = 40,
+  padding = 10,
+  pull = 0.18,
+  spring = { stiffness: 380, damping: 28, mass: 0.7 },
+}) {
+  const x = useSpring(useMotionValue(-200), spring)
+  const y = useSpring(useMotionValue(-200), spring)
+  const w = useSpring(useMotionValue(ringSize), spring)
+  const h = useSpring(useMotionValue(ringSize), spring)
+  const r = useSpring(useMotionValue(ringSize / 2), { stiffness: 300, damping: 30 })
+  const sx = useSpring(useMotionValue(1), { stiffness: 300, damping: 20 })
+  const sy = useSpring(useMotionValue(1), { stiffness: 300, damping: 20 })
+  const glow = useSpring(useMotionValue(0), { stiffness: 200, damping: 25 })
+  const opacity = useSpring(useMotionValue(0), { stiffness: 200, damping: 25 })
+  const rectsRef = useRef([])
+  const ringRef = useRef(null)
 
   useEffect(() => {
-    animateRef.current = animate
-  }, [animate])
+    let px = -200
+    let py = -200
+    let raf = 0
+    let dirty = true
 
-  useEffect(() => {
-    // Only enable on non-touch devices
-    const isTouchDevice = "ontouchstart" in window || navigator.maxTouchPoints > 0
-    if (isTouchDevice) return
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- feature-detects touch before enabling the custom cursor
-    setIsVisible(true)
-
-    const handleMouseMove = (e) => {
-      targetRef.current = { x: e.clientX, y: e.clientY }
+    const refresh = () => {
+      const els = document.querySelectorAll(TARGETS)
+      const rects = []
+      for (const el of els) {
+        const rc = el.getBoundingClientRect()
+        if (rc.width > 0 && rc.height > 0) rects.push(rc)
+      }
+      rectsRef.current = rects
+      dirty = false
     }
 
-    const handleMouseEnter = (e) => {
-      const target = e.target.closest("[data-cursor]")
-      if (target) {
-        setIsHovering(true)
-        setHoverText(target.getAttribute("data-cursor") || "")
-        
-        const type = target.getAttribute("data-cursor-type") || "text"
-        setCursorType(type)
-        
-        if (type === "image") {
-          setCursorImage(target.getAttribute("data-cursor-image") || "")
+    const update = () => {
+      raf = 0
+      if (dirty) refresh()
+      // nearest target within snapRadius (distance to the rect, not the centre)
+      let best = null
+      let bestD = snapRadius
+      const rects = rectsRef.current
+      for (let i = 0; i < rects.length; i++) {
+        const rc = rects[i]
+        const dx = Math.max(rc.left - px, 0, px - rc.right)
+        const dy = Math.max(rc.top - py, 0, py - rc.bottom)
+        const d = Math.sqrt(dx * dx + dy * dy)
+        if (d < bestD) {
+          bestD = d
+          best = rc
         }
       }
-    }
-
-    const handleMouseLeave = (e) => {
-      const target = e.target.closest("[data-cursor]")
-      if (target) {
-        setIsHovering(false)
-        setHoverText("")
-        setCursorType("text")
-        setCursorImage("")
+      if (best) {
+        const cx = best.left + best.width / 2
+        const cy = best.top + best.height / 2
+        const ox = (px - cx) * pull
+        const oy = (py - cy) * pull
+        const bw = best.width + padding * 2
+        const bh = best.height + padding * 2
+        x.set(cx + ox)
+        y.set(cy + oy)
+        w.set(bw)
+        h.set(bh)
+        r.set(Math.min(14, bh / 2))
+        // stretch toward the pointer
+        sx.set(1 + Math.abs(ox) / bw)
+        sy.set(1 + Math.abs(oy) / bh)
+        glow.set(1)
+      } else {
+        x.set(px)
+        y.set(py)
+        w.set(ringSize)
+        h.set(ringSize)
+        r.set(ringSize / 2)
+        sx.set(1)
+        sy.set(1)
+        glow.set(0)
       }
     }
-
-    document.addEventListener("mousemove", handleMouseMove)
-    document.addEventListener("mouseover", handleMouseEnter)
-    document.addEventListener("mouseout", handleMouseLeave)
-
-    rafRef.current = requestAnimationFrame(animate)
-
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove)
-      document.removeEventListener("mouseover", handleMouseEnter)
-      document.removeEventListener("mouseout", handleMouseLeave)
-      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update)
     }
-  }, [animate])
+    const onMove = (e) => {
+      px = e.clientX
+      py = e.clientY
+      opacity.set(1)
+      schedule()
+    }
+    const onLeave = () => opacity.set(0)
+    const invalidate = () => {
+      dirty = true
+      schedule()
+    }
+    // Layout changes (menu, dialog, popover, route change) invalidate the rects.
+    const mo = new MutationObserver((muts) => {
+      // the ring's own style updates must not invalidate every frame
+      const ring = ringRef.current
+      if (muts.some((m) => !ring || !ring.contains(m.target))) invalidate()
+    })
+    mo.observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["class", "style", "hidden"] })
 
-  if (!isVisible) return null
-
-  // Size calculation
-  let size = 32
-  if (isHovering) {
-    if (cursorType === "image") size = 120 // Larger for images
-    else size = 80 // Normal hover
-  }
+    window.addEventListener("mousemove", onMove, { passive: true })
+    window.addEventListener("scroll", invalidate, { passive: true })
+    window.addEventListener("resize", invalidate)
+    document.documentElement.addEventListener("mouseleave", onLeave)
+    return () => {
+      mo.disconnect()
+      window.removeEventListener("mousemove", onMove)
+      window.removeEventListener("scroll", invalidate)
+      window.removeEventListener("resize", invalidate)
+      document.documentElement.removeEventListener("mouseleave", onLeave)
+      if (raf) cancelAnimationFrame(raf)
+    }
+  }, [x, y, w, h, r, sx, sy, glow, opacity, snapRadius, padding, pull, ringSize])
 
   return (
-    <>
-      {/* Hide default cursor */}
-      <style jsx global>{`
-        * {
-          cursor: none !important;
-        }
-      `}</style>
-
-      {/* Dot cursor */}
-      <div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none mix-blend-difference"
+    <motion.div
+      ref={ringRef}
+      aria-hidden
+      className="pointer-events-none fixed left-0 top-0 z-[300] border border-green-glow"
+      style={{
+        x,
+        y,
+        width: w,
+        height: h,
+        borderRadius: r,
+        scaleX: sx,
+        scaleY: sy,
+        translateX: "-50%",
+        translateY: "-50%",
+        opacity,
+      }}
+    >
+      <motion.div
+        className="absolute inset-0 rounded-[inherit]"
         style={{
-          transform: `translate3d(${pos.x - 4}px, ${pos.y - 4}px, 0)`,
-          opacity: cursorType === "image" ? 0 : 1 // Hide dot when showing image
+          opacity: glow,
+          boxShadow: "0 0 18px 0 rgba(0,255,156,0.4), inset 0 0 12px 0 rgba(0,255,156,0.13)",
+          backgroundColor: "rgba(0,255,156,0.05)",
         }}
-      >
-        <div
-          className="w-2 h-2 rounded-full bg-white transition-transform duration-200"
-          style={{
-            transform: isHovering ? "scale(0)" : "scale(1)",
-          }}
-        />
-      </div>
-
-      {/* Ring cursor */}
-      <div
-        className="fixed top-0 left-0 z-[9999] pointer-events-none"
-        style={{
-          transform: `translate3d(${pos.x}px, ${pos.y}px, 0)`,
-        }}
-      >
-        <div
-          className="flex items-center justify-center rounded-full border transition-all duration-300 ease-out overflow-hidden"
-          style={{
-            width: size,
-            height: size,
-            marginLeft: -size / 2,
-            marginTop: -size / 2,
-            borderColor: isHovering ? "rgba(0,255,156,0.6)" : "rgba(255,255,255,0.3)",
-            backgroundColor: cursorType === "image" ? "rgba(0,0,0,0.8)" : (isHovering ? "rgba(0,255,156,0.1)" : "transparent"),
-            backdropFilter: isHovering ? "blur(4px)" : "none",
-          }}
-        >
-          <AnimatePresence mode="wait">
-            {isHovering && (
-              cursorType === "image" && cursorImage ? (
-                <motion.img
-                  key="cursor-image"
-                  src={cursorImage}
-                  alt="cursor"
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className="w-1/2 h-1/2 object-contain"
-                />
-              ) : hoverText ? (
-                <motion.span
-                  key="cursor-text"
-                  initial={{ opacity: 0, scale: 0.5 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.5 }}
-                  className="text-[10px] font-mono text-green-glow uppercase tracking-wider whitespace-nowrap"
-                >
-                  {hoverText}
-                </motion.span>
-              ) : null
-            )}
-          </AnimatePresence>
-        </div>
-      </div>
-    </>
+      />
+    </motion.div>
   )
 }

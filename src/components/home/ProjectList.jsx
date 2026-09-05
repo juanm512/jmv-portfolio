@@ -4,8 +4,10 @@ import Arrow from "@/components/ui/Arrow"
 // Shared shell for both row kinds: leading year column (tabular figures,
 // baseline-aligned with the title), a hairline below that brightens on hover,
 // title takes the project accent, arrow slides in from the right.
-const rowBase =
-  "group grid grid-cols-[3.25rem_minmax(0,1fr)_auto] sm:grid-cols-[4rem_minmax(0,1fr)_auto] items-baseline gap-x-3 sm:gap-x-4 border-b border-line hover:border-line-strong transition-colors outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark rounded-none px-4 sm:px-5 sm:-mx-5"
+export const rowBase =
+  "group grid grid-cols-[3.25rem_minmax(0,1fr)_auto] sm:grid-cols-[4rem_minmax(0,1fr)_auto] items-baseline gap-x-3 sm:gap-x-4 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-dark rounded-none px-4 sm:px-5 sm:-mx-5"
+
+export const rowLine = "border-b border-line hover:border-line-strong"
 
 function Year({ year }) {
   return (
@@ -21,15 +23,20 @@ function RowArrow() {
   )
 }
 
-export function FeaturedProjectRow({ project }) {
+// `ref` and the extra handlers are used by FeaturedProjectList to drive the
+// hover popover. `line` lets the wrapper own the hairline instead of the link
+// (mobile: the inline popover sits between the row and its hairline).
+export function FeaturedProjectRow({ project, line = true, ref, ...rest }) {
   return (
     <Link
+      ref={ref}
       href={`/projects/${project.slug}`}
       id={`project-${project.slug}`}
       data-project-row
       data-slug={project.slug}
       style={{ "--accent": project.accentColor || "#00FF9C" }}
-      className={`${rowBase} py-6`}
+      className={`${rowBase} ${line ? rowLine : ""} py-6`}
+      {...rest}
     >
       <Year year={project.year} />
       <div className="min-w-0">
@@ -63,7 +70,7 @@ export function SecondaryProjectRow({ project }) {
       data-project-row
       data-slug={project.slug}
       style={{ "--accent": project.accentColor || "#00FF9C" }}
-      className={`${rowBase} py-2.5 min-h-11`}
+      className={`${rowBase} ${rowLine} py-2.5 min-h-11`}
     >
       <Year year={project.year} />
       <span className="min-w-0 flex items-baseline gap-x-3">

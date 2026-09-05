@@ -133,7 +133,6 @@ function GridImage({ item, onMediaClick }) {
         className={`relative rounded-sm overflow-hidden cursor-zoom-in ${
           portrait ? "aspect-[9/16] bg-background-darker" : "aspect-[4/3] bg-ink/5"
         }`}
-        data-cursor="Expand"
         onClick={() => onMediaClick(item.src, "image")}
       >
         <Image
@@ -155,7 +154,6 @@ function GridVideo({ item, onMediaClick }) {
     <figure className="sm:col-span-2 lg:col-span-3">
       <div
         className="relative aspect-[4/3] rounded-sm overflow-hidden bg-ink/5 cursor-zoom-in"
-        data-cursor="Play"
         onClick={() => onMediaClick(item.src, "video")}
       >
         <LazyVideo src={item.src} className="w-full h-full object-cover" />
@@ -188,7 +186,6 @@ function FullWidthImageBlock({ block, onMediaClick }) {
     <figure className="py-12 w-full">
       <div
         className="relative w-full h-[50vh] md:h-[80vh] cursor-zoom-in"
-        data-cursor="Expand"
         onClick={() => onMediaClick(block.src, "image")}
       >
         <Image
@@ -250,7 +247,6 @@ function VideoBlock({ block, onMediaClick }) {
       )}
       <div
         className="relative w-full rounded-sm overflow-hidden bg-ink/5 cursor-pointer"
-        data-cursor="Play"
         onClick={() => onMediaClick(block.src, "video")}
       >
         <LazyVideo
@@ -331,7 +327,6 @@ function Lightbox({ media, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 md:p-12 cursor-pointer"
-      data-cursor="Close"
       onClick={onClose}
     >
       <motion.div
@@ -340,7 +335,6 @@ function Lightbox({ media, onClose }) {
         exit={{ scale: 0.9, opacity: 0 }}
         transition={{ type: "spring", damping: 25, stiffness: 300 }}
         className="relative w-full h-full max-w-7xl max-h-[90vh] flex items-center justify-center cursor-default"
-        data-cursor=""
         onClick={(e) => e.stopPropagation()}
       >
         {media.type === "video" ? (
@@ -367,7 +361,6 @@ function Lightbox({ media, onClose }) {
           type="button"
           onClick={onClose}
           aria-label="Close"
-          data-cursor="✕"
           className={`absolute -top-12 right-0 text-ink-2 hover:text-ink transition-colors p-2 cursor-pointer ${focusRing}`}
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -400,7 +393,6 @@ function HeroMedia({ hero, title, onMediaClick }) {
           portrait ? "bg-background-darker" : "bg-ink/5"
         }`}
         onClick={() => onMediaClick(hero.src, hero.type)}
-        data-cursor="Expand"
       >
         {hero.type === "video" ? (
           <video
@@ -442,7 +434,7 @@ function AdjacentRow({ prevProject, nextProject, locale, t }) {
     <nav aria-label={t("prevProject") + " / " + t("nextProject")} className="max-w-7xl mx-auto px-6">
       <div className="flex items-center justify-between gap-6 border-y border-line">
         {prevProject ? (
-          <Link href={`/${locale}/projects/${prevProject.slug}`} data-cursor="Prev" className={item}>
+          <Link href={`/${locale}/projects/${prevProject.slug}`} className={item}>
             <Kbd className="hidden md:inline-flex">{"←"}</Kbd>
             <Arrow direction="left" className="transition-transform duration-200 ease-out-expo group-hover:-translate-x-0.5 motion-reduce:transform-none" />
             <span className="sr-only">{t("prevProject")}: </span>
@@ -450,7 +442,7 @@ function AdjacentRow({ prevProject, nextProject, locale, t }) {
           </Link>
         ) : <span />}
         {nextProject && (
-          <Link href={`/${locale}/projects/${nextProject.slug}`} data-cursor="Next" className={`${item} text-right`}>
+          <Link href={`/${locale}/projects/${nextProject.slug}`} className={`${item} text-right`}>
             <span className="sr-only">{t("nextProject")}: </span>
             <span className="text-ink">{nextProject.title}</span>
             <Arrow className="transition-transform duration-200 ease-out-expo group-hover:translate-x-0.5 motion-reduce:transform-none" />
@@ -500,7 +492,6 @@ export default function ProjectPage({ project, nextProject, prevProject }) {
         <div className="flex items-center justify-between gap-6 mb-10 md:mb-16">
           <Link
             href={`/${locale}`}
-            data-cursor="Back"
             className={`group inline-flex items-center gap-2 min-h-11 -my-2 text-sm text-ink-2 hover:text-ink transition-colors ${focusRing}`}
           >
             <Arrow direction="left" className="transition-transform duration-200 ease-out-expo group-hover:-translate-x-0.5 motion-reduce:transform-none" />
@@ -573,7 +564,6 @@ export default function ProjectPage({ project, nextProject, prevProject }) {
                         href={url}
                         target="_blank"
                         rel="noreferrer"
-                        data-cursor={key === "repo" ? "Code" : "Visit"}
                         className={`inline-flex items-center gap-1 min-h-11 -my-2 transition-colors ${
                           key === "repo" ? "text-ink-2 hover:text-ink" : "text-[var(--accent)] hover:text-ink"
                         } ${focusRing}`}

@@ -1,7 +1,8 @@
 import { setRequestLocale, getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import { getProjectsByTier } from "@/lib/projects"
-import { FeaturedProjectRow, SecondaryProjectRow } from "@/components/home/ProjectList"
+import { SecondaryProjectRow } from "@/components/home/ProjectList"
+import FeaturedProjectList from "@/components/home/FeaturedProjectList"
 import Arrow from "@/components/ui/Arrow"
 import { ContactLinks } from "@/components/home/ContactBlock"
 
@@ -36,11 +37,7 @@ export default async function HomePage({ params }) {
         </Link>
       </section>
 
-      <section aria-label={t("projects.title")} className="border-t border-line">
-        {featured.map((project) => (
-          <FeaturedProjectRow key={project.slug} project={project} />
-        ))}
-      </section>
+      <FeaturedProjectList projects={featured} label={t("projects.title")} />
 
       <section className="mt-20">
         <h2 className="text-sm text-ink-2 mb-2">{t("projects.other")}</h2>
