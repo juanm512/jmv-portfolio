@@ -2,45 +2,53 @@ export const projects = [
 
   {
     slug: "copon",
+    tier: "featured",
     accentColor: "#00FF9C",
     year: "2026",
     client: "Freelance / Client Project",
     stack: ["Next.js", "tRPC", "Drizzle ORM", "Supabase", "TanStack Query", "Better-Auth", "Tailwind", "shadcn/ui"],
     links: { live: "https://copon.com.ar" },
-    hero: { type: "image", src: "/copon/hero.png" },
+    hero: { type: "image", src: "/copon/hero.webp" },
     locales: {
       en: {
-        title: "Copon — Football Prediction Tournaments",
-        description: "Full-stack platform to run private football prediction tournaments (prode) among friends, coworkers or communities — real-time standings, configurable point systems and round-based prize pools.",
+        title: "Copon",
+        tagline: "Private football prediction tournaments",
+        description: "Platform to run private football prediction pools (prode) with automatic scoring and live standings. Online at copon.com.ar running its first tournaments.",
         role: "Full Stack Developer (client project)",
+        context: "Freelance / Client project",
         content: [
-          { type: "text", title: "Overview", text: "A third party approached with the need to organize their group's football prode beyond spreadsheets and WhatsApp threads. Copon turned that into a dedicated product: private tournaments with automatic scoring, live standings and round-based prize pools — not a betting platform, just the tool that replaces the Excel sheet." },
-          { type: "grid", items: [ { src: "/copon/hero.png", caption: "Landing — organize your tournament, manage the prode" } ] },
-          { type: "video", src: "/copon/join-tournament.mp4", title: "Joining a Tournament", caption: "Mobile flow: joining a tournament via invite link (2026 World Cup group stage)" },
-          { type: "text", title: "Tournament Formats", text: "Three configurable formats — round-robin League, Groups + Knockout, or Knockout only — with custom or real teams, editable fixtures and configurable point systems." },
-          { type: "grid", items: [ { src: "/copon/bracket.jpg", caption: "Groups + Knockout format — bracket view" }, { src: "/copon/team-standings.jpg", caption: "League format — standings table" } ] },
-          { type: "grid", items: [ { src: "/copon/matchday.jpg", caption: "Finished matchday — fixture and results" }, { src: "/copon/prode-standings.jpg", caption: "Prode standings — who's winning the pool" } ] },
-          { type: "text", title: "Architecture", text: "T3-turbo monorepo: @repo/db (Drizzle schema + queries), @repo/api (tRPC routers), @repo/auth (Better-Auth), @repo/core (pure business logic, Result<T,E>, no framework), @repo/ui (shadcn/ui), @repo/validators (Zod). Core business logic — scoring, standings — is unit-tested with Vitest following TDD." }
+          { type: "text", title: "Overview", text: "Copon is a web platform to run private football prediction tournaments among friends, coworkers or a community. Whoever organizes the pool creates a tournament, invites people with a link, and the app scores every matchday on its own. It is not a betting site: it is the tool that replaces the spreadsheet." },
+          { type: "text", title: "The problem", text: "A client came to me with the pool of his group running on an Excel file and a WhatsApp thread. Somebody had to load every result by hand, recalculate the table, and settle arguments about who predicted what and when. Predictions arrived late, points came out wrong, and nobody could see the standings without asking for the file.\n\nWhat was needed was not a bigger spreadsheet: it was predictions that close on a deadline, scoring computed by the system, and a standings table anyone can open from their phone." },
+          { type: "grid", items: [ { src: "/copon/hero.webp", caption: "Landing: organize your tournament, manage the pool" } ] },
+          { type: "video", src: "/copon/join-tournament.mp4", poster: "/copon/join-tournament-poster.jpg", title: "Joining a tournament", caption: "Mobile flow: joining a tournament via invite link (2026 World Cup group stage)" },
+          { type: "text", title: "Decisions", text: "• Scoring and standings as a pure module (@repo/core): it is the part that has to be right, so it lives with no framework around it, returns Result<T,E> instead of throwing, and is unit tested with Vitest before anything renders.\n• tRPC instead of a REST layer: one developer, one codebase, and every router typed from server to client, so a change in a payload breaks the build and not the pool.\n• Drizzle ORM over Supabase Postgres: the schema is TypeScript, migrations stay versioned in the repo, and the queries read next to the business logic.\n• T3-turbo monorepo split by responsibility (@repo/db, @repo/api, @repo/auth, @repo/core, @repo/ui, @repo/validators): the pure logic never imports Next.js, so it stays testable and portable.\n• Better-Auth with invite links: joining a tournament had to be one tap from WhatsApp, not a signup form plus a code.\n• Three configurable formats (round robin League, Groups plus Knockout, Knockout only) with custom or real teams, editable fixtures and configurable point systems: every group scores its pool differently, and the app had to absorb that instead of imposing one rulebook.\n• TanStack Query on the client: standings and matchdays change while people are watching the match, so the cache refetches instead of the user reloading." },
+          { type: "grid", items: [ { src: "/copon/bracket.jpg", caption: "Groups plus Knockout format: bracket view" }, { src: "/copon/team-standings.jpg", caption: "League format: standings table" } ] },
+          { type: "grid", items: [ { src: "/copon/matchday.jpg", caption: "Finished matchday: fixture and results" }, { src: "/copon/prode-standings.jpg", caption: "Pool standings: who is winning the pot" } ] },
+          { type: "text", title: "Result", text: "Copon is online at copon.com.ar running the pools of the client's group, starting with the 2026 World Cup group stage. Nobody loads points by hand any more: results come in, the table updates, and the round based pot is settled by the same code that is covered by tests.\n\nWhat it confirmed for me is that keeping business logic pure pays off in the first week: every argument about scoring was closed by reading a test, not by reading the interface." }
         ]
       },
       es: {
-        title: "Copon — Torneos de Predicción de Fútbol",
-        description: "Plataforma full-stack para organizar torneos privados de prode entre amigos, laburo o comunidad — tabla en tiempo real, sistemas de puntos configurables y pozo de premios por ronda.",
+        title: "Copon",
+        tagline: "Torneos privados de prode",
+        description: "Plataforma para armar torneos privados de prode con puntaje automático y tabla en vivo. Está online en copon.com.ar corriendo sus primeros torneos.",
         role: "Desarrollador Full Stack (proyecto para cliente)",
+        context: "Freelance / Proyecto para cliente",
         content: [
-          { type: "text", title: "Resumen", text: "Un tercero se acercó con la necesidad de organizar el prode de su grupo más allá de un Excel o un chat de WhatsApp. Copon convirtió eso en un producto dedicado: torneos privados con puntaje automático, tabla en vivo y pozo de premios por ronda — no es una plataforma de apuestas, es la herramienta que reemplaza la planilla." },
-          { type: "grid", items: [ { src: "/copon/hero.png", caption: "Landing — organizá tu torneo, gestioná el prode" } ] },
-          { type: "video", src: "/copon/join-tournament.mp4", title: "Unirse a un torneo", caption: "Flujo mobile: unirse a un torneo por link de invitación (fase de grupos del Mundial 2026)" },
-          { type: "text", title: "Formatos de Torneo", text: "Tres formatos configurables — Liga (todos contra todos), Grupos + Llaves o Solo Llaves — con equipos custom o reales, fixture editable y sistemas de puntos configurables." },
-          { type: "grid", items: [ { src: "/copon/bracket.jpg", caption: "Formato Grupos + Llaves — vista de llave" }, { src: "/copon/team-standings.jpg", caption: "Formato Liga — tabla de posiciones" } ] },
-          { type: "grid", items: [ { src: "/copon/matchday.jpg", caption: "Jornada finalizada — fixture y resultados" }, { src: "/copon/prode-standings.jpg", caption: "Tabla del prode — quién va ganando el pozo" } ] },
-          { type: "text", title: "Arquitectura", text: "Monorepo T3-turbo: @repo/db (schema Drizzle + queries), @repo/api (routers tRPC), @repo/auth (Better-Auth), @repo/core (lógica de negocio pura, Result<T,E>, sin framework), @repo/ui (shadcn/ui), @repo/validators (Zod). La lógica central — puntaje, tabla de posiciones — está testeada con Vitest siguiendo TDD." }
+          { type: "text", title: "Resumen", text: "Copon es una plataforma web para armar torneos privados de prode entre amigos, el laburo o una comunidad. El que organiza crea el torneo, invita con un link, y la app puntúa cada fecha sola. No es una plataforma de apuestas: es la herramienta que reemplaza la planilla." },
+          { type: "text", title: "El problema", text: "Un cliente vino con el prode de su grupo corriendo en un Excel y un chat de WhatsApp. Alguien tenía que cargar cada resultado a mano, recalcular la tabla y arbitrar discusiones sobre quién había pronosticado qué y cuándo. Los pronósticos llegaban tarde, los puntos salían mal y nadie podía ver la tabla sin pedir el archivo.\n\nLo que hacía falta no era una planilla más grande: era pronósticos que cierran con una fecha límite, puntaje calculado por el sistema y una tabla que cualquiera abra desde el celular." },
+          { type: "grid", items: [ { src: "/copon/hero.webp", caption: "Landing: organizá tu torneo, gestioná el prode" } ] },
+          { type: "video", src: "/copon/join-tournament.mp4", poster: "/copon/join-tournament-poster.jpg", title: "Unirse a un torneo", caption: "Flujo mobile: unirse a un torneo por link de invitación (fase de grupos del Mundial 2026)" },
+          { type: "text", title: "Decisiones", text: "• Puntaje y tabla como módulo puro (@repo/core): es la parte que tiene que estar bien, así que vive sin framework alrededor, devuelve Result<T,E> en vez de tirar excepciones y está testeada con Vitest antes de que se renderice nada.\n• tRPC en vez de una capa REST: un solo desarrollador, un solo codebase, y cada router tipado del servidor al cliente, así un cambio en un payload rompe el build y no el prode.\n• Drizzle ORM sobre Postgres de Supabase: el schema es TypeScript, las migraciones quedan versionadas en el repo y las queries se leen al lado de la lógica de negocio.\n• Monorepo T3-turbo separado por responsabilidad (@repo/db, @repo/api, @repo/auth, @repo/core, @repo/ui, @repo/validators): la lógica pura nunca importa Next.js, así se mantiene testeable y portable.\n• Better-Auth con links de invitación: entrar a un torneo tenía que ser un tap desde WhatsApp, no un formulario de registro más un código.\n• Tres formatos configurables (Liga todos contra todos, Grupos más Llaves, Solo Llaves) con equipos custom o reales, fixture editable y sistemas de puntos configurables: cada grupo puntúa su prode distinto y la app tenía que absorber eso en vez de imponer un reglamento.\n• TanStack Query en el cliente: la tabla y las fechas cambian mientras la gente mira el partido, así que la caché revalida en vez de que el usuario recargue." },
+          { type: "grid", items: [ { src: "/copon/bracket.jpg", caption: "Formato Grupos más Llaves: vista de llave" }, { src: "/copon/team-standings.jpg", caption: "Formato Liga: tabla de posiciones" } ] },
+          { type: "grid", items: [ { src: "/copon/matchday.jpg", caption: "Jornada finalizada: fixture y resultados" }, { src: "/copon/prode-standings.jpg", caption: "Tabla del prode: quién va ganando el pozo" } ] },
+          { type: "text", title: "Resultado", text: "Copon está online en copon.com.ar corriendo los prodes del grupo del cliente, arrancando por la fase de grupos del Mundial 2026. Ya nadie carga puntos a mano: entran los resultados, la tabla se actualiza y el pozo por ronda lo resuelve el mismo código que está cubierto por tests.\n\nLo que me confirmó es que mantener la lógica de negocio pura se paga en la primera semana: cada discusión sobre el puntaje se cerró leyendo un test, no leyendo la interfaz." }
         ]
       }
     }
   },
   {
     slug: "tuerca",
+    tier: "featured",
     accentColor: "#F97316",
     year: "2026",
     client: "Active / Production",
@@ -49,112 +57,158 @@ export const projects = [
     hero: { type: "image", src: "/tuerca/dash.png" },
     locales: {
       en: {
-        title: "TUERCA — Field Service Management Platform",
-        description: "Production mobile FSM platform for field service teams — evolved from a web prototype to a cross-platform React Native app with route optimization, team management, and real-time job tracking.",
+        title: "TUERCA",
+        tagline: "Field service management from the phone",
+        description: "Field service management app for technical teams: jobs, routes, supplies and collections. Published on Google Play and in production.",
         role: "Sole Developer & Architect",
+        context: "Active / Production",
         content: [
-          { type: "text", title: "Overview", text: "TUERCA started as a web-based SaaS dashboard for service professionals. After validating the core workflows, the project was rearchitected into a dedicated mobile-first platform — because the real users, field technicians, are always on-site, not at a desk.\n\nThe result is a production React Native app available on Google Play that gives technical teams the tools to manage jobs, optimize routes, track finances, and coordinate in real time — all from their phones." },
-          { type: "grid", items: [ { src: "/tuerca/dash.png", caption: "Main dashboard — card-based overview" }, { src: "/tuerca/jobs_list.png", caption: "Jobs list — filterable work orders" } ] },
-          { type: "text", title: "Route Optimization", text: "One of the core differentiators: technicians receive a list of stops and the app converts them into an optimized route, minimizing travel time. Each stop links directly to Google Maps with one tap for turn-by-turn navigation.\n\nThis removes the friction of manual planning and lets field workers focus entirely on execution." },
-          { type: "grid", items: [ { src: "/tuerca/routes.png", caption: "Routes panel — multi-stop planning" }, { src: "/tuerca/route_execution.png", caption: "Route in execution — field navigation" } ] },
-          { type: "text", title: "Job Lifecycle Management", text: "From creation to payment, the full job lifecycle is handled in-app:\n• Job creation with client assignment, priority, and scheduling.\n• Activity timeline — technicians log real-time updates from the field.\n• Supplies tracking — materials used, quantities and costs per job.\n• Payment recording — field collections tracked per work order.\n\nEvery status change and action is synced instantly across the team." },
-          { type: "grid", items: [ { src: "/tuerca/job_creation.png", caption: "Job creation — quick assignment flow" }, { src: "/tuerca/job.png", caption: "Job detail — full work order view" } ] },
-          { type: "grid", items: [ { src: "/tuerca/job_activities.png", caption: "Activity feed — real-time field reporting" }, { src: "/tuerca/job_payment.png", caption: "Payment tracking — field collections" } ] },
-          { type: "grid", items: [ { src: "/tuerca/job_supplies.png", caption: "Supplies log — materials and cost tracking" }, { src: "/tuerca/clients.png", caption: "Client management — contact and history" } ] },
-          { type: "text", title: "Team Management", text: "A granular role system (Owner, Admin, Member) controls exactly what each person can see and do. Admins can invite members, adjust permissions, and monitor team performance from a single view.\n\nDesigned for small-to-mid service companies where accountability and clear ownership matter." },
-          { type: "grid", items: [ { src: "/tuerca/team.png", caption: "Team panel — member overview" }, { src: "/tuerca/team_edit.png", caption: "Role & permission editing" } ] },
-          { type: "text", title: "Architecture & Technical Migration", text: "The platform was migrated from a React web + tRPC setup to a fully cross-platform mobile stack:\n• React Native + Expo for iOS/Android from a single codebase.\n• NativeWind (TailwindCSS for React Native) for consistent, dark-mode-first UI.\n• tRPC for end-to-end type-safe API — shared types between server and mobile client.\n• Drizzle ORM with PostgreSQL for typed schema definitions and migrations.\n• Better-Auth for session management and role-based access control.\n• Calendar Sync — jobs are dynamically pushed to the device's native calendar.\n• Multi-tenant architecture: each organization has isolated data, members and billing." },
-          { type: "text", title: "End-to-End Testing (Maestro)", text: "Critical user flows are covered by automated E2E tests using Maestro — a mobile UI testing framework that simulates real user interactions on an emulator.\n\nTests validate the full experience end-to-end: from gesture input and screen transitions to data persistence and error states. This ensures that updates don't break the core workflows that field teams depend on daily." },
-          { type: "video", src: "/tuerca/tests/registro.mp4", title: "E2E Test — Registration Flow", caption: "Maestro automated test: user registration & onboarding (emulator)" }
+          { type: "text", title: "Overview", text: "TUERCA is a field service management platform for small and mid sized service companies: work orders, multi stop routes, supplies, field collections and team roles. It runs as a React Native app published on Google Play, with a multi tenant backend behind it." },
+          { type: "text", title: "The problem", text: "TUERCA started as a web SaaS dashboard for service professionals. The workflows were right, the usage was not: the person who needs the data is the technician, and the technician is on a roof, in a basement or in a van, never at a desk. Whatever happened during the day ended up being typed in at night, from memory.\n\nSo the product had to move to where the work happens. That meant rebuilding it as a mobile app, not wrapping the web one." },
+          { type: "grid", items: [ { src: "/tuerca/dash.png", caption: "Main dashboard: card based overview" }, { src: "/tuerca/jobs_list.png", caption: "Jobs list: filterable work orders" } ] },
+          { type: "text", title: "Decisions", text: "• React Native with Expo: one codebase for iOS and Android, and over the air updates so a fix reaches technicians without waiting on a store review.\n• Kept tRPC through the migration: the types the web app already had were reused by the mobile client, so what got rewritten was the UI layer and not the API.\n• Drizzle ORM with PostgreSQL: typed schema and versioned migrations, which matters when the same database serves several organizations.\n• Multi tenant from the schema up, with Better-Auth handling sessions and an Owner / Admin / Member role system: in a service company, who sees billing and who only closes their own jobs is not a detail.\n• Route optimization instead of a map: the technician gets a list of stops and the app turns it into an ordered route, and each stop opens Google Maps with one tap for turn by turn navigation. Building the navigator was never the point, ordering the day was.\n• Native calendar sync: jobs are pushed to the device calendar, so the schedule shows up where the technician already looks.\n• NativeWind for the UI: the same utility vocabulary as the web version, dark mode first because the app is read outdoors and in badly lit places.\n• End to end tests with Maestro on an emulator: the critical flows (registration, creating a job, closing it) are exercised as real gestures, so an update cannot silently break what a team uses every morning." },
+          { type: "grid", items: [ { src: "/tuerca/routes.png", caption: "Routes panel: multi stop planning" }, { src: "/tuerca/route_execution.png", caption: "Route in execution: field navigation" } ] },
+          { type: "text", title: "Job lifecycle", text: "The full lifecycle of a job lives inside the app, from creation to collection:\n• Job creation with client assignment, priority and scheduling.\n• Activity timeline: technicians log updates from the field as the job moves.\n• Supplies tracking: materials used, quantities and cost per job.\n• Payment recording: field collections tracked per work order.\n\nEvery status change syncs across the team, so the office sees a job close at the same time the technician does." },
+          { type: "grid", items: [ { src: "/tuerca/job_creation.png", caption: "Job creation: quick assignment flow" }, { src: "/tuerca/job.png", caption: "Job detail: full work order view" } ] },
+          { type: "grid", items: [ { src: "/tuerca/job_activities.png", caption: "Activity feed: real time field reporting" }, { src: "/tuerca/job_payment.png", caption: "Payment tracking: field collections" } ] },
+          { type: "grid", items: [ { src: "/tuerca/job_supplies.png", caption: "Supplies log: materials and cost tracking" }, { src: "/tuerca/clients.png", caption: "Client management: contact and history" } ] },
+          { type: "grid", items: [ { src: "/tuerca/team.png", caption: "Team panel: member overview" }, { src: "/tuerca/team_edit.png", caption: "Role and permission editing" } ] },
+          { type: "video", src: "/tuerca/tests/registro.mp4", poster: "/tuerca/tests/registro-poster.jpg", title: "E2E test: registration flow", caption: "Maestro automated test: user registration and onboarding (emulator)" },
+          { type: "text", title: "Result", text: "TUERCA is in production and published on Google Play, used by technical teams to run their day from the phone: they get the route, execute the stops, log supplies and record what they collected, with no second pass at the office.\n\nThe migration proved the part I cared about: with an end to end typed API and pure data access, going from web to React Native was a UI rewrite and not a rebuild. And Maestro turned the mobile release process into something I can repeat without crossing my fingers." }
         ]
       },
       es: {
-        title: "TUERCA — Plataforma de Gestión de Servicios de Campo",
-        description: "App móvil FSM en producción para equipos de campo — evolucionó de un prototipo web a una app React Native cross-platform con optimización de rutas, gestión de equipos y seguimiento de trabajos en tiempo real.",
+        title: "TUERCA",
+        tagline: "Gestión de servicios de campo desde el celular",
+        description: "App de gestión para equipos de servicio técnico: trabajos, rutas, insumos y cobros. Publicada en Google Play y en producción.",
         role: "Desarrollador Único & Arquitecto",
+        context: "Activo / En producción",
         content: [
-          { type: "text", title: "Resumen", text: "TUERCA comenzó como un dashboard SaaS web para profesionales de servicios. Después de validar los flujos de trabajo principales, el proyecto fue rediseñado como una plataforma mobile-first — porque los usuarios reales, los técnicos de campo, están siempre en terreno, no frente a un escritorio.\n\nEl resultado es una app React Native en producción, disponible en Google Play, que le da a los equipos técnicos las herramientas para gestionar trabajos, optimizar rutas, hacer seguimiento financiero y coordinar en tiempo real, todo desde el celular." },
-          { type: "grid", items: [ { src: "/tuerca/dash.png", caption: "Dashboard principal — resumen en tarjetas" }, { src: "/tuerca/jobs_list.png", caption: "Lista de trabajos — órdenes filtrables" } ] },
-          { type: "text", title: "Optimización de Rutas", text: "Uno de los diferenciadores centrales: los técnicos reciben una lista de paradas y la app las convierte en una ruta optimizada, minimizando tiempos de traslado. Cada parada se abre en Google Maps con un solo tap para navegación giro a giro.\n\nEsto elimina la fricción de la planificación manual y permite que los trabajadores de campo se concentren completamente en la ejecución." },
-          { type: "grid", items: [ { src: "/tuerca/routes.png", caption: "Panel de rutas — planificación multi-parada" }, { src: "/tuerca/route_execution.png", caption: "Ruta en ejecución — navegación en campo" } ] },
-          { type: "text", title: "Gestión del Ciclo de Vida del Trabajo", text: "Desde la creación hasta el cobro, el ciclo completo de un trabajo se maneja dentro de la app:\n• Creación de trabajo con asignación de cliente, prioridad y programación.\n• Línea de tiempo de actividades — los técnicos registran actualizaciones en tiempo real desde el campo.\n• Seguimiento de insumos — materiales usados, cantidades y costos por trabajo.\n• Registro de pagos — cobros en campo registrados por orden de trabajo.\n\nCada cambio de estado y acción se sincroniza al instante en todo el equipo." },
-          { type: "grid", items: [ { src: "/tuerca/job_creation.png", caption: "Creación de trabajo — flujo de asignación rápida" }, { src: "/tuerca/job.png", caption: "Detalle del trabajo — vista completa de la orden" } ] },
-          { type: "grid", items: [ { src: "/tuerca/job_activities.png", caption: "Feed de actividades — reporte en tiempo real desde el campo" }, { src: "/tuerca/job_payment.png", caption: "Seguimiento de pagos — cobros en campo" } ] },
-          { type: "grid", items: [ { src: "/tuerca/job_supplies.png", caption: "Registro de insumos — materiales y costos" }, { src: "/tuerca/clients.png", caption: "Gestión de clientes — contacto e historial" } ] },
-          { type: "text", title: "Gestión de Equipos", text: "Un sistema de roles granular (Propietario, Admin, Miembro) controla exactamente qué puede ver y hacer cada persona. Los administradores pueden invitar miembros, ajustar permisos y monitorear el rendimiento del equipo desde una sola vista.\n\nDiseñado para empresas de servicios pequeñas y medianas donde la responsabilidad y la claridad de roles son fundamentales." },
-          { type: "grid", items: [ { src: "/tuerca/team.png", caption: "Panel de equipo — vista general de miembros" }, { src: "/tuerca/team_edit.png", caption: "Edición de roles y permisos" } ] },
-          { type: "text", title: "Arquitectura y Migración Técnica", text: "La plataforma fue migrada de un stack React web + tRPC a una solución cross-platform móvil completa:\n• React Native + Expo para iOS/Android desde un único codebase.\n• NativeWind (TailwindCSS para React Native) para una UI consistente con dark mode nativo.\n• tRPC para una API completamente tipada de punta a punta — tipos compartidos entre servidor y cliente móvil.\n• Drizzle ORM con PostgreSQL para definiciones de esquema tipadas y migraciones.\n• Better-Auth para gestión de sesiones y control de acceso basado en roles.\n• Sincronización con Calendario — los trabajos se sincronizan dinámicamente al calendario nativo del dispositivo.\n• Arquitectura multi-tenant: cada organización tiene datos, miembros y facturación aislados." },
-          { type: "text", title: "Tests End-to-End (Maestro)", text: "Los flujos de usuario críticos están cubiertos por tests E2E automatizados con Maestro — un framework de testing de UI móvil que simula interacciones reales de usuario en un emulador.\n\nLos tests validan la experiencia completa de punta a punta: desde gestos e interacciones en pantalla hasta persistencia de datos y estados de error. Esto garantiza que las actualizaciones no rompan los flujos principales de los que dependen los equipos de campo a diario." },
-          { type: "video", src: "/tuerca/tests/registro.mp4", title: "Test E2E — Flujo de Registro", caption: "Test automatizado con Maestro: registro de usuario y onboarding (emulador)" }
+          { type: "text", title: "Resumen", text: "TUERCA es una plataforma de gestión de servicios de campo para empresas de servicios chicas y medianas: órdenes de trabajo, rutas de varias paradas, insumos, cobros en campo y roles de equipo. Corre como app React Native publicada en Google Play, con un backend multi-tenant atrás." },
+          { type: "text", title: "El problema", text: "TUERCA arrancó como un dashboard SaaS web para profesionales de servicios. Los flujos estaban bien, el uso no: el que necesita los datos es el técnico, y el técnico está en un techo, en un sótano o en la camioneta, nunca frente a un escritorio. Lo que pasaba durante el día terminaba tipeándose de noche, de memoria.\n\nAsí que el producto tenía que mudarse a donde pasa el trabajo. Eso significaba rehacerlo como app móvil, no envolver la web." },
+          { type: "grid", items: [ { src: "/tuerca/dash.png", caption: "Dashboard principal: resumen en tarjetas" }, { src: "/tuerca/jobs_list.png", caption: "Lista de trabajos: órdenes filtrables" } ] },
+          { type: "text", title: "Decisiones", text: "• React Native con Expo: un solo codebase para iOS y Android, y actualizaciones over the air para que un fix llegue al técnico sin esperar la revisión de la store.\n• Mantuve tRPC en la migración: los tipos que ya tenía la web los reusó el cliente móvil, así que lo que se reescribió fue la capa de UI y no la API.\n• Drizzle ORM con PostgreSQL: schema tipado y migraciones versionadas, algo que importa cuando la misma base sirve a varias organizaciones.\n• Multi-tenant desde el schema, con Better-Auth manejando sesiones y un sistema de roles Propietario / Admin / Miembro: en una empresa de servicios, quién ve la facturación y quién solo cierra sus trabajos no es un detalle.\n• Optimización de rutas en vez de un mapa: el técnico recibe una lista de paradas y la app la convierte en una ruta ordenada, y cada parada abre Google Maps con un tap para la navegación giro a giro. Nunca la idea fue hacer el navegador, era ordenar el día.\n• Sincronización con el calendario nativo: los trabajos se empujan al calendario del dispositivo, así la agenda aparece donde el técnico ya mira.\n• NativeWind para la UI: el mismo vocabulario de utilidades que la versión web, con dark mode primero porque la app se lee al aire libre y en lugares mal iluminados.\n• Tests end to end con Maestro sobre un emulador: los flujos críticos (registro, crear un trabajo, cerrarlo) se ejercitan como gestos reales, así una actualización no puede romper en silencio lo que un equipo usa todas las mañanas." },
+          { type: "grid", items: [ { src: "/tuerca/routes.png", caption: "Panel de rutas: planificación multi-parada" }, { src: "/tuerca/route_execution.png", caption: "Ruta en ejecución: navegación en campo" } ] },
+          { type: "text", title: "Ciclo de vida del trabajo", text: "El ciclo completo de un trabajo vive dentro de la app, desde la creación hasta el cobro:\n• Creación con asignación de cliente, prioridad y programación.\n• Línea de tiempo de actividades: los técnicos registran novedades desde el campo mientras el trabajo avanza.\n• Seguimiento de insumos: materiales usados, cantidades y costo por trabajo.\n• Registro de pagos: cobros en campo asociados a cada orden.\n\nCada cambio de estado se sincroniza en el equipo, así la oficina ve cerrar un trabajo al mismo tiempo que el técnico." },
+          { type: "grid", items: [ { src: "/tuerca/job_creation.png", caption: "Creación de trabajo: flujo de asignación rápida" }, { src: "/tuerca/job.png", caption: "Detalle del trabajo: vista completa de la orden" } ] },
+          { type: "grid", items: [ { src: "/tuerca/job_activities.png", caption: "Feed de actividades: reporte en tiempo real desde el campo" }, { src: "/tuerca/job_payment.png", caption: "Seguimiento de pagos: cobros en campo" } ] },
+          { type: "grid", items: [ { src: "/tuerca/job_supplies.png", caption: "Registro de insumos: materiales y costos" }, { src: "/tuerca/clients.png", caption: "Gestión de clientes: contacto e historial" } ] },
+          { type: "grid", items: [ { src: "/tuerca/team.png", caption: "Panel de equipo: vista general de miembros" }, { src: "/tuerca/team_edit.png", caption: "Edición de roles y permisos" } ] },
+          { type: "video", src: "/tuerca/tests/registro.mp4", poster: "/tuerca/tests/registro-poster.jpg", title: "Test E2E: flujo de registro", caption: "Test automatizado con Maestro: registro de usuario y onboarding (emulador)" },
+          { type: "text", title: "Resultado", text: "TUERCA está en producción y publicada en Google Play, usada por equipos técnicos para resolver el día desde el celular: reciben la ruta, ejecutan las paradas, cargan insumos y registran lo que cobraron, sin una segunda pasada en la oficina.\n\nLa migración me confirmó lo que me importaba: con una API tipada de punta a punta y acceso a datos puro, pasar de web a React Native fue reescribir la UI y no rehacer el producto. Y Maestro convirtió el proceso de release móvil en algo que puedo repetir sin cruzar los dedos." }
         ]
       }
     }
   },
   {
     slug: "relocate",
+    tier: "secondary",
     accentColor: "#3B82F6",
     year: "2026",
     client: "Personal Project",
     stack: ["Flask", "Python", "JavaScript"],
     links: { repo: "https://github.com/juanm512/relocate-app", live: "https://mudarg.vercel.app/" },
-    hero: { type: "image", src: "/relocate-app/inicial.png" },
+    hero: { type: "image", src: "/relocate-app/inicial.webp" },
     locales: {
       en: {
-        title: "Relocate - Commute Map",
-        description: "Visual tool that helps you discover where you can reasonably live based on your workplace and preferred commute mode.",
+        title: "Relocate",
+        tagline: "Commute Map",
+        description: "Map tool that shows where you can reasonably live given your workplace and commute mode, drawing the isochrones from real GTFS transit data.",
         role: "Full Stack Developer",
+        context: "Personal project",
         content: [
-          { type: "text", title: "Overview", text: "Interactive map built with Leaflet and Turf.js to visualize reachable areas from a specific point using walking, cycling, driving, and public transport modes." },
-          { type: "grid", items: [ { src: "/relocate-app/inicial.png", caption: "Initial Search" }, { src: "/relocate-app/resultado_colectivos.png", caption: "Public Transport Engine" }, { src: "/relocate-app/resultado_subtes.png", caption: "Subway Routing" } ] },
-          { type: "text", title: "Highlights", text: "Developed a custom algorithm parsing real public transit GTFS data to generate precise isochrones. The Flask backend handles geocoding via Nominatim and routing logic via OpenRouteService." },
-          { type: "text", title: "Feature Overview", text: "Two-stage flow for UI interaction, customizable time sliders, exact route breakdown checkboxes, and custom point of interest layers like hospitals and safety alerts." }
+          { type: "text", title: "Overview", text: "Interactive map built with Leaflet and Turf.js to visualize reachable areas from a specific point using walking, cycling, driving and public transport modes." },
+          { type: "grid", items: [ { src: "/relocate-app/inicial.webp", caption: "Initial search" }, { src: "/relocate-app/resultado_colectivos.webp", caption: "Public transport engine" }, { src: "/relocate-app/resultado_subtes.webp", caption: "Subway routing" } ] },
+          { type: "text", title: "Highlights", text: "Custom algorithm that parses real public transit GTFS data to generate precise isochrones. The Flask backend handles geocoding via Nominatim and routing via OpenRouteService." },
+          { type: "text", title: "Feature overview", text: "Two stage flow for the interaction, time sliders, exact route breakdown checkboxes, and custom point of interest layers like hospitals and safety alerts." }
         ]
       },
       es: {
-        title: "Relocate - Mapa de Alcance CABA",
-        description: "Herramienta visual que permite ver hasta dónde se puede vivir razonablemente según el lugar de trabajo y el medio de transporte elegido.",
+        title: "Relocate",
+        tagline: "Mapa de Alcance CABA",
+        description: "Herramienta de mapas que muestra hasta dónde se puede vivir razonablemente según el trabajo y el transporte, con isócronas calculadas sobre datos GTFS reales.",
         role: "Desarrollador Full Stack",
+        context: "Proyecto personal",
         content: [
-          { type: "text", title: "Resumen", text: "Aplicación interactiva de mapas (Leaflet y Turf.js) para visualizar hasta qué barrios podés llegar en cierta cantidad de minutos usando caminando, bicicleta, auto o transporte público." },
-          { type: "grid", items: [ { src: "/relocate-app/inicial.png", caption: "Búsqueda de partida" }, { src: "/relocate-app/resultado_colectivos.png", caption: "Alcance en Colectivos" }, { src: "/relocate-app/resultado_subtes.png", caption: "Alcance en Subte" } ] },
-          { type: "text", title: "Logros destacados", text: "Desarrollo de un algoritmo propio para calcular isócronas de transporte público usando datos reales de horarios (GTFS), uniendo backend en Python (Flask) con geocodificación de Nominatim." },
-          { type: "text", title: "Detalles", text: "Flujo de dos pantallas, controles deslizantes para el tiempo de viaje, desglose dinámico de líneas de transporte y filtros agregados de zonas de interés." }
+          { type: "text", title: "Resumen", text: "Aplicación interactiva de mapas (Leaflet y Turf.js) para visualizar hasta qué barrios se puede llegar en cierta cantidad de minutos caminando, en bicicleta, en auto o en transporte público." },
+          { type: "grid", items: [ { src: "/relocate-app/inicial.webp", caption: "Búsqueda de partida" }, { src: "/relocate-app/resultado_colectivos.webp", caption: "Alcance en colectivos" }, { src: "/relocate-app/resultado_subtes.webp", caption: "Alcance en subte" } ] },
+          { type: "text", title: "Logros destacados", text: "Algoritmo propio para calcular isócronas de transporte público usando datos reales de horarios (GTFS), con backend en Python (Flask) y geocodificación de Nominatim." },
+          { type: "text", title: "Detalles", text: "Flujo de dos pantallas, controles deslizantes para el tiempo de viaje, desglose dinámico de líneas de transporte y filtros de zonas de interés." }
+        ]
+      }
+    }
+  },
+
+  {
+    slug: "typemachine",
+    tier: "secondary",
+    accentColor: "#7DD3FC",
+    year: "2026",
+    client: "Personal Project",
+    stack: ["React", "TypeScript", "Vite", "Dexie", "Vitest", "Playwright", "PWA"],
+    links: { live: "https://typemachine.me", repo: "https://github.com/juanm512/typemachine" },
+    hero: { type: "image", src: "/typemachine/editor.png" },
+    locales: {
+      en: {
+        title: "TypeMachine",
+        tagline: "Typing trainer for programmers",
+        description: "Offline typing trainer for programmers: you type real code snippets under real code rules, and it shows which keys and bigrams slow you down.",
+        role: "Sole Developer",
+        context: "Personal project",
+        content: [
+          { type: "text", title: "Overview", text: "TypeMachine is a typing trainer for programmers. It is a single page app that works offline as a PWA, and its main view looks like a code editor: you type snippets from a catalogue of 40 across several languages, and the app keeps your history locally to show where you actually lose time." },
+          { type: "text", title: "The problem", text: "Typing trainers measure prose. Code is not prose: it is indentation, brackets, punctuation and closers, and the characters that slow a programmer down are the ones a prose test almost never asks for.\n\nOn top of that, comparing character by character punishes things that are not mistakes. Pressing Tab, using two spaces where the snippet had four, or leaving a closing bracket hanging on its own line are all legitimate ways of writing the same code, and a strict trainer marks them wrong and ruins the run." },
+          { type: "text", title: "Decisions", text: "• The typing engine is a pure module, written and tested before any UI: comparison happens over tokens instead of raw characters, through a registry of rules, so what counts as correct is data and not an if buried in a component.\n• Real code rules in that registry: Tab indents, spacing and punctuation are flexible, closers can hang on their own line. The trainer adapts to how code is written instead of demanding a transcription.\n• Ghost text realigned as you type, plus an IDE style mirror pane with its own highlighting: you see what you are writing the way you would see it in your editor, not as a plain paragraph.\n• Local history in Dexie over IndexedDB, with export and import: the data belongs to whoever typed it, the app keeps working with no network, and nothing needs an account. Session replay is compressed and opt in.\n• Ranking per key and per bigram: a global words per minute number does not tell you what to practice, a ranking of your weak keys and pairs does.\n• Configuration in a modal whose switches run the real engine on their examples: instead of explaining what a rule does, the setting shows it working.\n• CSS in variables split across files, no Tailwind: the app has a Windows 7 style window frame, a taskbar with programs as its shell, a menu on the logo, four view modes and a resizable divider, and that kind of chrome comes out cleaner as plain CSS with tokens.\n• Built in phases 0 to 7 over about two weeks, with parallel AI subagents working on disjoint file sets: splitting the work by files that do not touch each other is what makes running several agents at once safe.\n• A continuous single words mode next to the snippets, for practicing raw speed without the structure of a code block." },
+          { type: "text", title: "Result", text: "TypeMachine is online at typemachine.me, installable, and fully usable with no connection. It ships with 1161 unit tests and 58 end to end tests, including one that verifies the app still works offline as a PWA.\n\nWhat it proved is the value of writing the engine first: with the comparison logic pure and covered, every later feature (modes, ranking, replay, settings) was a consumer of that module, and the window shell on top could change freely without touching a single typing rule." }
+        ]
+      },
+      es: {
+        title: "TypeMachine",
+        tagline: "Entrenador de tipeo para programadores",
+        description: "Entrenador de tipeo offline para programadores: se tipean snippets de código con reglas de código reales y muestra qué teclas y bigramas te frenan.",
+        role: "Desarrollador Único",
+        context: "Proyecto personal",
+        content: [
+          { type: "text", title: "Resumen", text: "TypeMachine es un entrenador de tipeo para programadores. Es una single page app que funciona offline como PWA, y su vista principal parece un editor de código: se tipean snippets de un catálogo de 40 en varios lenguajes, y la app guarda el historial local para mostrar dónde se pierde tiempo de verdad." },
+          { type: "text", title: "El problema", text: "Los entrenadores de tipeo miden prosa. El código no es prosa: es indentación, corchetes, puntuación y cierres, y los caracteres que frenan a un programador son justamente los que un test de prosa casi nunca pide.\n\nEncima, comparar carácter por carácter castiga cosas que no son errores. Apretar Tab, usar dos espacios donde el snippet tenía cuatro o dejar un cierre colgando en su propia línea son formas legítimas de escribir el mismo código, y un entrenador estricto las marca mal y te arruina la corrida." },
+          { type: "text", title: "Decisiones", text: "• El motor de tipeo es un módulo puro, escrito y testeado antes que cualquier UI: la comparación es por tokens y no por caracteres crudos, a través de un registro de reglas, así lo que cuenta como correcto es data y no un if enterrado en un componente.\n• Reglas de código reales en ese registro: Tab indenta, el espaciado y la puntuación son flexibles, los cierres pueden colgar en su propia línea. El entrenador se adapta a cómo se escribe código en vez de exigir una transcripción.\n• Ghost text realineado mientras tipeás, más un panel espejo estilo IDE con su propio resaltado: ves lo que escribís como lo verías en tu editor, no como un párrafo plano.\n• Historial local en Dexie sobre IndexedDB, con exportar e importar: los datos son de quien tipeó, la app sigue andando sin red y nada requiere una cuenta. El replay de sesiones es comprimido y opcional.\n• Ranking por tecla y por bigrama: un número global de palabras por minuto no te dice qué practicar, un ranking de tus teclas y pares flojos sí.\n• Configuración en un modal cuyos switches corren el motor real sobre sus ejemplos: en vez de explicar qué hace una regla, el ajuste la muestra funcionando.\n• CSS en variables partido en archivos, sin Tailwind: la app tiene un marco de ventana estilo Windows 7, una barra de tareas con programas como shell, un menú en el logo, cuatro modos de vista y un divisor redimensionable, y ese tipo de chrome sale más limpio en CSS plano con tokens.\n• Construida en fases 0 a 7 en unas dos semanas, con subagentes de IA en paralelo trabajando sobre conjuntos de archivos disjuntos: dividir el laburo por archivos que no se tocan es lo que hace seguro correr varios agentes a la vez.\n• Un modo continuo de palabras sueltas al lado de los snippets, para practicar velocidad pura sin la estructura de un bloque de código." },
+          { type: "text", title: "Resultado", text: "TypeMachine está online en typemachine.me, se puede instalar y se usa entera sin conexión. Tiene 1161 tests unitarios y 58 tests end to end, incluido uno que verifica que la app siga funcionando offline como PWA.\n\nLo que demostró es el valor de escribir el motor primero: con la lógica de comparación pura y cubierta, cada feature posterior (modos, ranking, replay, ajustes) fue un consumidor de ese módulo, y el shell de ventana de arriba pudo cambiar libremente sin tocar una sola regla de tipeo." }
         ]
       }
     }
   },
   {
     slug: "single-resto",
+    tier: "featured",
     accentColor: "#F5A623",
     year: "2025",
     client: "Personal / Client",
     stack: ["Next.js", "TailwindCSS", "React", "Docker", "monorepo", "PostgreSQL", "Drizzle ORM", "mercadopago"],
     links: { live: "https://basic-single-restorant-template-web-mu.vercel.app/", live2: "https://basic-single-restorant-template-web.vercel.app/"},
-    hero: { type: "image", src: "/single_resto/portada.png" },
+    hero: { type: "image", src: "/single_resto/portada.webp" },
     locales: {
       en: {
-        title: "Single Resto — Web & Dashboard",
-        description: "Full-stack restaurant platform with public ordering website and admin dashboard — Docker-deployed to a VPS with real-time order notifications, MercadoPago payments, WhatsApp integration and white-label theming.",
+        title: "Single Resto",
+        tagline: "Ordering site and dashboard for a restaurant",
+        description: "Restaurant platform with a public ordering site and an admin dashboard, self hosted with Docker on a VPS and taking real orders through MercadoPago.",
         role: "Lead Developer",
+        context: "Personal / Client",
         content: [
-          { type: "text", title: "Overview", text: "Single Resto is a complete restaurant management system consisting of a customer-facing ordering website and an admin dashboard for restaurant operators. The project started as a client engagement and evolved into a white-label template capable of serving multiple restaurant brands from a single codebase. It represents my most production-oriented project to date — tackling real-world challenges from payment processing to self-hosted infrastructure on a VPS." },
-          { type: "grid", items: [ { src: "/single_resto/portada.png", caption: "Public restaurant website" } ] },
-          { type: "text", title: "Public Website", text: "The customer-facing site is a responsive Next.js application where diners can:\n• Browse the full product catalogue organized by categories.\n• Add items to a persistent cart with quantity controls.\n• Place orders with delivery or pickup options.\n• Pay via MercadoPago (Argentina's leading payment gateway) with automatic order confirmation.\n• See real-time store status — the site respects the restaurant's configured opening hours and blocks checkout outside business hours, showing clear alerts to the user." },
-          { type: "video", src: "/single_resto/video_demostracion_horarios_y_website_pedido.mp4", title: "Full Ordering Flow", caption: "End-to-end demo: browsing products, adding to cart, checkout with opening hours enforcement and order placement" },
-          { type: "video", src: "/single_resto/alerta_perdida_edicion_opciones_checkout_bloqueado_horario.mp4", title: "Checkout & Alerts", caption: "Unsaved changes alerts, edit options and checkout blocked outside business hours" },
-          { type: "text", title: "Admin Dashboard", text: "The dashboard gives restaurant owners full control over their operation:\n• Order management panel — incoming orders appear in near-realtime via SSE (Server-Sent Events) and can be accepted, prepared and completed with ticket printing support.\n• Product CRUD — create, edit and delete products with image uploads to Cloudflare R2, category assignment, pricing and visibility toggles.\n• Store configuration — set opening hours, delivery zones, store address, and toggle maintenance mode to take the site offline instantly.\n• WhatsApp integration — quick-action buttons that open pre-formatted WhatsApp messages to customers for order updates, powered by a self-hosted WhatsApp API container." },
-          { type: "video", src: "/single_resto/caja_y_manejo_de_pedidos.mp4", title: "Order Management", caption: "Order panel: receiving, managing and processing incoming orders" },
-          { type: "video", src: "/single_resto/creacion_productos_acciones_tabla.mp4", title: "Product Management", caption: "Creating products, table actions and category management" },
-          { type: "video", src: "/single_resto/subida_imagenes.mp4", title: "Image Uploads", caption: "Product image upload flow with R2 storage" },
-          { type: "video", src: "/single_resto/cambio_dir_tienda.mp4", title: "Store Settings", caption: "Updating store address and delivery configuration" },
-          { type: "text", title: "White-Label Architecture", text: "The system was architected as a white-label template from the ground up. Multiple restaurant brands can operate from the same codebase with independent themes, logos, product catalogues and configurations. Each tenant gets its own URL while sharing the underlying infrastructure — reducing maintenance overhead and enabling rapid onboarding of new clients." },
-          { type: "video", src: "/single_resto/video_demostracion_white_label.mp4", title: "White-Label Demo", caption: "Same codebase, different brand: switching between restaurant themes" },
-          { type: "video", src: "/single_resto/video_demostracion_flag_mantenimiento.mp4", title: "Maintenance Mode", caption: "Toggling maintenance mode to take the site offline instantly" },
-          { type: "text", title: "Infrastructure & Deployment", text: "One of the most challenging and rewarding aspects of this project was the self-hosted deployment. The entire stack runs on an Oracle Cloud VPS orchestrated with Docker Compose:\n• Application container — Next.js server with SSR and API routes.\n• PostgreSQL container — relational database with Drizzle ORM for type-safe queries and migrations.\n• WhatsApp API container — a self-hosted local WhatsApp API service that required significant effort to configure and stabilize, enabling the dashboard to send automated messages to customers.\n• Cloudflare R2 — object storage for product images, replacing traditional local file storage with a CDN-backed solution.\n• Reverse proxy — Nginx handling SSL termination and routing.\n\nThis deployment was achieved through careful task planning and organization — skills I developed in my software engineering courses at university — applied here in a real production environment for the first time. Managing multi-container Docker deployments, debugging networking between containers, and maintaining uptime on a VPS pushed me well beyond typical frontend development." },
-          { type: "text", title: "Real-Time Notifications with SSE", text: "Instead of WebSockets, I implemented Server-Sent Events (SSE) for the order notification system. The dashboard maintains a persistent connection to the server and receives push updates whenever a new order is placed. This approach was chosen for its simplicity and reliability over WebSockets for a unidirectional notification flow — the server pushes order events to the dashboard without the complexity of bidirectional state management." },
-          { type: "text", title: "Centralized Logging with Wide Events", text: "Implemented a modern logging system based on Wide Events (Canonical Log Lines) that replaced scattered console.log statements with structured, analytical events. Instead of multiple scattered log lines, the system emits ONE structured event per request/action with all necessary context: timestamp, request_id, user, action_name, duration_ms, outcome and specific business data." },
-          { type: "grid", items: [ { src: "/single_resto/image.png", caption: "Wide Events in action — structured terminal output" } ] },
-          { type: "code", title: "Example: Structured Wide Event", text: `{
+          { type: "text", title: "Overview", text: "Single Resto is a restaurant system in two parts: a public ordering site for diners and an admin dashboard for whoever runs the place. It started as a client job and ended as a white label template that serves several brands from one codebase, deployed on a VPS I administer myself." },
+          { type: "text", title: "The problem", text: "The client took orders over WhatsApp and wrote them down by hand. Two things broke constantly: orders arriving after closing time, and orders lost between the message and the kitchen. There was no catalogue anywhere either, so prices lived in a photo of a printed menu.\n\nAnd once the first restaurant worked, the next one asked for the same thing with its own brand. Rewriting the project per client was not an option." },
+          { type: "grid", items: [ { src: "/single_resto/portada.webp", caption: "Public restaurant website" } ] },
+          { type: "text", title: "Decisions", text: "• Server Sent Events instead of WebSockets for the order panel: the flow is one directional, the server pushes new orders to the dashboard, and SSE gives that with a fraction of the moving parts and reconnection handled by the browser.\n• Opening hours enforced on checkout, not just displayed: the site blocks the order outside business hours and says why, because the real cost was the order that arrives with the kitchen closed.\n• MercadoPago as the gateway: it is what customers in Argentina already have, and its confirmation closes the order automatically instead of requiring a manual check.\n• Drizzle ORM with PostgreSQL and a monorepo shared by the site and the dashboard: products, categories and store settings are one schema and one set of types, so the public menu can never drift from what the dashboard edited.\n• White label from the start: themes, logos, catalogues and settings per tenant over the same codebase, each with its own URL. A new client is a configuration, not a fork.\n• Self hosted on an Oracle Cloud VPS with Docker Compose: app container, PostgreSQL container, a self hosted WhatsApp API container and Nginx as reverse proxy for SSL and routing. Stabilizing the WhatsApp service was the hardest part, and it is what lets the dashboard notify customers on its own.\n• Cloudflare R2 for product images: object storage behind a CDN instead of files on the VPS disk, so images survive redeploys and load fast.\n• A maintenance flag in the settings: the owner can take the site offline instantly without calling me.\n• Structured logging with Wide Events (canonical log lines) instead of scattered console.log: one event per action with full context, which is what later makes it possible to ask for the error rate per action." },
+          { type: "video", src: "/single_resto/video_demostracion_horarios_y_website_pedido.mp4", poster: "/single_resto/video_demostracion_horarios_y_website_pedido-poster.jpg", title: "Full ordering flow", caption: "End to end demo: browsing products, adding to cart, checkout with opening hours enforcement and order placement" },
+          { type: "video", src: "/single_resto/alerta_perdida_edicion_opciones_checkout_bloqueado_horario.mp4", poster: "/single_resto/alerta_perdida_edicion_opciones_checkout_bloqueado_horario-poster.jpg", title: "Checkout and alerts", caption: "Unsaved changes alerts, edit options and checkout blocked outside business hours" },
+          { type: "text", title: "Admin dashboard", text: "The dashboard gives the owner control over the whole operation:\n• Order panel: incoming orders appear in near real time via SSE and move through accepted, in preparation and completed, with ticket printing support.\n• Product CRUD: create, edit and delete products with image uploads to R2, category assignment, pricing and visibility toggles.\n• Store configuration: opening hours, delivery zones, address and maintenance mode.\n• WhatsApp actions: quick buttons that open pre formatted messages to the customer with order updates." },
+          { type: "video", src: "/single_resto/caja_y_manejo_de_pedidos.mp4", poster: "/single_resto/caja_y_manejo_de_pedidos-poster.jpg", title: "Order management", caption: "Order panel: receiving, managing and processing incoming orders" },
+          { type: "video", src: "/single_resto/creacion_productos_acciones_tabla.mp4", poster: "/single_resto/creacion_productos_acciones_tabla-poster.jpg", title: "Product management", caption: "Creating products, table actions and category management" },
+          { type: "video", src: "/single_resto/subida_imagenes.mp4", poster: "/single_resto/subida_imagenes-poster.jpg", title: "Image uploads", caption: "Product image upload flow with R2 storage" },
+          { type: "video", src: "/single_resto/cambio_dir_tienda.mp4", poster: "/single_resto/cambio_dir_tienda-poster.jpg", title: "Store settings", caption: "Updating store address and delivery configuration" },
+          { type: "video", src: "/single_resto/video_demostracion_white_label.mp4", poster: "/single_resto/video_demostracion_white_label-poster.jpg", title: "White label demo", caption: "Same codebase, different brand: switching between restaurant themes" },
+          { type: "video", src: "/single_resto/video_demostracion_flag_mantenimiento.mp4", poster: "/single_resto/video_demostracion_flag_mantenimiento-poster.jpg", title: "Maintenance mode", caption: "Toggling maintenance mode to take the site offline instantly" },
+          { type: "grid", items: [ { src: "/single_resto/image.png", caption: "Wide Events in action: structured terminal output" } ] },
+          { type: "code", title: "Example: structured Wide Event", text: `{
   "timestamp": "2026-02-19T16:40:29.786Z",
   "request_id": "mltot5y2-3pf6a",
   "service": "single-resto",
@@ -172,33 +226,32 @@ export const projects = [
     "message": "Error de validación. Revise los campos."
   }
 }` },
-          { type: "text", title: "System Benefits", text: "• Single event per action with complete context (user, duration, outcome).\n• Automatic detection of errors and results using byethrow.\n• Analytical queries: error rate by action, average response time by tenant.\n• Complete traceability with unique request_id per request.\n• Significant reduction of log noise compared to traditional console.log." },
-          { type: "text", title: "What This Project Taught Me", text: "Single Resto was the project that pushed me closest to professional-level development. It exposed me to technologies and challenges I had never faced before:\n• Docker and container orchestration for multi-service deployments.\n• Self-hosted infrastructure management on a VPS — networking, SSL, uptime monitoring.\n• Cloudflare R2 for production-grade object storage.\n• Payment gateway integration with MercadoPago.\n• Monorepo architecture for sharing code between the public site and dashboard.\n• SSE as an alternative to WebSockets for real-time features.\n• Structured logging and observability with Wide Events.\n\nMost importantly, it was where I applied the project management and organizational skills from my software engineering courses in a real production context — planning deployments, managing a client relationship, and maintaining a live system used by actual customers." }
+          { type: "text", title: "What the logging bought", text: "• One event per action with full context (user, duration, outcome).\n• Automatic detection of errors and results using byethrow.\n• Analytical queries: error rate by action, average response time by tenant.\n• Full traceability with a unique request_id per request.\n• Much less log noise than scattered console.log." },
+          { type: "text", title: "Result", text: "The platform runs in production on the VPS, taking paid orders, printing tickets and notifying customers over WhatsApp, with the same codebase serving more than one brand.\n\nThis was the project that pushed me furthest from typical frontend work: multi container Docker, networking between containers, SSL, uptime, a payment gateway and production storage. It is also where I first applied, on a live system with real customers, the planning and organization I had only studied in software engineering courses." }
         ]
       },
       es: {
-        title: "Single Resto — Web & Dashboard",
-        description: "Plataforma full-stack para restaurantes con web de pedidos y dashboard admin — deploy en Docker sobre VPS con notificaciones en tiempo real, pagos con MercadoPago, integración WhatsApp y soporte white-label.",
+        title: "Single Resto",
+        tagline: "Web de pedidos y dashboard para un restaurante",
+        description: "Plataforma para restaurantes con web de pedidos y dashboard admin, self-hosted con Docker en un VPS y tomando pedidos reales con MercadoPago.",
         role: "Desarrollador Principal",
+        context: "Personal / Cliente",
         content: [
-          { type: "text", title: "Resumen", text: "Single Resto es un sistema completo de gestión para restaurantes que incluye una web de pedidos para los clientes y un dashboard de administración para los operadores del local. El proyecto empezó como un trabajo para un cliente y evolucionó a un template white-label capaz de servir múltiples marcas de restaurantes desde un solo codebase. Representa mi proyecto más orientado a producción hasta la fecha — enfrentando desafíos reales desde procesamiento de pagos hasta infraestructura self-hosted en un VPS." },
-          { type: "grid", items: [ { src: "/single_resto/portada.png", caption: "Web pública del restaurante" } ] },
-          { type: "text", title: "Web Pública", text: "La web orientada al cliente es una aplicación Next.js responsiva donde los comensales pueden:\n• Explorar el catálogo completo de productos organizado por categorías.\n• Agregar items a un carrito persistente con controles de cantidad.\n• Realizar pedidos con opciones de delivery o retiro.\n• Pagar vía MercadoPago con confirmación automática del pedido.\n• Ver el estado del local en tiempo real — la web respeta los horarios configurados del restaurante y bloquea el checkout fuera del horario de atención, mostrando alertas claras al usuario." },
-          { type: "video", src: "/single_resto/video_demostracion_horarios_y_website_pedido.mp4", title: "Flujo Completo de Pedido", caption: "Demo completa: explorar productos, agregar al carrito, checkout con control de horarios y colocación de pedido" },
-          { type: "video", src: "/single_resto/alerta_perdida_edicion_opciones_checkout_bloqueado_horario.mp4", title: "Checkout y Alertas", caption: "Alertas de cambios no guardados, opciones de edición y checkout bloqueado fuera de horario" },
-          { type: "text", title: "Dashboard de Administración", text: "El dashboard le da al dueño del restaurante control total sobre su operación:\n• Panel de pedidos — los pedidos entrantes aparecen en casi-tiempo-real vía SSE (Server-Sent Events) y pueden ser aceptados, preparados y completados con soporte de impresión de tickets.\n• CRUD de productos — crear, editar y eliminar productos con subida de imágenes a Cloudflare R2, asignación de categorías, precios y toggles de visibilidad.\n• Configuración del local — establecer horarios, zonas de delivery, dirección del local y activar modo mantenimiento para sacar la web de servicio al instante.\n• Integración WhatsApp — botones de acción rápida que abren mensajes pre-formateados de WhatsApp para actualizaciones de pedidos, usando una API de WhatsApp self-hosted en un container." },
-          { type: "video", src: "/single_resto/caja_y_manejo_de_pedidos.mp4", title: "Gestión de Pedidos", caption: "Panel de pedidos: recibir, gestionar y procesar pedidos entrantes" },
-          { type: "video", src: "/single_resto/creacion_productos_acciones_tabla.mp4", title: "Gestión de Productos", caption: "Creación de productos, acciones de tabla y gestión de categorías" },
-          { type: "video", src: "/single_resto/subida_imagenes.mp4", title: "Subida de Imágenes", caption: "Flujo de subida de imágenes con almacenamiento en R2" },
-          { type: "video", src: "/single_resto/cambio_dir_tienda.mp4", title: "Configuración del Local", caption: "Actualización de dirección del local y configuración de delivery" },
-          { type: "text", title: "Arquitectura White-Label", text: "El sistema fue diseñado como template white-label desde el principio. Múltiples marcas de restaurantes pueden operar desde el mismo codebase con temas, logos, catálogos de productos y configuraciones independientes. Cada tenant tiene su propia URL mientras comparte la infraestructura subyacente — reduciendo el overhead de mantenimiento y permitiendo el onboarding rápido de nuevos clientes." },
-          { type: "video", src: "/single_resto/video_demostracion_white_label.mp4", title: "Demo White-Label", caption: "Mismo codebase, diferente marca: alternando entre temas de restaurantes" },
-          { type: "video", src: "/single_resto/video_demostracion_flag_mantenimiento.mp4", title: "Modo Mantenimiento", caption: "Activar modo mantenimiento para sacar el sitio de servicio al instante" },
-          { type: "text", title: "Infraestructura & Deploy", text: "Uno de los aspectos más desafiantes y gratificantes de este proyecto fue el deploy self-hosted. Todo el stack corre en un VPS de Oracle Cloud orquestado con Docker Compose:\n• Container de aplicación — servidor Next.js con SSR y rutas API.\n• Container de PostgreSQL — base de datos relacional con Drizzle ORM para queries y migraciones type-safe.\n• Container de API WhatsApp — un servicio local de API de WhatsApp self-hosted que requirió un esfuerzo significativo para configurar y estabilizar, permitiendo al dashboard enviar mensajes automáticos a los clientes.\n• Cloudflare R2 — almacenamiento de objetos para imágenes de productos, reemplazando el almacenamiento local tradicional con una solución respaldada por CDN.\n• Reverse proxy — Nginx manejando terminación SSL y routing.\n\nEste deploy fue logrado mediante planificación cuidadosa de tareas y organización — habilidades que desarrollé en mis cursadas de ingeniería de software en la facultad — aplicadas aquí en un entorno de producción real por primera vez. Gestionar deploys multi-container en Docker, debuggear networking entre containers y mantener uptime en un VPS me empujó mucho más allá del desarrollo frontend típico." },
-          { type: "text", title: "Notificaciones en Tiempo Real con SSE", text: "En lugar de WebSockets, implementé Server-Sent Events (SSE) para el sistema de notificaciones de pedidos. El dashboard mantiene una conexión persistente con el servidor y recibe actualizaciones push cada vez que se realiza un nuevo pedido. Este enfoque fue elegido por su simplicidad y confiabilidad sobre WebSockets para un flujo de notificaciones unidireccional — el servidor pushea eventos de pedidos al dashboard sin la complejidad de gestión de estado bidireccional." },
-          { type: "text", title: "Logging Centralizado con Wide Events", text: "Implementé un sistema de logging moderno basado en Wide Events (Canonical Log Lines) que reemplazó los console.log dispersos por eventos estructurados y analíticos. En lugar de múltiples líneas de log dispersas, el sistema emite UN evento estructurado por request/acción con todo el contexto necesario: timestamp, request_id, user, action_name, duration_ms, outcome y datos de negocio específicos." },
-          { type: "grid", items: [ { src: "/single_resto/image.png", caption: "Wide Events en acción — salida estructurada en terminal" } ] },
-          { type: "code", title: "Ejemplo: Wide Event Estructurado", text: `{
+          { type: "text", title: "Resumen", text: "Single Resto es un sistema para restaurantes en dos partes: una web pública de pedidos para los comensales y un dashboard de administración para el que maneja el local. Empezó como un trabajo para un cliente y terminó siendo un template white-label que sirve varias marcas desde un solo codebase, desplegado en un VPS que administro yo." },
+          { type: "text", title: "El problema", text: "El cliente tomaba pedidos por WhatsApp y los anotaba a mano. Dos cosas se rompían todo el tiempo: pedidos que entraban con el local cerrado y pedidos que se perdían entre el mensaje y la cocina. Tampoco había catálogo en ningún lado, así que los precios vivían en una foto de una carta impresa.\n\nY cuando el primer restaurante funcionó, el siguiente pidió lo mismo con su marca. Reescribir el proyecto por cliente no era opción." },
+          { type: "grid", items: [ { src: "/single_resto/portada.webp", caption: "Web pública del restaurante" } ] },
+          { type: "text", title: "Decisiones", text: "• Server Sent Events en vez de WebSockets para el panel de pedidos: el flujo es unidireccional, el servidor empuja los pedidos nuevos al dashboard, y SSE da eso con una fracción de las piezas móviles y la reconexión resuelta por el navegador.\n• Horarios aplicados en el checkout, no solo mostrados: la web bloquea el pedido fuera de horario y explica por qué, porque el costo real era el pedido que entra con la cocina cerrada.\n• MercadoPago como pasarela: es lo que el cliente final ya tiene en Argentina, y su confirmación cierra el pedido automáticamente en vez de exigir una revisión manual.\n• Drizzle ORM con PostgreSQL y un monorepo compartido entre la web y el dashboard: productos, categorías y configuración del local son un solo schema y un solo juego de tipos, así la carta pública nunca se desfasa de lo que editó el dashboard.\n• White-label desde el principio: temas, logos, catálogos y configuración por tenant sobre el mismo codebase, cada uno con su URL. Un cliente nuevo es una configuración, no un fork.\n• Self-hosted en un VPS de Oracle Cloud con Docker Compose: container de la app, container de PostgreSQL, un container con una API de WhatsApp self-hosted y Nginx como reverse proxy para SSL y routing. Estabilizar el servicio de WhatsApp fue lo más difícil, y es lo que permite que el dashboard avise al cliente por su cuenta.\n• Cloudflare R2 para las imágenes de productos: object storage detrás de una CDN en vez de archivos en el disco del VPS, así las imágenes sobreviven a los redeploys y cargan rápido.\n• Un flag de mantenimiento en la configuración: el dueño puede sacar la web de servicio al instante sin llamarme.\n• Logging estructurado con Wide Events (canonical log lines) en vez de console.log dispersos: un evento por acción con todo el contexto, que es lo que después permite preguntar la tasa de error por acción." },
+          { type: "video", src: "/single_resto/video_demostracion_horarios_y_website_pedido.mp4", poster: "/single_resto/video_demostracion_horarios_y_website_pedido-poster.jpg", title: "Flujo completo de pedido", caption: "Demo completa: explorar productos, agregar al carrito, checkout con control de horarios y colocación del pedido" },
+          { type: "video", src: "/single_resto/alerta_perdida_edicion_opciones_checkout_bloqueado_horario.mp4", poster: "/single_resto/alerta_perdida_edicion_opciones_checkout_bloqueado_horario-poster.jpg", title: "Checkout y alertas", caption: "Alertas de cambios no guardados, opciones de edición y checkout bloqueado fuera de horario" },
+          { type: "text", title: "Dashboard de administración", text: "El dashboard le da al dueño control sobre toda la operación:\n• Panel de pedidos: los pedidos entrantes aparecen casi en tiempo real vía SSE y pasan por aceptado, en preparación y completado, con soporte de impresión de tickets.\n• CRUD de productos: crear, editar y eliminar productos con subida de imágenes a R2, categorías, precios y toggles de visibilidad.\n• Configuración del local: horarios, zonas de delivery, dirección y modo mantenimiento.\n• Acciones de WhatsApp: botones rápidos que abren mensajes pre-formateados al cliente con novedades del pedido." },
+          { type: "video", src: "/single_resto/caja_y_manejo_de_pedidos.mp4", poster: "/single_resto/caja_y_manejo_de_pedidos-poster.jpg", title: "Gestión de pedidos", caption: "Panel de pedidos: recibir, gestionar y procesar pedidos entrantes" },
+          { type: "video", src: "/single_resto/creacion_productos_acciones_tabla.mp4", poster: "/single_resto/creacion_productos_acciones_tabla-poster.jpg", title: "Gestión de productos", caption: "Creación de productos, acciones de tabla y gestión de categorías" },
+          { type: "video", src: "/single_resto/subida_imagenes.mp4", poster: "/single_resto/subida_imagenes-poster.jpg", title: "Subida de imágenes", caption: "Flujo de subida de imágenes con almacenamiento en R2" },
+          { type: "video", src: "/single_resto/cambio_dir_tienda.mp4", poster: "/single_resto/cambio_dir_tienda-poster.jpg", title: "Configuración del local", caption: "Actualización de dirección del local y configuración de delivery" },
+          { type: "video", src: "/single_resto/video_demostracion_white_label.mp4", poster: "/single_resto/video_demostracion_white_label-poster.jpg", title: "Demo white-label", caption: "Mismo codebase, distinta marca: alternando entre temas de restaurantes" },
+          { type: "video", src: "/single_resto/video_demostracion_flag_mantenimiento.mp4", poster: "/single_resto/video_demostracion_flag_mantenimiento-poster.jpg", title: "Modo mantenimiento", caption: "Activar modo mantenimiento para sacar el sitio de servicio al instante" },
+          { type: "grid", items: [ { src: "/single_resto/image.png", caption: "Wide Events en acción: salida estructurada en terminal" } ] },
+          { type: "code", title: "Ejemplo: Wide Event estructurado", text: `{
   "timestamp": "2026-02-19T16:40:29.786Z",
   "request_id": "mltot5y2-3pf6a",
   "service": "single-resto",
@@ -216,45 +269,52 @@ export const projects = [
     "message": "Error de validación. Revise los campos."
   }
 }` },
-          { type: "text", title: "Beneficios del Sistema", text: "• Un solo evento por acción con contexto completo (user, duration, outcome).\n• Detección automática de errores y resultados usando byethrow.\n• Queries analíticas: tasa de error por acción, tiempo promedio de respuesta por tenant.\n• Trazabilidad completa con request_id único por solicitud.\n• Reducción significativa de ruido en logs comparado con console.log tradicional." },
-          { type: "text", title: "Lo Que Me Enseñó Este Proyecto", text: "Single Resto fue el proyecto que me acercó más al desarrollo profesional. Me expuso a tecnologías y desafíos que nunca había enfrentado:\n• Docker y orquestación de containers para deploys multi-servicio.\n• Gestión de infraestructura self-hosted en un VPS — networking, SSL, monitoreo de uptime.\n• Cloudflare R2 para almacenamiento de objetos de nivel producción.\n• Integración de pasarela de pagos con MercadoPago.\n• Arquitectura monorepo para compartir código entre el sitio público y el dashboard.\n• SSE como alternativa a WebSockets para features en tiempo real.\n• Logging estructurado y observabilidad con Wide Events.\n\nLo más importante es que fue donde apliqué las habilidades de gestión de proyectos y organización de mis cursadas de ingeniería de software en un contexto de producción real — planificando deploys, gestionando la relación con el cliente y manteniendo un sistema en vivo usado por clientes reales." }
+          { type: "text", title: "Qué compró el logging", text: "• Un solo evento por acción con contexto completo (user, duration, outcome).\n• Detección automática de errores y resultados usando byethrow.\n• Queries analíticas: tasa de error por acción, tiempo promedio de respuesta por tenant.\n• Trazabilidad completa con request_id único por solicitud.\n• Mucho menos ruido en los logs que con console.log dispersos." },
+          { type: "text", title: "Resultado", text: "La plataforma corre en producción en el VPS, tomando pedidos con pago, imprimiendo tickets y avisando a los clientes por WhatsApp, con el mismo codebase sirviendo a más de una marca.\n\nFue el proyecto que más me alejó del frontend típico: Docker multi-container, networking entre containers, SSL, uptime, una pasarela de pagos y storage de producción. También fue donde apliqué por primera vez, sobre un sistema vivo con clientes reales, la planificación y la organización que hasta ahí solo había estudiado en las materias de ingeniería de software." }
         ]
       }
     }
   },
 
-  
+
   {
     slug: "gsp",
+    tier: "featured",
     accentColor: "#A855F7",
     year: "2025",
     client: "Personal / Research",
     stack: ["Next.js", "Node.js", "PostgreSQL", "Drizzle ORM", "Cloudflare R2", "Better-Auth"],
     links: { repo: "https://github.com/juanm512/gsp" },
-    hero: { type: "image", src: "/gsp/thumbnail.webp" },
+    hero: { type: "video", src: "/gsp/thumbnail.mp4", poster: "/gsp/thumbnail-poster.jpg" },
     locales: {
       en: {
-        title: "GSP — Gaussian Splatting Platform",
-        description: "Self-hosted platform for uploading scenes and orchestrating GPU rendering jobs that produce Gaussian Splatting outputs — a research project exploring an emerging 3D reconstruction technology.",
+        title: "GSP",
+        tagline: "Gaussian Splatting rendering platform",
+        description: "Self hosted platform where you upload photos of a scene and it orchestrates rented GPU jobs to return a Gaussian Splatting render, with history per organization.",
         role: "Developer / Research",
+        context: "Personal / Research",
         content: [
-          { type: "text", title: "What is Gaussian Splatting?", text: "3D Gaussian Splatting is a real-time rendering technique that reconstructs photorealistic 3D scenes from a set of 2D images. Unlike traditional mesh-based rendering, it represents scenes as millions of semi-transparent ellipsoids (\"splats\"), enabling high-fidelity reconstruction of real environments with neural-network-level visual quality.\n\nThis project was built to explore the technology practically — by building the infrastructure needed to run these renders at scale." },
-          { type: "text", title: "What it does", text: "GSP is a multi-tenant platform where users upload a set of photos of a scene and receive a fully rendered Gaussian Splatting output. Under the hood:\n• Files are uploaded to Cloudflare R2 and a render job is queued.\n• A background worker rents GPU compute, runs the splatting algorithm, and stores the result.\n• Failed jobs are retried automatically with exponential backoff.\n• Organizations can invite members and manage their own render history and usage." },
-          { type: "full-width-image", src: "/gsp/pipeline.png", caption: "Rendering pipeline — upload → preprocessing → GPU queue → output → R2 storage" },
-          { type: "text", title: "Technical Highlights", text: "• Background job orchestration with retry logic and status tracking (pending / running / failed / success).\n• GPU rental pipeline — compute is provisioned on demand per job, minimizing idle costs.\n• Cloudflare R2 for asset storage — uploads and rendered outputs.\n• Multi-tenant architecture: organizations with member invitations and per-org job history.\n• Payment service integration for usage-based billing.\n• Next.js frontend with shadcn/ui; Drizzle ORM + PostgreSQL for job and user state." },
-          { type: "video", src: "/gsp/gsp_vista_rapida_funcionalidades_admin_cutted.mp4", title: "Admin Interface", caption: "Quick walkthrough of the admin panel — job queue, org management and render status" }
+          { type: "text", title: "Overview", text: "GSP is a multi tenant platform for 3D Gaussian Splatting: you upload a set of photos of a scene and get back a rendered splat. Gaussian Splatting reconstructs photorealistic 3D scenes from 2D images by representing them as millions of semi transparent ellipsoids instead of meshes, and it renders in real time.\n\nI built it to understand the technology from the infrastructure side rather than from a paper." },
+          { type: "text", title: "The problem", text: "Running a splatting render is not the hard part: it is a command over a folder of images. The hard part is everything around it. It needs a GPU, and a GPU sitting idle costs money all day. The job takes long enough that no HTTP request can wait for it. It fails often, for reasons ranging from bad input photos to a machine disappearing. And the output is heavy, so it cannot live next to the app.\n\nWithout that scaffolding, experimenting with the technique means babysitting a terminal." },
+          { type: "text", title: "Decisions", text: "• Rent GPU compute per job instead of keeping a machine up: compute is provisioned when a job starts and released when it ends, so idle time is not paid for.\n• A queue with a background worker rather than a synchronous request: uploading and rendering are separate, the user gets a job with a state (pending, running, failed, success) and can close the tab.\n• Automatic retries with exponential backoff: failures here are mostly transient, so the retry is part of the pipeline instead of a manual relaunch.\n• Cloudflare R2 for both inputs and outputs: uploads go straight to object storage, renders come back to it, and the app server never becomes the file server.\n• Multi tenant with Better-Auth and organizations that invite members: renders belong to a team, with its own history and usage, which is also what makes usage based billing possible.\n• Drizzle ORM with PostgreSQL for job and user state: the state machine of a job is the most queried thing in the system, so it stays relational and typed.\n• Next.js with shadcn/ui for the admin surface: the interesting work is the pipeline, so the UI reuses components instead of inventing them." },
+          { type: "full-width-image", src: "/gsp/pipeline.png", caption: "Rendering pipeline: upload, preprocessing, GPU queue, output, R2 storage" },
+          { type: "video", src: "/gsp/gsp_vista_rapida_funcionalidades_admin_cutted.mp4", poster: "/gsp/gsp_vista_rapida_funcionalidades_admin_cutted-poster.jpg", title: "Admin interface", caption: "Quick walkthrough of the admin panel: job queue, org management and render status" },
+          { type: "text", title: "Result", text: "GSP runs the full cycle end to end: photos in, a queued job, GPU compute rented on demand, retries when something fails, and a finished render stored in R2 under the organization that asked for it.\n\nIt showed me that the interesting engineering in a GPU heavy product is rarely the algorithm: it is the queue, the retries, the storage and the tenancy around it. That is the part that turned an experiment I ran by hand into something anyone with an account can run." }
         ]
       },
       es: {
-        title: "GSP — Plataforma de Gaussian Splatting",
-        description: "Plataforma self-hosted para subir escenas y orquestar trabajos de render GPU que producen salidas de Gaussian Splatting — un proyecto de investigación sobre una tecnología 3D emergente.",
+        title: "GSP",
+        tagline: "Plataforma de render Gaussian Splatting",
+        description: "Plataforma self-hosted donde se suben fotos de una escena y orquesta trabajos en GPU alquilada para devolver un render Gaussian Splatting, con historial por organización.",
         role: "Desarrollador / Investigación",
+        context: "Personal / Investigación",
         content: [
-          { type: "text", title: "¿Qué es Gaussian Splatting?", text: "Gaussian Splatting es una técnica de renderizado en tiempo real que reconstruye escenas 3D fotorrealistas a partir de imágenes 2D. A diferencia del renderizado tradicional con mallas, representa las escenas como millones de elipsoides semitransparentes (\"splats\"), logrando una reconstrucción de alta fidelidad de entornos reales con calidad visual comparable a redes neuronales.\n\nEste proyecto fue construido para explorar la tecnología de forma práctica — desarrollando la infraestructura necesaria para correr estos renders a escala." },
-          { type: "text", title: "Qué hace", text: "GSP es una plataforma multi-tenant donde los usuarios suben un conjunto de fotos de una escena y reciben una salida de Gaussian Splatting completamente renderizada. Por debajo:\n• Los archivos se suben a Cloudflare R2 y se encola un trabajo de render.\n• Un worker en background alquila cómputo GPU, ejecuta el algoritmo de splatting y almacena el resultado.\n• Los trabajos fallidos se reintentan automáticamente con backoff exponencial.\n• Las organizaciones pueden invitar miembros y gestionar su propio historial de renders y uso." },
-          { type: "full-width-image", src: "/gsp/pipeline.png", caption: "Pipeline de renderizado — upload → preprocesamiento → cola GPU → salida → almacenamiento R2" },
-          { type: "text", title: "Destacados Técnicos", text: "• Orquestación de trabajos en background con lógica de reintentos y seguimiento de estado (pendiente / en proceso / fallido / exitoso).\n• Pipeline de alquiler de GPU — el cómputo se aprovisiona bajo demanda por trabajo, minimizando costos ociosos.\n• Cloudflare R2 para almacenamiento de assets — uploads y salidas renderizadas.\n• Arquitectura multi-tenant: organizaciones con invitaciones de miembros e historial de trabajos por organización.\n• Integración de servicio de pagos para facturación basada en uso.\n• Frontend en Next.js con shadcn/ui; Drizzle ORM + PostgreSQL para estado de trabajos y usuarios." },
-          { type: "video", src: "/gsp/gsp_vista_rapida_funcionalidades_admin_cutted.mp4", title: "Interfaz de Administrador", caption: "Recorrido por el panel de admin — cola de trabajos, gestión de organizaciones y estado de renders" }
+          { type: "text", title: "Resumen", text: "GSP es una plataforma multi-tenant de Gaussian Splatting 3D: se sube un conjunto de fotos de una escena y devuelve el splat renderizado. Gaussian Splatting reconstruye escenas 3D fotorrealistas a partir de imágenes 2D representándolas como millones de elipsoides semitransparentes en vez de mallas, y renderiza en tiempo real.\n\nLo construí para entender la tecnología desde el lado de la infraestructura y no desde un paper." },
+          { type: "text", title: "El problema", text: "Correr un render de splatting no es lo difícil: es un comando sobre una carpeta de imágenes. Lo difícil es todo lo que lo rodea. Necesita una GPU, y una GPU ociosa cuesta plata todo el día. El trabajo tarda lo suficiente como para que ningún request HTTP lo espere. Falla seguido, por razones que van desde fotos malas hasta una máquina que desaparece. Y la salida pesa, así que no puede vivir al lado de la app.\n\nSin ese andamiaje, experimentar con la técnica es cuidar una terminal." },
+          { type: "text", title: "Decisiones", text: "• Alquilar cómputo GPU por trabajo en vez de dejar una máquina prendida: el cómputo se aprovisiona cuando arranca el trabajo y se libera al terminar, así no se paga tiempo ocioso.\n• Una cola con un worker en background en vez de un request sincrónico: subir y renderizar son cosas separadas, el usuario recibe un trabajo con estado (pendiente, en proceso, fallido, exitoso) y puede cerrar la pestaña.\n• Reintentos automáticos con backoff exponencial: acá las fallas son en su mayoría transitorias, así que el reintento es parte del pipeline y no un relanzamiento manual.\n• Cloudflare R2 para entradas y salidas: los uploads van directo al object storage, los renders vuelven ahí, y el servidor de la app nunca se convierte en servidor de archivos.\n• Multi-tenant con Better-Auth y organizaciones que invitan miembros: los renders son de un equipo, con su historial y su uso, que es también lo que habilita la facturación por consumo.\n• Drizzle ORM con PostgreSQL para el estado de trabajos y usuarios: la máquina de estados de un trabajo es lo más consultado del sistema, así que queda relacional y tipada.\n• Next.js con shadcn/ui para la superficie de administración: lo interesante es el pipeline, así que la UI reusa componentes en vez de inventarlos." },
+          { type: "full-width-image", src: "/gsp/pipeline.png", caption: "Pipeline de renderizado: upload, preprocesamiento, cola GPU, salida, almacenamiento R2" },
+          { type: "video", src: "/gsp/gsp_vista_rapida_funcionalidades_admin_cutted.mp4", poster: "/gsp/gsp_vista_rapida_funcionalidades_admin_cutted-poster.jpg", title: "Interfaz de administrador", caption: "Recorrido por el panel de admin: cola de trabajos, gestión de organizaciones y estado de renders" },
+          { type: "text", title: "Resultado", text: "GSP corre el ciclo completo de punta a punta: entran las fotos, se encola el trabajo, se alquila cómputo GPU bajo demanda, se reintenta cuando algo falla y el render terminado queda en R2 bajo la organización que lo pidió.\n\nMe mostró que la ingeniería interesante en un producto pesado en GPU rara vez es el algoritmo: es la cola, los reintentos, el storage y el multi-tenant alrededor. Esa es la parte que convirtió un experimento que corría a mano en algo que cualquiera con una cuenta puede correr." }
         ]
       }
     }
@@ -262,35 +322,38 @@ export const projects = [
 
   {
     slug: "bmmusic",
+    tier: "secondary",
     accentColor: "#EC4899",
     year: "2024",
     client: "Personal",
     stack: ["Next.js", "TailwindCSS", "Framer Motion"],
     links: { repo: "https://github.com/juanm512/bmmusic", live: "https://bmmusic.vercel.app/" },
-    hero: { type: "image", src: "/BMusic/bmusichomepage.gif" },
+    hero: { type: "video", src: "/BMusic/bmusichomepage.mp4", poster: "/BMusic/bmusichomepage-poster.jpg" },
     locales: {
       en: {
-        title: "BM Music — Artist Landing",
-        description: "Polished landing page template for music artists — rich animations, song previews, and event ticket integration. A 3-day design-to-deploy sprint.",
+        title: "BM Music",
+        tagline: "Artist Landing",
+        description: "Landing page template for independent music artists with animated hero, song previews and a tickets section, designed and deployed in three days.",
         role: "Frontend Developer / Designer",
+        context: "Personal",
         content: [
-          { type: "text", title: "Overview", text: "Designed and developed a modern, ready-to-use landing page template for independent music artists. The site features a hero with animated transitions, a discography section with embedded song previews, and an events/tickets page — all built in under 3 days." },
-          { type: "grid", items: [ { src: "/BMusic/bmusichomepage.gif", caption: "Animated homepage hero" }, { src: "/BMusic/Bmusicsongs.gif", caption: "Discography browser" } ] },
-          { type: "grid", items: [ { src: "/BMusic/homepage.gif", caption: "Scroll-based transitions" }, { src: "/BMusic/tickets.gif", caption: "Events & tickets section" } ] },
-          { type: "text", title: "Technical Highlights", text: "• Micro-interaction system built with Framer Motion: staggered card reveals, parallax scroll effects, and smooth page transitions.\n• Fully responsive layout with TailwindCSS — tested across mobile, tablet and desktop breakpoints.\n• Component-driven architecture in Next.js with prop-based theming for easy artist customization.\n• Performance-optimized: lazy-loaded images, minimal bundle size, and fast Vercel edge deployment." },
-          { type: "text", title: "Why it matters", text: "Demonstrates rapid prototyping skills, strong aesthetic sense, and proficiency with animation libraries — built and deployed in just 3 days while maintaining production-quality code." }
+          { type: "text", title: "Overview", text: "Designed and built a ready to use landing page template for independent music artists: a hero with animated transitions, a discography section with embedded song previews and an events and tickets page, all in under three days." },
+          { type: "grid", items: [ { src: "/BMusic/bmusichomepage.mp4", caption: "Animated homepage hero" }, { src: "/BMusic/Bmusicsongs.mp4", caption: "Discography browser" } ] },
+          { type: "grid", items: [ { src: "/BMusic/homepage.mp4", caption: "Scroll based transitions" }, { src: "/BMusic/tickets.mp4", caption: "Events and tickets section" } ] },
+          { type: "text", title: "Technical highlights", text: "• Micro interaction system built with Framer Motion: staggered card reveals, parallax scroll effects and page transitions.\n• Fully responsive layout with TailwindCSS, tested across mobile, tablet and desktop breakpoints.\n• Component driven architecture in Next.js with prop based theming, so a new artist is a set of props.\n• Lazy loaded images and a small bundle, deployed on Vercel." }
         ]
       },
       es: {
-        title: "BM Music — Landing de Artista",
-        description: "Landing page template pulida para artistas musicales — animaciones ricas, previews de canciones e integración de tickets para eventos. Sprint de diseño a deploy en 3 días.",
+        title: "BM Music",
+        tagline: "Landing de Artista",
+        description: "Template de landing para artistas musicales independientes con hero animado, previews de canciones y sección de tickets, diseñado y desplegado en tres días.",
         role: "Frontend Developer / Diseñador",
+        context: "Personal",
         content: [
-          { type: "text", title: "Resumen", text: "Diseñé y desarrollé una landing page moderna y lista para usar para artistas musicales independientes. El sitio incluye un hero con transiciones animadas, una sección de discografía con previews embebidos y una página de eventos/tickets — todo construido en menos de 3 días." },
-          { type: "grid", items: [ { src: "/BMusic/bmusichomepage.gif", caption: "Hero animado de la homepage" }, { src: "/BMusic/Bmusicsongs.gif", caption: "Navegador de discografía" } ] },
-          { type: "grid", items: [ { src: "/BMusic/homepage.gif", caption: "Transiciones basadas en scroll" }, { src: "/BMusic/tickets.gif", caption: "Sección de eventos y tickets" } ] },
-          { type: "text", title: "Destacados Técnicos", text: "• Sistema de micro-interacciones con Framer Motion: aparición escalonada de tarjetas, efectos parallax en scroll y transiciones suaves entre páginas.\n• Layout totalmente responsivo con TailwindCSS — testeado en breakpoints de mobile, tablet y desktop.\n• Arquitectura basada en componentes en Next.js con theming por props para facilitar la personalización del artista.\n• Optimizado en rendimiento: imágenes lazy-loaded, bundle mínimo y deploy rápido en Vercel edge." },
-          { type: "text", title: "Por qué importa", text: "Demuestra habilidades de prototipado rápido, fuerte sentido estético y dominio de librerías de animación — construido y desplegado en solo 3 días manteniendo código de calidad de producción." }
+          { type: "text", title: "Resumen", text: "Diseñé y construí un template de landing listo para usar para artistas musicales independientes: un hero con transiciones animadas, una sección de discografía con previews embebidos y una página de eventos y tickets, todo en menos de tres días." },
+          { type: "grid", items: [ { src: "/BMusic/bmusichomepage.mp4", caption: "Hero animado de la homepage" }, { src: "/BMusic/Bmusicsongs.mp4", caption: "Navegador de discografía" } ] },
+          { type: "grid", items: [ { src: "/BMusic/homepage.mp4", caption: "Transiciones basadas en scroll" }, { src: "/BMusic/tickets.mp4", caption: "Sección de eventos y tickets" } ] },
+          { type: "text", title: "Destacados técnicos", text: "• Sistema de micro-interacciones con Framer Motion: aparición escalonada de tarjetas, parallax en scroll y transiciones entre páginas.\n• Layout totalmente responsivo con TailwindCSS, testeado en breakpoints de mobile, tablet y desktop.\n• Arquitectura por componentes en Next.js con theming por props, así un artista nuevo es un juego de props.\n• Imágenes lazy-loaded y bundle chico, desplegado en Vercel." }
         ]
       }
     }
@@ -298,6 +361,7 @@ export const projects = [
 
   {
     slug: "atlas-3d",
+    tier: "featured",
     accentColor: "#8B5A2B",
     year: "2023",
     client: "Freelance / Research",
@@ -309,34 +373,39 @@ export const projects = [
     hero: { type: "image", src: "/Atlas3d/index.jpg" },
     locales: {
       en: {
-        title: "Atlas 3D — Interactive Anatomy Atlas",
-        description: "Interactive 3D anatomy atlas built with Three.js and React for a medical school textbook project — real-time rendering, zoom, rotation and model annotations designed for students and educators.",
+        title: "Atlas 3D",
+        tagline: "Interactive anatomy atlas for a textbook",
+        description: "Browser based 3D anatomy atlas built for a medical school textbook: students rotate and zoom real bone models with labels anchored to the geometry.",
         role: "Frontend / 3D Engineer",
+        context: "Freelance / Research",
         content: [
-          { type: "text", title: "Origin", text: "This project started when a friend who was writing a textbook for an anatomy department at a medical school asked me to build an interactive companion tool. The goal was to create a web-based 3D atlas that students could use alongside the book to explore human bones in a way that static illustrations simply can't provide — with rotation, zoom and contextual annotations." },
-          { type: "text", title: "Overview", text: "The result is a full-featured 3D anatomy atlas that renders human skeletal models in the browser using Three.js via react-three-fiber. Users can freely rotate, zoom and pan around each bone, while annotation overlays display anatomical names and descriptions anchored to specific 3D coordinates. The interface was designed to be intuitive enough for non-technical medical students while maintaining the precision required for academic use." },
-          { type: "grid", items: [ { src: "/Atlas3d/home.gif", caption: "Interactive 3D viewer" }, { src: "/Atlas3d/bonePage.gif", caption: "Detailed bone exploration" } ] },
-          { type: "text", title: "Technical Highlights", text: "• Built with react-three-fiber for declarative 3D scene composition inside a Next.js application.\n• GPU-accelerated model loading with progressive LOD (Level of Detail) for faster initial render and smooth transitions between detail levels.\n• Custom annotation system that binds metadata to 3D world coordinates — labels remain accurately positioned across all camera rotations and zoom levels.\n• Touch-gesture support for mobile devices: pinch-to-zoom, two-finger rotation, and swipe navigation between bones.\n• Performance profiled and optimized draw calls to maintain 60 fps interaction on mid-range hardware.\n• Framer Motion animations for UI transitions between the bone catalogue and individual bone detail views." },
-          { type: "text", title: "What This Project Taught Me", text: "Beyond the technical challenges, Atlas 3D was my first real experience working with a non-technical client on a sustained project. It taught me lessons I would later formally study in software engineering courses at university:\n• Requirements gathering — translating an anatomist's vision into concrete features and user stories.\n• Client communication — regular check-ins, managing expectations, presenting progress through demos instead of technical jargon.\n• Task organization — breaking a complex project into milestones, prioritizing core functionality over nice-to-haves, and iterating based on feedback.\n• Scope management — learning when to push back on feature requests and when to accommodate them.\n\nThis project gave me a practical foundation in project management and client-facing development long before I encountered those concepts in a classroom." }
+          { type: "text", title: "Overview", text: "Atlas 3D is a web anatomy atlas that renders human skeletal models in the browser with Three.js through react-three-fiber. Students rotate, zoom and pan around each bone while annotation overlays show anatomical names anchored to specific 3D coordinates. It was built as the interactive companion to a printed textbook for an anatomy department at a medical school." },
+          { type: "text", title: "The problem", text: "A friend writing that textbook had a limitation no amount of illustration solves: a bone is a three dimensional object and a page shows one angle of it. Students memorize the drawing instead of the shape, and then fail to recognize the same bone from another view.\n\nHe needed something students could open next to the book, turn around in their hands and read labels off, without installing anything and without technical knowledge." },
+          { type: "text", title: "Decisions", text: "• react-three-fiber inside Next.js instead of raw Three.js: the scene is composed declaratively as React components, so the annotations and the UI live in the same model as the 3D content.\n• Annotations bound to 3D world coordinates, not to screen positions: labels stay on the right part of the bone through every rotation and zoom level, which is the whole point in an academic context.\n• Progressive level of detail on model loading: the first render arrives fast on a student laptop and detail comes in afterwards, instead of a long blank wait.\n• Draw calls profiled and optimized to hold 60 fps on mid range hardware: the target device was a student's laptop or phone, not a workstation.\n• Touch gestures as a first class input: pinch to zoom, two finger rotation and swipe between bones, because most of the studying happens on a phone next to the book.\n• Framer Motion only for the interface transitions between the catalogue and each bone detail: the 3D canvas is left alone." },
+          { type: "grid", items: [ { src: "/Atlas3d/home.mp4", caption: "Interactive 3D viewer" }, { src: "/Atlas3d/bonePage.mp4", caption: "Detailed bone exploration" } ] },
+          { type: "text", title: "Result", text: "The atlas is online and works as the companion to the book: any student opens a bone, turns it and reads the labels on the real geometry, from a laptop or a phone.\n\nIt was also my first sustained project with a non technical client, and that taught me as much as the rendering did: gathering requirements from an anatomist, showing progress with demos instead of jargon, cutting a complex project into milestones, and deciding when to push back on a request. I met those ideas formally in software engineering courses later, with the practice already done." }
         ]
       },
       es: {
-        title: "Atlas 3D — Atlas de Anatomía Interactivo",
-        description: "Atlas de anatomía 3D interactivo con Three.js y React para un proyecto de libro de texto de una facultad de medicina — renderizado en tiempo real, zoom, rotación y anotaciones sobre modelos diseñados para estudiantes y docentes.",
+        title: "Atlas 3D",
+        tagline: "Atlas de anatomía interactivo para un libro",
+        description: "Atlas de anatomía 3D en el navegador hecho para un libro de una facultad de medicina: los estudiantes rotan y hacen zoom sobre huesos con etiquetas ancladas a la geometría.",
         role: "Frontend / Ingeniero 3D",
+        context: "Freelance / Investigación",
         content: [
-          { type: "text", title: "Origen", text: "Este proyecto nació cuando un amigo que estaba escribiendo un libro para una cátedra de anatomía en la facultad de medicina me pidió construir una herramienta interactiva complementaria. El objetivo era crear un atlas 3D web que los estudiantes pudieran usar junto al libro para explorar huesos humanos de una manera que las ilustraciones estáticas simplemente no pueden ofrecer — con rotación, zoom y anotaciones contextuales." },
-          { type: "text", title: "Resumen", text: "El resultado es un atlas de anatomía 3D completo que renderiza modelos esqueléticos humanos en el navegador usando Three.js mediante react-three-fiber. Los usuarios pueden rotar, hacer zoom y desplazarse libremente alrededor de cada hueso, mientras que las anotaciones superpuestas muestran nombres y descripciones anatómicas ancladas a coordenadas 3D específicas. La interfaz fue diseñada para ser lo suficientemente intuitiva para estudiantes de medicina no técnicos, manteniendo la precisión requerida para uso académico." },
-          { type: "grid", items: [ { src: "/Atlas3d/home.gif", caption: "Visor 3D interactivo" }, { src: "/Atlas3d/bonePage.gif", caption: "Exploración detallada de huesos" } ] },
-          { type: "text", title: "Destacados Técnicos", text: "• Construido con react-three-fiber para composición declarativa de escenas 3D dentro de una aplicación Next.js.\n• Carga de modelos acelerada por GPU con LOD (Level of Detail) progresivo para renderizado inicial rápido y transiciones suaves entre niveles de detalle.\n• Sistema de anotaciones personalizado que vincula metadatos a coordenadas 3D del mundo — las etiquetas se mantienen posicionadas con precisión durante todas las rotaciones y niveles de zoom.\n• Soporte de gestos táctiles para dispositivos móviles: pinch-to-zoom, rotación con dos dedos y navegación por swipe entre huesos.\n• Perfilado de rendimiento y optimización de draw calls para mantener interacción a 60 fps en hardware de gama media.\n• Animaciones con Framer Motion para transiciones de UI entre el catálogo de huesos y las vistas de detalle individuales." },
-          { type: "text", title: "Lo Que Me Enseñó Este Proyecto", text: "Más allá de los desafíos técnicos, Atlas 3D fue mi primera experiencia real trabajando con un cliente no técnico en un proyecto sostenido. Me enseñó lecciones que luego estudié formalmente en las materias de ingeniería de software en la facultad:\n• Relevamiento de requerimientos — traducir la visión de un anatomista en funcionalidades concretas e historias de usuario.\n• Comunicación con el cliente — reuniones periódicas, gestión de expectativas, presentación de avances mediante demos en lugar de jerga técnica.\n• Organización de tareas — descomponer un proyecto complejo en hitos, priorizar funcionalidad core sobre nice-to-haves, e iterar en base a feedback.\n• Gestión de alcance — aprender cuándo resistir pedidos de features y cuándo acomodarlos.\n\nEste proyecto me dio una base práctica en gestión de proyectos y desarrollo orientado al cliente mucho antes de encontrar esos conceptos en un aula." }
+          { type: "text", title: "Resumen", text: "Atlas 3D es un atlas de anatomía web que renderiza modelos esqueléticos humanos en el navegador con Three.js mediante react-three-fiber. Los estudiantes rotan, hacen zoom y se desplazan alrededor de cada hueso mientras las anotaciones muestran nombres anatómicos anclados a coordenadas 3D específicas. Se construyó como complemento interactivo de un libro impreso para una cátedra de anatomía de una facultad de medicina." },
+          { type: "text", title: "El problema", text: "Un amigo que estaba escribiendo ese libro tenía una limitación que ninguna ilustración resuelve: un hueso es un objeto tridimensional y una página muestra un ángulo. Los estudiantes memorizan el dibujo en vez de la forma, y después no reconocen el mismo hueso desde otra vista.\n\nNecesitaba algo que los estudiantes pudieran abrir al lado del libro, girar en la mano y leerle las etiquetas, sin instalar nada y sin conocimiento técnico." },
+          { type: "text", title: "Decisiones", text: "• react-three-fiber dentro de Next.js en vez de Three.js crudo: la escena se compone declarativamente como componentes React, así las anotaciones y la UI viven en el mismo modelo que el contenido 3D.\n• Anotaciones atadas a coordenadas 3D del mundo, no a posiciones de pantalla: las etiquetas quedan sobre la parte correcta del hueso en cualquier rotación y nivel de zoom, que es todo el punto en un contexto académico.\n• Nivel de detalle progresivo al cargar los modelos: el primer render llega rápido en la notebook de un estudiante y el detalle entra después, en vez de una espera larga en blanco.\n• Draw calls perfilados y optimizados para sostener 60 fps en hardware de gama media: el dispositivo objetivo era la notebook o el celular de un estudiante, no una workstation.\n• Gestos táctiles como entrada de primera clase: pinch para zoom, rotación con dos dedos y swipe entre huesos, porque la mayor parte del estudio pasa en el celular al lado del libro.\n• Framer Motion solo para las transiciones de interfaz entre el catálogo y el detalle de cada hueso: al canvas 3D no se lo toca." },
+          { type: "grid", items: [ { src: "/Atlas3d/home.mp4", caption: "Visor 3D interactivo" }, { src: "/Atlas3d/bonePage.mp4", caption: "Exploración detallada de huesos" } ] },
+          { type: "text", title: "Resultado", text: "El atlas está online y funciona como complemento del libro: cualquier estudiante abre un hueso, lo gira y lee las etiquetas sobre la geometría real, desde una notebook o un celular.\n\nFue además mi primer proyecto sostenido con un cliente no técnico, y eso me enseñó tanto como el renderizado: relevar requerimientos con un anatomista, mostrar avances con demos en vez de jerga, partir un proyecto complejo en hitos y decidir cuándo resistir un pedido. Esas ideas las vi formalmente en las materias de ingeniería de software después, con la práctica ya hecha." }
         ]
       }
     }
   },
-  
+
   {
     slug: "f1-stats",
+    tier: "secondary",
     accentColor: "#EF4444",
     year: "2023",
     client: "Personal / Learning",
@@ -346,26 +415,28 @@ export const projects = [
     locales: {
       en: {
         title: "F1 Stats 2023",
-        description: "Cross-platform mobile app built with React Native to browse the 2023 Formula 1 season — driver standings, team comparisons and race calendar, all fetched from a live API.",
+        description: "React Native app to follow the 2023 Formula 1 season (driver standings, teams and calendar) from a live API. My first mobile project.",
         role: "Mobile Developer",
+        context: "Personal / Learning",
         content: [
-          { type: "text", title: "Overview", text: "My first React Native project, developed to learn mobile development by building something I was passionate about. The app consumes the Ergast F1 API to display real-time standings, team profiles, and the full race calendar for the 2023 season." },
-          { type: "grid", items: [ { src: "/f1-stats/home.png", caption: "Home — Season overview" }, { src: "/f1-stats/drivers.png", caption: "Driver standings" } ] },
+          { type: "text", title: "Overview", text: "My first React Native project, built to learn mobile development on a subject I actually follow. The app consumes the Ergast F1 API to show standings, team profiles and the full race calendar for the 2023 season." },
+          { type: "grid", items: [ { src: "/f1-stats/home.png", caption: "Home: season overview" }, { src: "/f1-stats/drivers.png", caption: "Driver standings" } ] },
           { type: "grid", items: [ { src: "/f1-stats/teams.png", caption: "Team comparisons" }, { src: "/f1-stats/calendar.png", caption: "Race calendar" } ] },
-          { type: "text", title: "Technical Highlights", text: "• Built with Expo for fast iteration and seamless testing on both iOS and Android.\n• Integrated the Ergast Developer API with custom hooks for data fetching, caching and error handling.\n• Implemented tab-based navigation with React Navigation and animated list transitions.\n• Responsive layouts adapting to varying screen sizes — designed mobile-first for optimal usability." },
-          { type: "text", title: "What I learned", text: "First hands-on experience with React Native's component model, native navigation patterns, and the differences between mobile and web development paradigms. Solidified my understanding of state management and async data flows in a mobile context." }
+          { type: "text", title: "Technical highlights", text: "• Built with Expo for fast iteration and testing on both iOS and Android.\n• Ergast Developer API integrated through custom hooks for fetching, caching and error handling.\n• Tab based navigation with React Navigation and animated list transitions.\n• Layouts adapted to different screen sizes, designed mobile first." },
+          { type: "text", title: "What I learned", text: "First hands on experience with React Native's component model, native navigation patterns and the differences between mobile and web. It is where state management and async data flows stopped being theory for me." }
         ]
       },
       es: {
         title: "F1 Stats 2023",
-        description: "App móvil multiplataforma construida con React Native para explorar la temporada 2023 de Fórmula 1 — clasificaciones de pilotos, comparaciones entre equipos y calendario de carreras, todo desde una API en vivo.",
+        description: "App en React Native para seguir la temporada 2023 de Fórmula 1 (pilotos, equipos y calendario) desde una API en vivo. Mi primer proyecto mobile.",
         role: "Desarrollador Mobile",
+        context: "Personal / Aprendizaje",
         content: [
-          { type: "text", title: "Resumen", text: "Mi primer proyecto en React Native, desarrollado para aprender desarrollo mobile construyendo algo que me apasiona. La app consume la API Ergast de F1 para mostrar clasificaciones en tiempo real, perfiles de equipos y el calendario completo de la temporada 2023." },
-          { type: "grid", items: [ { src: "/f1-stats/home.png", caption: "Home — Resumen de temporada" }, { src: "/f1-stats/drivers.png", caption: "Clasificación de pilotos" } ] },
+          { type: "text", title: "Resumen", text: "Mi primer proyecto en React Native, hecho para aprender desarrollo mobile sobre un tema que sigo de verdad. La app consume la API Ergast de F1 para mostrar clasificaciones, perfiles de equipos y el calendario completo de la temporada 2023." },
+          { type: "grid", items: [ { src: "/f1-stats/home.png", caption: "Home: resumen de temporada" }, { src: "/f1-stats/drivers.png", caption: "Clasificación de pilotos" } ] },
           { type: "grid", items: [ { src: "/f1-stats/teams.png", caption: "Comparación de equipos" }, { src: "/f1-stats/calendar.png", caption: "Calendario de carreras" } ] },
-          { type: "text", title: "Destacados Técnicos", text: "• Construida con Expo para iteración rápida y testing fluido en iOS y Android.\n• Integración con la API de Ergast Developer usando hooks customizados para data fetching, caché y manejo de errores.\n• Navegación por tabs con React Navigation y transiciones animadas de listas.\n• Layouts responsivos adaptados a distintos tamaños de pantalla — diseñado mobile-first para usabilidad óptima." },
-          { type: "text", title: "Qué aprendí", text: "Primera experiencia práctica con el modelo de componentes de React Native, patrones de navegación nativos y las diferencias entre paradigmas de desarrollo mobile y web. Consolidé mi entendimiento de gestión de estado y flujos de datos asíncronos en un contexto mobile." }
+          { type: "text", title: "Destacados técnicos", text: "• Construida con Expo para iterar rápido y probar en iOS y Android.\n• API de Ergast integrada con hooks propios para fetching, caché y manejo de errores.\n• Navegación por tabs con React Navigation y transiciones animadas de listas.\n• Layouts adaptados a distintos tamaños de pantalla, pensados mobile first." },
+          { type: "text", title: "Qué aprendí", text: "Primera experiencia práctica con el modelo de componentes de React Native, los patrones de navegación nativos y las diferencias con la web. Fue donde la gestión de estado y los flujos asíncronos dejaron de ser teoría." }
         ]
       }
     }
@@ -373,33 +444,34 @@ export const projects = [
 
   {
     slug: "donatelo",
+    tier: "secondary",
     accentColor: "#FBBF24",
     year: "2022",
     client: "Personal / Research",
     stack: ["React", "Node.js", "socket.io", "MongoDB", "ethereum", "Express"],
     links: { repo: "https://github.com/juanm512/streams-donations-realtime", live: "https://donatelo.netlify.app/" },
-    hero: { type: "image", src: "/donatelo/Screenshot 2022-05-02 at 12-03-58 Donatelo.png" },
+    hero: { type: "image", src: "/donatelo/home.webp" },
     locales: {
       en: {
         title: "Donatelo",
-        description: "Real-time crypto donation platform for live streamers — multi-chain payments, WebSocket-driven on-screen alerts and a full donor/streamer dashboard.",
+        description: "Crypto donation platform for live streamers: multi chain payments that trigger on screen alerts over WebSockets in under two seconds.",
         role: "Full Stack Developer",
+        context: "Personal / Research",
         content: [
-          { type: "text", title: "What it does", text: "Donatelo enables viewers to send cryptocurrency donations during live streams. Streamers get customizable on-screen alerts powered by WebSockets, while donors can track their history via a dedicated dashboard. Supports multiple blockchains and tokens through ethers.js." },
-          { type: "video", src: "/donatelo/donatelo_video_breve_funcionalidad.mp4", title: "Platform Demo", caption: "Quick walkthrough of the core functionality" },
-          { type: "text", title: "Technical Architecture", text: "• Node.js + Express backend with JWT authentication and one-click MetaMask login.\n• Real-time event pipeline: blockchain transaction confirmation → server webhook → socket.io broadcast → overlay render in < 2 s.\n• MongoDB for user profiles, donation history and streamer settings.\n• Multi-chain support: custom RPC provider selection and contract ABI abstraction for ERC-20 tokens.\n• Frontend built in React with daisyUI + TailwindCSS and Three.js animations for the landing page." },
-          { type: "text", title: "Why it matters", text: "Demonstrates end-to-end real-time architecture, blockchain integration, and event-driven systems — core skills for any backend or full-stack role requiring low-latency data flows." }
+          { type: "text", title: "What it does", text: "Donatelo lets viewers send cryptocurrency donations during live streams. Streamers get customizable on screen alerts driven by WebSockets, and donors can track their history from a dashboard. It supports several blockchains and tokens through ethers.js." },
+          { type: "video", src: "/donatelo/donatelo_video_breve_funcionalidad.mp4", poster: "/donatelo/donatelo_video_breve_funcionalidad-poster.jpg", title: "Platform demo", caption: "Quick walkthrough of the core functionality" },
+          { type: "text", title: "Technical architecture", text: "• Node.js and Express backend with JWT authentication and one click MetaMask login.\n• Real time event pipeline: transaction confirmation, server webhook, socket.io broadcast, overlay render in under two seconds.\n• MongoDB for user profiles, donation history and streamer settings.\n• Multi chain support: custom RPC provider selection and contract ABI abstraction for ERC-20 tokens.\n• React frontend with daisyUI, TailwindCSS and Three.js animations on the landing page." }
         ]
       },
       es: {
         title: "Donatelo",
-        description: "Plataforma de donaciones crypto en tiempo real para streamers — pagos multi-cadena, alertas en pantalla vía WebSocket y un dashboard completo para donantes y streamers.",
+        description: "Plataforma de donaciones crypto para streamers: pagos multi-cadena que disparan alertas en pantalla por WebSockets en menos de dos segundos.",
         role: "Full Stack Developer",
+        context: "Personal / Investigación",
         content: [
-          { type: "text", title: "Qué hace", text: "Donatelo permite a los espectadores enviar donaciones en criptomonedas durante transmisiones en vivo. Los streamers reciben alertas personalizables en pantalla potenciadas por WebSockets, mientras que los donantes pueden rastrear su historial desde un dashboard dedicado. Soporta múltiples blockchains y tokens a través de ethers.js." },
-          { type: "video", src: "/donatelo/donatelo_video_breve_funcionalidad.mp4", title: "Demo de la Plataforma", caption: "Recorrido rápido de la funcionalidad principal" },
-          { type: "text", title: "Arquitectura Técnica", text: "• Backend en Node.js + Express con autenticación JWT y login one-click con MetaMask.\n• Pipeline de eventos en tiempo real: confirmación de transacción blockchain → webhook al servidor → broadcast socket.io → render del overlay en < 2 s.\n• MongoDB para perfiles de usuario, historial de donaciones y configuración de streamers.\n• Soporte multi-cadena: selección de proveedor RPC personalizado y abstracción de ABI de contratos para tokens ERC-20.\n• Frontend en React con daisyUI + TailwindCSS y animaciones Three.js para la landing page." },
-          { type: "text", title: "Por qué importa", text: "Demuestra arquitectura en tiempo real de punta a punta, integración blockchain y sistemas event-driven — habilidades clave para roles backend o full-stack que requieren flujos de datos de baja latencia." }
+          { type: "text", title: "Qué hace", text: "Donatelo permite a los espectadores enviar donaciones en criptomonedas durante transmisiones en vivo. Los streamers reciben alertas personalizables en pantalla por WebSockets, y los donantes pueden ver su historial desde un dashboard. Soporta varias blockchains y tokens a través de ethers.js." },
+          { type: "video", src: "/donatelo/donatelo_video_breve_funcionalidad.mp4", poster: "/donatelo/donatelo_video_breve_funcionalidad-poster.jpg", title: "Demo de la plataforma", caption: "Recorrido rápido de la funcionalidad principal" },
+          { type: "text", title: "Arquitectura técnica", text: "• Backend en Node.js y Express con autenticación JWT y login one-click con MetaMask.\n• Pipeline de eventos en tiempo real: confirmación de la transacción, webhook al servidor, broadcast por socket.io, render del overlay en menos de dos segundos.\n• MongoDB para perfiles de usuario, historial de donaciones y configuración de streamers.\n• Soporte multi-cadena: selección de proveedor RPC y abstracción de ABI de contratos para tokens ERC-20.\n• Frontend en React con daisyUI, TailwindCSS y animaciones Three.js en la landing." }
         ]
       }
     }
@@ -407,69 +479,38 @@ export const projects = [
 
   {
     slug: "vas-ecommerce",
+    tier: "secondary",
     accentColor: "#22D3EE",
     year: "2022",
     client: "Freelance",
     stack: ["Next.js", "TailwindCSS", "MongoDB"],
     links: { live: "https://vas-ecommerce.vercel.app/", repo: "" },
-    hero: { type: "image", src: "/vas-ecommerce/Screenshot 2022-10-03 at 18-48-56 Ventas a Services - Respuestos de refrigeracion y linea blanca.png" },
+    hero: { type: "image", src: "/vas-ecommerce/home.webp" },
     locales: {
       en: {
         title: "Ventas A Services",
-        description: "Production e-commerce platform with product catalogue, admin dashboard, inventory management and WhatsApp-based order notifications for a retail client.",
+        description: "E-commerce for a refrigeration parts retailer: public catalogue, admin dashboard with inventory, and orders that arrive as WhatsApp notifications.",
         role: "Full Stack / Frontend",
+        context: "Freelance",
         content: [
-          { type: "text", title: "Overview", text: "Built a complete e-commerce solution for a small retail business selling refrigeration and appliance parts. Includes a public storefront with search, filters and cart, plus a private admin dashboard for inventory and order management." },
-          { type: "grid", items: [ { src: "/vas-ecommerce/Screenshot 2022-10-03 at 18-46-04 Admin Page.png", caption: "Admin dashboard" }, { src: "/vas-ecommerce/Screenshot 2022-10-03 at 18-49-06 Ventas a Services - Respuestos de refrigeracion y linea blanca.png", caption: "Product catalogue" } ] },
-          { type: "text", title: "Technical Highlights", text: "• Server-side rendering with Next.js for SEO-optimised product pages and fast initial loads.\n• Admin CRUD interface with role-based access, image uploads to AWS S3 and real-time inventory tracking.\n• Shopping cart without payment gateway (per client request) — orders trigger WhatsApp notifications for manual processing.\n• JWT-based authentication with bcrypt password hashing and MongoDB for flexible document storage." },
-          { type: "text", title: "Impact", text: "Delivered a production-ready platform that digitized the client's catalogue and streamlined their order workflow — showcasing end-to-end product development from requirements to deployment." }
+          { type: "text", title: "Overview", text: "A complete e-commerce for a small retailer selling refrigeration and appliance parts: a public storefront with search, filters and cart, plus a private admin dashboard for inventory and orders." },
+          { type: "grid", items: [ { src: "/vas-ecommerce/admin.webp", caption: "Admin dashboard" }, { src: "/vas-ecommerce/home-2.webp", caption: "Product catalogue" } ] },
+          { type: "text", title: "Technical highlights", text: "• Server side rendering with Next.js for indexable product pages and fast first loads.\n• Admin CRUD with role based access, image uploads to AWS S3 and inventory tracking.\n• Cart with no payment gateway, at the client's request: an order triggers a WhatsApp notification for manual processing.\n• JWT authentication with bcrypt hashing and MongoDB for the catalogue documents." },
+          { type: "text", title: "Result", text: "The client's catalogue went from paper to a site their customers can browse, and orders now arrive in one place instead of scattered across messages." }
         ]
       },
       es: {
         title: "Ventas A Services",
-        description: "Plataforma e-commerce en producción con catálogo de productos, dashboard de administración, gestión de inventario y notificaciones de pedidos por WhatsApp para un cliente minorista.",
+        description: "E-commerce para un negocio de repuestos de refrigeración: catálogo público, dashboard admin con inventario y pedidos que llegan como notificación de WhatsApp.",
         role: "Full Stack / Frontend",
+        context: "Freelance",
         content: [
-          { type: "text", title: "Resumen", text: "Solución e-commerce completa para un negocio minorista de repuestos de refrigeración y línea blanca. Incluye tienda pública con búsqueda, filtros y carrito, más un dashboard de administración privado para gestión de inventario y pedidos." },
-          { type: "grid", items: [ { src: "/vas-ecommerce/Screenshot 2022-10-03 at 18-46-04 Admin Page.png", caption: "Panel de administración" }, { src: "/vas-ecommerce/Screenshot 2022-10-03 at 18-49-06 Ventas a Services - Respuestos de refrigeracion y linea blanca.png", caption: "Catálogo de productos" } ] },
-          { type: "text", title: "Destacados Técnicos", text: "• Server-side rendering con Next.js para páginas de productos optimizadas para SEO y cargas iniciales rápidas.\n• Interfaz CRUD de administración con acceso basado en roles, subida de imágenes a AWS S3 y seguimiento de inventario en tiempo real.\n• Carrito de compras sin pasarela de pago (a pedido del cliente) — los pedidos disparan notificaciones de WhatsApp para procesamiento manual.\n• Autenticación basada en JWT con hashing de contraseñas bcrypt y MongoDB para almacenamiento flexible de documentos." },
-          { type: "text", title: "Impacto", text: "Entregué una plataforma lista para producción que digitalizó el catálogo del cliente y optimizó su flujo de pedidos — demostrando desarrollo de producto de punta a punta desde requisitos hasta despliegue." }
+          { type: "text", title: "Resumen", text: "Un e-commerce completo para un negocio minorista de repuestos de refrigeración y línea blanca: tienda pública con búsqueda, filtros y carrito, más un dashboard privado para inventario y pedidos." },
+          { type: "grid", items: [ { src: "/vas-ecommerce/admin.webp", caption: "Panel de administración" }, { src: "/vas-ecommerce/home-2.webp", caption: "Catálogo de productos" } ] },
+          { type: "text", title: "Destacados técnicos", text: "• Server side rendering con Next.js para páginas de producto indexables y primeras cargas rápidas.\n• CRUD de administración con acceso por roles, subida de imágenes a AWS S3 y seguimiento de inventario.\n• Carrito sin pasarela de pago, a pedido del cliente: el pedido dispara una notificación de WhatsApp para procesarlo a mano.\n• Autenticación JWT con hashing bcrypt y MongoDB para los documentos del catálogo." },
+          { type: "text", title: "Resultado", text: "El catálogo del cliente pasó del papel a un sitio que sus clientes pueden recorrer, y los pedidos ahora llegan a un solo lugar en vez de desperdigados en mensajes." }
         ]
       }
     }
-  },
-
-
-  // {
-  //   slug: "yt-notes",
-  //   year: "2022",
-  //   client: "Personal",
-  //   stack: ["JavaScript", "Chrome Extensions API", "HTML", "CSS"],
-  //   links: { repo: "" },
-  //   hero: { type: "image", src: "/YT-Notes/ytnoteslogo.png" },
-  //   locales: {
-  //     en: {
-  //       title: "YT-Notes",
-  //       description: "Chrome extension that lets you create timestamped annotations on any YouTube video — jump to any note instantly while watching. Built in a pre-AI era when extension development documentation was scarce.",
-  //       role: "Solo Developer",
-  //       content: [
-  //         { type: "text", title: "Overview", text: "A browser extension designed to enhance the YouTube learning experience. Users can add notes at specific timestamps, and click any note to jump directly to that moment in the video — turning passive watching into active note-taking." },
-  //         { type: "grid", items: [ { src: "/YT-Notes/ytnotes1.jpg", caption: "Extension panel with timestamped notes" }, { src: "/YT-Notes/ytnotes2.jpg", caption: "Note creation interface" } ] },
-  //         { type: "text", title: "Technical Highlights", text: "• Built using the Chrome Extensions Manifest V2 API — content scripts inject a sidebar panel directly into YouTube's DOM.\n• Leveraged Chrome's Storage API for persistent note storage across sessions.\n• Custom timestamp parsing and video seek integration using YouTube's player API.\n• Published to the Chrome Web Store — navigated the complex review and approval process independently." },
-  //         { type: "text", title: "Context & Challenges", text: "Developed in 2020, when Chrome extension documentation was extremely limited and there was zero AI assistance available. Figuring out content script injection, message passing between background/content/popup scripts, and the Chrome Web Store publishing pipeline was entirely self-taught through trial and error. The extension is currently outdated due to Manifest V3 migration changes, but remains a testament to problem-solving with minimal resources." }
-  //       ]
-  //     },
-  //     es: {
-  //       title: "YT-Notes",
-  //       description: "Extensión de Chrome que permite crear anotaciones con marca de tiempo en cualquier video de YouTube — saltá a cualquier nota al instante mientras mirás. Construida en una era pre-IA cuando la documentación de extensiones era escasa.",
-  //       role: "Desarrollador Solo",
-  //       content: [
-  //         { type: "text", title: "Resumen", text: "Una extensión de navegador diseñada para mejorar la experiencia de aprendizaje en YouTube. Los usuarios pueden agregar notas en timestamps específicos y hacer clic en cualquier nota para saltar directamente a ese momento del video — transformando la visualización pasiva en toma de notas activa." },
-  //         { type: "grid", items: [ { src: "/YT-Notes/ytnotes1.jpg", caption: "Panel de extensión con notas timestamped" }, { src: "/YT-Notes/ytnotes2.jpg", caption: "Interfaz de creación de notas" } ] },
-  //         { type: "text", title: "Destacados Técnicos", text: "• Construida usando la API de Chrome Extensions Manifest V2 — los content scripts inyectan un panel lateral directamente en el DOM de YouTube.\n• Uso de la Storage API de Chrome para almacenamiento persistente de notas entre sesiones.\n• Parsing de timestamps personalizado e integración con la API del reproductor de YouTube para seek.\n• Publicada en el Chrome Web Store — navegué el complejo proceso de revisión y aprobación de forma independiente." },
-  //         { type: "text", title: "Contexto y Desafíos", text: "Desarrollada en 2020, cuando la documentación de extensiones de Chrome era extremadamente limitada y no había cero asistencia de IA disponible. Entender la inyección de content scripts, el message passing entre scripts background/content/popup, y el pipeline de publicación del Chrome Web Store fue completamente autodidacta por prueba y error. La extensión está actualmente desactualizada por los cambios de migración a Manifest V3, pero es un testimonio de resolución de problemas con recursos mínimos." }
-  //       ]
-  //     }
-  //   }
-  // }
+  }
 ]

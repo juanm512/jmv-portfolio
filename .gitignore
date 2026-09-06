@@ -57,3 +57,6 @@ next-env.d.ts
 .unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/7.jpeg
 .unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/8.jpeg
 .unlighthouse/localhost/473e/reports/es/__screenshot-thumbnails__/9.jpeg
+
+# impeccable live session
+.impeccable/live/

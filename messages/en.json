@@ -1,41 +1,50 @@
 {
   "Home": {
     "hero": {
-      "title": "Full Stack Developer — Every problem has a solution.",
-      "title_alt": "Full Stack Developer — I think in problems, I build solutions.",
+      "title": "Full stack developer. Mobile apps in production, multi-tenant SaaS and 3D in the browser.",
+      "title_alt": "Full stack developer. I think in problems, I build solutions.",
       "subtitle": "Juan Manuel Vila"
     },
     "childhood": {
-      "title": "I always wanted to know how things work.",
+      "title": "From Chivilcoy to university",
       "subtitle": "The origin",
       "text_1": "I grew up in Chivilcoy, Argentina, always getting into my dad's work — repairs, air conditioning installations, whatever he was doing. From an early age I was drawn to understanding how things worked and how to handle them with my hands. That curiosity never left.",
       "text_2": "I started electronic engineering, and in my third year I had my first programming class in C. Something clicked. I realized that programming had everything I loved about engineering — solving real problems — but with a huge advantage: you can test, fail, and fix in real time.",
       "text_3": "That led me to change my major and enroll in a University Programmer Analyst program — seeking a more formal foundation for everything I was already learning on my own. That training gave me a broader perspective on how to design effective solutions, not just code that works."
     },
     "abstract": {
-      "title": "Practice teaches what theory cannot.",
+      "title": "What I'm doing now",
       "subtitle": "Background & today",
       "text_1": "Since I started programming I've been learning through personal projects, mistakes, and an obsession with understanding things deeply. University gave me the structural foundation, but the hands-on experience I built myself — and with my degree now completed, I feel ready to tackle diverse problems that a title alone doesn't prepare you for.",
       "text_2": "Lately I've been exploring how to automate Gaussian Splatting generation. Alongside that, I'm shipping a production app for technicians, workshops and service professionals — my first time publishing on the Play Store, targeting a sector with real and growing demand. Along the way I've built up experience across the full JavaScript/TypeScript ecosystem — React, Next.js, React Native with Expo — alongside Python, Django, Flask, Rust, PostgreSQL and tools like Power BI.",
       "text_3": "I firmly believe a good developer never stops learning. Technology evolves constantly, and keeping up isn't just a professional necessity — it's what makes this work genuinely exciting."
     },
     "contributions": {
-      "title": "Consistency over immediacy.",
+      "title": "Commit history",
       "subtitle": "Code history",
       "text_1": "Coding every day is a habit I built over time — not out of obligation, but because there's always something to learn, improve, or explore. This graph reflects that.",
-      "text_2": "Throughout my career, I built approximately five complex projects working in teams using agile methodologies (Scrum), Python, Rust, Node.js, NestJS, Next.js, Django, and Flask. These periods took a backseat to my personal projects, but they helped me understand how teams work and the different methodologies for solving various problems."
+      "text_2": "Throughout my career, I built approximately five complex projects working in teams using agile methodologies (Scrum), Python, Rust, Node.js, NestJS, Next.js, Django, and Flask. These periods took a backseat to my personal projects, but they helped me understand how teams work and the different methodologies for solving various problems.",
+      "legend": "GitHub contributions per week, {from}–{to}"
     },
     "projects": {
       "title": "Projects",
       "subtitle": "A selection of works that represent my evolution as a developer",
-      "viewProject": "View project"
+      "viewProject": "View project",
+      "other": "Other projects"
+    },
+    "cta": {
+      "about": "Who I am"
+    },
+    "footer": {
+      "text": "© {year} Juan Manuel Vila"
     },
     "contact": {
       "title": "Let's talk",
       "subtitle": "You can reach me through:",
       "email": "Email",
       "github": "GitHub",
-      "linkedin": "LinkedIn"
+      "linkedin": "LinkedIn",
+      "cv": "CV"
     }
   },
   "Navigation": {
@@ -52,29 +61,96 @@
     "results": "Results",
     "viewLive": "View live",
     "viewCode": "View code",
-    "backToHome": "Back to Home",
+    "backToHome": "Back to home",
     "role": "Role",
-    "client": "Client",
     "year": "Year",
     "links": "Links",
-    "live": "Live",
-    "repo": "Repo",
-    "nextProject": "Next Project",
-    "viewAllProjects": "View All Projects",
-    "projectNotFound": "Project Not Found"
+    "nextProject": "Next project",
+    "viewAllProjects": "View all projects",
+    "projectNotFound": "Project Not Found",
+    "context": "Context",
+    "web": "Web",
+    "app": "App",
+    "playStore": "Play Store",
+    "code": "Code",
+    "prevProject": "Previous project",
+    "openImage": "Open image",
+    "openVideo": "Open video",
+    "closeLightbox": "Close enlarged view",
+    "lightbox": "Enlarged view",
+    "projectImage": "Project image"
   },
   "Meta": {
     "title": "Juan Manuel Vila - FullStack Developer",
-    "description": "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems."
+    "description": "Portfolio of Juan Manuel Vila - FullStack Developer specialized in building systems that solve real problems.",
+    "ogAlt": "Juan Manuel Vila, full stack developer"
   },
-  "Header": {
+  "Menu": {
+    "button": "Menu",
+    "buttonHint": "Esc",
     "close": "Close",
-    "menu": "Menu",
-    "home": "Home",
-    "about_me": "About me",
-    "my_work": "My work",
-    "contact": "Contact",
-    "made_by": "Made by:",
-    "typography": "Typography:"
+    "legend": {
+      "move": "move",
+      "enter": "enter",
+      "back": "back",
+      "open": "open",
+      "close": "close",
+      "help": "help"
+    },
+    "sections": {
+      "pages": "Pages",
+      "projects": "Projects",
+      "links": "Links",
+      "language": "Language"
+    },
+    "items": {
+      "home": "Home",
+      "about": "About me",
+      "contact": "Contact",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "email": "Email",
+      "cv": "CV",
+      "spanish": "Español",
+      "english": "English"
+    },
+    "current": "current",
+    "projectGroups": {
+      "featured": "Featured",
+      "other": "Other"
+    },
+    "switchLanguage": "Switch to {locale}",
+    "heading": "Navigation menu"
+  },
+  "About": {
+    "title": "About",
+    "back": "Back to home"
+  },
+  "Shortcuts": {
+    "title": "Keyboard shortcuts",
+    "moveDown": "Next project",
+    "moveUp": "Previous project",
+    "open": "Open project",
+    "prevNext": "Previous / next project",
+    "language": "Switch language",
+    "back": "Open / close menu",
+    "backHome": "Back to home",
+    "menuNav": "Navigate inside the menu",
+    "help": "Show this help"
+  },
+  "NotFound": {
+    "code": "404",
+    "title": "Page not found",
+    "text": "The address you opened does not exist or has moved.",
+    "back": "Back to home"
+  },
+  "Error": {
+    "label": "Error",
+    "title": "Something went wrong",
+    "retry": "Try again"
+  },
+  "Locales": {
+    "es": "Spanish",
+    "en": "English"
   }
 }
