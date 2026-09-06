@@ -1,8 +1,7 @@
-import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 import Arrow from "@/components/ui/Arrow"
 
-// Shared shell for both row kinds: leading year column (tabular figures,
+// Shell for the secondary rows (FeaturedProjectRow has its own grid): leading year column (tabular figures,
 // baseline-aligned with the title), a hairline below that brightens on hover,
 // title takes the project accent, arrow slides in from the right.
 export const rowBase =
@@ -21,47 +20,6 @@ function RowArrow() {
     <span className="text-ink-3 group-hover:text-[var(--accent)] transition-[color,transform] duration-200 ease-out-expo translate-x-0 group-hover:translate-x-0.5 motion-reduce:transform-none">
       <Arrow />
     </span>
-  )
-}
-
-// `ref` and the extra handlers are used by FeaturedProjectList to drive the
-// hover popover. `line` lets the wrapper own the hairline instead of the link
-// (mobile: the inline popover sits between the row and its hairline).
-export function FeaturedProjectRow({ project, line = true, ref, ...rest }) {
-  const t = useTranslations("Project")
-  return (
-    <Link
-      ref={ref}
-      href={`/projects/${project.slug}`}
-      id={`project-${project.slug}`}
-      data-project-row
-      data-slug={project.slug}
-      style={{ "--accent": project.accentColor || "#00FF9C" }}
-      className={`${rowBase} ${line ? rowLine : ""} py-6`}
-      {...rest}
-    >
-      <Year year={project.year} />
-      <div className="min-w-0">
-        <h2 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] group-hover:text-[var(--accent)] transition-colors duration-200">
-          {project.title}
-          {project.tagline && (
-            <span className="block sm:inline sm:ml-3 text-base md:text-lg font-normal text-ink-2 sm:before:content-['·'] sm:before:mr-3 sm:before:text-ink-3">
-              {project.tagline}
-            </span>
-          )}
-        </h2>
-        <p className="mt-2 text-ink-2 text-sm md:text-base max-w-[60ch] leading-[1.6]">
-          {project.description}
-        </p>
-        {project.stack?.length > 0 && (
-          <p className="hidden sm:block mt-3 font-mono text-xs text-ink-3 truncate">
-            <span className="sr-only">{t("stack")}: </span>
-            {project.stack.join(" · ")}
-          </p>
-        )}
-      </div>
-      <RowArrow />
-    </Link>
   )
 }
 
