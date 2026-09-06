@@ -2,7 +2,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import { OG_LOCALE, localizedPath, pageAlternates } from "@/lib/metadata"
 import { getProjectsByTier } from "@/lib/projects"
-import { SecondaryProjectRow } from "@/components/home/ProjectList"
+import SecondaryProjectList from "@/components/home/SecondaryProjectList"
 import FeaturedProjectList from "@/components/home/FeaturedProjectList"
 import Arrow from "@/components/ui/Arrow"
 import { ContactLinks } from "@/components/home/ContactBlock"
@@ -47,11 +47,7 @@ export default async function HomePage({ params }) {
 
       <section className="mt-20">
         <h2 className="text-sm text-ink-2 mb-2">{t("projects.other")}</h2>
-        <div className="border-t border-line">
-          {secondary.map((project) => (
-            <SecondaryProjectRow key={project.slug} project={project} />
-          ))}
-        </div>
+        <SecondaryProjectList projects={secondary} />
       </section>
 
       <footer className="mt-auto pt-28 pb-10">
