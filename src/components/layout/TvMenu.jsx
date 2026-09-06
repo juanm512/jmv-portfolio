@@ -13,7 +13,7 @@ import { useFocusTrap } from "@/lib/useFocusTrap"
 const SECTION_IDS = ["pages", "projects", "links", "language"]
 const EASE_OUT_EXPO = [0.16, 1, 0.3, 1]
 const FOCUS_RING =
-  "outline-none focus-visible:ring-2 focus-visible:ring-green-glow focus-visible:ring-offset-2 focus-visible:ring-offset-background-darker"
+  "outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-green-glow"
 
 // Sections + items shared by the desktop TV model and the mobile flat list.
 function useMenuSections(projects, t, locale) {
@@ -470,7 +470,7 @@ function TvMenuDesktop({ sections, activateItem, initialSection, reduceMotion, t
               animate={{ opacity: level === "sections" ? 0.55 : 1 }}
               exit={{ opacity: 0 }}
               transition={fade(0.12)}
-              className="flex flex-col self-center overflow-y-auto max-h-[70vh] -mx-3 px-3"
+              className="flex flex-col self-center overflow-y-auto max-h-[70vh] -mx-3 px-3 py-1"
               onMouseEnter={cancelHover}
             >
               {activeSection?.items.map((item) => {
