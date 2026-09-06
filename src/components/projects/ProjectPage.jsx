@@ -7,7 +7,6 @@ import { motion, useInView, useReducedMotion, AnimatePresence } from "motion/rea
 import Kbd from "@/components/ui/Kbd"
 import Arrow from "@/components/ui/Arrow"
 import { useTranslations, useLocale } from "next-intl"
-import { Balancer } from "react-wrap-balancer"
 import { useFocusTrap } from "@/lib/useFocusTrap"
 
 const focusRing =
@@ -115,8 +114,8 @@ function TextBlock({ block }) {
   return (
     <div className="py-12 md:py-20 max-w-4xl mx-auto px-6">
       {block.title && (
-        <h2 className="text-2xl md:text-3xl font-semibold text-ink leading-[1.25] mb-5">
-          <Balancer>{block.title}</Balancer>
+        <h2 className="text-2xl md:text-3xl font-semibold text-ink leading-[1.25] mb-5 text-balance">
+          {block.title}
         </h2>
       )}
       <div className="flex flex-col gap-5">
@@ -246,7 +245,7 @@ function CodeBlock({ block }) {
   return (
     <div className="py-12 md:py-16 max-w-5xl mx-auto px-6">
       {block.title && (
-        <h3 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] mb-5">
+        <h3 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] mb-5 text-balance">
           {block.title}
         </h3>
       )}
@@ -263,7 +262,7 @@ function VideoBlock({ block, onMediaClick, t }) {
   return (
     <figure className="py-12 px-6 max-w-7xl mx-auto">
       {block.title && (
-        <h3 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] mb-5">
+        <h3 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] mb-5 text-balance">
           {block.title}
         </h3>
       )}
