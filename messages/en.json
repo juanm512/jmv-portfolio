@@ -88,6 +88,7 @@
   "Menu": {
     "button": "Menu",
     "buttonHint": "Esc",
+    "close": "Close",
     "legend": {
       "move": "move",
       "enter": "enter",
@@ -114,7 +115,6 @@
       "english": "English"
     },
     "current": "current",
-    "touchHint": "Tap a section, then an item",
     "projectGroups": {
       "featured": "Featured",
       "other": "Other"
