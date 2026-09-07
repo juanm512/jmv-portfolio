@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/navigation"
 import Arrow from "@/components/ui/Arrow"
 
@@ -67,10 +66,10 @@ export default function FeaturedProjectRow({
   trackPx = 220,
   durationMs = 420,
   restLines = 2,
+  stackLabel = "Stack",
   ref,
   ...rest
 }) {
-  const t = useTranslations("Project")
   const inner = useRef(null)
   const setRefs = (el) => {
     inner.current = el
@@ -133,7 +132,7 @@ export default function FeaturedProjectRow({
         </p>
         {project.stack?.length > 0 && (
           <p className="hidden sm:block mt-3 font-mono text-xs text-ink-3 truncate">
-            <span className="sr-only">{t("stack")}: </span>
+            <span className="sr-only">{stackLabel}: </span>
             {project.stack.join(" · ")}
           </p>
         )}

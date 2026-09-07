@@ -2,18 +2,20 @@ import "@/styles/globals.css"
 import localFont from "next/font/local"
 import { GeistSans } from "geist/font/sans"
 import { hasLocale, NextIntlClientProvider } from "next-intl"
-import { setRequestLocale, getTranslations } from "next-intl/server"
+import { setRequestLocale, getTranslations, getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
 import { routing } from "@/i18n/routing"
 import { SITE_URL, OG_LOCALE, localizedPath, pageAlternates } from "@/lib/metadata"
 
 import Navbar from "@/components/layout/Navbar"
 import Shortcuts from "@/components/layout/Shortcuts"
-import TvMenu from "@/components/layout/TvMenu"
+import TvMenuLoader from "@/components/layout/TvMenuLoader"
 import { getAllProjects } from "@/lib/projects"
+import { pickMessages } from "@/lib/pickMessages"
 
+// Latin subset, wght axis limited to 400-600 (see styles/Kode_Mono/README-subset.txt).
 const kodeMono = localFont({
-  src: "../../../styles/Kode_Mono/KodeMono-VariableFont_wght.ttf",
+  src: "../../../styles/Kode_Mono/KodeMono-latin-400-600.woff2",
   display: "swap",
   variable: "--font-kode-mono"
 })
@@ -84,6 +86,10 @@ export default async function LocaleLayout({ children, params }) {
   if (!hasLocale(routing.locales, locale)) notFound()
   setRequestLocale(locale)
 
+  // Only the namespaces client components render (menu, help, error page);
+  // everything else stays server-side via getTranslations.
+  const messages = pickMessages(await getMessages())
+
   const projects = getAllProjects(locale).map((p) => ({
     slug: p.slug,
     title: p.title,
@@ -99,10 +105,10 @@ export default async function LocaleLayout({ children, params }) {
       className={`${GeistSans.variable} ${kodeMono.variable}`}
     >
       <body className="relative font-sans w-full min-h-screen p-0 m-0 overflow-x-hidden bg-background-dark text-ink">
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
           <Navbar />
           <Shortcuts />
-          <TvMenu projects={projects} />
+          <TvMenuLoader projects={projects} />
           {children}
         </NextIntlClientProvider>
       </body>

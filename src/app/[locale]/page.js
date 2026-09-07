@@ -22,6 +22,7 @@ export default async function HomePage({ params }) {
   const { locale } = await params
   setRequestLocale(locale)
   const t = await getTranslations("Home")
+  const tProject = await getTranslations("Project")
 
   const featured = getProjectsByTier("featured", locale)
   const secondary = getProjectsByTier("secondary", locale)
@@ -43,7 +44,7 @@ export default async function HomePage({ params }) {
         </Link>
       </section>
 
-      <FeaturedProjectList projects={featured} label={t("projects.title")} />
+      <FeaturedProjectList projects={featured} label={t("projects.title")} stackLabel={tProject("stack")} />
 
       <section className="mt-20">
         <h2 className="text-sm text-ink-2 mb-2">{t("projects.other")}</h2>

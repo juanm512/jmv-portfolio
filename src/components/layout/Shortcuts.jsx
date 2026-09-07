@@ -1,13 +1,13 @@
 "use client"
 
-import { useCallback, useEffect, useRef, useState } from "react"
-import { motion, AnimatePresence, useReducedMotion } from "motion/react"
-import Kbd from "@/components/ui/Kbd"
-import { useTranslations } from "next-intl"
+import { useCallback, useEffect, useState } from "react"
+import dynamic from "next/dynamic"
 import { useRouter, usePathname } from "@/i18n/navigation"
 import { useLanguageToggle } from "@/lib/useLanguageToggle"
 import { toggleTvMenu } from "@/lib/tvMenuStore"
-import { useFocusTrap } from "@/lib/useFocusTrap"
+
+// The help dialog only ships once "?" is pressed for the first time.
+const HelpDialog = dynamic(() => import("@/components/layout/HelpDialog"), { ssr: false })
 
 function isTypingTarget(el) {
   if (!el) return false
@@ -19,17 +19,19 @@ function getProjectRows() {
   return Array.from(document.querySelectorAll("[data-project-row]"))
 }
 
+// Hooks only: global key handling. Rendering is delegated to HelpDialog.
 export default function Shortcuts() {
-  const t = useTranslations("Shortcuts")
   const router = useRouter()
   const pathname = usePathname()
   const { toggleLanguage } = useLanguageToggle()
   const [helpOpen, setHelpOpen] = useState(false)
-  const dialogRef = useRef(null)
-  const reduceMotion = useReducedMotion()
-
-  // Page behind goes inert, Tab stays inside, focus returns to the opener.
-  useFocusTrap(dialogRef, helpOpen)
+  // Once loaded, the dialog stays mounted (it handles its own fade-out).
+  const [helpLoaded, setHelpLoaded] = useState(false)
+  const openHelp = useCallback(() => {
+    setHelpLoaded(true)
+    setHelpOpen(true)
+  }, [])
+  const closeHelp = useCallback(() => setHelpOpen(false), [])
 
   const isHome = pathname === "/"
 
@@ -87,7 +89,7 @@ export default function Shortcuts() {
 
       if (event.key === "?") {
         event.preventDefault()
-        setHelpOpen(true)
+        openHelp()
         return
       }
 
@@ -126,77 +128,14 @@ export default function Shortcuts() {
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [helpOpen, isHome, moveFocus, router, toggleLanguage])
+  }, [helpOpen, isHome, moveFocus, openHelp, router, toggleLanguage])
 
   // The TV menu forwards "?" here after closing itself.
   useEffect(() => {
-    const openHelp = () => setHelpOpen(true)
     window.addEventListener("shortcuts:help", openHelp)
     return () => window.removeEventListener("shortcuts:help", openHelp)
-  }, [])
+  }, [openHelp])
 
-  useEffect(() => {
-    if (!helpOpen) return
-    function handleClickOutside(event) {
-      if (dialogRef.current && !dialogRef.current.contains(event.target)) {
-        setHelpOpen(false)
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [helpOpen])
-
-  // keys: alternatives for the same action are rendered as separate keycaps.
-  const shortcuts = [
-    { keys: ["J", "↓"], label: t("moveDown") },
-    { keys: ["K", "↑"], label: t("moveUp") },
-    { keys: ["Enter"], label: t("open") },
-    { keys: ["←", "→"], label: t("prevNext") },
-    { keys: ["L"], label: t("language") },
-    { keys: ["Esc"], label: t("back") },
-    { keys: ["Backspace"], label: t("backHome") },
-    { keys: ["W", "A", "S", "D"], label: t("menuNav") },
-    { keys: ["?"], label: t("help") }
-  ]
-
-  return (
-    <AnimatePresence>
-      {helpOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: reduceMotion ? 0 : 0.15 }}
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-background-darker/80 p-6"
-        >
-          <motion.div
-            ref={dialogRef}
-            tabIndex={-1}
-            aria-labelledby="shortcuts-title"
-            initial={reduceMotion ? false : { opacity: 0, y: 6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            role="dialog"
-            aria-modal="true"
-            className="w-full max-w-sm bg-background-dark border border-line-strong rounded-md p-6 outline-none"
-          >
-            <h2 id="shortcuts-title" className="font-kode text-sm text-ink mb-5">{t("title")}</h2>
-            <ul className="flex flex-col gap-3">
-              {shortcuts.map((s) => (
-                <li key={s.label} className="flex items-center justify-between gap-4 text-sm">
-                  <span className="text-ink-2">{s.label}</span>
-                  <span className="flex items-center gap-1 shrink-0">
-                    {s.keys.map((k) => (
-                      <Kbd key={k}>{k}</Kbd>
-                    ))}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  )
+  if (!helpLoaded) return null
+  return <HelpDialog open={helpOpen} onClose={closeHelp} />
 }

@@ -88,3 +88,66 @@ p {
     animation-iteration-count: 1 !important;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Motion done in CSS (no JS animation library on the first load).
+   --------------------------------------------------------------------------- */
+
+/* Help dialog: fade + 6px lift on open, fade on close (HelpDialog.jsx). */
+[data-help-scrim] {
+  opacity: 1;
+  transition: opacity 150ms;
+  @starting-style {
+    opacity: 0;
+  }
+}
+[data-help-panel] {
+  transform: translateY(0);
+  transition: transform 200ms var(--ease-out-expo);
+  @starting-style {
+    transform: translateY(6px);
+  }
+}
+[data-help-scrim][data-state="closing"] {
+  opacity: 0;
+}
+
+/* Project page: the title block fades up on load, each narrative block
+   fades up the first time it scrolls into view (Reveal.jsx sets data-in). */
+[data-reveal="load"] {
+  animation: reveal-up 600ms var(--ease-out-expo) both;
+}
+[data-reveal="view"] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 500ms var(--ease-out-expo), transform 500ms var(--ease-out-expo);
+}
+[data-reveal="view"][data-in] {
+  opacity: 1;
+  transform: none;
+}
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-help-scrim],
+  [data-help-panel],
+  [data-reveal="view"] {
+    transition: none;
+  }
+  [data-reveal="load"] {
+    animation: none;
+  }
+  [data-reveal="view"] {
+    opacity: 1;
+    transform: none;
+  }
+}

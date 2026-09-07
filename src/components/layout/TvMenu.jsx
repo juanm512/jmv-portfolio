@@ -1,7 +1,7 @@
 "use client"
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { motion, AnimatePresence, useReducedMotion } from "motion/react"
+import { LazyMotion, domAnimation, m, AnimatePresence, useReducedMotion } from "motion/react"
 import Kbd from "@/components/ui/Kbd"
 import { useLocale, useTranslations } from "next-intl"
 import { useRouter, usePathname } from "@/i18n/navigation"
@@ -65,7 +65,9 @@ function useMenuSections(projects, t, locale) {
   }, [t, projects, locale])
 }
 
-export default function TvMenu({ projects = [] }) {
+// `initialOpen` / `initialOpener`: TvMenuLoader mounts this lazily on the
+// first open request, so the request that triggered the load is replayed here.
+export default function TvMenu({ projects = [], initialOpen = false, initialOpener = null }) {
   const t = useTranslations("Menu")
   const locale = useLocale()
   const router = useRouter()
@@ -96,7 +98,12 @@ export default function TvMenu({ projects = [] }) {
   )
   const handleClose = useCallback(() => setOpen(false), [])
 
+  const replayedRef = useRef(false)
   useEffect(() => {
+    if (initialOpen && !replayedRef.current) {
+      replayedRef.current = true
+      handleOpen(initialOpener)
+    }
     return subscribeTvMenu({
       onOpen: handleOpen,
       onClose: handleClose,
@@ -108,7 +115,7 @@ export default function TvMenu({ projects = [] }) {
         })
       }
     })
-  }, [handleOpen, handleClose])
+  }, [handleOpen, handleClose, initialOpen, initialOpener])
 
   // Lock body scroll + expose data-menu-open for Shortcuts.jsx to check.
   useEffect(() => {
@@ -153,9 +160,10 @@ export default function TvMenu({ projects = [] }) {
   const isMobile = mode === "mobile"
 
   return (
+    <LazyMotion features={domAnimation} strict>
     <AnimatePresence>
       {open && (
-        <motion.div
+        <m.div
           ref={dialogRef}
           role="dialog"
           aria-modal="true"
@@ -205,9 +213,10 @@ export default function TvMenu({ projects = [] }) {
               t={t}
             />
           )}
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
+    </LazyMotion>
   )
 }
 
@@ -427,7 +436,7 @@ function TvMenuDesktop({ sections, activateItem, initialSection, reduceMotion, t
             {sections.map((section, sIndex) => {
               const isHighlighted = sIndex === sectionIndex
               return (
-                <motion.li
+                <m.li
                   key={section.id}
                   initial={reduceMotion ? false : { opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -458,13 +467,13 @@ function TvMenuDesktop({ sections, activateItem, initialSection, reduceMotion, t
                     />
                     {section.label}
                   </button>
-                </motion.li>
+                </m.li>
               )
             })}
           </ul>
 
           <AnimatePresence mode="wait" initial={false}>
-            <motion.ul
+            <m.ul
               key={activeSection?.id}
               initial={{ opacity: 0 }}
               animate={{ opacity: level === "sections" ? 0.55 : 1 }}
@@ -543,7 +552,7 @@ function TvMenuDesktop({ sections, activateItem, initialSection, reduceMotion, t
                   </li>
                 )
               })}
-            </motion.ul>
+            </m.ul>
           </AnimatePresence>
         </div>
       </div>

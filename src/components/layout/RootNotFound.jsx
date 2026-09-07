@@ -4,18 +4,14 @@ import { useEffect } from "react"
 import { usePathname } from "next/navigation"
 import Arrow from "@/components/ui/Arrow"
 import { routing } from "@/i18n/routing"
-import es from "../../../messages/es.json"
-import en from "../../../messages/en.json"
-
-const MESSAGES = { es, en }
-
 // Outside the locale layout there is no next-intl provider, so the locale is
-// read from the URL and the strings come straight from the message files.
-export default function RootNotFound() {
+// read from the URL and the strings (NotFound namespace per locale) arrive
+// as props from the server page.
+export default function RootNotFound({ messages }) {
   const pathname = usePathname() || "/"
   const first = pathname.split("/")[1]
   const locale = routing.locales.includes(first) ? first : routing.defaultLocale
-  const t = MESSAGES[locale].NotFound
+  const t = messages[locale]
 
   useEffect(() => {
     document.documentElement.lang = locale

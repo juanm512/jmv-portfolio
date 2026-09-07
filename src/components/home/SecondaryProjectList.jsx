@@ -2,13 +2,14 @@
 
 import { useRef, useState } from "react"
 import Image from "next/image"
-import { motion, useMotionValue, useSpring } from "motion/react"
 import { SecondaryProjectRow } from "@/components/home/ProjectList"
 import { coverSrc } from "@/components/home/FeaturedProjectRow"
 import { usePopoverMode, useReducedMotionMQ } from "@/lib/useFinePointer"
+import { useSpringXY } from "@/lib/useSpringXY"
 
 const WIDTH = 220
 const OFFSET = { x: 24, y: 18 }
+const EASE = "cubic-bezier(0.16, 1, 0.3, 1)"
 
 // Secondary rows: on a fine pointer the cover floats and follows the cursor
 // with a spring; on coarse pointers there is no cover at all (one-line rows,
@@ -18,20 +19,22 @@ export default function SecondaryProjectList({ projects }) {
   const reduced = useReducedMotionMQ()
   const [hovered, setHovered] = useState(null)
   const listRef = useRef(null)
+  const coverRef = useRef(null)
 
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const spring = reduced ? { stiffness: 1000, damping: 100 } : { stiffness: 260, damping: 28, mass: 0.6 }
-  const sx = useSpring(x, spring)
-  const sy = useSpring(y, spring)
+  // Reduced motion: an almost critically-damped, very stiff spring (snaps).
+  const spring = useSpringXY(
+    coverRef,
+    reduced ? { stiffness: 1000, damping: 100, mass: 1 } : { stiffness: 260, damping: 28, mass: 0.6 }
+  )
 
-  const move = (e) => {
+  const target = (e) => {
     const h = (WIDTH * 10) / 16
-    const px = Math.min(e.clientX + OFFSET.x, window.innerWidth - WIDTH - 8)
-    const py = Math.min(e.clientY + OFFSET.y, window.innerHeight - h - 8)
-    x.set(px)
-    y.set(py)
+    return [
+      Math.min(e.clientX + OFFSET.x, window.innerWidth - WIDTH - 8),
+      Math.min(e.clientY + OFFSET.y, window.innerHeight - h - 8)
+    ]
   }
+  const move = (e) => spring.set(...target(e))
 
   const project = hovered && mode === "desktop" ? projects.find((p) => p.slug === hovered) : null
   const src = project ? coverSrc(project) : null
@@ -49,25 +52,29 @@ export default function SecondaryProjectList({ projects }) {
           key={p.slug}
           onPointerEnter={(e) => {
             if (mode !== "desktop") return
-            move(e)
-            sx.jump(x.get())
-            sy.jump(y.get())
+            // Entering a row lands the cover in place; movement inside is sprung.
+            spring.jump(...target(e))
             setHovered(p.slug)
           }}
         >
           <SecondaryProjectRow project={p} />
         </div>
       ))}
-      <motion.div
+      {/* Position comes from the spring (transform); opacity/scale from CSS. */}
+      <div
+        ref={coverRef}
         aria-hidden="true"
-        initial={false}
-        animate={{ opacity: active ? 1 : 0, scale: active ? 1 : 0.96 }}
-        transition={{ duration: reduced ? 0 : 0.18, ease: [0.16, 1, 0.3, 1] }}
-        style={{ x: sx, y: sy, width: WIDTH, "--accent": project?.accentColor || "#00FF9C" }}
+        style={{
+          width: WIDTH,
+          "--accent": project?.accentColor || "#00FF9C",
+          opacity: active ? 1 : 0,
+          scale: active ? "1" : "0.96",
+          transition: `opacity ${reduced ? 0 : 180}ms ${EASE}, scale ${reduced ? 0 : 180}ms ${EASE}`
+        }}
         className="pointer-events-none fixed left-0 top-0 z-40 aspect-[16/10] overflow-hidden border border-line-strong bg-ink/5 shadow-[0_0_40px_-12px_var(--accent)]"
       >
         {src && <Image src={src} alt="" fill sizes={`${WIDTH}px`} className="object-cover" />}
-      </motion.div>
+      </div>
     </div>
   )
 }
