@@ -1,6 +1,6 @@
 import { routing } from "@/i18n/routing"
 
-export const SITE_URL = "https://jmvila.com"
+export const SITE_URL = "https://juuanmav.vercel.app"
 
 // `path` is locale-less ("/", "/about", "/projects/tuerca").
 export function localizedPath(locale, path = "/") {

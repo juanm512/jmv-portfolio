@@ -9,7 +9,7 @@
 
 ## 🚀 Demo
 
-Visita el portfolio en: [https://jmv-portfolio.vercel.app](https://jmv-portfolio.vercel.app)
+Visita el portfolio en: [https://juuanmav.vercel.app](https://juuanmav.vercel.app)
 
 ## ✨ Características
 
