@@ -1,7 +1,6 @@
 import { setRequestLocale, getTranslations } from "next-intl/server"
 import { Link } from "@/i18n/navigation"
 import { OG_LOCALE, localizedPath, pageAlternates } from "@/lib/metadata"
-import ContributionGraphSVG from "@/components/home/ContributionGraphSVG"
 import Arrow from "@/components/ui/Arrow"
 import ContactBlock from "@/components/home/ContactBlock"
 
@@ -56,19 +55,6 @@ export default async function AboutPage({ params }) {
           </div>
         </section>
 
-        <section className="mb-10">
-          <h2 className="text-2xl md:text-3xl font-semibold text-ink leading-[1.25] text-balance mb-6">
-            {t("contributions.title")}
-          </h2>
-          <div className={prose}>
-            <p>{t("contributions.text_1")}</p>
-            <p>{t("contributions.text_2")}</p>
-          </div>
-        </section>
-      </div>
-
-      <div className="max-w-7xl mx-auto w-full">
-        <ContributionGraphSVG locale={locale} />
       </div>
 
       <div className="max-w-7xl mx-auto w-full">
