@@ -8,16 +8,16 @@
     "childhood": {
       "title": "From Chivilcoy to university",
       "subtitle": "The origin",
-      "text_1": "I grew up in Chivilcoy, Argentina, always getting into my dad's work — repairs, air conditioning installations, whatever he was doing. From an early age I was drawn to understanding how things worked and how to handle them with my hands. That curiosity never left.",
-      "text_2": "I started electronic engineering, and in my third year I had my first programming class in C. Something clicked. I realized that programming had everything I loved about engineering — solving real problems — but with a huge advantage: you can test, fail, and fix in real time.",
-      "text_3": "That led me to change my major and enroll in a University Programmer Analyst program — seeking a more formal foundation for everything I was already learning on my own. That training gave me a broader perspective on how to design effective solutions, not just code that works."
+      "text_1": "I grew up in Chivilcoy, tagging along on my dad's jobs: repairs, air conditioning installs, whatever came up. I handed him tools and watched him open a unit until he found why it would not start. That left me with the habit of not taking anything for granted until I open it and look inside.",
+      "text_2": "I started electronic engineering and got as far as third year, where I took my first programming course, in C. Something shifted there. Programming had what I liked about engineering, solving concrete problems, but with a much shorter loop: you write it, run it, it breaks, you fix it and run it again within the hour.",
+      "text_3": "I switched to a University Programmer Analyst degree to put a formal base under what I was already learning on my own. It helped less because of the language and more because of the rest: designing a solution before writing it, and then being able to explain why it is built that way and not another."
     },
     "abstract": {
       "title": "What I'm doing now",
       "subtitle": "Background & today",
-      "text_1": "Since I started programming I've been learning through personal projects, mistakes, and an obsession with understanding things deeply. University gave me the structural foundation, but the hands-on experience I built myself — and with my degree now completed, I feel ready to tackle diverse problems that a title alone doesn't prepare you for.",
-      "text_2": "Lately I've been exploring how to automate Gaussian Splatting generation. Alongside that, I'm shipping a production app for technicians, workshops and service professionals — my first time publishing on the Play Store, targeting a sector with real and growing demand. Along the way I've built up experience across the full JavaScript/TypeScript ecosystem — React, Next.js, React Native with Expo — alongside Python, Django, Flask, Rust, PostgreSQL and tools like Power BI.",
-      "text_3": "I firmly believe a good developer never stops learning. Technology evolves constantly, and keeping up isn't just a professional necessity — it's what makes this work genuinely exciting."
+      "text_1": "I learned to program through my own projects, mistakes and a need to understand what was happening underneath. During the degree I built around five complex projects in teams, working with Scrum, with backends in Python, Rust and Node.js and frontends in Next.js. With the degree now finished, what stayed useful is not the certificate: it is having worked with other people on code that had to run.",
+      "text_2": "Right now I am automating Gaussian Splatting generation and running an app for technicians, workshops and service professionals, already published on the Play Store. Along the way I put in the miles with JavaScript and TypeScript over React, Next.js and React Native with Expo; on the other side, with Python, Django, Flask, Rust and PostgreSQL, plus Power BI when what is needed is for the data to be readable.",
+      "text_3": "What I am after now is getting into a product that already has users and real problems on it. I work best close to the code that decides things: the business logic, the data, the parts that have to be testable before they ship. If you are building something like that, write to me."
     },
     "projects": {
       "title": "Projects",

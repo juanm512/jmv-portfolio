@@ -8,16 +8,16 @@
     "childhood": {
       "title": "De Chivilcoy a la facultad",
       "subtitle": "El origen",
-      "text_1": "Crecí en Chivilcoy metido en los trabajos de mi viejo — reparaciones, instalaciones de aire acondicionado, lo que fuera. Desde chico me enganchaba ver cómo funcionaban las cosas y cómo se agarraban con las manos. Esa curiosidad nunca se fue.",
-      "text_2": "Arranqué ingeniería electrónica, y en tercer año tuve mi primera materia de programación en C. Algo hizo click. Me di cuenta de que programar tenía todo lo que me gustaba de la ingeniería — resolver problemas reales — pero con una ventaja enorme: podés probar, fallar y corregir en tiempo real.",
-      "text_3": "Eso me llevó a cambiarme de carrera y anotarme para Analista Programador Universitario — buscando una base más formal para todo lo que ya estaba aprendiendo solo. Esa formación me dio una perspectiva más amplia sobre cómo diseñar soluciones efectivas, no solo código que funcione."
+      "text_1": "Crecí en Chivilcoy, atrás de mi viejo en cada laburo: reparaciones, instalaciones de aire acondicionado, lo que apareciera. Le alcanzaba las herramientas y miraba cómo abría un equipo hasta encontrar por qué no arrancaba. De ahí me quedó la costumbre de no dar nada por sentado hasta abrirlo y verlo por dentro.",
+      "text_2": "Arranqué ingeniería electrónica y llegué hasta tercer año, donde cursé la primera materia de programación en C. Ahí se me movió algo. Programar tenía lo mismo que me gustaba de la ingeniería, resolver problemas concretos, pero con un ciclo mucho más corto: escribís, probás, falla, corregís y volvés a probar en el mismo rato.",
+      "text_3": "Me cambié a Analista Programador Universitario para tener una base formal debajo de lo que ya venía aprendiendo solo. Me sirvió menos por el lenguaje que por lo otro: pensar el diseño de una solución antes de escribirla, y después poder explicar por qué está armada así y no de otra manera."
     },
     "abstract": {
       "title": "Qué estoy haciendo ahora",
       "subtitle": "Formación y actualidad",
-      "text_1": "Desde que arranqué a programar fui aprendiendo a base de proyectos propios, errores y obsesión por entender. La facultad me formó en lo estructural, pero la práctica la complementé con desafíos propios — y con la carrera ya terminada, hoy me siento preparado para resolver problemas diversos que un título por sí solo no te enseña a enfrentar.",
-      "text_2": "Últimamente estuve explorando cómo automatizar la generación de Gaussian Splatting. En paralelo, estoy llevando a producción una app para técnicos, talleres y profesionales — mi primera publicación en Play Store, apuntando a un rubro con demanda real y creciente. En el camino fui acumulando experiencia en el ecosistema completo de JavaScript/TypeScript — React, Next.js, React Native con Expo — junto a Python, Django, Flask, Rust, PostgreSQL y herramientas como Power BI.",
-      "text_3": "Creo que un buen desarrollador nunca deja de aprender. La tecnología evoluciona constantemente, y mantenerse al día no es solo una necesidad profesional — es lo que hace que este trabajo sea genuinamente emocionante."
+      "text_1": "Aprendí a programar a base de proyectos propios, errores y ganas de entender qué pasaba abajo. Durante la carrera armé alrededor de cinco proyectos complejos en equipo, trabajando con Scrum, con backends en Python, Rust y Node.js y frontends en Next.js. Ya con el título terminado, lo que me quedó más útil no es el papel: es haber laburado con otra gente sobre código que tenía que andar.",
+      "text_2": "Ahora estoy automatizando la generación de Gaussian Splatting y llevando adelante una app para técnicos, talleres y profesionales, ya publicada en Play Store. En el camino junté kilómetros con JavaScript y TypeScript sobre React, Next.js y React Native con Expo; del otro lado, con Python, Django, Flask, Rust y PostgreSQL, más Power BI cuando lo que hace falta es que los datos se lean.",
+      "text_3": "Lo que busco ahora es meterme en un producto que ya tenga usuarios y problemas reales encima. Trabajo cómodo cerca del código que decide cosas: la lógica de negocio, los datos, lo que tiene que poder testearse antes de salir. Si estás armando algo así, escribime."
     },
     "projects": {
       "title": "Proyectos",
