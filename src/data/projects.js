@@ -146,34 +146,38 @@ export const projects = [
     accentColor: "#3B82F6",
     year: "2026",
     client: "Personal Project",
-    stack: ["Flask", "Python", "JavaScript"],
-    links: { repo: "https://github.com/juanm512/relocate-app", live: "https://mudarg.vercel.app/" },
-    hero: { type: "image", src: "/relocate-app/inicial.webp" },
+    stack: ["Next.js", "React", "Svelte", "WXT", "Leaflet", "oRPC", "Drizzle", "PostgreSQL", "better-auth", "Polar", "Tailwind"],
+    links: { repo: "https://github.com/juanm512/mudar", live: "https://mudarg.com" },
+    hero: { type: "image", src: "/mudarg/mockup.webp" },
     locales: {
       en: {
         title: "Mudarg",
-        tagline: "Commute Map",
-        description: "Map tool that shows where you can reasonably live given your workplace and commute mode, drawing the isochrones from real GTFS transit data.",
-        role: "Full Stack Developer",
-        context: "Personal project",
+        tagline: "Search properties by travel time",
+        description: "Browser extension that draws travel time isochrones over a real estate portal's own map and filters the listings to the ones you can actually reach.",
+        role: "Sole Developer",
+        context: "Personal project, in production",
         content: [
-          { type: "text", title: "Overview", text: "Interactive map built with Leaflet and Turf.js to visualize reachable areas from a specific point using walking, cycling, driving and public transport modes." },
-          { type: "grid", items: [ { src: "/relocate-app/inicial.webp", caption: "Initial search" }, { src: "/relocate-app/resultado_colectivos.webp", caption: "Public transport engine" }, { src: "/relocate-app/resultado_subtes.webp", caption: "Subway routing" } ] },
-          { type: "text", title: "Highlights", text: "Custom algorithm that parses real public transit GTFS data to generate precise isochrones. The Flask backend handles geocoding via Nominatim and routing via OpenRouteService." },
-          { type: "text", title: "Feature overview", text: "Two stage flow for the interaction, time sliders, exact route breakdown checkboxes, and custom point of interest layers like hospitals and safety alerts." }
+          { type: "text", title: "Overview", text: "Mudarg is a browser extension that enriches the ArgenProp real estate portal with travel time data. You pick a point (your office, your university), a maximum time and a transport mode, and the zone you can reach in N minutes walking, cycling, driving or by public transport is drawn over the map you are already using. Then you keep only the properties inside it.\n\nIt is the production evolution of relocate-app, the Flask and Leaflet MVP that validated the reachability map idea for Buenos Aires." },
+          { type: "grid", items: [ { src: "/mudarg/mockup.webp", caption: "Before and after: the portal map with a Mudarg isochrone" }, { type: "video", src: "/mudarg/muestra-extension.mp4", poster: "/mudarg/muestra-extension-poster.jpg", title: "The extension in action", caption: "Side panel plus overlay on the portal map" } ] },
+          { type: "text", title: "The problem", text: "Looking for an apartment should not be a full time job. You lose hours opening every listing in a new tab, copying the address and asking Google Maps how long it takes to get to work.\n\nThe technical obstacle was worse: there is no way to touch the portal's map from an extension. Content scripts run in an isolated JavaScript context, so the portal's Leaflet instance, its coordinates and its layers are a black box." },
+          { type: "text", title: "Decisions", text: "• Mirror the map instead of hacking it: the extension creates a second, fully invisible Leaflet map on top of the portal's one with pointer events disabled. It reads the only thing the DOM does expose, the tile URLs, derives z/x/y from them and, with each tile's screen position, projects any pixel back to latitude and longitude. The mirror stays in sync on every pan and zoom, and the isochrones are drawn on it.\n• Property markers are DOM elements, so they get the same inverse projection: each one is tested against the active zones and hidden or shown with CSS. The portal's map is never modified.\n• The panel lives in a Shadow DOM so the site's styles cannot break it, and API calls go through the extension's background script as an RPC proxy over a message port, which avoids CORS and credential issues.\n• Monorepo with pnpm workspaces and Turborepo: a Next.js 16 web app (landing, auth, dashboard, webhooks) and a WXT plus Svelte 5 extension, sharing typed packages for the oRPC API, Drizzle schema, better-auth and the TravelTime and Nominatim clients.\n• Tokens as a ledger: each calculation costs one token per transport mode, the balance is the sum of the user's rows, and the server checks it before calling TravelTime. No coverage, no charge. Packs are bought through Polar and credited by webhook.\n• Local cache: every GeoJSON result is stored in the browser and can be reloaded without spending tokens." },
+          { type: "grid", items: [ { src: "/mudarg/no-filtro.webp", caption: "Zone drawn, all listings still visible" }, { src: "/mudarg/filtro-con-externos.webp", caption: "134 properties within 10 minutes by car, the rest greyed out" }, { src: "/mudarg/filtro-no-externos.webp", caption: "Only the listings inside the zone" } ] },
+          { type: "text", title: "Result", text: "Mudarg is live at mudarg.com with the extension published for free: up to two simultaneous zones to compare modes, 5 to 180 minutes, address search with autocomplete, an account with email or Google, calculation history and token packs from the dashboard." }
         ]
       },
       es: {
         title: "Mudarg",
-        tagline: "Mapa de Alcance CABA",
-        description: "Herramienta de mapas que muestra hasta dónde se puede vivir razonablemente según el trabajo y el transporte, con isócronas calculadas sobre datos GTFS reales.",
-        role: "Desarrollador Full Stack",
-        context: "Proyecto personal",
+        tagline: "Buscá propiedades por tiempo de viaje",
+        description: "Extensión de navegador que dibuja isócronas de tiempo de viaje sobre el mapa de un portal inmobiliario y filtra las propiedades a las que de verdad llegás.",
+        role: "Desarrollador Único",
+        context: "Proyecto personal, en producción",
         content: [
-          { type: "text", title: "Resumen", text: "Aplicación interactiva de mapas (Leaflet y Turf.js) para visualizar hasta qué barrios se puede llegar en cierta cantidad de minutos caminando, en bicicleta, en auto o en transporte público." },
-          { type: "grid", items: [ { src: "/relocate-app/inicial.webp", caption: "Búsqueda de partida" }, { src: "/relocate-app/resultado_colectivos.webp", caption: "Alcance en colectivos" }, { src: "/relocate-app/resultado_subtes.webp", caption: "Alcance en subte" } ] },
-          { type: "text", title: "Logros destacados", text: "Algoritmo propio para calcular isócronas de transporte público usando datos reales de horarios (GTFS), con backend en Python (Flask) y geocodificación de Nominatim." },
-          { type: "text", title: "Detalles", text: "Flujo de dos pantallas, controles deslizantes para el tiempo de viaje, desglose dinámico de líneas de transporte y filtros de zonas de interés." }
+          { type: "text", title: "Resumen", text: "Mudarg es una extensión de navegador que enriquece el portal inmobiliario ArgenProp con datos de tiempo de viaje. Elegís un punto (tu oficina, tu facultad), un tiempo máximo y un medio de transporte, y la zona a la que llegás en N minutos caminando, en bici, en auto o en transporte público se dibuja sobre el mapa que ya estás usando. Después te quedás solo con las propiedades que entran ahí.\n\nEs la evolución en producción de relocate-app, el MVP en Flask y Leaflet que validó la idea del mapa de alcance para CABA." },
+          { type: "grid", items: [ { src: "/mudarg/mockup.webp", caption: "Antes y después: el mapa del portal con una isócrona de Mudarg" }, { type: "video", src: "/mudarg/muestra-extension.mp4", poster: "/mudarg/muestra-extension-poster.jpg", title: "La extensión en acción", caption: "Panel lateral más overlay sobre el mapa del portal" } ] },
+          { type: "text", title: "El problema", text: "Buscar departamento no debería ser un trabajo de tiempo completo. Perdés horas abriendo cada propiedad en una pestaña nueva, copiando la dirección y preguntándole a Google Maps cuánto tardás al trabajo.\n\nEl obstáculo técnico era peor: no hay forma de tocar el mapa del portal desde una extensión. Los content scripts corren en un contexto JavaScript aislado, así que la instancia de Leaflet del portal, sus coordenadas y sus capas son una caja negra." },
+          { type: "text", title: "Decisiones", text: "• Espejar el mapa en vez de hackearlo: la extensión crea un segundo mapa Leaflet propio, totalmente invisible, superpuesto al del portal y sin pointer events. Lee lo único que el DOM sí expone, las URLs de los tiles, saca z/x/y de ahí y, con la posición de cada tile en pantalla, proyecta cualquier píxel de vuelta a latitud y longitud. El espejo se mantiene sincronizado en cada pan y zoom, y sobre él se dibujan las isócronas.\n• Los marcadores de propiedades sí son elementos del DOM, así que reciben la misma proyección inversa: cada uno se evalúa contra las zonas activas y se oculta o muestra con CSS. El mapa del portal nunca se modifica.\n• El panel vive en un Shadow DOM para que los estilos del sitio no lo rompan, y las llamadas a la API salen por el background script de la extensión como proxy RPC sobre un message port, lo que evita problemas de CORS y credenciales.\n• Monorepo con pnpm workspaces y Turborepo: una web en Next.js 16 (landing, auth, dashboard, webhooks) y una extensión en WXT más Svelte 5, compartiendo packages tipados para la API oRPC, el schema de Drizzle, better-auth y los clientes de TravelTime y Nominatim.\n• Tokens como ledger: cada cálculo consume un token por transporte, el saldo es la suma de las filas del usuario y el servidor lo verifica antes de llamar a TravelTime. Sin cobertura no se descuenta nada. Los packs se compran por Polar y se acreditan por webhook.\n• Cache local: cada GeoJSON se guarda en el navegador y se puede recargar sin gastar tokens." },
+          { type: "grid", items: [ { src: "/mudarg/no-filtro.webp", caption: "Zona dibujada, todas las propiedades visibles" }, { src: "/mudarg/filtro-con-externos.webp", caption: "134 propiedades a 10 minutos en auto, el resto en gris" }, { src: "/mudarg/filtro-no-externos.webp", caption: "Solo las propiedades dentro de la zona" } ] },
+          { type: "text", title: "Resultado", text: "Mudarg está online en mudarg.com con la extensión publicada gratis: hasta dos zonas simultáneas para comparar transportes, de 5 a 180 minutos, búsqueda por dirección con autocompletado, cuenta con email o Google, historial de cálculos y packs de tokens desde el dashboard." }
         ]
       }
     }
