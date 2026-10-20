@@ -3,6 +3,18 @@ import { Link } from "@/i18n/navigation"
 import { OG_LOCALE, localizedPath, pageAlternates } from "@/lib/metadata"
 import Arrow from "@/components/ui/Arrow"
 import ContactBlock from "@/components/home/ContactBlock"
+import ProjectMention from "@/components/about/ProjectMention"
+import { timeline } from "@/data/timeline"
+
+// "[[slug]]" or "[[slug|label]]" -> ProjectMention. split() with a capture
+// group leaves the matches at odd indexes.
+function withMentions(text, locale) {
+  return text.split(/\[\[([^\]]+)\]\]/).map((part, i) => {
+    if (i % 2 === 0) return part
+    const [slug, label] = part.split("|")
+    return <ProjectMention key={i} slug={slug} label={label} locale={locale} />
+  })
+}
 
 export async function generateMetadata({ params }) {
   const { locale } = await params
@@ -34,26 +46,28 @@ export default async function AboutPage({ params }) {
           {tAbout("back")}
         </Link>
 
-        <h1 className="text-3xl md:text-4xl font-semibold text-ink leading-[1.2] text-balance mb-8">
-          {t("childhood.title")}
+        <h1 className="text-3xl md:text-4xl font-semibold text-ink leading-[1.2] text-balance mb-12">
+          {tAbout("title")}
         </h1>
 
-        <section className={`${prose} mb-20`}>
-          <p>{t("childhood.text_1")}</p>
-          <p>{t("childhood.text_2")}</p>
-          <p>{t("childhood.text_3")}</p>
-        </section>
-
-        <section className="mb-20">
-          <h2 className="text-2xl md:text-3xl font-semibold text-ink leading-[1.25] text-balance mb-6">
-            {t("abstract.title")}
-          </h2>
-          <div className={prose}>
-            <p>{t("abstract.text_1")}</p>
-            <p>{t("abstract.text_2")}</p>
-            <p>{t("abstract.text_3")}</p>
-          </div>
-        </section>
+        <ol className="mb-20">
+          {timeline.map((e, i) => {
+            const l = e.locales[locale] || e.locales.es
+            return (
+              <li key={i} className="relative border-l border-line pl-8 pb-14 last:pb-0">
+                <span
+                  aria-hidden="true"
+                  className={`absolute -left-[6px] top-2.5 size-[11px] rounded-full border-2 bg-background-dark ${e.kind === "life" ? "border-ink-3" : "border-green-glow"}`}
+                />
+                <h2 className="text-xl md:text-2xl font-semibold text-ink leading-[1.25] text-balance">{l.title}</h2>
+                {l.subtitle && <p className="mt-1 text-ink-3">{l.subtitle}</p>}
+                <div className={`${prose} mt-4`}>
+                  {l.text.split("\n\n").map((para, j) => <p key={j}>{withMentions(para, locale)}</p>)}
+                </div>
+              </li>
+            )
+          })}
+        </ol>
 
       </div>
 
